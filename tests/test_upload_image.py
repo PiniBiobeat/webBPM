@@ -20,10 +20,10 @@ class TestUpload(TestBase):
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
         page.upload_photo(list)
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
-        expected_price = "39x1 "
+        expected_price = page.get_image()
         current_price = page.get_price()
         self.browser.stop_trace()
-        assert current_price == expected_price
+        assert current_price.replace("39x","").strip() == str(expected_price)
 
 
 
