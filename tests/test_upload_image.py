@@ -23,7 +23,7 @@ class TestUpload(TestBase):
         expected_price = page.get_image()
         current_price = page.get_price()
         self.browser.stop_trace()
-        print("ffff")
+        print("f")
         assert current_price.replace("39x","").strip() == str(expected_price)
 
 
