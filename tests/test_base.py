@@ -19,11 +19,10 @@ class TestBase():
         yield self.browser
         if request.session.testsfailed != failed_before:
             try:
-                self.tear_down_invoke()
                 self.browser.stop_trace()
             except:
                 pass
-            #add test name
+        self.tear_down_invoke()
         print('\r*****DONE*****')
 
 
