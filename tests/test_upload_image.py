@@ -1,18 +1,16 @@
 import pytest
-
-from infra.teardown import tear_down
-
 from logic.pages.home_page import HomePage
 from logic.pages.upload_photo_page import UploadPhotoPage
 from tests.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.gallery_page import GalleryPage
+from logic.pages.instagram_page import InstagramPage
 
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
-text_user_name = "pinitesttiles"
-text_password = "Pinimari2020!"
+text_user_name_instagram = "pinitesttiles"
+text_password_instagram = "Pinimari2020!"
 text_googleUserName="lupadevtest@gmail.com"
 text_googlePassword="lupadevtest!128"
 
@@ -58,16 +56,15 @@ class TestUpload(TestBase):
         page.choose_tiles()
 
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-        page.login_to_instagram(text_user_name,text_password)
+        page.open_instagram_and_login(text_user_name_instagram,text_password_instagram)
+
+        page: InstagramPage = self.browser.create_page(InstagramPage)
         page.upload_photos_from_instagram()
 
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
         assert current_price.replace("39x", "").strip() == str(expected_price)
-
-     #   page.login_imstagram(text_user_name)
-        print("ddddd")
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
@@ -78,9 +75,7 @@ class TestUpload(TestBase):
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
         page.upload_photo_googlePhotos(text_googleUserName,text_googlePassword)
 
-     #   page.login_imstagram(text_user_name)
-        print("ddddd")
-        print("pini")
+
 
 
 

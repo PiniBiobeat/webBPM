@@ -1,8 +1,8 @@
 from infra.page_base import PageBase
 
 
-
 class GalleryPage(PageBase):
+
     group_images = "//div[@class='skewed_border lupa-gallery']"
     choose_image = "//div[@class='skewed_border lupa-gallery-thumbnail']"
     button_next = "//button[@class='lupa-btn']"
