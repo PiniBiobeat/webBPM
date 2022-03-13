@@ -80,6 +80,7 @@ class TestUpload(TestBase):
 
      #   page.login_imstagram(text_user_name)
         print("ddddd")
+        print("pini")
 
 
 
