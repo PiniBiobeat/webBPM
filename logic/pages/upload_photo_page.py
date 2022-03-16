@@ -1,27 +1,23 @@
 from infra.page_base import PageBase
 
+
 class UploadPhotoPage(PageBase):
 
     input_photo = "//input[@id= 'f']"
     title_button = "//span[@id= 'header_title']"
     gallery_button = "//img[@src='/static/media/icon_gallery_old.e4c596ba.svg']"
     instagram_button = "//img[@src='/static/media/icon_instagram.ae47004e.svg']"
-    title_instagram  = "//h1[@class='NXVPg Szr5J  coreSpriteLoggedOutWordmark  ']"
     user_name = "//span[@class='_9nyy2']"
     user_password = "//input[@aria-label='Password']"
     login_button = "//button[@type='submit']"
     button_login_save_1 = "//button[@type='button' and contains(., 'Save Info')]"
     button_login_save_2 = "//button[@class='sqdOP  L3NKy   y3zKF   cB_4K  ' and contains(., 'Allow')]"
 
-    wait_for_save = "//button[@class= 'sqdOP  L3NKy   y3zKF     ']"
-    googlePhotos_button ="//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
-    googleUserName_button="//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc qfvgSe qIypjc TrZEUc lw1w4b']"
-    googleFillEmail_button="//input[@type='email']"
-    googleFillPassword_button="//input[@type='password']"
-    googleFillAllow_button="//span[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-INsAgc VfPpkd-LgbsSe-OWXEXe-dgl2Hf Rj2Mlf OLiIxf PDpWxe P62QJc xYnMae TrZEUc lw1w4b']"
-    googleAllPhotos_button="//p[@class= 'album_title']"
-    googlePhoto_button="//div[@class='content ']"
-
+    googlePhotos_button = "//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
+    googleFillEmail_button = "//input[@type='email']"
+    googleUserName_button = "//span[text()='הבא']"
+    googleFillPassword_button = "//input[@type='password']"
+    googleFillAllow_button = "//div[@id='passwordNext']"
 
     def __init__(self, page):
         super().__init__(page)
@@ -43,26 +39,17 @@ class UploadPhotoPage(PageBase):
         popup.click(self.login_button)
         popup.click(self.button_login_save_1)
         popup.click(self.button_login_save_2)
+#    def open_googlePhotos_and_login(self,text_user_name,text_password):
 
-    def upload_photo_googlePhotos(self, text_user_name,text_password):
+    def open_googlePhotos_and_login(self, text_user_name,text_password):
         with self.pw_page.expect_popup() as popup_info:
             self.pw_page.click(self.googlePhotos_button)
         popup = popup_info.value
         popup.wait_for_load_state()
         popup.fill(self.googleFillEmail_button,text_user_name)
         popup.click(self.googleUserName_button)
-        popup.wait_for_timeout(4000)
         popup.fill(self.googleFillPassword_button,text_password)
         popup.click(self.googleUserName_button)
-        popup.click(self.googleUserName_button)
-        popup.wait_for_timeout(1000)
-        popup.click(self.googleAllPhotos_button)
-        popup.wait_for_timeout(1000)
-        popup.click(self.googlePhoto_button)
-        #self.pw_page.wait_for_selector(self.wait_for_save, state="visible")
-        popup.wait_for_timeout(7000)
-        popup.click(self.login1)
-        popup.click(self.login2)
 
 
 

@@ -6,7 +6,7 @@ from infra.config.config_provider import configuration
 from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.gallery_page import GalleryPage
 from logic.pages.instagram_page import InstagramPage
-
+from logic.pages.googlePhotos_page import GooglePhotosPage
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
 text_user_name_instagram = "pinitesttiles"
@@ -73,13 +73,16 @@ class TestUpload(TestBase):
         page.choose_tiles()
 
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-        page.upload_photo_googlePhotos(text_googleUserName,text_googlePassword)
+        page.open_googlePhotos_and_login(text_googleUserName,text_googlePassword)
 
+        page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
+        #upload_photos_from_google --> can get number of photos to upload
+        page.upload_photos_from_google(10)
 
-
-
-
-
+        page: PreviewScreen = self.browser.create_page(PreviewScreen)
+        expected_price = page.get_image()
+        current_price = page.get_price()
+        assert current_price.replace("39x", "").strip() == str(expected_price)
 
 
 

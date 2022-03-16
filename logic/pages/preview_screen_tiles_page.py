@@ -4,16 +4,19 @@ class PreviewScreen(PageBase):
 
 
     title_button = "//span[@style='font-size: 22px;']"
+    all_selector_in_page = '//div[@class="vh_div"]'
 
     def __init__(self, page):
         super().__init__(page)
 
     def get_image(self):
-        images = self.pw_page.query_selector_all('//div[@class="vh_div"]')
+        self.pw_page.wait_for_selector(self.all_selector_in_page, state="visible")
+        images = self.pw_page.query_selector_all(self.all_selector_in_page)
         num_of_image = len(images)
         return num_of_image
 
     def get_price(self):
+
         text = self.pw_page.text_content(self.title_button)
         return text
 
