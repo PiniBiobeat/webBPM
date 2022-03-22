@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from logic.pages.home_page import HomePage
 from logic.pages.upload_photo_page import UploadPhotoPage
@@ -7,12 +9,18 @@ from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.gallery_page import GalleryPage
 from logic.pages.instagram_page import InstagramPage
 from logic.pages.googlePhotos_page import GooglePhotosPage
+from logic.pages.Psifas_upload_photo_page import PsifasPhotosPage
+from logic.pages.instagram_popup_page import InstagramPopUp
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
+psifsPhoto=["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg"]
 text_user_name_instagram = "pinitesttiles"
 text_password_instagram = "Pinimari2020!"
 text_googleUserName="lupadevtest@gmail.com"
 text_googlePassword="lupadevtest!128"
+
+originalPrice=39
+defaultQuantity=1
 
 class TestUpload(TestBase):
 
@@ -56,7 +64,9 @@ class TestUpload(TestBase):
         page.choose_tiles()
 
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-        page.open_instagram_and_login(text_user_name_instagram,text_password_instagram)
+
+        page: InstagramPopUp = self.browser.create_popup(page.open_instagram(),InstagramPopUp)
+        page.login_instagram(text_user_name_instagram,text_password_instagram)
 
         page: InstagramPage = self.browser.create_page(InstagramPage)
         page.upload_photos_from_instagram()
@@ -68,7 +78,7 @@ class TestUpload(TestBase):
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_upload_photos_from_GooglePhotos(self):
+    def test_upload_photos_from_GooglePhotos(self,originalPrice="39",defaultQuantity="1"):
         page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
         page.choose_tiles()
 
@@ -77,12 +87,30 @@ class TestUpload(TestBase):
 
         page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
         #upload_photos_from_google --> can get number of photos to upload
-        page.upload_photos_from_google(10)
+        page.upload_photos_from_google(defaultQuantity)
 
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("39x", "").strip() == str(expected_price)
+        assert current_price.replace(f"{originalPrice}x", "").strip() == str(expected_price)
+
+    @pytest.mark.smoke
+    @pytest.mark.usefixtures("before_after_test")
+    def test_Psifas_upload_photo(self):
+        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page.choose_pesipas()
+
+        page: PsifasPhotosPage = self.browser.create_page(PsifasPhotosPage)
+        #עצרתי פה לא הצלחתי להעלות תמונות
+        page.Psifas_upload_photos(psifsPhoto)
+
+    @pytest.mark.smoke
+    @pytest.mark.usefixtures("before_after_test")
+    def test_SalePrices(self):
+        SalePrice=39
+        MinQuantity=10
+        #אם רוצים להמשיך צריל לשנות קצת את הלוגיקה של כל שאר הפונקציות
+        TestUpload.test_upload_photos_from_GooglePhotos(self, SalePrice, MinQuantity)
 
 
 

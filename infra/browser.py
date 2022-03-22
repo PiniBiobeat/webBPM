@@ -23,5 +23,9 @@ class Browser:
     def create_page(self, page_type):
         return page_type(self.page)
 
+    def create_popup(self, popup, new_popup):
+        self.page = popup
+        return new_popup(self.page)
+
     def stop_trace(self):
         self.context.tracing.stop(path="trace.zip")
