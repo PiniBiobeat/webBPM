@@ -5,6 +5,7 @@ class PreviewScreen(PageBase):
 
     title_button = "//span[@style='font-size: 22px;']"
     all_selector_in_page = '//div[@class="vh_div"]'
+    psifas_size = '// option[ @ value = "1"]'
 
     def __init__(self, page):
         super().__init__(page)
@@ -16,8 +17,14 @@ class PreviewScreen(PageBase):
         return num_of_image
 
     def get_price(self):
-
         text = self.pw_page.text_content(self.title_button)
         return text
+
+    def get_psifas_size(self):
+        text_psifas_size = self.pw_page.text_content(self.psifas_size)
+        return text_psifas_size
+
+
+
 
 

@@ -7,6 +7,7 @@ class InstagramPopUp(PageBase):
     login_button = "//button[@type='submit']"
     button_login_save_1 = "//button[@type='button' and contains(., 'Save Info')]"
     button_login_save_2 = "//button[@class='sqdOP  L3NKy   y3zKF   cB_4K  ' and contains(., 'Allow')]"
+    choose_image_from_instagram_1 = "//div[@data-id= '17935148023619398']"
 
     def __init__(self, page):
         super().__init__(page)
@@ -18,6 +19,9 @@ class InstagramPopUp(PageBase):
         self.pw_page.click(self.login_button)
         self.pw_page.click(self.button_login_save_1)
         self.pw_page.click(self.button_login_save_2)
+
+
+
 
 
 

@@ -7,6 +7,7 @@ class Browser:
     browser = None
     context = None
     page = None
+    popup = None
 
     def __init__(self):
         playwright = sync_playwright().start()
@@ -16,6 +17,7 @@ class Browser:
         self.context.tracing.start(screenshots=True, snapshots=True)
         self.page = self.context.new_page()
 
+
     def navigate(self, address, page_type: Type[PageBase]):
         self.page.goto(address, wait_until="load")
         return self.create_page(page_type)
@@ -24,8 +26,8 @@ class Browser:
         return page_type(self.page)
 
     def create_popup(self, popup, new_popup):
-        self.page = popup
-        return new_popup(self.page)
+        self.popup = popup
+        return new_popup(self.popup)
 
     def stop_trace(self):
         self.context.tracing.stop(path="trace.zip")

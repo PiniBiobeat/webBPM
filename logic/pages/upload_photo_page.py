@@ -8,10 +8,6 @@ class UploadPhotoPage(PageBase):
     gallery_button = "//img[@src='/static/media/icon_gallery_old.e4c596ba.svg']"
     instagram_button = "//img[@src='/static/media/icon_instagram.ae47004e.svg']"
     googlePhotos_button = "//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
-    googleFillEmail_button = "//input[@type='email']"
-    googleUserName_button = "//span[text()='הבא']"
-    googleFillPassword_button = "//input[@type='password']"
-    googleFillAllow_button = "//div[@id='passwordNext']"
 
     def __init__(self, page):
         super().__init__(page)
@@ -26,22 +22,13 @@ class UploadPhotoPage(PageBase):
     def open_instagram(self):
         with self.pw_page.expect_popup() as popup_info:
             self.pw_page.click(self.instagram_button)
-        popup = popup_info.value
-        return popup
+        return popup_info.value
 
-
-
-
-
-    def open_googlePhotos_and_login(self, text_user_name,text_password):
+    def open_google_photos(self):
         with self.pw_page.expect_popup() as popup_info:
             self.pw_page.click(self.googlePhotos_button)
-        popup = popup_info.value
-        popup.wait_for_load_state()
-        popup.fill(self.googleFillEmail_button,text_user_name)
-        popup.click(self.googleUserName_button)
-        popup.fill(self.googleFillPassword_button,text_password)
-        popup.click(self.googleUserName_button)
+        return popup_info.value
+
 
 
 
