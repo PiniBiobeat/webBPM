@@ -1,8 +1,6 @@
 import time
-
 import pytest
 import requests
-
 from logic.pages.home_page import HomePage
 from logic.pages.upload_photo_page import UploadPhotoPage
 from tests.test_base import TestBase
@@ -117,23 +115,46 @@ class TestUpload(TestBase):
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
+    def test_psifas_upload_photos_from_google_photos(self,originalPrice="39",defaultQuantity="1"):
+        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page.choose_pesipas()
+
+        page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
+
+        page: GooglePhotosPopUp = self.browser.create_popup(page.open_google_photos(), GooglePhotosPopUp)
+        page.login_google_photos(text_googleUserName, text_googlePassword)
+
+        page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
+        # upload_photos_from_google --> can get number of photos to upload
+        page.upload_photos_from_google(defaultQuantity)
+
+        page: PreviewScreen = self.browser.create_page(PreviewScreen)
+        text_psifas_size = page.get_psifas_size()
+        assert text_psifas_size.replace(" ריבועים  | מידות 44.3 על  44.3 ס”מ", "").strip() == "2*2"
+
+    @pytest.mark.smoke
+    @pytest.mark.xfail
+    @pytest.mark.usefixtures("before_after_test")
     def test_SalePrices(self):
         SalePrice=29
         MinQuantity=10
         #אם רוצים להמשיך צריל לשנות קצת את הלוגיקה של כל שאר הפונקציות
-        TestUpload.test_upload_photos_from_GooglePhotos(self, SalePrice, MinQuantity)
+        #TestUpload.test_upload_photos_from_GooglePhotos(self, SalePrice, MinQuantity)
 
 
 
     @pytest.mark.tcid3
+    @pytest.mark.xfail
     def test_upload2(self):
         print("2222222222222222222")
 
     @pytest.mark.tcid4
+    @pytest.mark.xfail
     def test_upload3(self):
         print("333333333333333333")
 
     @pytest.mark.tcid5
+    @pytest.mark.xfail
     def test_upload3(self):
         print("4444444444444444444")
 
