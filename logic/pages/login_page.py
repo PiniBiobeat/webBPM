@@ -1,0 +1,49 @@
+import time
+
+from infra.page_base import PageBase
+
+
+
+class LoginPage(PageBase):
+
+    text_user_login = "//input[@type='text']"
+    test_pass_login = "//input[@type='password']"
+    button_login = "//span[@class='lupa-btn-content']"
+    google_button = "//button[@class='google_sign_in']"
+    tiles_button = '(//span[@class="lupa-btn-content"])[1]'
+    facebook_button = "//button[@class='facebook_sign_in']"
+
+    def __init__(self,page):
+        super().__init__(page)
+        self.pw_page.wait_for_selector(self.text_user_login,state="visible")
+
+    def input_user_and_pass(self,text_user,text_pass):
+        self.pw_page.fill(self.text_user_login,text_user)
+        self.pw_page.fill(self.test_pass_login,text_pass)
+
+    def click_login_button(self):
+        self.pw_page.click(self.button_login)
+
+
+    def take_token(self):
+        time.sleep(7)
+        token = self.pw_page.context.storage_state(path="['origins'][0]['localStorage'][5]['value']")
+        user_token = token['origins'][0]['localStorage'][5]['value']
+        return user_token
+
+    def login_with_google(self):
+        with self.pw_page.expect_popup() as popup_info:
+            self.pw_page.click(self.google_button)
+        return popup_info.value
+
+    def login_with_facebook(self):
+        with self.pw_page.expect_popup() as popup_info:
+            self.pw_page.click(self.facebook_button)
+        return popup_info.value
+
+
+
+
+
+
+

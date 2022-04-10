@@ -1,5 +1,5 @@
 from infra.page_base import PageBase
-
+import time
 
 class GooglePhotosPopUp(PageBase):
 
@@ -7,6 +7,8 @@ class GooglePhotosPopUp(PageBase):
     google_user_name_button = "//span[text()='הבא']"
     google_fill_password_button = "//input[@type='password']"
     google_fill_allow_button = "//div[@id='passwordNext']"
+    title_button = "//h4[@class='intro-title' and contains(.,'לופה בריבוע')]"
+    tiles_button = '(//span[@class="lupa-btn-content"])[1]'
 
 
     def __init__(self, page):
@@ -19,4 +21,13 @@ class GooglePhotosPopUp(PageBase):
         self.pw_page.click(self.google_user_name_button)
         self.pw_page.fill(self.google_fill_password_button, text_password)
         self.pw_page.click(self.google_fill_allow_button)
+
+
+    def take_token(self):
+        time.sleep(7)
+        #self.pw_page.wait_for_selector(self.tiles_button, state="attached")
+        token = self.pw_page.context.storage_state(path="['origins'][0]['localStorage'][5]['value']")
+        user_token = token['origins'][0]['localStorage'][5]['value']
+        return user_token
+
 

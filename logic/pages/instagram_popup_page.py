@@ -9,8 +9,8 @@ class InstagramPopUp(PageBase):
     button_login_save_2 = "//button[@class='sqdOP  L3NKy   y3zKF   cB_4K  ' and contains(., 'Allow')]"
     choose_image_from_instagram_1 = "//div[@data-id= '17935148023619398']"
 
-    def __init__(self, page):
-        super().__init__(page)
+    def __init__(self, popup):
+        super().__init__(popup)
 
     def login_instagram(self,text_user_name_instagram,text_password_instagram):
         self.pw_page.wait_for_load_state()
