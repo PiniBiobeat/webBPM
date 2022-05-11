@@ -23,14 +23,10 @@ def send_hook():
 
     url = 'http://files.lupa.co.il/lp/hooks.aspx?method=coupon_desk&campaign_name=WelcomePopupApp&messageid=4783512567742464&email=couponsaoutomat@gmail.com&sale=1'
     response = requests.get(url).json()
-
-
     print(response)
-    time.sleep(8)
+    time.sleep(5)
     if response != 200:
         if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
-
-
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
@@ -38,7 +34,6 @@ def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
       print('Subject : ' + subject + '\n')
       print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
       print("+++++++++++")
-
 
       return True
     else:
@@ -76,49 +71,16 @@ def check_in_payment():
             print("Email not exists --עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍-- ")
             if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
 
-#TODO: create task to update coupon date by api in lupa-service2
 def delete_coupon():
-    hostname = "35.233.19.13"
-    database = "coupons"
-    username = "machineDBA"
-    pwd = "A#214Fdse!35dDC214XAzRDA12^79"
 
-    conn = None
-    cur = None
-
-    try:
-        conn = psycopg2.connect(
-            host = hostname,
-            dbname = database,
-            user = username,
-            password = pwd)
-        cur = conn.cursor()
-        update_script = '''update public.coupons_tbl
-                           set end_date = '2021-05-16 23:59:59.999'
-                           where user_id = '3502298' and name = 'WelcomePopupApp' '''
-        cur.execute(update_script)
-
-        print("The number of parts: ", cur.rowcount)
-
-        # Fetch result
-        record = cur.fetchone()
-        while record is not None:
-            print(record)
-            record = cur.fetchall()
-        print(record)
-
-
-    except Exception as error:
-        print(error)
-    finally:
-        if cur is not None:
-            cur.close()
-        if conn is not None:
-            conn.close()
-
-
+    url = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=WelcomePopupApp&master_id=3502298'
+    response = requests.get(url).json()
+    print(response)
+    if response['isValid'] != True:
+        if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
 
 def check_all_emails(first_email_id, latest_email_id,mail):
+
     isValid = True
     for i in range(latest_email_id, first_email_id, -1):
         data = mail.fetch(str(i), '(RFC822)')
@@ -146,9 +108,10 @@ def check_all_emails(first_email_id, latest_email_id,mail):
 def read_email():
 
     try:
+
         send_hook()
-        delete_coupon()
         check_in_payment()
+        delete_coupon()
         mail = imaplib.IMAP4_SSL(SMTP_SERVER)
         mail.login(FROM_EMAIL,FROM_PWD)
         mail.select('inbox')
@@ -162,7 +125,5 @@ def read_email():
     except Exception as e:
         traceback.print_exc()
         print(str(e))
-
-
 
 read_email()
