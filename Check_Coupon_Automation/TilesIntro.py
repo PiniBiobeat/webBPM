@@ -19,7 +19,7 @@ date_time = datetime.now()
 
 def send_hook():
 
-    url = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=IncentiveTilesBuyers&messageid=5638359101800448&email=lupadevtest@gmail.com&discount=20&days=3'
+    url = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=TilesIntro&messageid=6166875740372992&email=lupadevtest@gmail.com&discount=30&days=3'
     response = requests.get(url).json()
 
     print(response)
@@ -27,7 +27,7 @@ def send_hook():
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
-    if subject == 'הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁' and date_from_email_after_regex == date_time_now:
+    if subject == 'לך ורק לך! הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁' and date_from_email_after_regex == date_time_now:
       print('Subject : ' + subject + '\n')
       print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
       print("+++++++++++")
@@ -73,8 +73,8 @@ def check_all_emails(first_email_id, latest_email_id,mail):
         if isValid:
             break
     if not isValid:
-         print("Email not exists -- הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁 -- ")
-         if_email_not_exists_send_email("The user did not receive the email -- הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁 --" + FROM_EMAIL)
+         print("Email not exists --לך ורק לך! הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁 -- ")
+         if_email_not_exists_send_email("The user did not receive the email -- לך ורק לך! הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁 --" + FROM_EMAIL)
 
 
 def read_email():

@@ -12,6 +12,7 @@ class LoginPage(PageBase):
     google_button = "//button[@class='google_sign_in']"
     tiles_button = '(//span[@class="lupa-btn-content"])[1]'
     facebook_button = "//button[@class='facebook_sign_in']"
+    get_text_err = "//div[@class='error']"
 
     def __init__(self,page):
         super().__init__(page)
@@ -25,10 +26,12 @@ class LoginPage(PageBase):
         self.pw_page.click(self.button_login)
 
 
+
     def take_token(self):
         time.sleep(7)
         token = self.pw_page.context.storage_state(path="['origins'][0]['localStorage'][5]['value']")
         user_token = token['origins'][0]['localStorage'][5]['value']
+
         return user_token
 
     def login_with_google(self):
@@ -40,6 +43,11 @@ class LoginPage(PageBase):
         with self.pw_page.expect_popup() as popup_info:
             self.pw_page.click(self.facebook_button)
         return popup_info.value
+
+    def get_error(self):
+        text_error = self.pw_page.text_content(self.get_text_err)
+        return text_error
+
 
 
 

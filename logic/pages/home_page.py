@@ -7,6 +7,7 @@ class HomePage(PageBase):
     pesipas_button = '(//span[@class="lupa-btn-content"])[2]'
     menu_button = '//img[@class="burger_menu"]'
     open_login_sceen_button = '//div[@class="menu-item" and contains(.,"כניסה ")]'
+    click_log_out  = '//div[@class="menu-item" and contains(.,"יציאה מהחשבון")]'
 
 
 
@@ -25,5 +26,9 @@ class HomePage(PageBase):
 
     def open_screen_login_from_menu(self):
         self.pw_page.click(self.open_login_sceen_button)
+
+    def log_out(self):
+        self.pw_page.click(self.click_log_out)
+
 
 

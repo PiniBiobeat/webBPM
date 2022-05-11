@@ -23,11 +23,14 @@ class GooglePhotosPopUp(PageBase):
         self.pw_page.click(self.google_fill_allow_button)
 
 
+
     def take_token(self):
         time.sleep(7)
         #self.pw_page.wait_for_selector(self.tiles_button, state="attached")
         token = self.pw_page.context.storage_state(path="['origins'][0]['localStorage'][5]['value']")
         user_token = token['origins'][0]['localStorage'][5]['value']
+        self.pw_page.close()
         return user_token
+
 
 

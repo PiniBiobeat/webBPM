@@ -19,7 +19,7 @@ date_time = datetime.now()
 
 def send_hook():
 
-    url = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=IncentiveTilesBuyers&messageid=5638359101800448&email=lupadevtest@gmail.com&discount=20&days=3'
+    url = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=BookIntro&messageid=5547439475982336&email=lupadevtest@gmail.com&discount=10&days=14'
     response = requests.get(url).json()
 
     print(response)
@@ -27,7 +27,7 @@ def send_hook():
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
-    if subject == 'הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁' and date_from_email_after_regex == date_time_now:
+    if subject == 'עפתם על הלופה? תזמינו לה עותק נוסף בהנחה שווה 😍' and date_from_email_after_regex == date_time_now:
       print('Subject : ' + subject + '\n')
       print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
       print("+++++++++++")
@@ -42,7 +42,7 @@ def send_email(subject, message):
         "https://api.mailgun.net/v3/lupa.co.il/messages",
         auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
         data={
-              "from": "Lupa Automation ,Coupon Automation IncentiveTilesBuyers  <monitor@lupa.co.il>",
+              "from": "Lupa Automation ,Coupon Automation BookIntro  <monitor@lupa.co.il>",
               "to": operators,
               "subject": subject,
               "text": message,
@@ -50,7 +50,7 @@ def send_email(subject, message):
     )
 def if_email_not_exists_send_email(result):
 
-    send_email("The email not sent ** IncentiveTilesBuyers **", result)
+    send_email("The email not sent ** BookIntro **", result)
 
 def check_all_emails(first_email_id, latest_email_id,mail):
     isValid = True
@@ -73,8 +73,8 @@ def check_all_emails(first_email_id, latest_email_id,mail):
         if isValid:
             break
     if not isValid:
-         print("Email not exists -- הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁 -- ")
-         if_email_not_exists_send_email("The user did not receive the email -- הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁 --" + FROM_EMAIL)
+         print("Email not exists --עפתם על הלופה? תזמינו לה עותק נוסף בהנחה שווה 😍 -- ")
+         if_email_not_exists_send_email("The user did not receive the email -- עפתם על הלופה? תזמינו לה עותק נוסף בהנחה שווה 😍 --" + FROM_EMAIL)
 
 
 def read_email():
