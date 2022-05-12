@@ -21,16 +21,16 @@ url_token = "https://payments.lupa.co.il/v1/checkout.aspx?token=2231621121430861
 
 def send_hook():
 
-    url = 'http://files.lupa.co.il/lp/hooks.aspx?method=coupon_desk&campaign_name=WelcomePopupApp&messageid=4783512567742464&email=couponsaoutomat@gmail.com&sale=1'
+    url = 'http://files.lupa.co.il/lp/hooks.aspx?method=coupon_desk&messageid=5215569852825600&email=couponsaoutomat@gmail.com&campaign_name=AbandonedCartBookDesktop'
     response = requests.get(url).json()
     print(response)
     time.sleep(5)
     if response != 200:
-        if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
+        if_email_not_exists_send_email("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁 --" + FROM_EMAIL)
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
-    if subject == 'עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍' and date_from_email_after_regex == date_time_now:
+    if subject == 'פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁' and date_from_email_after_regex == date_time_now:
       print('Subject : ' + subject + '\n')
       print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
       print("+++++++++++")
@@ -45,7 +45,7 @@ def send_email(subject, message):
         "https://api.mailgun.net/v3/lupa.co.il/messages",
         auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
         data={
-              "from": "Lupa Automation ,Coupon Automation WelcomePopupApp  <monitor@lupa.co.il>",
+              "from": "Lupa Automation ,Coupon Automation AbandonedCartBookDesktop  <monitor@lupa.co.il>",
               "to": operators,
               "subject": subject,
               "text": message,
@@ -53,31 +53,15 @@ def send_email(subject, message):
     )
 def if_email_not_exists_send_email(result):
 
-    send_email("The email not sent ** WelcomePopupApp **", result)
-
-def check_in_payment():
-
-        playwright = sync_playwright().start()
-        pixel_2 = playwright.devices['Pixel 2']
-        browser = playwright.chromium.launch(headless=False)
-        context = browser.new_context(**pixel_2, )
-        context.tracing.start(screenshots=True, snapshots=True)
-        page = context.new_page()
-        page.goto(url_token,wait_until="load")
-        text = page.text_content("//span[@class='price-label' and contains(.,'הנחת קופון אישי')]")
-        print(page.title())
-        browser.close()
-        if text != 'הנחת קופון אישי':
-            print("Email not exists --עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍-- ")
-            if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
+    send_email("The email not sent ** AbandonedCartBookDesktop **", result)
 
 def delete_coupon():
 
-    url = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=WelcomePopupApp&master_id=3502298'
+    url = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=AbandonedCartBookDesktop&master_id=3502298'
     response = requests.get(url).json()
     print(response)
     if response['isValid'] != True:
-        if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
+        if_email_not_exists_send_email("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁 --" + FROM_EMAIL)
 
 def check_all_emails(first_email_id, latest_email_id,mail):
 
@@ -102,15 +86,14 @@ def check_all_emails(first_email_id, latest_email_id,mail):
             break
 
     if not isValid:
-         print("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 -- ")
-         if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
+         print("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁 -- ")
+         if_email_not_exists_send_email("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁 --" + FROM_EMAIL)
 
 def read_email():
 
     try:
 
         send_hook()
-        check_in_payment()
         delete_coupon()
         mail = imaplib.IMAP4_SSL(SMTP_SERVER)
         mail.login(FROM_EMAIL,FROM_PWD)
