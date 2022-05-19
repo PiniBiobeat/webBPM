@@ -8,7 +8,7 @@ class HomePage(PageBase):
     menu_button = '//img[@class="burger_menu"]'
     open_login_sceen_button = '//div[@class="menu-item" and contains(.,"כניסה ")]'
     click_log_out  = '//div[@class="menu-item" and contains(.,"יציאה מהחשבון")]'
-
+    button_sign_up = '//span[@style="display: inline-flex;" and contains(.,"יצירת חשבון חדש")]'
 
 
 
@@ -29,6 +29,10 @@ class HomePage(PageBase):
 
     def log_out(self):
         self.pw_page.click(self.click_log_out)
+
+    def shoose_sign_up(self):
+        self.pw_page.click(self.button_sign_up)
+
 
 
 

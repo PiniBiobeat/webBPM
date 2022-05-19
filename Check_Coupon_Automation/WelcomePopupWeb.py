@@ -9,8 +9,6 @@ from datetime import datetime
 import re
 from playwright.sync_api import sync_playwright
 import psycopg2
-import pytest
-
 ORG_EMAIL = "@gmail.com"
 
 FROM_EMAIL = "couponsaoutomat" + ORG_EMAIL
@@ -21,18 +19,19 @@ SMTP_PORT = 993
 date_time = datetime.now()
 url_token = "https://payments.lupa.co.il/v1/checkout.aspx?token=223162112143086108041059072224085117055012015193017171017225063179088126115061190231207181239206167254092119250116100147141161254102026055247229&lang=he&app_version=2.10.35&device_type=android"
 
+
 def send_hook():
 
-    url = 'http://files.lupa.co.il/lp/hooks.aspx?method=coupon_desk&campaign_name=WelcomePopupApp&messageid=4783512567742464&email=couponsaoutomat@gmail.com&sale=1'
+    url = "https://files.lupa.co.il/lp/hooks.aspx?method=coupon&messageid=5825839902031872&email=couponsaoutomat@gmail.com&campaign_name=WelcomePopupWeb"
     response = requests.get(url).json()
     print(response)
     time.sleep(5)
     if response != 200:
-        if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
+        if_email_not_exists_send_email("מה שמגיע מגיע - קופון הנחה מלופה 😍 --" + FROM_EMAIL)
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
-    if subject == 'עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍' and date_from_email_after_regex == date_time_now:
+    if subject == 'מה שמגיע מגיע' and date_from_email_after_regex == date_time_now:
       print('Subject : ' + subject + '\n')
       print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
       print("+++++++++++")
@@ -47,7 +46,7 @@ def send_email(subject, message):
         "https://api.mailgun.net/v3/lupa.co.il/messages",
         auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
         data={
-              "from": "Lupa Automation ,Coupon Automation WelcomePopupApp  <monitor@lupa.co.il>",
+              "from": "Lupa Automation ,Coupon Automation WelcomePopupWeb  <monitor@lupa.co.il>",
               "to": operators,
               "subject": subject,
               "text": message,
@@ -55,7 +54,7 @@ def send_email(subject, message):
     )
 def if_email_not_exists_send_email(result):
 
-    send_email("The email not sent ** WelcomePopupApp **", result)
+    send_email("The email not sent ** WelcomePopupWeb **", result)
 
 def check_in_payment():
 
@@ -66,20 +65,20 @@ def check_in_payment():
         context.tracing.start(screenshots=True, snapshots=True)
         page = context.new_page()
         page.goto(url_token,wait_until="load")
-        text = page.text_content("//span[@class='price-label' and contains(.,'הנחת קופון אישי')]")
+        text = page.text_content("//span[@class='price-label' and contains(.,'קופון אישי')]")
         print(page.title())
         browser.close()
-        if text != 'הנחת קופון אישי':
-            print("Email not exists --עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍-- ")
+        if text != 'קופון אישי':
+            print("Email not exists --מה שמגיע מגיע - קופון הנחה מלופה 😍-- ")
             if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
 
 def delete_coupon():
 
-    url = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=WelcomePopupApp&master_id=3502298'
+    url = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=WelcomePopupWeb&master_id=3502298'
     response = requests.get(url).json()
     print(response)
     if response['isValid'] != True:
-        if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
+        if_email_not_exists_send_email("מה שמגיע מגיע - קופון הנחה מלופה 😍 --" + FROM_EMAIL)
 
 def check_all_emails(first_email_id, latest_email_id,mail):
 
@@ -104,8 +103,8 @@ def check_all_emails(first_email_id, latest_email_id,mail):
             break
 
     if not isValid:
-         print("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 -- ")
-         if_email_not_exists_send_email("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 --" + FROM_EMAIL)
+         print("מה שמגיע מגיע - קופון הנחה מלופה 😍 -- ")
+         if_email_not_exists_send_email("מה שמגיע מגיע - קופון הנחה מלופה 😍 --" + FROM_EMAIL)
 
 def read_email():
 
@@ -127,5 +126,6 @@ def read_email():
     except Exception as e:
         traceback.print_exc()
         print(str(e))
+
 
 read_email()

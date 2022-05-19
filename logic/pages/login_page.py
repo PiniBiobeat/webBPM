@@ -2,8 +2,6 @@ import time
 
 from infra.page_base import PageBase
 
-
-
 class LoginPage(PageBase):
 
     text_user_login = "//input[@type='text']"
@@ -13,6 +11,8 @@ class LoginPage(PageBase):
     tiles_button = '(//span[@class="lupa-btn-content"])[1]'
     facebook_button = "//button[@class='facebook_sign_in']"
     get_text_err = "//div[@class='error']"
+    menu_button = '//img[@class="burger_menu"]'
+    button_out = '//div[@class="menu-item" and contains(., "יציאה מהחשבון")]'
 
     def __init__(self,page):
         super().__init__(page)
@@ -25,13 +25,10 @@ class LoginPage(PageBase):
     def click_login_button(self):
         self.pw_page.click(self.button_login)
 
-
-
     def take_token(self):
-        time.sleep(7)
+        time.sleep(5)
         token = self.pw_page.context.storage_state(path="['origins'][0]['localStorage'][5]['value']")
         user_token = token['origins'][0]['localStorage'][5]['value']
-
         return user_token
 
     def login_with_google(self):
@@ -46,7 +43,15 @@ class LoginPage(PageBase):
 
     def get_error(self):
         text_error = self.pw_page.text_content(self.get_text_err)
+       # self.pw_page.close()
         return text_error
+
+    def open_menu(self):
+        self.pw_page.click(self.menu_button)
+
+    def click_out(self):
+        self.pw_page.click(self.button_out)
+
 
 
 

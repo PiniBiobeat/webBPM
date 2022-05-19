@@ -5,7 +5,7 @@ class UploadPhotoPage(PageBase):
 
     input_photo = "//input[@id= 'f']"
     title_button = "//span[@id= 'header_title']"
-    gallery_button = "//img[@src='/static/media/icon_gallery_old.e4c596ba.svg']"
+    gallery_button = "//div[@class='rounded_box small'][1]"
     instagram_button = "//img[@src='/static/media/icon_instagram.ae47004e.svg']"
     googlePhotos_button = "//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
 

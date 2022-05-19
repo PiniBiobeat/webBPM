@@ -54,14 +54,13 @@ class TestLogin(TestBase):
         token_after_login  = page.take_token()
         assert token_after_login is not None
 
-
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_login_google(self):
         page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
         page.choose_tiles()
         page.open_menu()
-        page.open_screen_login_from_menu()
+        page.log_out()
 
         page: ChooseLoginOrSignUpPage = self.browser.create_page(ChooseLoginOrSignUpPage)
         page.click_login_button()
@@ -70,6 +69,8 @@ class TestLogin(TestBase):
 
         page: GooglePhotosPopUp = self.browser.create_popup(page.login_with_google(), GooglePhotosPopUp)
         page.login_google_photos(text_googleUserName, text_googlePassword)
+
+        page: LoginPage = self.browser.create_page(LoginPage)
         token_after_login = page.take_token()
         assert token_after_login is not None
 
@@ -79,7 +80,7 @@ class TestLogin(TestBase):
         page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
         page.choose_tiles()
         page.open_menu()
-        page.open_screen_login_from_menu()
+        page.log_out()
 
         page: ChooseLoginOrSignUpPage = self.browser.create_page(ChooseLoginOrSignUpPage)
         page.click_login_button()
@@ -88,8 +89,12 @@ class TestLogin(TestBase):
 
         page: FacebookPopup = self.browser.create_popup(page.login_with_facebook(), FacebookPopup)
         page.login_facebook(text_facebook_user, text_facebook_pass)
+
+        page: LoginPage = self.browser.create_page(LoginPage)
         token_after_login = page.take_token()
         assert token_after_login is not None
+
+
 
 
 

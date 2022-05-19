@@ -23,9 +23,3 @@ class FacebookPopup(PageBase):
         self.pw_page.fill(self.facebook_pass, text_password)
         self.pw_page.click(self.button_login)
 
-    def take_token(self):
-        time.sleep(7)
-        #self.pw_page.wait_for_selector(self.tiles_button, state="attached")
-        token = self.pw_page.context.storage_state(path="['origins'][0]['localStorage'][5]['value']")
-        user_token = token['origins'][0]['localStorage'][5]['value']
-        return user_token
