@@ -9,8 +9,9 @@ class GooglePhotosPage(PageBase):
     def __init__(self, page):
         super().__init__(page)
 
-    def upload_photos_from_google(self,Quanity=1):
+    def upload_photos_from_google(self):
         self.pw_page.click(self.googleAllPhotos_button)
         # for i in range(Quanity):
         self.pw_page.click(self.googleChoosePhoto_button)
         self.pw_page.click(self.button_next)
+

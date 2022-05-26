@@ -53,6 +53,8 @@ def send_email(subject, message):
               "text": message,
               }
     )
+
+
 def if_email_not_exists_send_email(result):
 
     send_email("The email not sent ** WelcomePopupApp **", result)

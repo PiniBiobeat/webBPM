@@ -26,7 +26,7 @@ def send_hook():
     print(response)
     time.sleep(5)
     if response != 200:
-        if_email_not_exists_send_email("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁 --" + FROM_EMAIL)
+        if_email_not_exists_send_email("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁not create coupon =!200  😍 --" + FROM_EMAIL)
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
@@ -53,7 +53,7 @@ def send_email(subject, message):
     )
 def if_email_not_exists_send_email(result):
 
-    send_email("The email not sent ** AbandonedCartBook **", result)
+    send_email("The email not sent ** AbandonedCartBook **the email not exists", result)
 
 def check_in_payment():
 
@@ -66,6 +66,7 @@ def check_in_payment():
         page.goto(url_token,wait_until="load")
         text = page.text_content("//span[@class='price-label' and contains(.,'הנחת קופון אישי')]")
         print(page.title())
+        print(text)
         browser.close()
         if text != 'הנחת קופון אישי':
             print("Email not exists --פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁-- ")
@@ -103,7 +104,7 @@ def check_all_emails(first_email_id, latest_email_id,mail):
 
     if not isValid:
          print("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁 -- ")
-         if_email_not_exists_send_email("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁 --" + FROM_EMAIL)
+         if_email_not_exists_send_email("פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁-the email not send to user  --" + FROM_EMAIL)
 
 def read_email():
 

@@ -6,6 +6,12 @@ class PreviewScreen(PageBase):
     title_button = "//span[@style='font-size: 22px;']"
     all_selector_in_page = '//div[@class="vh_div"]'
     psifas_size = '// option[ @ value = "1"]'
+    icon_add_image = "//img[@class='upload_icon']"
+    icon_google = "//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
+    test_logout = "//div[@class='first-row-el'][1]"
+    icon_delete = "(//img[@src='/static/media/icon_trash.5d8f7be3.svg'])[1]"
+    text_yes_delete = "//span[@class='lupa-btn-content' and contains(.,'כן')]"
+    icon_edit = "(//img[@src='/static/media/icon_image_edit.d59295f7.svg'])[1]"
 
     def __init__(self, page):
         super().__init__(page)
@@ -23,6 +29,24 @@ class PreviewScreen(PageBase):
     def get_psifas_size(self):
         text_psifas_size = self.pw_page.text_content(self.psifas_size)
         return text_psifas_size
+
+    def click_add_image(self):
+        self.pw_page.click(self.icon_add_image)
+
+    def click_add_image_from_google(self):
+        self.pw_page.click(self.icon_google)
+
+    def click_log_out(self):
+        self.pw_page.click(self.test_logout)
+
+    def delete_image(self):
+        self.pw_page.click(self.icon_delete)
+
+    def yes_delete(self):
+        self.pw_page.click(self.text_yes_delete)
+
+    def click_edit_page(self):
+        self.pw_page.click(self.icon_edit)
 
 
 

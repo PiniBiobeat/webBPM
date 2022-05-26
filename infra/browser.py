@@ -31,3 +31,5 @@ class Browser:
 
     def stop_trace(self):
         self.context.tracing.stop(path="trace.zip")
+
+
