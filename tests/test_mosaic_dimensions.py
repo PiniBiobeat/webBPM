@@ -1,9 +1,10 @@
+import time
+
 import pytest
 from logic.pages.home_page import HomePage
 from logic.pages.upload_photo_page import UploadPhotoPage
 from tests.test_base import TestBase
 from infra.config.config_provider import configuration
-from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.googlePhotos_page import GooglePhotosPage
 from logic.pages.Psifas_upload_photo_page import PsifasPhotosPage
 from logic.pages.google_photos_popup import GooglePhotosPopUp
@@ -16,34 +17,11 @@ text_password_instagram = "Pinimari2020!"
 text_googleUserName="lupadevtest@gmail.com"
 text_googlePassword="lupadevtest!128"
 
-originalPrice=39
-defaultQuantity=1
-
-
-
-
-
-class TestUploadMosaic(TestBase):
+class TestMosaicDimensions(TestBase):
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_psifas_upload_photo_from_local_gallery(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
-        page.choose_pesipas()
-
-        page: PsifasPhotosPage = self.browser.create_page(PsifasPhotosPage)
-        page.Psifas_upload_photos(psifsPhoto)
-        # use API
-        # url = f"https://tiles.lupa.co.il/api.aspx?method=get_mosaic_options&width=4898&height=3265"
-        # response = requests.get(url).json()
-        # a =  response["payload"][0]['Price']
-        page: PreviewMosaicScreen = self.browser.create_page(PreviewMosaicScreen)
-        text_psifas_size = page.get_psifas_size()
-        assert text_psifas_size.replace(" ריבועים  | מידות 44.3 על  44.3 ס”מ" ,"").strip() == "2*2"
-
-    @pytest.mark.smoke
-    @pytest.mark.usefixtures("before_after_test")
-    def test_psifas_upload_photos_from_google_photos(self ,originalPrice="39" ,defaultQuantity="1"):
+    def test_upload_image_3631_width_3026_height_make_sure_respons_2X2(self):
         page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
         page.choose_pesipas()
 
@@ -53,9 +31,25 @@ class TestUploadMosaic(TestBase):
         page.login_google_photos(text_googleUserName, text_googlePassword)
 
         page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
-        # upload_photos_from_google --> can get number of photos to upload
-        page.upload_photos_from_google()
+        page.upload_image_for_mosaic()
 
         page: PreviewMosaicScreen = self.browser.create_page(PreviewMosaicScreen)
-        text_psifas_size = page.get_psifas_size()
-        assert text_psifas_size.replace(" ריבועים  | מידות 44.3 על  44.3 ס”מ", "").strip() == "2*2"
+        all_size_for_image = page.get_psifas_size_1()
+        assert all_size_for_image == 12
+
+    # @pytest.mark.smoke
+    # @pytest.mark.usefixtures("before_after_test")
+    # def test_edit_mosaic(self):
+    #     page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+    #     page.choose_pesipas()
+    #
+    #     page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
+    #
+    #     page: GooglePhotosPopUp = self.browser.create_popup(page.open_google_photos(), GooglePhotosPopUp)
+    #     page.login_google_photos(text_googleUserName, text_googlePassword)
+    #
+    #     page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
+    #     page.upload_image_for_mosaic()
+    #
+    #     page: PreviewMosaicScreen = self.browser.create_page(PreviewMosaicScreen)
+    #     page.move_the_image()

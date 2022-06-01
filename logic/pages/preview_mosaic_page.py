@@ -1,6 +1,6 @@
 from infra.page_base import PageBase
 
-class PreviewScreen(PageBase):
+class PreviewMosaicScreen(PageBase):
 
 
     title_button = "//span[@style='font-size: 22px;']"
@@ -12,6 +12,8 @@ class PreviewScreen(PageBase):
     icon_delete = "(//img[@src='/static/media/icon_trash.5d8f7be3.svg'])[1]"
     text_yes_delete = "//span[@class='lupa-btn-content' and contains(.,'כן')]"
     icon_edit = "(//img[@src='/static/media/icon_image_edit.d59295f7.svg'])[1]"
+    gel_all_size = "//option[@direction='rtl']"
+    wait_for_ele =  "//select[@class='select-css']"
 
     def __init__(self, page):
         super().__init__(page)
@@ -26,8 +28,17 @@ class PreviewScreen(PageBase):
         text = self.pw_page.text_content(self.title_button)
         return text
 
+    def get_psifas_size(self):
+        text_psifas_size = self.pw_page.text_content(self.psifas_size)
+        return text_psifas_size
+
     def click_add_image(self):
         self.pw_page.click(self.icon_add_image)
+
+    def get_psifas_size_1(self):
+        self.pw_page.wait_for_selector(self.wait_for_ele, state="visible")
+        size = self.pw_page.locator(self.gel_all_size).count()
+        return size
 
     def click_add_image_from_google(self):
         self.pw_page.click(self.icon_google)
@@ -35,14 +46,10 @@ class PreviewScreen(PageBase):
     def click_log_out(self):
         self.pw_page.click(self.test_logout)
 
-    def delete_image(self):
-        self.pw_page.click(self.icon_delete)
+    #def move_the_image(self):
+       # self.pw_page.click('canvas',{position: {x: 50,y: 100}})
 
-    def yes_delete(self):
-        self.pw_page.click(self.text_yes_delete)
 
-    def click_edit_page(self):
-        self.pw_page.click(self.icon_edit)
 
 
 

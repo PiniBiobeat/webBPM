@@ -13,7 +13,7 @@ from logic.pages.google_photos_popup import GooglePhotosPopUp
 
 
 
-list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg", "C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
+list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg", "C:\\Users\\lupa\\Desktop\\london\\IMG_2577.jpg"]
 
 
 
@@ -35,6 +35,7 @@ class TestEditTiles(TestBase):
 
         page: EditPage = self.browser.create_page(EditPage)
         page.move_image()
+        page.click_save()
 
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()

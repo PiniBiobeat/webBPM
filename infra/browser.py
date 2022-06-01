@@ -10,13 +10,14 @@ class Browser:
     popup = None
 
     def __init__(self):
+
         playwright = sync_playwright().start()
         pixel_2 = playwright.devices['Pixel 2']
+        Desktop = playwright.devices['Desktop Chrome HiDPI']
         self.browser = playwright.chromium.launch(headless=False)
-        self.context = self.browser.new_context(**pixel_2,)
+        self.context = self.browser.new_context(**Desktop,)
         self.context.tracing.start(screenshots=True, snapshots=True)
         self.page = self.context.new_page()
-
 
     def navigate(self, address, page_type: Type[PageBase]):
         self.page.goto(address, wait_until="load")
