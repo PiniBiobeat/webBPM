@@ -3,8 +3,6 @@ from tests.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.online_name_book_page import NameBook
 
-
-
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
 psifsPhoto = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg"]
 text_user_name_instagram = "pinitesttiles"
@@ -13,9 +11,6 @@ text_googleUserName="lupadevtest@gmail.com"
 text_googlePassword="lupadevtest!128"
 Short_name = "B"
 name_book =  "Book Automation"
-
-
-
 
 
 class TestCreateAlbum(TestBase):

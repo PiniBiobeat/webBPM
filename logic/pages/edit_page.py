@@ -30,6 +30,7 @@ class EditPage(PageBase):
         # self.pw_page.mouse.down()
         # self.pw_page.hover(selector)
         # self.pw_page.click(selector)
+        #self.pw_page.drag_and_drop("440","300"[,source_position=None])
 
     def click_save(self):
         self.pw_page.click(self.button_save)

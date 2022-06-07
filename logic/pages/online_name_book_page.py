@@ -39,6 +39,7 @@ class NameBook(PageBase):
     def click_approval(self):
         self.pw_page.click(self.approval_button)
 
+
     def take_token(self):
      time.sleep(10)
      event_token = self.pw_page.evaluate("JSON.parse(localStorage.getItem('LUPA_TOKEN'))['event_token']")

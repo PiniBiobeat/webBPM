@@ -5,11 +5,7 @@ from tests.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.edit_page import EditPage
 from logic.pages.preview_screen_tiles_page import PreviewScreen
-from logic.pages.gallery_page import GalleryPage
-from logic.pages.instagram_page import InstagramPage
-from logic.pages.googlePhotos_page import GooglePhotosPage
-from logic.pages.instagram_popup_page import InstagramPopUp
-from logic.pages.google_photos_popup import GooglePhotosPopUp
+
 
 
 
