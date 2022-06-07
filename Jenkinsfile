@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM Python:3.10.5-alpine
 RUN mkdir /pytest-container-demo/
 ADD .  /pytest-container-demo/ 
 WORKDIR /pytest-container-demo/
