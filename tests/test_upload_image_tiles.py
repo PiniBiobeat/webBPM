@@ -34,7 +34,7 @@ class TestUpload(TestBase):
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("39x","").strip() == str(expected_price)
+        assert current_price.replace("42x","").strip() == str(expected_price)
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
@@ -53,7 +53,7 @@ class TestUpload(TestBase):
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("39x", "").strip() == str(expected_price)
+        assert current_price.replace("42x", "").strip() == str(expected_price)
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
@@ -72,11 +72,11 @@ class TestUpload(TestBase):
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("39x", "").strip() == str(expected_price)
+        assert current_price.replace("42x", "").strip() == str(expected_price)
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_upload_photos_from_GooglePhotos(self,originalPrice="39",defaultQuantity="1"):
+    def test_upload_photos_from_GooglePhotos(self,originalPrice="42",defaultQuantity="1"):
         page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
         page.choose_tiles()
 

@@ -13,9 +13,9 @@ class Browser:
 
         playwright = sync_playwright().start()
         pixel_2 = playwright.devices['Pixel 2']
-        Desktop = playwright.devices['Desktop Chrome HiDPI']
+
         self.browser = playwright.chromium.launch(headless=False)
-        self.context = self.browser.new_context(**Desktop,)
+        self.context = self.browser.new_context(**pixel_2,)
         self.context.tracing.start(screenshots=True, snapshots=True)
         self.page = self.context.new_page()
 

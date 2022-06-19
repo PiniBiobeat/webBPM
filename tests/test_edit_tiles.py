@@ -36,5 +36,5 @@ class TestEditTiles(TestBase):
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("39x", "").strip() == str(expected_price)
+        assert current_price.replace("42x", "").strip() == str(expected_price)
 

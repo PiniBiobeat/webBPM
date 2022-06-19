@@ -9,6 +9,7 @@ from datetime import datetime
 import re
 from playwright.sync_api import sync_playwright
 import psycopg2
+import json
 import pytest
 
 ORG_EMAIL = "@gmail.com"
