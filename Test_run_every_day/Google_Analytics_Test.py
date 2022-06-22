@@ -8,7 +8,6 @@ import traceback
 
 
 ORG_EMAIL = "@gmail.com"
-
 FROM_EMAIL = "couponsaoutomat" + ORG_EMAIL
 FROM_PWD = "maripini"
 SMTP_SERVER = "imap.gmail.com"
@@ -21,7 +20,7 @@ tiles_button = '(//span[@class="lupa-btn-content"])[1]'
 input_photo = "//input[@id= 'f']"
 button_click_to_buy = "//button[@class='lupa-btn']"
 login_to_existing_account = "//span[@class='lupa-btn-content' and contains(.,'כניסה')]"
-text_user = "pinim@lupa.co.il"
+text_user = "pinim4@lupa.co.il"
 text_pass = "pinim1"
 locators_user_name  = "//input[@type='text']"
 locators_pass = "//input[@type='password']"
@@ -39,15 +38,13 @@ next_payment = "//button[@class='lupa-btn' and contains(.,'לתשלום')]"
 checkbox_approve = "//input[@type='checkbox']//..//..//..//div[@class='checkbox']"
 webhook_url = "https://hooks.slack.com/services/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"
 
-
-
 def send_event():
+
     playwright = sync_playwright().start()
     pixel_2 = playwright.devices['Pixel 2']
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context(**pixel_2, )
     context.tracing.start(screenshots=True, snapshots=True)
-
     page = context.new_page()
     page.goto(url_token, wait_until="load")
     page.click(tiles_button)
@@ -74,7 +71,7 @@ def send_event():
     text_title_login1 = page.frame_locator("//iframe[@class='credit_guard_frame']").locator("//input[@id='tmpHelper']").input_value()
     result = ast.literal_eval(text_title_login1)
     if result['event'] !=  'eec.transaction':
-        slack_notification('Hello World!'+ "  -> " + result['event'])
+        slack_notification('The event sent correct '+ "  -> " + result['event'])
 
         print(result['event'])
     else:

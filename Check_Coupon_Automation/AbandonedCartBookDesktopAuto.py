@@ -22,8 +22,9 @@ operators = ["pinim@lupa.co.il"]
 SMTP_PORT = 993
 date_time = datetime.now()
 url_token = "https://payments.lupa.co.il/v1/checkout.aspx?token=223162112143086108041059072224085117055012015193017171017225063179088126115061190231207181239206167254092119250116100147141161254102026055247229&lang=he&app_version=2.10.35&device_type=android"
-URL = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=IncentiveTilesBuyers&messageid=5638359101800448&email=couponsaoutomat@gmail.com&discount=20&days=3'
+URL = 'http://files.lupa.co.il/lp/hooks.aspx?method=coupon_desk&messageid=5215569852825600&email=couponsaoutomat@gmail.com&campaign_name=AbandonedCartBookDesktop'
 webhook_url = "https://hooks.slack.com/services/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"
+url_delete_coupon = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=AbandonedCartBookDesktop&master_id=3502298'
 
 def maks_hook():
     URL_1 = URL
@@ -51,6 +52,7 @@ def check_gmail():
     except Exception as e:
         traceback.print_exc()
         print(str(e))
+        delete_coupon()
         #send_email("not send hook", FROM_EMAIL)
         #slack_notification("the coupon email not found " + "  -> " + FROM_EMAIL)
 
@@ -75,6 +77,7 @@ def check_all_emails(first_email_id, latest_email_id,mail):
                         break
         if isValid:
             break
+    delete_coupon()
     if not isValid:
 
          send_email("the coupon email not found ",FROM_EMAIL)
@@ -82,7 +85,7 @@ def check_all_emails(first_email_id, latest_email_id,mail):
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
-    if subject == 'הטבה אישית ללופה בריבוע מחכה לך בפנים 🎁' and date_from_email_after_regex == date_time_now:
+    if subject == 'פיני, מגיע לך קופון הנחה לרכישת הלופה 🎁' and date_from_email_after_regex == date_time_now:
       print('Subject : ' + subject + '\n')
       print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
       print("+++++++++++")
@@ -91,12 +94,20 @@ def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
     else:
       return False
 
+def delete_coupon():
+    url_delete = url_delete_coupon
+    response = requests.get(url_delete).json()
+    print(response)
+    if response['isValid'] != True:
+        send_email("the coupon not deleted",FROM_EMAIL)
+        slack_notification("the coupon not deleted" + "  -> " + FROM_EMAIL)
+
 def send_email(subject, message):
     return requests.post(
         "https://api.mailgun.net/v3/lupa.co.il/messages",
         auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
         data={
-            "from": "Lupa Automation ,Coupon Automation IncentiveTilesBuyers  <monitor@lupa.co.il>",
+            "from": "Lupa Automation ,Coupon Automation AbandonedCartBookDesktop  <monitor@lupa.co.il>",
             "to": operators,
             "subject": subject,
             "text": message,
@@ -115,6 +126,7 @@ def slack_notification(message):
                                     retries=False)
         except:
             traceback.print_exc()
+
         return True
 
 maks_hook()

@@ -1,3 +1,4 @@
+import json
 import time
 import traceback
 import imaplib
@@ -8,51 +9,54 @@ import requests
 from datetime import datetime
 import re
 
+import urllib3
+from playwright.sync_api import sync_playwright
+
+
 ORG_EMAIL = "@gmail.com"
-FROM_EMAIL = "lupadevtest" + ORG_EMAIL
-FROM_PWD = "lupadevtest!128"
-SMTP_SERVER = "imap.gmail.com"
-operators = ["pinim@lupa.co.il","adi@lupa.co.il"]
+
+FROM_EMAIL = "couponsaoutomat" + ORG_EMAIL
+FROM_PWD = "maripini"
+SMTP_SERVER = "smtp.gmail.com"
+operators = ["pinim@lupa.co.il"]
 SMTP_PORT = 993
 date_time = datetime.now()
+url_token = "https://payments.lupa.co.il/v1/checkout.aspx?token=223162112143086108041059072224085117055012015193017171017225063179088126115061190231207181239206167254092119250116100147141161254102026055247229&lang=he&app_version=2.10.35&device_type=android"
+URL = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=AbandonedCartTilesWeb&messageid=4509318634340352&email=couponsaoutomat@gmail.com&discount=10&days=3'
+webhook_url = "https://hooks.slack.com/services/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"
+url_delete_coupon = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=AbandonedCartTilesWeb&master_id=3493815'
 
-
-def send_hook():
-
-    url = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=AbandonedCartTilesWeb&messageid=4509318634340352&email=lupadevtest@gmail.com&discount=10&days=3'
-    response = requests.get(url).json()
-
+def maks_hook():
+    URL_1 = URL
+    response = requests.get(URL_1)
     print(response)
-    time.sleep(8)
-
-def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
-
-    if subject == 'בדיקה, קופון הטבה אישי ללופה בריבוע מחכה לך בפנים 🎁' and date_from_email_after_regex == date_time_now:
-      print('Subject : ' + subject + '\n')
-      print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
-      print("+++++++++++")
-      #return exit()
-      return True
+    if response.status_code == 200:
+        check_gmail()
     else:
-      return False
+        send_email("not send hook", FROM_EMAIL)
+        slack_notification("not send hook" + "  -> " + FROM_EMAIL)
 
-def send_email(subject, message):
+def check_gmail():
 
-    return requests.post(
-        "https://api.mailgun.net/v3/lupa.co.il/messages",
-        auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
-        data={
-              "from": "Lupa Automation ,Coupon Automation IncentiveTilesBuyers  <monitor@lupa.co.il>",
-              "to": operators,
-              "subject": subject,
-              "text": message,
-              }
-    )
-def if_email_not_exists_send_email(result):
+    try:
+        mail = imaplib.IMAP4_SSL(SMTP_SERVER)
+        mail.login(FROM_EMAIL, FROM_PWD)
+        mail.select('inbox')
+        data = mail.search(None, 'ALL')
+        mail_ids = data[1]
+        id_list = mail_ids[0].split()
+        first_email_id = int(id_list[0])
+        latest_email_id = int(id_list[-1])
+        check_all_emails(first_email_id, latest_email_id, mail)
 
-    send_email("The email not sent ** IncentiveTilesBuyers **", result)
+    except Exception as e:
+        traceback.print_exc()
+        print(str(e))
+        #send_email("not send hook", FROM_EMAIL)
+        #slack_notification("the coupon email not found " + "  -> " + FROM_EMAIL)
 
 def check_all_emails(first_email_id, latest_email_id,mail):
+
     isValid = True
     for i in range(latest_email_id, first_email_id, -1):
         data = mail.fetch(str(i), '(RFC822)')
@@ -73,30 +77,46 @@ def check_all_emails(first_email_id, latest_email_id,mail):
         if isValid:
             break
     if not isValid:
-         print("Email not exists --בדיקה, קופון הטבה אישי ללופה בריבוע מחכה לך בפנים 🎁-- ")
-         if_email_not_exists_send_email("The user did not receive the email -- בדיקה, קופון הטבה אישי ללופה בריבוע מחכה לך בפנים 🎁 --" + FROM_EMAIL)
 
+         send_email("the coupon email not found ",FROM_EMAIL)
+         slack_notification("the coupon email not found " + "  -> " + FROM_EMAIL)
 
-def read_email():
+def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
-    send_hook()
+    if subject == 'בדיקה, קופון הטבה אישי ללופה בריבוע מחכה לך בפנים 🎁' and date_from_email_after_regex == date_time_now:
+      print('Subject : ' + subject + '\n')
+      print('The date now  : ' + date_time_now + ',  The date from email : ' + date_from_email_after_regex + '\n')
+      print("+++++++++++")
 
-    try:
-        mail = imaplib.IMAP4_SSL(SMTP_SERVER)
-        mail.login(FROM_EMAIL,FROM_PWD)
-        mail.select('inbox')
-        data = mail.search(None, 'ALL')
-        mail_ids = data[1]
-        id_list = mail_ids[0].split()
-        first_email_id = int(id_list[0])
-        latest_email_id = int(id_list[-1])
-        check_all_emails(first_email_id,latest_email_id,mail)
+      return True
+    else:
+      return False
 
+def send_email(subject, message):
+    return requests.post(
+        "https://api.mailgun.net/v3/lupa.co.il/messages",
+        auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
+        data={
+            "from": "Lupa Automation ,Coupon Automation AbandonedCartTilesWeb  <monitor@lupa.co.il>",
+            "to": operators,
+            "subject": subject,
+            "text": message,
+        }
+    )
 
-    except Exception as e:
-        traceback.print_exc()
-        print(str(e))
+def slack_notification(message):
+        try:
+            slack_message = {'text': message}
 
+            http = urllib3.PoolManager()
+            response = http.request('POST',
+                                    webhook_url,
+                                    body=json.dumps(slack_message),
+                                    headers={'Content-Type': 'application/json'},
+                                    retries=False)
+        except:
+            traceback.print_exc()
 
+        return True
 
-read_email()
+maks_hook()
