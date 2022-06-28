@@ -17,6 +17,10 @@ class NameBook(PageBase):
     text_create_album = "//a[@class='ng-tns-c0-0' and contains(text(),'יצירת ספר')]"
     text_login_title = "(//h1[@class='bold' and contains(text(),'כניסה לחשבון לופה')])[1]"
     text_iframe = "(//iframe[@frameborder='0'])[1]"
+    text_open_my_album = "//a[@class='ng-tns-c0-0 ng-star-inserted' and contains(text(),' הספרים שלי')]"
+    text_open_web_site = "//a[@class='ng-tns-c0-0' and contains(text(),'אתר לופה')]"
+    text_open_chat = "//a[@class='ng-tns-c0-0' and contains(text(),'מפה מתחילים')]"
+    text_open_login_screen = "//a[@class='ng-tns-c0-0 ng-star-inserted' and contains(text(),'התחברות לחשבון')]"
 
     def __init__(self, page):
         super().__init__(page)
@@ -25,11 +29,29 @@ class NameBook(PageBase):
     def click_next(self):
         self.pw_page.click(self.click_button_next)
 
+    def click_open_web_side(self):
+        with self.pw_page.context.expect_page() as tab:
+            self.pw_page.click(self.text_open_web_site)
+        new_tab = tab.value.url
+        return new_tab
+
+    def get_url_chat(self):
+        with self.pw_page.context.expect_page() as tab:
+            self.pw_page.click(self.text_open_chat)
+        new_tab = tab.value.url
+        return new_tab
+
+    def clock_login(self):
+        self.pw_page.click(self.text_open_login_screen)
+
     def click_on_manu(self):
         self.pw_page.click(self.icon_manu)
 
     def click_create_album(self):
         self.pw_page.click(self.text_create_album)
+
+    def click_open_my_albums(self):
+        self.pw_page.click(self.text_open_my_album)
 
     def get_err(self):
         text =  self.pw_page.text_content(self.get_err_text)

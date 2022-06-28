@@ -13,7 +13,7 @@ from logic.pages.google_photos_popup import GooglePhotosPopUp
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
 psifsPhoto = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg"]
 text_user_name_instagram = "pinitesttiles"
-text_password_instagram = "Pinimari2020!"
+text_password_instagram = "Pinim2022!"
 text_googleUserName="lupadevtest@gmail.com"
 text_googlePassword="lupadevtest!128"
 
