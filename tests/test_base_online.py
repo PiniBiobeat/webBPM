@@ -17,6 +17,7 @@ class TestBaseOnline():
         print('Starting test "' + test_name + '"')
         failed_before = request.session.testsfailed
         yield self.browser_online
+
         if request.session.testsfailed != failed_before:
             try:
                 self.browser_online.stop_trace()
@@ -24,7 +25,8 @@ class TestBaseOnline():
                 pass
         self.tear_down_invoke()
         print('\r*****DONE*****')
-
+# context.close()
+# crowser.close()
 
     def tear_down_invoke(self):
         print('\r******TEARDOWN******')
@@ -36,3 +38,4 @@ class TestBaseOnline():
                 pass
         tear_down_tasks.clear()
         print('\r*****DONE_TEARDOWN*****')
+

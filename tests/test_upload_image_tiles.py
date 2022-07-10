@@ -55,45 +55,45 @@ class TestUpload(TestBase):
         current_price = page.get_price()
         assert current_price.replace("42x", "").strip() == str(expected_price)
 
-    @pytest.mark.smoke
-    @pytest.mark.usefixtures("before_after_test")
-    def test_upload_photos_from_instagram(self):
-        page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
-        page.choose_tiles()
-
-        page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-
-        page: InstagramPopUp = self.browser.create_popup(page.open_instagram(),InstagramPopUp)
-        page.login_instagram(text_user_name_instagram,text_password_instagram)
-
-        page: InstagramPage = self.browser.create_page(InstagramPage)
-        page.upload_photos_from_instagram()
-
-        page: PreviewScreen = self.browser.create_page(PreviewScreen)
-        expected_price = page.get_image()
-        current_price = page.get_price()
-        assert current_price.replace("42x", "").strip() == str(expected_price)
-
-    @pytest.mark.smoke
-    @pytest.mark.usefixtures("before_after_test")
-    def test_upload_photos_from_GooglePhotos(self,originalPrice="42",defaultQuantity="1"):
-        page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
-        page.choose_tiles()
-
-        page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-
-        page: GooglePhotosPopUp = self.browser.create_popup(page.open_google_photos(),GooglePhotosPopUp)
-        page.login_google_photos(text_googleUserName, text_googlePassword)
-
-        page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
-        #upload_photos_from_google --> can get number of photos to upload
-        page.upload_photos_from_google()
-
-        page: PreviewScreen = self.browser.create_page(PreviewScreen)
-        expected_price = page.get_image()
-        current_price = page.get_price()
-
-        assert current_price.replace(f"{originalPrice}x", "").strip() == str(expected_price)
+    # @pytest.mark.smoke
+    # @pytest.mark.usefixtures("before_after_test")
+    # def test_upload_photos_from_instagram(self):
+    #     page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
+    #     page.choose_tiles()
+    #
+    #     page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
+    #
+    #     page: InstagramPopUp = self.browser.create_popup(page.open_instagram(),InstagramPopUp)
+    #     page.login_instagram(text_user_name_instagram,text_password_instagram)
+    #
+    #     page: InstagramPage = self.browser.create_page(InstagramPage)
+    #     page.upload_photos_from_instagram()
+    #
+    #     page: PreviewScreen = self.browser.create_page(PreviewScreen)
+    #     expected_price = page.get_image()
+    #     current_price = page.get_price()
+    #     assert current_price.replace("42x", "").strip() == str(expected_price)
+    #
+    # @pytest.mark.smoke
+    # @pytest.mark.usefixtures("before_after_test")
+    # def test_upload_photos_from_GooglePhotos(self,originalPrice="42",defaultQuantity="1"):
+    #     page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
+    #     page.choose_tiles()
+    #
+    #     page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
+    #
+    #     page: GooglePhotosPopUp = self.browser.create_popup(page.open_google_photos(),GooglePhotosPopUp)
+    #     page.login_google_photos(text_googleUserName, text_googlePassword)
+    #
+    #     page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
+    #     #upload_photos_from_google --> can get number of photos to upload
+    #     page.upload_photos_from_google()
+    #
+    #     page: PreviewScreen = self.browser.create_page(PreviewScreen)
+    #     expected_price = page.get_image()
+    #     current_price = page.get_price()
+    #
+    #     assert current_price.replace(f"{originalPrice}x", "").strip() == str(expected_price)
 
     @pytest.mark.smoke
     @pytest.mark.xfail

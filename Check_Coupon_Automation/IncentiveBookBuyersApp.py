@@ -26,6 +26,7 @@ URL = 'https://files.lupa.co.il/lp/hooks.aspx?method=old_coupon&campaign_name=In
 webhook_url = "https://hooks.slack.com/services/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"
 
 def maks_hook():
+
     URL_1 = URL
     response = requests.get(URL_1)
     print(response)

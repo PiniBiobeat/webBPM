@@ -10,6 +10,8 @@ text_login_pass = 'pinim1'
 text_user_not_valid = "NOT"
 text_error = "lupa@lup.co.il דוגמא לכתובת מייל נכונה"
 
+
+
 class TestLogin(TestBase):
 
     @pytest.mark.smoke
@@ -31,7 +33,7 @@ class TestLogin(TestBase):
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_login_local(self):
+    def test_login_local(self) -> None:
         page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
         page.choose_tiles()
         page.open_menu()
@@ -45,15 +47,6 @@ class TestLogin(TestBase):
         page.click_login_button()
         token_after_login  = page.take_token()
         assert token_after_login is not None
-
-
-
-
-
-
-
-
-
 
 
 

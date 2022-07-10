@@ -27,11 +27,13 @@ webhook_url = "https://hooks.slack.com/services/T01EPT4V4B0/B03GFU8349Y/evDAA2ht
 url_delete_coupon = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=WelcomePopupWeb&master_id=3502298'
 
 def maks_hook():
+    time.sleep(5)
     URL_1 = URL
     response = requests.get(URL_1)
     print(response)
     if response.status_code == 200:
-        check_gmail()
+       # check_gmail()
+        check_in_payment()
     else:
         send_email("not send hook", FROM_EMAIL)
         slack_notification("not send hook" + "  -> " + FROM_EMAIL)
@@ -94,23 +96,29 @@ def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
       return False
 
 def check_in_payment():
-    playwright = sync_playwright().start()
-    pixel_2 = playwright.devices['Pixel 2']
-    browser = playwright.chromium.launch(headless=False)
-    context = browser.new_context(**pixel_2, )
-    context.tracing.start(screenshots=True, snapshots=True)
-    page = context.new_page()
-    page.goto(url_token, wait_until="load")
-    text = page.text_content("//span[@class='price-label' and contains(.,'קופון אישי')]")
-    print(page.title())
-    browser.close()
-    if text != 'קופון אישי':
+    try:
+        playwright = sync_playwright().start()
+        pixel_2 = playwright.devices['Pixel 2']
+        browser = playwright.chromium.launch(headless=False)
+        context = browser.new_context(**pixel_2, )
+        context.tracing.start(screenshots=True, snapshots=True)
+        page = context.new_page()
+        page.goto(url_token, wait_until="load")
+        text = page.text_content("//span[@class='price-label' and contains(.,'קופון אישי')]")
+        print(page.title())
+        time.sleep(5)
+        browser.close()
+        if text != 'קופון אישי':
+            print("coupon not in payment")
+            send_email("coupon not in payment",FROM_EMAIL)
+            slack_notification("coupon not in payment" + "  -> " + FROM_EMAIL)
+        else:
+            print("the coupon apper in payment")
+            delete_coupon()
+    except:
         print("coupon not in payment")
-        send_email("coupon not in payment",FROM_EMAIL)
+        send_email("coupon not in payment", FROM_EMAIL)
         slack_notification("coupon not in payment" + "  -> " + FROM_EMAIL)
-    else:
-        print("the coupon apper in payment")
-        delete_coupon()
 
 def delete_coupon():
     url_delete = url_delete_coupon
@@ -119,6 +127,8 @@ def delete_coupon():
     if response['isValid'] != True:
         send_email("the coupon not deleted",FROM_EMAIL)
         slack_notification("the coupon not deleted" + "  -> " + FROM_EMAIL)
+    else:
+        print("The coupon deleted !!!!!!!!!!!!!!!!!!!!!!!")
 
 def send_email(subject, message):
     return requests.post(

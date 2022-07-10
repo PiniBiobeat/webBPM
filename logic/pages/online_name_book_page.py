@@ -9,7 +9,7 @@ class NameBook(PageBase):
     locator_book_name = "//input[@id='mat-input-1']"
     click_button_next = "//button[@type='submit' and contains(.,'המשיכו')]"
     get_err_text = "//mat-error[@class='mat-error ng-star-inserted']"
-    click_in_input = "//input[@id='mat-input-1']"
+    click_in_input = "(//div[@class='mat-form-field-infix' and contains(.,'שם הלופה שלך')])[2]"
     get_err_text_short_name = "//mat-error[@class='mat-error ng-star-inserted' and contains(.,' שם הספר קצר מידי ')]"
     click_checkbox = "//input[@type='checkbox' ]//..//..//span[@class='mat-checkbox-label' and contains(.,' שניה לפני שממשיכים בבקשה אשרו את ')]"
     approval_button = "(//button[@type='submit'])[2]"
@@ -62,6 +62,7 @@ class NameBook(PageBase):
         return text_title_login
 
     def insert_name_book(self,name_of_book):
+        self.pw_page.wait_for_selector(self.click_in_input, state="visible")
         self.pw_page.click(self.click_in_input)
         self.pw_page.fill(self.locator_book_name,name_of_book)
 
@@ -77,7 +78,7 @@ class NameBook(PageBase):
 
     def take_token(self):
          time.sleep(10)
-         event_token = self.pw_page.evaluate("JSON.parse(localStorage.getItem('LUPA_TOKEN'))['event_token']")
+         event_token = self.pw_page.evaluate("JSON.parse(localStorage.getItem('acceptTerms'))")
          return event_token
 
     def take_frame(self):

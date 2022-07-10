@@ -31,7 +31,8 @@ def maks_hook():
     response = requests.get(URL_1)
     print(response)
     if response.status_code == 200:
-        check_gmail()
+        check_in_payment()
+        #check_gmail()
     else:
         send_email("not send hook", FROM_EMAIL)
         slack_notification("not send hook" + "  -> " + FROM_EMAIL)
@@ -103,6 +104,7 @@ def check_in_payment():
     page.goto(url_token, wait_until="load")
     text = page.text_content("//span[@class='price-label' and contains(.,'הנחת קופון אישי')]")
     print(page.title())
+    time.sleep(5)
     browser.close()
     if text != 'הנחת קופון אישי':
         print("coupon not in payment")
