@@ -2,7 +2,7 @@ import pytest
 from tests.test_base_online import TestBaseOnline
 from infra.config.config_provider import configuration
 from logic.pages.online_name_book_page import NameBook
-from playwright.sync_api import sync_playwright, expect
+
 
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]

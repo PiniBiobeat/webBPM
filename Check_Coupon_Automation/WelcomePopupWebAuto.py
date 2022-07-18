@@ -107,7 +107,7 @@ def check_in_payment():
         text = page.text_content("//span[@class='price-label' and contains(.,'קופון אישי')]")
         print(page.title())
         time.sleep(5)
-        browser.close()
+
         if text != 'קופון אישי':
             print("coupon not in payment")
             send_email("coupon not in payment",FROM_EMAIL)
@@ -115,6 +115,7 @@ def check_in_payment():
         else:
             print("the coupon apper in payment")
             delete_coupon()
+        browser.close()
     except:
         print("coupon not in payment")
         send_email("coupon not in payment", FROM_EMAIL)

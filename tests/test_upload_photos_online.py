@@ -1,5 +1,5 @@
 import time
-
+from playwright.sync_api import  expect
 import pytest
 from tests.test_base_online import TestBaseOnline
 from infra.config.config_provider import configuration
@@ -63,3 +63,9 @@ class TestUploadPhotos(TestBaseOnline):
         page.click_upload_photos_to_check_low_quality()
         image_with_text = page.get_unprintable_quality()
         assert text_unprintable_quality == image_with_text
+        text_button_locator_next_disabled = page.get_locator_button()
+        expect(text_button_locator_next_disabled).to_be_disabled()
+
+
+
+

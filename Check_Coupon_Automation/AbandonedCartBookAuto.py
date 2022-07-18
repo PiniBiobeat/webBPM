@@ -27,6 +27,7 @@ webhook_url = "https://hooks.slack.com/services/T01EPT4V4B0/B03GFU8349Y/evDAA2ht
 url_delete_coupon = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=AbandonedCartBook&master_id=3502298'
 
 def maks_hook():
+    time.sleep(5)
     URL_1 = URL
     response = requests.get(URL_1)
     print(response)
@@ -105,7 +106,7 @@ def check_in_payment():
     text = page.text_content("//span[@class='price-label' and contains(.,'הנחת קופון אישי')]")
     print(page.title())
     time.sleep(5)
-    browser.close()
+
     if text != 'הנחת קופון אישי':
         print("coupon not in payment")
         send_email("coupon not in payment",FROM_EMAIL)
@@ -113,6 +114,7 @@ def check_in_payment():
     else:
         print("the coupon apper in payment")
         delete_coupon()
+    browser.close()
 
 def delete_coupon():
     url_delete = url_delete_coupon

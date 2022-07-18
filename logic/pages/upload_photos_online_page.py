@@ -1,7 +1,7 @@
 from infra.page_base import PageBase
 import time
 import json
-
+from playwright.sync_api import expect
 
 
 
@@ -30,11 +30,18 @@ class UploadPhotosOnline(PageBase):
     text_low_quality = 'text = איכות נמוכה'
     text_unprintable_quality = 'text = איכות לא ניתנת להדפסה'
     text_click_pupap = "//div[@class='mat-dialog-actions']"
+    text_button_locators = "//button[@class='ng-tns-c9-4 mat-raised-button mat-accent']"
+    text_button_next = "(//button)[6]"
+    text_buttom_image = "(//div[@class='image-wrap'])[2]"
+    text_button_delete = "//a[@class='delete']"
+    text_edit_button = "//a[@class='editPhoto']"
+    text_set_cover_image = "//a[@class='setCover']"
+    adxax = "//div[@class='overlay ng-tns-c9-3 ng-star-inserted'] and"
 
 
     def __init__(self, page):
         super().__init__(page)
-        self.pw_page.wait_for_selector(self.text_button_upload, state="visible")
+       # self.pw_page.wait_for_selector(self.text_button_upload, state="visible")
 
     def click_upload_photos(self):
         self.pw_page.locator(self.text_button_upload).set_input_files(self.path_images)
@@ -47,6 +54,19 @@ class UploadPhotosOnline(PageBase):
 
     def click_upload_photos_to_check_low_quality(self):
         self.pw_page.locator(self.text_button_upload).set_input_files(self.image_with_low_quality)
+        self.pw_page.click(self.text_click_pupap)
+
+    def click_choose_one_image(self):
+        self.pw_page.click(self.text_buttom_image)
+
+    def click_on_set_cover_image(self):
+        self.pw_page.click(self.text_set_cover_image)
+
+    def click_on_edit_button(self):
+        self.pw_page.click(self.text_edit_button)
+
+    def click_on_delete_button_image(self):
+        self.pw_page.click(self.text_button_delete)
 
     def get_text_low_quality(self):
         self.pw_page.wait_for_selector(self.text_low_quality, state="visible")
@@ -59,4 +79,13 @@ class UploadPhotosOnline(PageBase):
         self.pw_page.click(self.text_click_pupap)
         return_low_quality = self.pw_page.locator(self.text_unprintable_quality).text_content()
         return return_low_quality
+
+    def get_locator_button(self):
+        test_text =  self.pw_page.locator(self.text_button_next)
+        return test_text
+
+    def get_locator_button1(self):
+        test_text1 =  self.pw_page.locator(self.adxax)
+        return test_text1
+
 

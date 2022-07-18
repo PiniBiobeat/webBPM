@@ -3,6 +3,8 @@ from playwright.sync_api import sync_playwright
 from infra.page_base import PageBase
 
 
+
+
 class BrowserOnline:
     browser = None
     context = None
