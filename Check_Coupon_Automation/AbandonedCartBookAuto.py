@@ -96,6 +96,7 @@ def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
       return False
 
 def check_in_payment():
+
     playwright = sync_playwright().start()
     pixel_2 = playwright.devices['Pixel 2']
     browser = playwright.chromium.launch(headless=False)
@@ -113,7 +114,7 @@ def check_in_payment():
         slack_notification("coupon not in payment" + "  -> " + FROM_EMAIL)
     else:
         print("the coupon apper in payment")
-        delete_coupon()
+    delete_coupon()
     browser.close()
 
 def delete_coupon():

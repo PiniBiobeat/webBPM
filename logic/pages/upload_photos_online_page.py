@@ -29,14 +29,19 @@ class UploadPhotosOnline(PageBase):
     text_sum_with_test = "//div[@class='image ng-tns-c11-4 ng-star-inserted visible active']"
     text_low_quality = 'text = איכות נמוכה'
     text_unprintable_quality = 'text = איכות לא ניתנת להדפסה'
-    text_click_pupap = "//div[@class='mat-dialog-actions']"
+    text_click_pupap = 'text = הבנתי בואו נתקדם'
     text_button_locators = "//button[@class='ng-tns-c9-4 mat-raised-button mat-accent']"
     text_button_next = "(//button)[6]"
     text_buttom_image = "(//div[@class='image-wrap'])[2]"
     text_button_delete = "//a[@class='delete']"
     text_edit_button = "//a[@class='editPhoto']"
     text_set_cover_image = "//a[@class='setCover']"
-    adxax = "//div[@class='overlay ng-tns-c9-3 ng-star-inserted'] and"
+    text_cover_image = "(//div[@class='select-wrap'])[2]"
+    text_button_add_image = "text = הוסיפו עוד תמונות"
+    text_button_add_from_local = "text = מחשב"
+    text_button_add_text = "text = הוספת טקסט "
+    text_from_image = "(//div[@class='select-wrap'])[2]"
+    image_with_text = ["C:/Users/lupa/Desktop/london/IMG_2549.jpg","C:/Users/lupa/Desktop/london/IMG_2561.jpg","C:/Users/lupa/Desktop/london/IMG_2569.jpg"]
 
 
     def __init__(self, page):
@@ -56,8 +61,21 @@ class UploadPhotosOnline(PageBase):
         self.pw_page.locator(self.text_button_upload).set_input_files(self.image_with_low_quality)
         self.pw_page.click(self.text_click_pupap)
 
+    def click_upload_Photos_for_text(self):
+        self.pw_page.locator(self.text_button_upload).set_input_files(self.image_with_text)
+        self.pw_page.click(self.text_click_pupap)
+
+    def click_add_images(self):
+        self.pw_page.click(self.text_button_add_image)
+
+    def click_add_images_from_local(self):
+        self.pw_page.locator(self.text_button_add_from_local).set_input_files(self.path_images)
+
     def click_choose_one_image(self):
         self.pw_page.click(self.text_buttom_image)
+
+    def click_add_text(self):
+        self.pw_page.click(self.text_button_add_text)
 
     def click_on_set_cover_image(self):
         self.pw_page.click(self.text_set_cover_image)
@@ -70,13 +88,11 @@ class UploadPhotosOnline(PageBase):
 
     def get_text_low_quality(self):
         self.pw_page.wait_for_selector(self.text_low_quality, state="visible")
-        self.pw_page.click(self.text_click_pupap)
         return_low_quality = self.pw_page.locator(self.text_low_quality).text_content()
         return return_low_quality
 
     def get_unprintable_quality(self):
         self.pw_page.wait_for_selector(self.text_unprintable_quality, state="visible")
-        self.pw_page.click(self.text_click_pupap)
         return_low_quality = self.pw_page.locator(self.text_unprintable_quality).text_content()
         return return_low_quality
 
@@ -84,8 +100,12 @@ class UploadPhotosOnline(PageBase):
         test_text =  self.pw_page.locator(self.text_button_next)
         return test_text
 
-    def get_locator_button1(self):
-        test_text1 =  self.pw_page.locator(self.adxax)
-        return test_text1
+    def get_locator_image(self):
+        return_text_image = self.pw_page.locator(self.text_cover_image)
+        return return_text_image
+
+    def get_text_from_image(self):
+        return_text_from_image = self.pw_page.locator(self.text_from_image).text_content()
+        return return_text_from_image
 
 

@@ -96,6 +96,7 @@ def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
       return False
 
 def check_in_payment():
+    time.sleep(7)
     try:
         playwright = sync_playwright().start()
         pixel_2 = playwright.devices['Pixel 2']
