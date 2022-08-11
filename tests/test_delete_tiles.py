@@ -29,5 +29,4 @@ class TestDeleteTiles(TestBase):
         page.yes_delete()
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("42x", "40").strip() == str(expected_price)
-        print("dd")
+        assert current_price.replace("42x", "").strip() == str(expected_price)
