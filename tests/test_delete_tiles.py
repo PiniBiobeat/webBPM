@@ -5,10 +5,12 @@ from tests.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.gallery_page import GalleryPage
+from pytest import mark
 
 
 class TestDeleteTiles(TestBase):
 
+    @mark.td12
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_delete_image_preview(self):
