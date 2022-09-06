@@ -35,8 +35,8 @@ def maks_hook():
        # check_gmail()
         check_in_payment()
     else:
-        send_email("not send hook", FROM_EMAIL)
-        slack_notification("not send hook" + "  -> " + FROM_EMAIL)
+        send_email("not send hook WelcomePopupWeb ", FROM_EMAIL)
+        slack_notification("not send hook WelcomePopupWeb " + "  -> WelcomePopupWeb " + FROM_EMAIL)
 
 def check_gmail():
 
@@ -110,9 +110,9 @@ def check_in_payment():
         time.sleep(5)
 
         if text != 'קופון אישי':
-            print("coupon not in payment")
-            send_email("coupon not in payment",FROM_EMAIL)
-            slack_notification("coupon not in payment" + "  -> " + FROM_EMAIL)
+            print("coupon not in payment WelcomePopupWeb")
+            send_email("coupon not in payment WelcomePopupWeb",FROM_EMAIL)
+            slack_notification("coupon not in payment" + "  -> WelcomePopupWeb " + FROM_EMAIL)
         else:
             print("the coupon apper in payment")
             delete_coupon()
@@ -128,7 +128,7 @@ def delete_coupon():
     print(response)
     if response['isValid'] != True:
         send_email("the coupon not deleted",FROM_EMAIL)
-        slack_notification("the coupon not deleted" + "  -> " + FROM_EMAIL)
+        slack_notification("the coupon not deleted" + "  -> WelcomePopupWeb " + FROM_EMAIL)
     else:
         print("The coupon deleted !!!!!!!!!!!!!!!!!!!!!!!")
 

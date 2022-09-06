@@ -35,8 +35,8 @@ def maks_hook():
         check_in_payment()
         #check_gmail()
     else:
-        send_email("not send hook", FROM_EMAIL)
-        slack_notification("not send hook" + "  -> " + FROM_EMAIL)
+        send_email("not send hook  WelcomePopupApp ", FROM_EMAIL)
+        slack_notification("not send hook" + "  ->WelcomePopupApp " + FROM_EMAIL)
 
 def check_gmail():
 
@@ -127,8 +127,8 @@ def delete_coupon():
     response = requests.get(url_delete).json()
     print(response)
     if response['isValid'] != True:
-        send_email("the coupon not deleted",FROM_EMAIL)
-        slack_notification("the coupon not deleted" + "  -> " + FROM_EMAIL)
+        send_email("the coupon not deleted  WelcomePopupApp",FROM_EMAIL)
+        slack_notification("the coupon not deleted" + "  ->WelcomePopupApp " + FROM_EMAIL)
     else:
         print("The coupon deleted !!!!!!!!!!!")
 

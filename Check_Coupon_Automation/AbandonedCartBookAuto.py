@@ -36,7 +36,7 @@ def maks_hook():
         #check_gmail()
     else:
         send_email("not send hook", FROM_EMAIL)
-        slack_notification("not send hook" + "  -> " + FROM_EMAIL)
+        slack_notification("not send hook AbandonedCartBook" + "  -> " + FROM_EMAIL)
 
 def check_gmail():
 
@@ -82,7 +82,7 @@ def check_all_emails(first_email_id, latest_email_id,mail):
     if not isValid:
          print("עוד לא הספקת להגיד לופה וכבר הגענו עם ההטבה 😍 -- ")
          send_email("the coupon email not found ",FROM_EMAIL)
-         slack_notification("the coupon email not found " + "  -> " + FROM_EMAIL)
+         slack_notification("the coupon email not found AbandonedCartBook" + "  -> " + FROM_EMAIL)
 
 def chack_if_email_exists(date_from_email_after_regex,subject,date_time_now):
 
@@ -111,7 +111,7 @@ def check_in_payment():
     if text != 'הנחת קופון אישי':
         print("coupon not in payment")
         send_email("coupon not in payment",FROM_EMAIL)
-        slack_notification("coupon not in payment" + "  -> " + FROM_EMAIL)
+        slack_notification("coupon not in payment AbandonedCartBook" + "  -> " + FROM_EMAIL)
     else:
         print("the coupon apper in payment")
     delete_coupon()
@@ -123,14 +123,14 @@ def delete_coupon():
     print(response)
     if response['isValid'] != True:
         send_email("the coupon not deleted",FROM_EMAIL)
-        slack_notification("the coupon not deleted" + "  -> " + FROM_EMAIL)
+        slack_notification("the coupon not deleted AbandonedCartBook" + "  -> " + FROM_EMAIL)
 
 def send_email(subject, message):
     return requests.post(
         "https://api.mailgun.net/v3/lupa.co.il/messages",
         auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
         data={
-            "from": "Lupa Automation ,Coupon Automation WelcomePopupApp  <monitor@lupa.co.il>",
+            "from": "Lupa Automation ,Coupon Automation AbandonedCartBook  <monitor@lupa.co.il>",
             "to": operators,
             "subject": subject,
             "text": message,

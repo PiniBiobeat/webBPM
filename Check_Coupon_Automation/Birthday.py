@@ -29,11 +29,12 @@ def maks_hook():
     URL_1 = URL
     response = requests.get(URL_1)
     print(response)
-    if response.status_code == 200:
-        check_gmail()
-    else:
-        send_email("not send hook", FROM_EMAIL)
-        slack_notification("not send hook" + "  -> " + FROM_EMAIL)
+    if response.status_code != 200:
+        send_email("not send hook ", FROM_EMAIL)
+        slack_notification("not send hook Birthday" + "  -> Birthday     " + FROM_EMAIL)
+    print("+++++++++++++++++++++ good +++++++++++++++++++")
+    time.sleep(3)
+
 
 def check_gmail():
 

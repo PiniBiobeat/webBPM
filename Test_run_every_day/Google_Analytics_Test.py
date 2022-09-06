@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 #import pytest
@@ -66,8 +67,10 @@ def send_event():
     page.click(next_payment)
     page.click(next_payment)
     page.click(checkbox_approve)
+    time.sleep(5)
     page.click(next_payment)
-    page.click(next_payment)
+
+
     text_title_login1 = page.frame_locator("//iframe[@class='credit_guard_frame']").locator("//input[@id='tmpHelper']").input_value()
     result = ast.literal_eval(text_title_login1)
     if result['event'] !=  'eec.transaction':
