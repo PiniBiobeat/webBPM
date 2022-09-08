@@ -1,7 +1,5 @@
-import time
-from playwright.sync_api import  expect
 import pytest
-from tests.test_base_online import TestBaseOnline
+from tests.Test_Online.test_base_online import TestBaseOnline
 from infra.config.config_provider import configuration
 from logic.pages.online_name_book_page import NameBook
 from logic.pages.upload_photos_online_page import UploadPhotosOnline
@@ -12,7 +10,7 @@ list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Deskt
 psifsPhoto = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg"]
 
 name_book = "Book Automation"
-num_images = 1
+num_images = 2
 num_images1 = 27
 
 class TestEditImageOnline(TestBaseOnline):
