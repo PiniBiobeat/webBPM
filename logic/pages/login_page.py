@@ -30,7 +30,7 @@ class LoginPage(PageBase):
         time.sleep(5)
         token = self.pw_page.context.storage_state(path='state.json')
         #self.pw_page.wait_for_load_state(timeout=10000)
-        user_token = token['origins'][0]['localStorage'][4]['value']
+        user_token = token['origins'][0]['localStorage'][1]['value']
         return user_token
 
     def login_with_google(self):

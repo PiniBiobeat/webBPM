@@ -1,6 +1,6 @@
 from playwright.sync_api import  expect
 import pytest
-from tests.Test_Online.test_base_online import TestBaseOnline
+from tests.TestOnline.test_base_online import  TestBaseOnline
 from infra.config.config_provider import configuration
 from logic.pages.online_name_book_page import NameBook
 from logic.pages.upload_photos_online_page import UploadPhotosOnline
