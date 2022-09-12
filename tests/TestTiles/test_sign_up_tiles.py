@@ -1,6 +1,6 @@
 
 from logic.pages.home_page import HomePage
-from tests.TestTiles.test_base import TestBase
+from tests.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.sign_up_page import SignUpPage
 from infra.generic_helpers import generate_random_email_and_password
