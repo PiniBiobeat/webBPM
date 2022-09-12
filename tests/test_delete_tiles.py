@@ -30,4 +30,4 @@ class TestDeleteTiles(TestBase):
         expected_price = page.get_image()
         current_price = page.get_price()
         #assert current_price.replace("42x", "").strip() == str(expected_price)
-        assert num_images == str(expected_price)
+        assert num_images == expected_price
