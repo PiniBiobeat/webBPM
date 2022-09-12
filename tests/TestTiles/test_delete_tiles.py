@@ -5,7 +5,7 @@ from tests.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.gallery_page import GalleryPage
-
+num_images = 1
 
 class TestDeleteTiles(TestBase):
 
@@ -29,4 +29,5 @@ class TestDeleteTiles(TestBase):
         page.yes_delete()
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("42x", "").strip() == str(expected_price)
+        #assert current_price.replace("42x", "").strip() == str(expected_price)
+        assert num_images == str(expected_price)
