@@ -1,6 +1,6 @@
 import pytest
 from logic.pages.home_page import HomePage
-from tests.test_base import TestBase
+from tests.TestTiles.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.google_photos_popup import GooglePhotosPopUp
 from logic.pages.choose_login_or_sign_up_page import ChooseLoginOrSignUpPage

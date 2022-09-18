@@ -1,6 +1,6 @@
 import pytest
 
-from tests.test_base import TestBase
+from tests.TestTiles.test_base import TestBase
 
 
 class TestClass(TestBase):

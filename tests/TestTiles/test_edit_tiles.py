@@ -1,7 +1,7 @@
 import pytest
 from logic.pages.home_page import HomePage
 from logic.pages.upload_photo_page import UploadPhotoPage
-from tests.test_base import TestBase
+from tests.TestTiles.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.edit_page import EditPage
 from logic.pages.preview_screen_tiles_page import PreviewScreen
