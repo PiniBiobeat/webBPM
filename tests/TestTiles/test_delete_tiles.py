@@ -5,7 +5,7 @@ from tests.TestTiles.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.gallery_page import GalleryPage
-num_images = 3
+num_images = 1
 
 class TestDeleteTiles(TestBase):
 
