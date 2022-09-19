@@ -5,14 +5,9 @@ from tests.TestTiles.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.edit_page import EditPage
 from logic.pages.preview_screen_tiles_page import PreviewScreen
+num_images = 1
 
-
-
-
-list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg", "C:\\Users\\lupa\\Desktop\\london\\IMG_2577.jpg"]
-
-
-
+list = ["C:\\Users\\tester\\Desktop\\london\\IMG_2561.jpg", "C:\\Users\\tester\\Desktop\\london\\IMG_2577.jpg"]
 
 
 class TestEditTiles(TestBase):
@@ -36,5 +31,6 @@ class TestEditTiles(TestBase):
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("42x", "").strip() == str(expected_price)
+        #assert current_price.replace("42x", "").strip() == str(expected_price)
+        assert num_images == expected_price
 

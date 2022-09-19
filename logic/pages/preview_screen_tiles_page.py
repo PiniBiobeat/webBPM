@@ -3,7 +3,7 @@ from infra.page_base import PageBase
 class PreviewScreen(PageBase):
 
 
-    title_button = "//span[@style='font-size: 22px;']"
+    title_button = "//span[@style='font-weight: bold; font-size: 21px;']"
     all_selector_in_page = '//div[@class="vh_div"]'
     psifas_size = '// option[ @ value = "1"]'
     icon_add_image = "//img[@class='upload_icon']"
