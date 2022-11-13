@@ -16,3 +16,6 @@ def test_connect_to_db():
     cursor.commit()
     print(a)
     cursor.close()
+
+
+test_connect_to_db()
