@@ -14,6 +14,7 @@ class LoginPage(PageBase):
     menu_button = '//img[@class="burger_menu"]'
     button_out = '//div[@class="menu-item" and contains(., "יציאה מהחשבון")]'
 
+
     def __init__(self,page):
         super().__init__(page)
         self.pw_page.wait_for_selector(self.text_user_login,state="visible")
@@ -53,6 +54,8 @@ class LoginPage(PageBase):
 
     def click_out(self):
         self.pw_page.click(self.button_out)
+
+
 
 
 

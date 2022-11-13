@@ -5,9 +5,11 @@ class UploadPhotoPage(PageBase):
 
     input_photo = "//input[@id= 'f']"
     title_button = "//span[@id= 'header_title']"
-    gallery_button = "//div[@class='rounded_box small'][1]"
+    gallery_button = "//div[@class='rounded_box small dif'][1]"
+    set_size_tiles = "(//li[@class='MuiListItem-root list_model_ul MuiListItem-gutters'])[1]"
     instagram_button = "//img[@src='/static/media/icon_instagram.ae47004e.svg']"
     googlePhotos_button = "//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
+    #'(//li[@class='MuiListItem-root list_model_ul MuiListItem-gutters'])[1]'
 
     def __init__(self, page):
         super().__init__(page)
@@ -18,6 +20,7 @@ class UploadPhotoPage(PageBase):
 
     def upload_photo_gallery(self):
         self.pw_page.click(self.gallery_button)
+        self.pw_page.click(self.set_size_tiles)
 
     def open_instagram(self):
         with self.pw_page.expect_popup() as popup_info:

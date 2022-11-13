@@ -2,10 +2,11 @@ from infra.page_base import PageBase
 
 
 
-class ChooseLoginOrSignUpPage(PageBase):
+class TermsPages(PageBase):
 
     login_button = "//span[@class='lupa-btn-content' and contains(.,'כניסה')]"
-    get_title_log_in = '//h1[contains(.,"כניסה לחשבון לופה")]'
+    get_text_title_log_in = '//h2[contains(.,"תקנון ומדיניות פרטיות")]'
+
     def __init__(self, page):
         super().__init__(page)
         self.pw_page.wait_for_selector(self.login_button,state="visible")
@@ -14,8 +15,6 @@ class ChooseLoginOrSignUpPage(PageBase):
         self.pw_page.click(self.login_button)
 
 
-    def get_log_in_text(self):
-        text_error = self.pw_page.text_content(self.get_title_log_in)
-       # self.pw_page.close()
+    def get_title_terms(self):
+        text_error = self.pw_page.text_content(self.get_text_title_log_in)
         return text_error
-

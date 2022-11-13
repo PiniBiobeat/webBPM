@@ -9,7 +9,10 @@ class HomePage(PageBase):
     open_login_sceen_button = '//div[@class="menu-item" and contains(.,"כניסה ")]'
     click_log_out  = '//div[@class="menu-item" and contains(.,"יציאה מהחשבון")]'
     button_sign_up = '//span[@style="display: inline-flex;" and contains(.,"יצירת חשבון חדש")]'
-
+    manu_icon = "//img[@class='burger_menu']"
+    link_log_in = "(//div[@class='menu-item'])[1]"
+    button_lups_site = "(//div[@class='menu-item'])[2]"
+    button_lups_tariff = "(//div[@class='menu-item'])[3]"
 
 
     def __init__(self, page):
@@ -24,6 +27,9 @@ class HomePage(PageBase):
     def open_menu(self):
         self.pw_page.click(self.menu_button)
 
+    def click_log_in(self):
+        self.pw_page.click(self.link_log_in)
+
     def open_screen_login_from_menu(self):
         self.pw_page.click(self.open_login_sceen_button)
 
@@ -32,6 +38,17 @@ class HomePage(PageBase):
 
     def shoose_sign_up(self):
         self.pw_page.click(self.button_sign_up)
+
+    def click_lupa_site(self):
+        with self.pw_page.context.expect_page() as tab:
+            self.pw_page.click(self.button_lups_site)
+        new_tab = tab.value.url
+        return new_tab
+
+    def click_lupa_tariff(self):
+        self.pw_page.click(self.button_lups_tariff)
+
+
 
 
 
