@@ -1,14 +1,13 @@
 import pyodbc
-
+from datetime import datetime
+import datetime
 def test_connect_to_db():
     server = '104.155.49.95'
     database = 'lupa'
     username = 'MachineDBA'
     password = 'Kk28!32Zx'
-    # ENCRYPT defaults to yes starting in ODBC Driver 18. It's good to always specify ENCRYPT=yes on the client side to avoid MITM attacks.
     cnxn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
 
     cursor = cnxn.cursor()
     print(cursor)
@@ -17,5 +16,9 @@ def test_connect_to_db():
     print(a)
     cursor.close()
 
+    x = datetime.datetime.now()
 
+    with open("C:\\Users\\tester\\Desktop\\all_logs_from_delete_coupon\\log_" + x.strftime("_%B") + x.strftime("_%d") + x.strftime("_%Y")+".txt", 'x') as f:
+        f.write('create file for check if open file   ')
+    f.close()
 test_connect_to_db()
