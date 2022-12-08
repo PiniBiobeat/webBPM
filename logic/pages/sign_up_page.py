@@ -16,6 +16,7 @@ class SignUpPage(PageBase):
     selectoption_day = "//div[@class='birth-date-day']//select[@class='select-css']"
     selectoption_month = "//div[@class='birth-date-month']//select[@class='select-css']"
     selectoption_year = "//div[@class='birth-date-year']//select[@class='select-css']"
+    text_yes_markting  = "//div[@class='left-btn']"
     day = "27"
     month = "2"
     year = "1987"
@@ -50,8 +51,12 @@ class SignUpPage(PageBase):
     def take_token(self):
         time.sleep(5)
         token = self.pw_page.context.storage_state(path="state.json")
-        user_token = token['origins'][0]['localStorage'][4]['value']
+        user_token = token['origins'][0]['localStorage'][0]['value']
         return user_token
+
+    def Sign_me_up_without_mailing(self):
+        self.pw_page.click(self.text_yes_markting)
+
 
 
 

@@ -31,6 +31,9 @@ class TestSignUp(TestBase):
         page.approval_regulations()
         page.click_checkbox()
         page.click_next()
+        page.Sign_me_up_without_mailing()
+        page.click_next()
+
 
         token_after_login = page.take_token()
         assert token_after_login is not None

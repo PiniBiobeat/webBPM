@@ -2,16 +2,13 @@ import psycopg2
 import requests
 import jsonpath
 
-
-
-
-
 def test_check_all_site():
     class Error:
         def __init__(self, url, siteName):
             self.siteName = siteName
             self.url = url
     try:
+
         connection = psycopg2.connect(user="machineDBA",
                                       password="A#214Fdse!35dDC214XAzRDA12^79",
                                       host="10.116.96.3",
@@ -25,8 +22,8 @@ def test_check_all_site():
         print("You are connected to - ", record, "\n")
         list_url_err = list()
         for i in record:
-            token_url = i[0]
-            response = requests.get(token_url)
+            token_site = i[0]
+            response = requests.get(token_site)
             if i[
                 2] == True and response.content != b'Index was out of range. Must be non-negative and less than the size of the collection.\r\nParameter name: index':
                 e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 14, "active": "true",
@@ -38,12 +35,17 @@ def test_check_all_site():
                      "token": "", "extra_params": {"url": i[0]}}
                 list_url_err.append(e)
                 continue
-        token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&errors='
+        token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
 
-        token_url = token_url + str(list_url_err)
-        response = requests.get(token_url)
-        token_value = jsonpath.jsonpath(response.json(), 'payLoad')
-        print(token_value)
+
+
+
+        #token_url_1 = token_url + str(list_url_err)__len__ = {int} 8
+        obj = {}
+        obj["errors"] = str(list_url_err)
+        res = requests.post(token_url, data=obj)
+
+        print(res)
     except (Exception, Error) as error:
         print("Error while connecting to PostgreSQL", error)
     finally:

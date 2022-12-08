@@ -1,6 +1,7 @@
 import pyodbc
 from datetime import datetime
 import datetime
+
 def test_connect_to_db():
     server = '104.155.49.95'
     database = 'lupa'
