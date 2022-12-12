@@ -25,6 +25,7 @@ def test_connect_to_db():
             {"orders_waiting_overlay": list_orders_with_status_WO})
         response = requests.get(token_url)
         print(response)
+        
 
     cursor.close()
 test_connect_to_db()
