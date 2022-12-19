@@ -45,11 +45,10 @@ class TestChechManuTiles(TestBase):
     def test_link_lupa_terms_of_use(self):
         page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
         page.open_menu()
-        page.click_lupa_tariff()
+        url_lupa_terms_of_use = page.click_terms_of_use()
+        assert url_lupa_terms_of_use == "https://localhost:3000/terms-of-use"
 
-        page: TermsPages = self.browser.create_page(TermsPages)
-        text_login = page.get_title_terms()
-        assert text_login == title_text_in_terms_page
+
 
 
 

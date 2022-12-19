@@ -13,7 +13,7 @@ class HomePage(PageBase):
     link_log_in = "(//div[@class='menu-item'])[1]"
     button_lups_site = "(//div[@class='menu-item'])[2]"
     button_lups_tariff = "(//div[@class='menu-item'])[3]"
-
+    button_lups_terms_of_use = "(//div[@class='menu-item'])[4]"
 
     def __init__(self, page):
         super().__init__(page)
@@ -46,7 +46,15 @@ class HomePage(PageBase):
         return new_tab
 
     def click_lupa_tariff(self):
-        self.pw_page.click(self.button_lups_tariff)
+      self.pw_page.click(self.button_lups_tariff)
+      a = self.pw_page.url
+      return a
+
+    def click_terms_of_use(self):
+      self.pw_page.click(self.button_lups_terms_of_use)
+      a = self.pw_page.url
+      return a
+
 
 
 
