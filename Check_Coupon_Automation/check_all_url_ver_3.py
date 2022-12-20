@@ -36,11 +36,20 @@ def test_check_all_site_ver3():
         print("You are connected to - ", record, "\n")
         list_url_err = list()
         token_from_login = create_token()
+        event_token = "&event_token=f932c5f9a2914232b085724ac6b39dbd"
         for i in record:
             token_site = i[0]
+            if i[2] == 2 :
+                response = requests.get(token_site + token_from_login + event_token)
+                if response.status_code != 200:
+                    e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
+                         "token": "", "extra_params": {"url": i[0]}}
+                    list_url_err.append(e)
+                    continue
+
             response = requests.get(token_site + token_from_login)
             if response.status_code != 200:
-                e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 14, "active": "true",
+                e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
                      "token": "", "extra_params": {"url": i[0]}}
                 list_url_err.append(e)
                 continue
