@@ -27,12 +27,12 @@ def test_check_all_site():
             if i[
                 2] == True and response.content != b'Index was out of range. Must be non-negative and less than the size of the collection.\r\nParameter name: index':
                 e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 14, "active": "true",
-                     "token": "", "extra_params": {"url": i[0]}}
+                     "token": "", "extra_params": {"url": i[0],"Error_code":response.status_code}}
                 list_url_err.append(e)
                 continue
             if response.status_code != 200:
                 e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 14, "active": "true",
-                     "token": "", "extra_params": {"url": i[0]}}
+                     "token": "", "extra_params": {"url": i[0],"Error_code":response.status_code}}
                 list_url_err.append(e)
                 continue
         token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'

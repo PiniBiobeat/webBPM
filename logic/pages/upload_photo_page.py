@@ -16,6 +16,7 @@ class UploadPhotoPage(PageBase):
         self.pw_page.wait_for_selector(self.title_button, state="visible")
 
     def upload_photo(self, path):
+        self.pw_page.click(self.set_size_tiles)
         self.pw_page.set_input_files(self.input_photo, path)
 
     def upload_photo_gallery(self):

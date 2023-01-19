@@ -4,8 +4,8 @@ from infra.page_base import PageBase
 class GalleryPage(PageBase):
 
     group_images = "//div[@class='skewed_border lupa-gallery']"
-    choose_image_1 = "//div[@class='photo_thumbnail' and contains(@data-id,'957')]"
-    choose_image_2 = "//div[@class='photo_thumbnail' and contains(@data-id,'958')]"
+    choose_image_1 = "//div[@class='photo_thumbnail' and contains(@data-id,'791')]"
+    choose_image_2 = "//div[@class='photo_thumbnail' and contains(@data-id,'792')]"
     button_next = "//button[@class='lupa-btn']"
 
     def __init__(self, page):

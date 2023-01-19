@@ -6,7 +6,7 @@ import jsonpath
 
 def create_token():
     token_url = "https://groupa.lupa.co.il/v1/api.aspx?method=login&cloudcode=public&app_version=3.4.108.d&device_type=android&lang=he&token="
-    data = {'email': 'Pinim@lupa.co.il', 'password': 'pinim1'}
+    data = {'email': 'pinimautoxoxo@lupa.co.il', 'password': 'pinim1'}
     response = requests.get(token_url, data)
     if response.status_code != 200:
         token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
@@ -19,14 +19,11 @@ def create_token():
 
 
 def test_check_all_site_ver3():
-
     class Error:
         def __init__(self, url, siteName):
             self.siteName = siteName
             self.url = url
-
     try:
-
         connection = psycopg2.connect(user="machineDBA",
                                       password="A#214Fdse!35dDC214XAzRDA12^79",
                                       host="10.116.96.3",
@@ -47,7 +44,7 @@ def test_check_all_site_ver3():
             response = requests.get(token_site + token_from_login)
             if response.status_code != 200:
                 e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
-                     "token": "", "extra_params": {"url": i[0]}}
+                     "token": "", "extra_params": {"url": i[0] + token_from_login ,"Error_code":response.status_code}}
                 list_url_err.append(e)
                 continue
         token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
