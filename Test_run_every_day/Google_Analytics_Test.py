@@ -31,6 +31,12 @@ click_sum_order = "//button[@class='lupa-btn' and contains(.,'לסיכום הז�
 add_coupon = "//button[@class='add_code']"
 imput_code = "//input[@autocomplete='new-password']"
 code_coupon = "12930"
+set_size_tiles = "(//li[@class='MuiListItem-root list_model_ul MuiListItem-gutters'])[1]"
+gallery_button = "//div[@class='rounded_box small dif'][1]"
+group_images = "//div[@class='skewed_border lupa-gallery']"
+choose_image_1 = "//div[@class='photo_thumbnail' and contains(@data-id,'791')]"
+choose_image_2 = "//div[@class='photo_thumbnail' and contains(@data-id,'792')]"
+button_next = "//button[@class='lupa-btn']"
 save_coupons = "//button[@class='lupa-btn' and contains(.,'למימוש קופון')]"
 button_ok = "//button[@class='lupa-btn' and contains(.,'הבנתי')]"
 go_to_shipping = "//button[@class='lupa-btn' and contains(.,'לבחירת משלוח')]"
@@ -49,9 +55,12 @@ def send_event():
     page = context.new_page()
     page.goto(url_token, wait_until="load")
     page.click(tiles_button)
-    page.set_input_files(input_photo,list[0])
-    page.click(button_click_to_buy)
-    page.click(approve_image)
+    page.click(gallery_button)
+    page.click(set_size_tiles)
+    page.click(group_images)
+    page.click(choose_image_1)
+    page.click(choose_image_2)
+    page.click(button_next)
     page.click(button_click_to_buy)
     page.click(login_to_existing_account)
     page.fill(locators_user_name,text_user)
