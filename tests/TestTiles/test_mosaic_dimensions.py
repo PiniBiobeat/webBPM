@@ -8,7 +8,7 @@ from logic.pages.google_photos_popup import GooglePhotosPopUp
 from logic.pages.preview_mosaic_page import PreviewMosaicScreen
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
-psifsPhoto = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg"]
+psifsPhoto = ["./IMG_2549.jpg"]
 text_user_name_instagram = "pinitesttiles"
 text_password_instagram = "Pinimari2020!"
 text_googleUserName="lupadevtest@gmail.com"

@@ -12,7 +12,10 @@ rand_email = generate_random_email_and_password()
 email =  rand_email["email"]
 password = rand_email["password"]
 num_and_pass =  password + "1"
+email1 = 'pinim@lupa.co.il'
 
+firt_name1 = "פיני1"
+last_name1 = "mari1"
 
 
 
@@ -33,10 +36,63 @@ class TestSignUp(TestBase):
         page.click_next()
         page.Sign_me_up_without_mailing()
         page.click_next()
-
-
         token_after_login = page.take_token()
         assert token_after_login is not None
+
+
+    @pytest.mark.smoke
+    @pytest.mark.usefixtures("before_after_test")
+    def test_sign_up_with_email_exists(self):
+        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page.open_menu()
+        page.open_screen_login_from_menu()
+        page.shoose_sign_up()
+
+        page: SignUpPage = self.browser.create_page(SignUpPage)
+        page.input_user_details_exists(firt_name, last_name, email1, num_and_pass)
+        page.approval_regulations()
+        page.click_checkbox()
+        page.click_next()
+        page.Sign_me_up_without_mailing()
+        page.click_next()
+        token_after_login = page.get_message_when_user_exists_text()
+        assert token_after_login == "למייל הזה כבר יש חשבון בלופה, להזכיר לך את הסיסמה?"
+
+    @pytest.mark.smoke
+    @pytest.mark.usefixtures("before_after_test")
+    def test_sign_up_with_f_name_number(self):
+        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page.open_menu()
+        page.open_screen_login_from_menu()
+        page.shoose_sign_up()
+
+        page: SignUpPage = self.browser.create_page(SignUpPage)
+        page.input_user_details_exists(firt_name1, last_name1, email1, num_and_pass)
+        page.approval_regulations()
+        page.click_checkbox()
+        page.click_next()
+        page.Sign_me_up_without_mailing()
+        page.click_next()
+        token_after_login = page.get_text_error_f_name_with_num()
+        assert token_after_login == "שם פרטי לא יכול להכיל ספרות"
+
+    @pytest.mark.smoke
+    @pytest.mark.usefixtures("before_after_test")
+    def test_sign_up_with_l_name_number(self):
+        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page.open_menu()
+        page.open_screen_login_from_menu()
+        page.shoose_sign_up()
+
+        page: SignUpPage = self.browser.create_page(SignUpPage)
+        page.input_user_details_exists(firt_name1, last_name1, email1, num_and_pass)
+        page.approval_regulations()
+        page.click_checkbox()
+        page.click_next()
+        page.Sign_me_up_without_mailing()
+        page.click_next()
+        token_after_login = page.get_text_error_l_name_with_num()
+        assert token_after_login == "רק לרובוט יש ספרות בשם"
 
 
 

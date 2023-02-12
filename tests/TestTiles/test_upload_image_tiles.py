@@ -11,7 +11,7 @@ from logic.pages.instagram_popup_page import InstagramPopUp
 from logic.pages.google_photos_popup import GooglePhotosPopUp
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
-psifsPhoto = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg"]
+psifsPhoto = ["./shutterstock_711632317.jpg"]
 text_user_name_instagram = "pinitesttiles"
 text_password_instagram = "Pinim2022!"
 text_googleUserName="lupadevtest@gmail.com"
@@ -29,7 +29,7 @@ class TestUpload(TestBase):
         page.choose_tiles()
 
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-        page.upload_photo(list)
+        page.upload_photo(psifsPhoto)
 
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()

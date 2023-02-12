@@ -20,6 +20,10 @@ class SignUpPage(PageBase):
     day = "27"
     month = "2"
     year = "1987"
+    emailEx = "pinim@lupa.co.il"
+    get_exists_text = "//div[@class='center'  and contains(.,'למייל')]"
+    get_text_name_f_with_num = "//div[@class='error'  and contains(.,'שם פרטי לא יכול להכיל ספרות')]"
+    get_text_name_l_with_num = "//div[@class='error'  and contains(.,'רק לרובוט יש ספרות בשם')]"
 
 
 
@@ -38,6 +42,16 @@ class SignUpPage(PageBase):
         self.pw_page.fill(self.text_password_1,passwor)
         self.pw_page.fill(self.text_password_2,passwor)
 
+    def input_user_details_exists(self,firt_name,last_name,emailEx,passwor):
+        self.pw_page.fill(self.text_first_name, firt_name)
+        self.pw_page.fill(self.text_last_name,
+                          last_name)  # self.pw_page.select_option("//select[@class='select-css']","2")
+        self.pw_page.fill(self.text_email, emailEx)
+        self.pw_page.select_option(self.selectoption_day, self.day)
+        self.pw_page.select_option(self.selectoption_month, self.month)
+        self.pw_page.select_option(self.selectoption_year, self.year)
+        self.pw_page.fill(self.text_password_1, passwor)
+        self.pw_page.fill(self.text_password_2, passwor)
 
     def click_checkbox(self):
         self.pw_page.locator(self.checkbox).click()
@@ -56,6 +70,18 @@ class SignUpPage(PageBase):
 
     def Sign_me_up_without_mailing(self):
         self.pw_page.click(self.text_yes_markting)
+
+    def get_message_when_user_exists_text(self):
+        text_error = self.pw_page.text_content(self.get_exists_text)
+       # self.pw_page.close()
+        return text_error
+
+    def get_text_error_f_name_with_num(self):
+        text_error = self.pw_page.text_content(self.get_text_name_f_with_num)
+        return text_error
+    def get_text_error_l_name_with_num(self):
+        text_error = self.pw_page.text_content(self.get_text_name_l_with_num)
+        return text_error
 
 
 
