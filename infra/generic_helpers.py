@@ -1,4 +1,7 @@
-
+import pyodbc
+from datetime import datetime
+import datetime
+import requests
 import random
 import string
 import logging as logger
@@ -24,3 +27,22 @@ def generate_random_email_and_password(domain=None,email_prefix=None):
     random_info = {"email":email,"password":rand_password}
 
     return random_info
+
+def sql_get_status_newsletter(Email):
+
+        server = '104.155.49.95'
+        database = 'lupa'
+        username = 'MachineDBA'
+        password = 'Kk28!32Zx'
+        cnxn = pyodbc.connect(
+            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+
+        cursor = cnxn.cursor()
+        print(cursor)
+        cursor.execute("select * FROM [lupa].[dbo].[newslleter] where email =?",Email)
+        row = cursor.fetchall()
+        for i in row:
+            return i[5]
+        cursor.close()
+
+#[lupa].[dbo].[newslleter].newsletter_ststus

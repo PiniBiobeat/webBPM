@@ -11,7 +11,7 @@ from logic.pages.instagram_popup_page import InstagramPopUp
 from logic.pages.google_photos_popup import GooglePhotosPopUp
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
-psifsPhoto = ["./shutterstock_711632317.jpg"]
+psifsPhoto = [".\\shutterstock_711632317.jpg"]
 text_user_name_instagram = "pinitesttiles"
 text_password_instagram = "Pinim2022!"
 text_googleUserName="lupadevtest@gmail.com"
@@ -53,7 +53,7 @@ class TestUpload(TestBase):
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         expected_price = page.get_image()
         current_price = page.get_price()
-        assert current_price.replace("42x", "").strip() == str(expected_price)
+        assert "₪ 42.00" == current_price
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
