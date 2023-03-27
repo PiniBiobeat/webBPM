@@ -21,6 +21,8 @@ class Browser:
 
     def navigate(self, address, page_type: Type[PageBase]):
         self.page.goto(address, wait_until="load")
+        self.page.evaluate("localStorage.clear()")
+        self.page.reload()
         return self.create_page(page_type)
 
     def create_page(self, page_type):

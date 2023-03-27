@@ -17,13 +17,17 @@ class TestBase():
         print('Starting test "' + test_name + '"')
         failed_before = request.session.testsfailed
         yield self.browser
+
         if request.session.testsfailed != failed_before:
             try:
                 self.browser.stop_trace()
             except:
                 pass
-        self.tear_down_invoke()
+        #self.tear_down_invoke()
         print('\r*****DONE*****')
+        #self.browser.context.close()
+
+
 
 
     def tear_down_invoke(self):

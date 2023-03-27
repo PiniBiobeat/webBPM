@@ -7,9 +7,9 @@ from logic.pages.edit_page import EditPage
 from logic.pages.preview_screen_tiles_page import PreviewScreen
 num_images = 1
 
-list = ["C:\\Users\\tester\\Desktop\\london\\IMG_2561.jpg", "C:\\Users\\tester\\Desktop\\london\\IMG_2577.jpg"]
+list = ["./testtiles/shutterstock_711632317.jpg", "C:\\Users\\tester\\Desktop\\london\\IMG_2577.jpg"]
 
-
+#'./data/test001.txt'
 class TestEditTiles(TestBase):
 
     @pytest.mark.smoke
@@ -19,7 +19,7 @@ class TestEditTiles(TestBase):
         page.choose_tiles()
 
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-        page.upload_photo(list[0])
+        page.upload_photo("./shutterstock_711632317.jpg")
 
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         page.click_edit_page()

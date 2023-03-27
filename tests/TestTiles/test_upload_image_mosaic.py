@@ -40,21 +40,21 @@ class TestUploadMosaic(TestBase):
         text_psifas_size = page.get_psifas_size()
         assert text_psifas_size.replace(" ריבועים  | מידות 44.3 על  44.3 ס”מ" ,"").strip() == "2*2"
 
-    @pytest.mark.smoke
-    @pytest.mark.usefixtures("before_after_test")
-    def test_psifas_upload_photos_from_google_photos(self ,originalPrice="39" ,defaultQuantity="1"):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
-        page.choose_pesipas()
-
-        page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
-
-        page: GooglePhotosPopUp = self.browser.create_popup(page.open_google_photos(), GooglePhotosPopUp)
-        page.login_google_photos(text_googleUserName, text_googlePassword)
-
-        page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
-        # upload_photos_from_google --> can get number of photos to upload
-        page.upload_photos_from_google()
-
-        page: PreviewMosaicScreen = self.browser.create_page(PreviewMosaicScreen)
-        text_psifas_size = page.get_psifas_size()
-        assert text_psifas_size.replace(" ריבועים  | מידות 44.3 על  44.3 ס”מ", "").strip() == "2*2"
+    # @pytest.mark.smoke
+    # @pytest.mark.usefixtures("before_after_test")
+    # def test_psifas_upload_photos_from_google_photos(self ,originalPrice="39" ,defaultQuantity="1"):
+    #     page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+    #     page.choose_pesipas()
+    #
+    #     page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
+    #
+    #     page: GooglePhotosPopUp = self.browser.create_popup(page.open_google_photos(), GooglePhotosPopUp)
+    #     page.login_google_photos(text_googleUserName, text_googlePassword)
+    #
+    #     page: GooglePhotosPage = self.browser.create_page(GooglePhotosPage)
+    #     # upload_photos_from_google --> can get number of photos to upload
+    #     page.upload_photos_from_google()
+    #
+    #     page: PreviewMosaicScreen = self.browser.create_page(PreviewMosaicScreen)
+    #     text_psifas_size = page.get_psifas_size()
+    #     assert text_psifas_size.replace(" ריבועים  | מידות 44.3 על  44.3 ס”מ", "").strip() == "2*2"

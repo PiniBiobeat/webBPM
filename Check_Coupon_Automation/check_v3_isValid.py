@@ -45,7 +45,7 @@ def test_check_all_site_ver3_is_valid():
                 token_value = response.json()
                 if token_value['isValid'] != True:
 
-                    e = {"source": "AutomationMonitor_isValid", "service_api": i[1], "error_code": 17, "active": "true",
+                    e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
                          "token": "", "extra_params": {"url": i[0]+ token_from_login,"error": token_value['Error']}}
                     list_url_err.append(e)
                     continue
