@@ -21,7 +21,7 @@ SMTP_SERVER = "smtp.gmail.com"
 operators = ["pinim@lupa.co.il"]
 SMTP_PORT = 993
 date_time = datetime.now()
-url_token = "https://paymentsv3.lupa.co.il/v1/checkout.aspx?eventToken=3111db5e16fb4efa83c8f8ffe46aab5b&snapshotsComplete=true&cloudcode=public&app_version=3.4.150.d&device_type=android&lang=he&token=203106107247071029219054090006143168083087076205048073133076201080086102111193195064104032248227229197113035020199146226008081153234106197150205"
+url_token = "https://paymentsv3.lupa.co.il/v1/checkout.aspx?cloudcode=public&app_version=3.4.150.d&device_type=android&lang=he&token=216202226153099208227177163216082096161182216030035208164037230103206249223169028104189102051102083177086004073170067237105116033044099248148069#itembasket"
 URL = 'http://files.lupa.co.il/lp/hooks.aspx?method=coupon_desk&campaign_name=WelcomePopupApp&messageid=4783512567742464&email=couponsaoutomat@gmail.com&sale=1'
 webhook_url = "https://hooks.slack.com/services/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"
 url_delete_coupon = 'http://service.v2.lupa.co/api/coupons.aspx?method=change_status&name=WelcomePopupApp&master_id=3502298'
