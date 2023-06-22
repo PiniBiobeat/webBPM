@@ -47,7 +47,7 @@ def test_check_all_site_ver3():
                      "token": "", "extra_params": {"url": i[0] + token_from_login ,"Error_code":response.status_code}}
                 list_url_err.append(e)
                 continue
-        token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
+        token_url = 'http://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
         obj = {}
         obj["errors"] = str(list_url_err)
         res = requests.post(token_url, data=obj)

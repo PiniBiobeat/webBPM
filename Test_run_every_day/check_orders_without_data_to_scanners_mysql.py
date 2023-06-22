@@ -1,11 +1,10 @@
-import pyodbc
-from datetime import datetime
-import datetime
+import time
+
+import mysql.connector
 import requests
 import json
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import sqlite3 as sl
+
 my_dict_lupa = dict()
 
 #'ben@lupa.co.il','pinim@lupa.co.il'
@@ -15,66 +14,44 @@ hours = 8
 class Test_me():
     my_dict_lupa = dict()
 
-    def test_connect_to_db_in_lupa_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+    def test_connect_to_mysql(self):
+        cnx = mysql.connector.connect(
+            user='printahead',
+            passwd='kklixd883',
+            host='10.116.97.3',
+            db='printahead')
 
-        cursor = cnxn.cursor()
+        cursor = cnx.cursor()
         print(cursor)
-        cursor.execute(f"select *  FROM [lupa].[dbo].[orders_tbl] where bulk_id is null  and in_status = 'Printing process' and charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
+        counter = 0
+        rows = []
+
+        while counter < 3:
+            cursor.execute(
+                "SELECT * FROM EASYPHOTOBOOK WHERE JOBID IS NULL AND CAST(ORDER_CHANGED AS DATE) > '2023-06-10' ORDER BY TRANSFERTIME DESC;")
+            new_rows = cursor.fetchall()
+            if len(new_rows) != 0:
+                if rows == new_rows:
+                    counter += 1
+                else:
+                    counter = 0
+                    rows = new_rows
+                    time.sleep(5)
+            else:
+                break
+
+        self.check_again(rows)
+        cursor.close()
+        cnx.close()
+
+    def check_again(self, rows):
+        if rows:
             for row in rows:
                 my_dict_lupa[row[0]] = row[1]
-        print(my_dict_lupa)
+            if len(my_dict_lupa) > 0:
+                self.send_to_email(my_dict_lupa)
+                self.send_to_slack(my_dict_lupa)
 
-
-        cursor.close()
-
-    def test_connect_to_db_in_lupa_online_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa_online'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
-        cursor = cnxn.cursor()
-        print(cursor)
-        cursor.execute(f"select *  FROM [lupa_online].[dbo].[order_item_tbl] where bulk_id = 0   and in_status = 21 and  charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
-            for row in rows:
-                my_dict_lupa[row[1]] = row[2]
-            print(my_dict_lupa)
-            #self.send_to_email(my_dict_lupa)
-
-        cursor.close()
-
-    def test_connect_to_db_in_lupa_tiles_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa_square'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
-        cursor = cnxn.cursor()
-        print(cursor)
-        cursor.execute(f"select *  FROM [lupa_square].[dbo].[order_item_tbl] where bulk_id = 0   and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
-            for row in rows:
-                my_dict_lupa[row[1]] = row[2]
-            print(my_dict_lupa)
-        cursor.close()
-        if len(my_dict_lupa) > 0:
-            self.send_to_email(my_dict_lupa)
-            self.send_to_slack(my_dict_lupa)
 
 
     import json
@@ -99,7 +76,7 @@ class Test_me():
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "הזמנות ללא באלק :wave:"
+                    "text": "הזמנות ללא check_orders_without_data_to_scanners_mysql :wave:"
                 }
             },
             {
@@ -161,9 +138,9 @@ class Test_me():
             "https://api.mailgun.net/v3/lupa.co.il/messages",
             auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
             data={
-                "from": "Orders without bulk id   <monitor@lupa.co.il>",
+                "from": "check_orders_without_data_to_scanners_mysql   <monitor@lupa.co.il>",
                 "to": operators,
-                "subject": "all orders orders without bulk id in 24 hours and with status Printing process ! ",
+                "subject": "check_orders_without_data_to_scanners_mysql ! ",
                 "html": self.json_to_html_table(my_dict_lupa)
             }
           )

@@ -35,7 +35,7 @@ def test_check_all_site():
                      "token": "", "extra_params": {"url": i[0],"Error_code":response.status_code}}
                 list_url_err.append(e)
                 continue
-        token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
+        token_url = 'http://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
 
 
 

@@ -1,83 +1,49 @@
 import pyodbc
-from datetime import datetime
+import sqlite3
+from datetime import datetime, timedelta
 import datetime
 import requests
 import json
+import sqlite3 as sl
+from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 my_dict_lupa = dict()
-
+data_to_send = []
 #'ben@lupa.co.il','pinim@lupa.co.il'
 
 operators = ['ben@lupa.co.il','pinim@lupa.co.il','shlomi@lupa.co.il','ofer@lupa.co.il','ofir@lupa.co.il','igor_r@lupa.co.il']
-hours = 8
+
 class Test_me():
     my_dict_lupa = dict()
 
     def test_connect_to_db_in_lupa_DB(self):
+        a = self.check_if_send_message()
+        if a is True:
+            self.connect_to_db()
+
+    def connect_to_db(self):
         server = '104.155.49.95'
         database = 'lupa'
         username = 'MachineDBA'
         password = 'Kk28!32Zx'
         cnxn = pyodbc.connect(
             'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
         cursor = cnxn.cursor()
         print(cursor)
-        cursor.execute(f"select *  FROM [lupa].[dbo].[orders_tbl] where bulk_id is null  and in_status = 'Printing process' and charged_date < DATEADD(hour, -{hours}, GETDATE())")
+        cursor.execute(f"SELECT TOP (1000) * FROM [lupa].[dbo].[shippment_errors_tbl]")
         rows = cursor.fetchall()
         if rows != []:
             for row in rows:
-                my_dict_lupa[row[0]] = row[1]
+                my_dict_lupa[row[7]] = row[0]
         print(my_dict_lupa)
 
 
         cursor.close()
 
-    def test_connect_to_db_in_lupa_online_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa_online'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
 
-        cursor = cnxn.cursor()
-        print(cursor)
-        cursor.execute(f"select *  FROM [lupa_online].[dbo].[order_item_tbl] where bulk_id = 0   and in_status = 21 and  charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
-            for row in rows:
-                my_dict_lupa[row[1]] = row[2]
-            print(my_dict_lupa)
-            #self.send_to_email(my_dict_lupa)
-
-        cursor.close()
-
-    def test_connect_to_db_in_lupa_tiles_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa_square'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
-        cursor = cnxn.cursor()
-        print(cursor)
-        cursor.execute(f"select *  FROM [lupa_square].[dbo].[order_item_tbl] where bulk_id = 0   and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
-            for row in rows:
-                my_dict_lupa[row[1]] = row[2]
-            print(my_dict_lupa)
-        cursor.close()
-        if len(my_dict_lupa) > 0:
-            self.send_to_email(my_dict_lupa)
-            self.send_to_slack(my_dict_lupa)
-
-
-    import json
+        self.send_to_slack(my_dict_lupa)
 
     def json_to_slack_message(self, json_data):
         """
@@ -99,7 +65,7 @@ class Test_me():
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "הזמנות ללא באלק :wave:"
+                    "text": "orders with incorrect data :wave:"
                 }
             },
             {
@@ -118,6 +84,39 @@ class Test_me():
 
         # Convert the payload to JSON and return it
         return json.dumps(payload)
+    def check_if_send_message(self):
+
+        # Connect to the database
+        con = sqlite3.connect('my-test.db')
+
+        # Define the SQL query
+        sql = "SELECT * FROM orders_send WHERE time_insert_test < ?"
+
+        # Calculate the datetime 24 hours ago
+        time_threshold = datetime.now() - timedelta(hours=10)
+
+        # Execute the SQL query with the provided parameter
+        with con:
+            data = con.execute(sql, (time_threshold,))
+            for row in data:
+                data_to_send.append(row)
+                print(row)
+            if len(data_to_send) > 0:
+                return True
+
+    def insert_to_DB_the_date(self):
+        con = sl.connect('my-test.db')
+        sql = 'INSERT INTO orders_send (test_name, time_insert_test) values( ?, ?)'
+        # Get the current date and time
+        current_datetime = datetime.now()
+
+        # Format the current datetime as a string
+        current_datetime_str = current_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
+        data = [
+            (my_dict_lupa, current_datetime_str)
+        ]
+        with con:
+            con.executemany(sql, data)
 
     def json_to_html_table(self,json_data):
         """
@@ -161,18 +160,19 @@ class Test_me():
             "https://api.mailgun.net/v3/lupa.co.il/messages",
             auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
             data={
-                "from": "Orders without bulk id   <monitor@lupa.co.il>",
+                "from": "orders with incorrect data   <monitor@lupa.co.il>",
                 "to": operators,
-                "subject": "all orders orders without bulk id in 24 hours and with status Printing process ! ",
+                "subject": "orders with incorrect data ! ",
                 "html": self.json_to_html_table(my_dict_lupa)
             }
           )
 
+
     def send_to_slack(self, my_dict_lupa):
         payload = self.json_to_slack_message(my_dict_lupa)
-        requests.post("https://hooks.slack.com/services/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",data=payload)
+        requests.post("https://hooks.slack.com/services/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",data=payload)
         print(payload)
-
+        self.insert_to_DB_the_date()
 
 
 
