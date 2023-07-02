@@ -45,7 +45,7 @@ next_payment = "//button[@class='lupa-btn' and contains(.,'לתשלום')]"
 checkbox_approve = "//input[@type='checkbox']//..//..//..//div[@class='checkbox']"
 webhook_url = "https://hooks.slack.com/services/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"
 
-def send_event():
+def test_send_event():
 
     playwright = sync_playwright().start()
     pixel_2 = playwright.devices['Pixel 2']
@@ -66,6 +66,7 @@ def send_event():
     page.fill(locators_user_name,text_user)
     page.fill(locators_pass,text_pass)
     page.click(click_login)
+    page.click(button_click_to_buy)
     page.click(click_sum_order)
     page.click(add_coupon)
     page.fill(imput_code,code_coupon)
@@ -106,7 +107,7 @@ def slack_notification(message):
 
         return True
 
-send_event()
+
 
 
 
