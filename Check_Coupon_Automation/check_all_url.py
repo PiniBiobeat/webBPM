@@ -2,7 +2,7 @@ import psycopg2
 import requests
 import jsonpath
 
-def test_check_all_site():
+def check_all_site():
     class Error:
         def __init__(self, url, siteName):
             self.siteName = siteName
@@ -54,4 +54,4 @@ def test_check_all_site():
             connection.close()
             print("PostgreSQL connection is closed")
 
-test_check_all_site()
+check_all_site()
