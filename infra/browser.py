@@ -12,12 +12,18 @@ class Browser:
     def __init__(self):
 
         playwright = sync_playwright().start()
-        pixel_2 = playwright.devices['Pixel 2']
+        available_devices = playwright.devices
+        print("Available devices:", available_devices)
+
+        # Choose the correct device name, for example, 'iPhone 12 Pro Max'
+        device_name = 'iPhone 12 Pro Max'
+        device = available_devices[device_name]
 
         self.browser = playwright.chromium.launch(headless=False)
-        self.context = self.browser.new_context(**pixel_2,)
+        self.context = self.browser.new_context(**device)
         self.context.tracing.start(screenshots=True, snapshots=True)
         self.page = self.context.new_page()
+
 
     def navigate(self, address, page_type: Type[PageBase]):
         self.page.goto(address, wait_until="load")

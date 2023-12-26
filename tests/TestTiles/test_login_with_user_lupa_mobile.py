@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from logic.pages.home_page import HomePage
 from tests.TestTiles.test_base import TestBase
@@ -6,7 +8,7 @@ from logic.pages.choose_login_or_sign_up_page import ChooseLoginOrSignUpPage
 from logic.pages.login_page import LoginPage
 
 text_login_user = 'pinim@lupa.co.il'
-text_login_pass = 'pinim1'
+text_login_pass = 'pinim199'
 text_user_not_valid = "NOT"
 text_error = "lupa@lup.co.il דוגמא לכתובת מייל נכונה"
 
@@ -46,7 +48,8 @@ class TestLogin(TestBase):
         page.input_user_and_pass(text_login_user,text_login_pass)
         page.click_login_button()
         token_after_login  = page.take_token()
-        assert token_after_login is not None
+        a        = json.loads(token_after_login)
+        assert a is not None
 
 
 

@@ -15,12 +15,16 @@ class GooglePhotosPopUp(PageBase):
         super().__init__(page)
 
     def login_google_photos(self,text_user_name,text_password):
+        with self.pw_page.expect_popup() as popup_info:
+            self.pw_page.wait_for_load_state()
+            self.pw_page.fill(self.google_fill_email_button, text_user_name)
+            self.pw_page.click(self.google_user_name_button)
+            self.pw_page.fill(self.google_fill_password_button, text_password)
+            self.pw_page.click(self.google_fill_allow_button)
 
-        self.pw_page.wait_for_load_state()
-        self.pw_page.fill(self.google_fill_email_button, text_user_name)
-        self.pw_page.click(self.google_user_name_button)
-        self.pw_page.fill(self.google_fill_password_button, text_password)
-        self.pw_page.click(self.google_fill_allow_button)
+        popup = popup_info.value
+
+        popup.wait_for_load_state()
 
 
 

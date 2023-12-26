@@ -42,6 +42,11 @@ def test_check_all_site_ver3_is_valid():
             token_site = i[0]
             if i[3] == '1' :
                 response = requests.get(token_site + token_from_login)
+                if response.status_code != 200:
+                    e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
+                         "token": "", "extra_params": {"url": i[0] + token_from_login, "error": response.status_code}}
+                    list_url_err.append(e)
+                    continue
                 token_value = response.json()
                 if token_value['isValid'] != True:
 
@@ -62,5 +67,6 @@ def test_check_all_site_ver3_is_valid():
             cursor.close()
             connection.close()
             print("PostgreSQL connection is closed")
+
 
 test_check_all_site_ver3_is_valid()

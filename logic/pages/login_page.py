@@ -13,6 +13,9 @@ class LoginPage(PageBase):
     get_text_err = "//div[@class='error']"
     menu_button = '//img[@class="burger_menu"]'
     button_out = '//div[@class="menu-item" and contains(., "יציאה מהחשבון")]'
+    text_login_google = "//div[@id='container']"
+    text_popup_date = "//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-slyssw']"
+    frame = "//iframe[@frameborder='0']"
 
 
     def __init__(self,page):
@@ -39,6 +42,11 @@ class LoginPage(PageBase):
             self.pw_page.click(self.google_button)
         return popup_info.value
 
+    def choose_birthday(self):
+        with self.pw_page.expect_popup() as popup_info:
+            self.pw_page.frame_locator(self.frame).locator(self.text_popup_date).click()
+        return popup_info.value
+
     def login_with_facebook(self):
         with self.pw_page.expect_popup() as popup_info:
             self.pw_page.click(self.facebook_button)
@@ -54,6 +62,9 @@ class LoginPage(PageBase):
 
     def click_out(self):
         self.pw_page.click(self.button_out)
+
+    def click_login_google(self):
+        self.pw_page.click(self.text_login_google)
 
 
 
