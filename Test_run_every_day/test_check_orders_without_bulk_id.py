@@ -10,7 +10,7 @@ my_dict_lupa = dict()
 
 #'ben@lupa.co.il','pinim@lupa.co.il'
 
-operators = ['ben@lupa.co.il','pinim@lupa.co.il','shlomi@lupa.co.il','ofer@lupa.co.il','ofir@lupa.co.il','igor_r@lupa.co.il']
+operators = ['ben@lupa.co.il']
 hours = 8
 class Test_me():
     my_dict_lupa = dict()
@@ -75,6 +75,7 @@ class Test_me():
         if len(my_dict_lupa) > 0:
             self.send_to_email(my_dict_lupa)
             self.send_to_slack(my_dict_lupa)
+
 
 
     import json

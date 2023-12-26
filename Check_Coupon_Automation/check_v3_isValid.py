@@ -48,6 +48,11 @@ def test_check_all_site_ver3_is_valid():
                     list_url_err.append(e)
                     continue
                 token_value = response.json()
+                if response.status_code != 200:
+                    e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
+                         "token": "", "extra_params": {"url": i[0] + token_from_login, "error": response.status_code}}
+                    list_url_err.append(e)
+                    continue
                 if token_value['isValid'] != True:
 
                     e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",

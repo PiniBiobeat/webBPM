@@ -28,7 +28,14 @@ class Test_me():
 
         while counter < 3:
             cursor.execute(
-                "SELECT * FROM EASYPHOTOBOOK WHERE JOBID IS NULL AND CAST(ORDER_CHANGED AS DATE) > '2023-06-10' ORDER BY TRANSFERTIME DESC;")
+                '''
+                       SELECT *
+                            FROM EASYPHOTOBOOK
+                            WHERE JOBID IS NULL
+                              AND CAST(ORDER_CHANGED AS DATE) > '2023-06-10'
+                              AND TIMESTAMPDIFF(MINUTE, ORDER_CHANGED, NOW()) > 10
+                            ORDER BY TRANSFERTIME DESC;
+                ''')
             new_rows = cursor.fetchall()
             if len(new_rows) != 0:
                 if rows == new_rows:
@@ -49,8 +56,8 @@ class Test_me():
             for row in rows:
                 my_dict_lupa[row[0]] = row[1]
             if len(my_dict_lupa) > 0:
-                self.send_to_email(my_dict_lupa)
-                self.send_to_slack(my_dict_lupa)
+               self.send_to_email(my_dict_lupa)
+               self.send_to_slack(my_dict_lupa)
 
 
 
