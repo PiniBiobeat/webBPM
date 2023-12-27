@@ -16,7 +16,6 @@ Short_name = "B"
 name_book =  "Book Automation"
 
 
-
 class TestCreateAlbum(TestBaseOnline):
 
     @pytest.mark.smoke

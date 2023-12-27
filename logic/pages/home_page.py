@@ -46,9 +46,10 @@ class HomePage(PageBase):
         return new_tab
 
     def click_lupa_tariff(self):
-      self.pw_page.click(self.button_lups_tariff)
-      a = self.pw_page.url
-      return a
+        with self.pw_page.context.expect_page() as tab:
+            self.pw_page.click(self.button_lups_tariff)
+        a = tab.value.url
+        return a
 
     def click_terms_of_use(self):
       self.pw_page.click(self.button_lups_terms_of_use)
