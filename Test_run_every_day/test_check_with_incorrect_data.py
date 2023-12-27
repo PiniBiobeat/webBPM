@@ -1,29 +1,9 @@
 import pyodbc
-import sqlite3
-from datetime import datetime, timedelta
-import datetime
 import requests
 import json
-import sqlite3 as sl
-from datetime import datetime
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-my_dict_lupa = dict()
-data_to_send = []
-#'ben@lupa.co.il','pinim@lupa.co.il'
 
-operators = ['ben@lupa.co.il','pinim@lupa.co.il','shlomi@lupa.co.il','ofer@lupa.co.il','ofir@lupa.co.il','igor_r@lupa.co.il']
-
-class Test_me():
-    my_dict_lupa = dict()
-
-    def test_connect_to_db_in_lupa_DB(self):
-        a = self.check_if_send_message()
-        if a is True:
-            self.connect_to_db()
-
-    def connect_to_db(self):
+def connect_to_db():
+        global cursor
         server = '104.155.49.95'
         database = 'lupa'
         username = 'MachineDBA'
@@ -32,169 +12,71 @@ class Test_me():
             'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
         cursor = cnxn.cursor()
         print(cursor)
-        cursor.execute(f"SELECT TOP (1000) * FROM [lupa].[dbo].[shippment_errors_tbl]")
-        rows = cursor.fetchall()
-        cursor.close()
-        if rows != []:
-            for row in rows:
-                my_dict_lupa[row[7]] = row[0]
-            if len(my_dict_lupa) > 10 :
-                self.send_to_slack1(len(my_dict_lupa))
-            self.send_to_slack(my_dict_lupa)
-            self.insert_to_DB_the_date()
-        else:
-            return False
+def test_check_if_have_orders_in_table():
+            connect_to_db()
+            cursor.execute(
+                '''  
+             SELECT * FROM lupa.[dbo].orders_generic_errors_tbl  AS o
+             RIGHT   JOIN (select  order_id,master_id,shipping_bill_id,insert_date,platform FROM [lupa].[dbo].[shippment_errors_tbl] ) AS e ON o.order_id = e.order_id where  ISNULL(payload,'') = '' 
+           ''')
+            row = cursor.fetchall()
+            for i in row:
+                if i[2] == None:
+                    send_to_slack(i[6])
+                    insert_to_table_error(i[6], i[7], i[10], i[10], i[8], i[9])
+                else:
+                    continue
+            cursor.close()
+def insert_to_table_error(order_id, master_id, platform, payload, code, insert_date):
+            try:
+                query = '''INSERT INTO lupa.[dbo].orders_generic_errors_tbl (order_id, master_id, platform, payload, code, insert_date)
+                       VALUES (?, ?, ?, ?, ?, ?);'''
+                cursor.execute(query, (order_id, master_id, platform, payload, code, insert_date))
+                cursor.commit()
+                print("Insert successful!")
+            except Exception as e:
+                print(f"Error: {e}")
 
-    def json_to_slack_message(self, json_data):
-        """
-        Converts a JSON object to a formatted Slack message.
+def json_to_slack_message( value_list):
+    """
+            Converts a JSON object to a formatted Slack message.
 
-        Args:
-            json_data (dict): The JSON data to convert to a Slack message.
+            Args:
+                json_data (dict): The JSON data to convert to a Slack message.
 
-        Returns:
-            str: The formatted Slack message string.
-        """
-        # Create a bulleted list of the key values
-        keys_list = list(json_data.keys())
-        value_list = "\n".join([f"• <https://admin.lupa.co.il/admin_book/Order_Details.aspx?id={key}|{key}>" if str(key).startswith('18') else f"• <https://admin.lupa.co.il/admin_online/Order_Details.aspx?id={key}|{key}>" if str(key).startswith('76') else f"• <https://admin.lupa.co.il/admin_online/Order_Details.aspx?id={key}|{key}>" for key in keys_list])
-
-        # Build the Slack message blocks
-        blocks = [
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "orders with incorrect data  :wave:"
-                }
-            },
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": value_list
-                }
+            Returns:
+                str: The formatted Slack message string.
+            """
+    blocks = [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "orders with incorrect data Bar hafaza :wave:"
             }
-        ]
-
-        # Build the Slack message payload
-        payload = {
-            "blocks": blocks
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": str(value_list)
+            }
         }
+    ]
 
-        # Convert the payload to JSON and return it
-        return json.dumps(payload)
-    def check_if_send_message(self):
+    # Build the Slack message payload
+    payload = {
+        "blocks": blocks
+    }
 
-        # Connect to the database
-        con = sqlite3.connect('my-test.db')
-        cursor = con.cursor()
-        cursor.execute("SELECT * FROM orders_send")
-        results = cursor.fetchall()
-        for row in results:
-            # Process the row data as needed
-            data_to_send.append(row)
-            print(row)
-        cursor.close()
-        con.close()
-        if len(data_to_send) != 0:
-            return False
-        else:
-            return True
+    # Convert the payload to JSON and return it
+    return json.dumps(payload)
 
-    def insert_to_DB_the_date(self):
-        con = sl.connect('my-test.db')
-        sql = 'INSERT INTO orders_send (test_name, time_insert_test) values( ?, ?)'
-        # Get the current date and time
-        current_datetime = datetime.now()
-
-        # Format the current datetime as a string
-        current_datetime_str = current_datetime.strftime('%Y-%m-%d %H:%M:%S.%f')
-
-        data = [
-            (next(iter(my_dict_lupa)), current_datetime_str)
-        ]
-        with con:
-            con.executemany(sql, data)
-
-    def json_to_html_table(self,json_data):
-        """
-        Converts a JSON object to an HTML table.
-
-        Args:
-            json_data (str or dict): The JSON data to convert to an HTML table.
-
-        Returns:
-            str: The HTML table string.
-        """
-        # Load JSON data if it's a string
-        if isinstance(json_data, str):
-            json_data = json.loads(json_data)
-
-        # Build the table rows
-        rows = []
-        for key, value in json_data.items():
-            rows.append(f"<tr><td>{key}</td><td>{value}</td></tr>")
-
-        # Build the HTML table
-        table = f"<table><tr><th>Key</th><th>Value</th></tr>{''.join(rows)}</table>"
-
-        # Build the HTML template
-        template = f"""
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>JSON to HTML Table</title>
-                </head>
-                <body>
-                    {table}
-                </body>
-            </html>
-        """
-
-        return template
-
-    def send_to_email(self,my_dict_lupa):
-      requests.post(
-            "https://api.mailgun.net/v3/lupa.co.il/messages",
-            auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
-            data={
-                "from": "orders with incorrect data   <monitor@lupa.co.il>",
-                "to": operators,
-                "subject": "orders with incorrect data ! ",
-                "html": self.json_to_html_table(my_dict_lupa)
-            }
-          )
-
-
-    def send_to_slack(self, my_dict_lupa):
-        payload = self.json_to_slack_message(my_dict_lupa)
+def send_to_slack( my_dict_lupa):
+        payload = json_to_slack_message(my_dict_lupa)
         requests.post("https://hooks.slack.com/services/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",data=payload)
         print(payload)
-        self.insert_to_DB_the_date()
-
-    def send_to_slack1(self, my_dict_lupa):
-
-        # Replace 'YOUR_WEBHOOK_URL' with your actual webhook URL
-        webhook_url = 'https://hooks.slack.com/services/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'
-
-        # Create a dictionary containing the message payload
-        message_payload = {
-            'text': f'There are many orders Bar hafaza !!!  {my_dict_lupa}',
-            'username': 'monitor',  # Optional: Customize the username
-            'icon_emoji': ':robot_face:',  # Optional: Customize the icon
-        }
-
-        # Convert the payload to JSON format
-        payload_json = json.dumps(message_payload)
-
-        # Send the POST request to the Slack webhook URL
-        response = requests.post(webhook_url, data=payload_json, headers={'Content-Type': 'application/json'})
-
-        if response.status_code == 200:
-            print("Message sent successfully")
-        else:
-            print(f"Error sending message: {response.text}")
+test_check_if_have_orders_in_table()
 
 
 

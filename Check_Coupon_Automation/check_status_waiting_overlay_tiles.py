@@ -1,34 +1,47 @@
 import json
-
 import pyodbc
-from datetime import datetime
-import datetime
-
 import requests
 
 
-def test_connect_to_db():
+
+
+def connect_to_db():
+    global cursor
     server = '104.155.49.95'
     database = 'lupa_square'
     username = 'MachineDBA'
     password = 'Kk28!32Zx'
-    list_orders_with_status_WO = list()
     cnxn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
     cursor = cnxn.cursor()
-    print(cursor)
-    cursor.execute("select * from (select DATEADD(hour, -1 , GETDATE()) AS DATEADD  , order_id,master_id,in_status,charged_date,order_comments FROM [lupa_square].[dbo].[orders_tbl] where in_status = 26) as t where DATEADD>t.charged_date")
+
+def test_check_if_have_orders_in_table():
+    connect_to_db()
+    cursor.execute(
+        '''  SELECT * FROM lupa.[dbo].orders_generic_errors_tbl  AS o
+        RIGHT   JOIN (select DATEADD(hour, -1 , GETDATE()) AS DATEADD  , order_id,master_id,in_status,charged_date,device,project_path FROM [lupa_square].[dbo].[orders_tbl] where in_status = 26) AS e ON o.order_id = e.order_id where DATEADD>e.charged_date and ISNULL(payload,'') = ''
+   ''')
     row = cursor.fetchall()
     for i in row:
-        print(str(i[1]))
-        list_orders_with_status_WO.append(i[1])
-    if len(list_orders_with_status_WO) != 0:
-
-        send_to_slack(list_orders_with_status_WO)
+        if i[2] == None:
+            send_to_slack(i[7])
+            insert_to_table_error(i[7], i[8], i[11], i[11], i[9], i[6])
+        else:
+            continue
     cursor.close()
-def json_to_slack_message(list):
-            """
+
+def insert_to_table_error(order_id, master_id, platform, payload, code, insert_date):
+    try:
+        query = '''INSERT INTO lupa.[dbo].orders_generic_errors_tbl (order_id, master_id, platform, payload, code, insert_date)
+               VALUES (?, ?, ?, ?, ?, ?);'''
+        cursor.execute(query, (order_id, master_id, platform, payload, code, insert_date))
+        cursor.commit()
+        print("Insert successful!")
+    except Exception as e:
+        print(f"Error: {e}")
+
+def json_to_slack_message(value_list):
+    """
             Converts a JSON object to a formatted Slack message.
 
             Args:
@@ -37,40 +50,34 @@ def json_to_slack_message(list):
             Returns:
                 str: The formatted Slack message string.
             """
-            # Create a bulleted list of the key values
-
-            value_list = "\n".join([f"•{key}" for key in list])
-
-            # Build the Slack message blocks
-            blocks = [
-                {
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": "orders with status waiting :wave:"
-                    }
-                },
-                {
-                    "type": "section",
-                    "text": {
-                        "type": "mrkdwn",
-                        "text": value_list
-                    }
-                }
-            ]
-
-            # Build the Slack message payload
-            payload = {
-                "blocks": blocks
+    blocks = [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "orders with status waiting :wave:"
             }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": str(value_list)
+            }
+        }
+    ]
 
-            # Convert the payload to JSON and return it
-            return json.dumps(payload)
+    # Build the Slack message payload
+    payload = {
+        "blocks": blocks
+    }
+
+    # Convert the payload to JSON and return it
+    return json.dumps(payload)
+
 def send_to_slack(my_dict_lupa):
-            payload = json_to_slack_message(my_dict_lupa)
-            requests.post("https://hooks.slack.com/services/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",
-                          data=payload)
+    payload = json_to_slack_message(my_dict_lupa)
+    requests.post("https://hooks.slack.com/services/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",
+                  data=payload)
 
-
-
-test_connect_to_db()
+test_check_if_have_orders_in_table()

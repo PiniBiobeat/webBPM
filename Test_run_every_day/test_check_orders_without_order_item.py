@@ -1,25 +1,14 @@
-#check_orders_without_order_item
-
-
-
 import pyodbc
-import sqlite3
-from datetime import datetime, timedelta
-import datetime
 import requests
 import json
-import sqlite3 as sl
-from datetime import datetime
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+
 my_dict_lupa = dict()
 data_to_send = []
 
 class Test_me():
     my_dict_lupa = dict()
 
-    def test_connect_to_db(self):
+    def test_connect_to_and_check_if_have_orders_without_orders_item(self):
         server = '104.155.49.95'
         database = 'master'
         username = 'MachineDBA'
@@ -29,7 +18,7 @@ class Test_me():
         cursor = cnxn.cursor()
         print(cursor)
         cursor.execute('''
-            SELECT top(1) o.order_id
+            SELECT top(10) o.order_id
 			FROM [lupa_online].[dbo].[orders_tbl] AS o
 			LEFT JOIN [lupa_online].[dbo].[order_item_tbl] AS oi
 			ON o.order_id = oi.order_id
