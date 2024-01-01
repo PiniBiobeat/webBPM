@@ -83,7 +83,7 @@ class Test_me():
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "הזמנות ללא check_orders_without_data_to_scanners_mysql :wave:"
+                    "text": "הסקנרס נפל יש להפעיל אותו :wave:"
                 }
             },
             {
@@ -145,9 +145,9 @@ class Test_me():
             "https://api.mailgun.net/v3/lupa.co.il/messages",
             auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
             data={
-                "from": "check_orders_without_data_to_scanners_mysql   <monitor@lupa.co.il>",
+                "from": "Please check if the scanners work   <monitor@lupa.co.il>",
                 "to": operators,
-                "subject": "check_orders_without_data_to_scanners_mysql ! ",
+                "subject": "Please check if the scanners work ! ",
                 "html": self.json_to_html_table(my_dict_lupa)
             }
           )
