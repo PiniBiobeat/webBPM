@@ -1,3 +1,5 @@
+import time
+
 import pyodbc
 from datetime import datetime
 import datetime
@@ -47,6 +49,7 @@ def sql_get_status_newsletter(Email):
 
 
 def sql_get_status_master_id(Email):
+    time.sleep(5)
     server = '104.155.49.95'
     database = 'lupa'
     username = 'MachineDBA'
