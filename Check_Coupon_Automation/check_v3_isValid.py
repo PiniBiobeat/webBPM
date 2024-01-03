@@ -1,6 +1,7 @@
 import psycopg2
 import requests
 import jsonpath
+import json
 
 
 
@@ -42,11 +43,6 @@ def test_check_all_site_ver3_is_valid():
             token_site = i[0]
             if i[3] == '1' :
                 response = requests.get(token_site + token_from_login)
-                if response.status_code != 200:
-                    e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
-                         "token": "", "extra_params": {"url": i[0] + token_from_login, "error": response.status_code}}
-                    list_url_err.append(e)
-                    continue
                 token_value = response.json()
                 if response.status_code != 200:
                     e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
@@ -56,12 +52,13 @@ def test_check_all_site_ver3_is_valid():
                 if token_value['isValid'] != True:
 
                     e = {"source": "AutomationMonitor", "service_api": i[1], "error_code": 17, "active": "true",
-                         "token": "", "extra_params": {"url": i[0]+ token_from_login,"error": token_value['Error']}}
+                         "token": "","master_id":"3310809", "extra_params": {"url": i[0]+ token_from_login,"error": token_value['Error']}}
                     list_url_err.append(e)
                     continue
-        token_url = 'http://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
+        token_url = 'https://monitor.lupa.co.il/api/api.aspx?method=write_errors&source=AutomationMonitor&service_api=hi'
         obj = {}
         obj["errors"] = str(list_url_err)
+        payload_json = json.dumps(obj)
         res = requests.post(token_url, data=obj)
 
         print(res)
@@ -72,6 +69,5 @@ def test_check_all_site_ver3_is_valid():
             cursor.close()
             connection.close()
             print("PostgreSQL connection is closed")
-
 
 test_check_all_site_ver3_is_valid()
