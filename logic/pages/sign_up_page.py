@@ -10,7 +10,7 @@ class SignUpPage(PageBase):
     text_password_1 = "//div[@class='group' and contains(.,'הסיסמה שלך')]//input[@type='password']"
     text_password_2 = "//div[@class='group' and contains(.,'שוב הסיסמה')]//input[@type='password']"
     button_next = "//button[@class='lupa-btn']"
-    checkbox = "//div[@class='checkbox_container first checkbox_registration' and contains(.,'אני מאשר/ת קבל דואר פרסומי')]//input[@type='checkbox']//..//span[@class = 'checkmark']"
+    checkbox = '''//div[@class='checkbox_container first checkbox_registration' and contains(.,'אני מאשר/ת קבלת מסרים פרסומיים בדוא"ל/מסרון')]//input[@type='checkbox']//..//span[@class = 'checkmark']'''
     manu =  '//img[@class="burger_menu"]'
     checkbox_approval_regulations = "//div[@class='checkbox_container checkbox_registration' and contains(.,'אני מאשר/ת את')]//input[@type='checkbox']//..//span[@class = 'checkmark']"
     selectoption_day = "//div[@class='birth-date-day']//select[@class='select-css']"
