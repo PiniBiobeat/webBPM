@@ -5,7 +5,7 @@ import requests
 import jsonpath
 
 
-def test_check_roi_vision():
+def check_orders_with_error_coupons():
 
     class Error:
         def __init__(self, url, siteName):
@@ -14,30 +14,35 @@ def test_check_roi_vision():
     try:
         connection = psycopg2.connect(user="machineDBA",
                                       password="A#214Fdse!35dDC214XAzRDA12^79",
-                                      host="10.116.96.3",
+                                      host="35.187.190.6",
                                       port="5432",
-                                      database="groupa")
+                                      database="Tariff")
         cursor = connection.cursor()
         print("PostgreSQL server information")
         print(connection.get_dsn_parameters(), "\n")
-        cursor.execute("SELECT roi_vision FROM groupav4.visions_tbl ORDER BY vision_id DESC, master_index DESC, album_token DESC LIMIT 1 ")
+        cursor.execute('''
+                SELECT order_id,user_id,finished,error_code,error_message FROM cpn.service_log_tbl
+                WHERE error_code <> 0 AND error_code <> 900 
+                AND finished > '2024-01-30' AND finished > NOW() - INTERVAL '5 minutes' LIMIT 1;
+        ''')
         record = cursor.fetchall()
 
         print(len(record))
         print("You are connected to - ", record, "\n")
 
-        if record[0][0] == '':
+        if len(record) != 0:
 
             # Slack webhook URL (you need to obtain this from Slack)
             webhook_url = "YOUR_SLACK_WEBHOOK_URL"
 
             # Create the message payload
             message = {
-                "text": "roi_vision NOT WORK!",
+                "text": f"need check errors on new coupons.\n error ->  {record[0][4]} .\n order num -> {record[0][0]} .\n master id -> {record[0][1]}. ",
                 "channel": "#general"
             }
 
             # Convert the message payload to JSON format
+            print(message)
             payload = json.dumps(message)
 
             try:
@@ -64,5 +69,5 @@ def test_check_roi_vision():
 
 
 
-test_check_roi_vision()
+check_orders_with_error_coupons()
 
