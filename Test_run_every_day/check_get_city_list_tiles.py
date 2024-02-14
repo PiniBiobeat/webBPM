@@ -5,8 +5,7 @@ import requests
 
 
 def check_get_city_list_tiles():
-    url = "https://paymentsv4-api.lupa.co.il/api.aspx?method=get_city_list&source_type=tiles&language=&source_device=desktop&token=075006004198174051194069114000059171223190201022241114097118246017106021141252132008248100179032200057179068154106101200050007232010073061230171&show_header="
-
+    url = "https://paymentsv4-api.lupa.co.il/api.aspx?method=get_city_list&source_type=tiles&language=&source_device=desktop&token=tIKxzLq2DpXhfKaojAiq64JPBL7rMbrlZCVq9nzONBd2V4pkHlsc1T7a_DKxxMRk_FtOVH0Br8tM4htwMzEqmE4uD52yYfzGVoC-WrFkEVkrSLsi7XkRTf2KuMh1YjP9BhY22BFeqEHhBbFiMAmL-XwX_SmfvR02dzdD732LdYcwr0yWbnN6pTnYcVb2vAxXpO30SbjgulGG5Is2YqgyQOWqP_bupDMKJX708AyhIGqimdMM3BHgg4zKlqECP-x3qJwuqqYILU2fCk3sPCWXhTHs_lQkrIvGbKcNw1i8g4BvlHX4K87sHUzAErdsY3xqix_9qZcPbIEL3QbXC8A96Q2&show_header="
     payload = {}
     headers = {
       'authority': 'paymentsv4-api.lupa.co.il',
