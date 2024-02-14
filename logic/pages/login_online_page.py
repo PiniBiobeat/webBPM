@@ -31,5 +31,5 @@ class LogInOnline(PageBase):
         time.sleep(5)
         token = self.pw_page.context.storage_state(path='state.json')
         # self.pw_page.wait_for_load_state(timeout=10000)
-        user_token = token['origins'][0]['localStorage'][2]['value']
+        user_token = token['origins'][0]['localStorage'][3]['value']
         return user_token

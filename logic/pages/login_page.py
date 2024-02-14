@@ -13,7 +13,7 @@ class LoginPage(PageBase):
     get_text_err = "//div[@class='error']"
     menu_button = '//img[@class="burger_menu"]'
     button_out = '//div[@class="menu-item" and contains(., "יציאה מהחשבון")]'
-    text_login_google = "//div[@id='container']"
+    text_login_google = "div[tabindex='0']"
     text_popup_date = "//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-slyssw']"
     frame = "//iframe[@frameborder='0']"
 
@@ -34,12 +34,12 @@ class LoginPage(PageBase):
         time.sleep(5)
         token = self.pw_page.context.storage_state(path='state.json')
         #self.pw_page.wait_for_load_state(timeout=10000)
-        user_token = token['origins'][0]['localStorage'][1]['value']
+        user_token = token['origins'][0]['localStorage'][12]['value']
         return user_token
 
     def login_with_google(self):
         with self.pw_page.expect_popup() as popup_info:
-            self.pw_page.click(self.google_button)
+            self.pw_page.click(self.text_login_google)
         return popup_info.value
 
     def choose_birthday(self):

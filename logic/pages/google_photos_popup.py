@@ -4,7 +4,7 @@ import time
 class GooglePhotosPopUp(PageBase):
 
     google_fill_email_button = "//input[@type='email']"
-    google_user_name_button = "//span[text()='הבא']"
+    google_user_name_button = "//span[text()='Next']"
     google_fill_password_button = "//input[@type='password']"
     google_fill_allow_button = "//div[@id='passwordNext']"
     title_button = "//h4[@class='intro-title' and contains(.,'לופה בריבוע')]"

@@ -6,8 +6,8 @@ from logic.pages.google_photos_popup import GooglePhotosPopUp
 from logic.pages.choose_login_or_sign_up_page import ChooseLoginOrSignUpPage
 from logic.pages.login_page import LoginPage
 
-text_googleUserName="lupadevtest@gmail.com"
-text_googlePassword="lupadevtest!128"
+text_googleUserName="ppinilupa@gmail.com"
+text_googlePassword="Pinimari!1"
 text_error = "lupa@lup.co.il דוגמא לכתובת מייל נכונה"
 
 class TestLoginGoogle(TestBase):
