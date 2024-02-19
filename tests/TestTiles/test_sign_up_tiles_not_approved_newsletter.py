@@ -5,7 +5,7 @@ from infra.config.config_provider import configuration
 from logic.pages.sign_up_page import SignUpPage
 from infra.generic_helpers import generate_random_email_and_password
 from infra.generic_helpers import sql_get_status_newsletter
-
+from infra.generic_helpers import sql_get_status_master_id
 import pytest
 
 firt_name = "פיני"
@@ -44,6 +44,8 @@ class TestSignUpNotApproved(TestBase):
         #page.Sign_me_up_without_mailing()
         page.click_next()
         token_after_login = page.take_token()
-        aa = sql_get_status_newsletter(email)
+        newsletter = sql_get_status_newsletter(email)
+        master_id = sql_get_status_master_id(email)
         assert token_after_login is not None
-        assert  aa == 0
+        assert newsletter == 0
+        assert master_id == 'False'

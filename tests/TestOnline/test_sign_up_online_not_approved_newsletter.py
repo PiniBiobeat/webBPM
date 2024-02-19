@@ -46,10 +46,9 @@ class TestSignUpOnline(TestBaseOnline):
         page.insert_user_details(firt_name,last_name,email,num_phone,num_and_pass)
         page.click_checkbox()
         page.click_button_create_user()
-        aa = sql_get_status_master_id(email)
-        #token_after_login = page.take_token()
-       # a = json.loads(token_after_login)
-       #b = a['token']
-       # assert b is not None
-        time.sleep(5)
-        assert aa == 'False'
+        token_after_login = page.take_token_online()
+        newsletter = sql_get_status_newsletter(email)
+        master_id = sql_get_status_master_id(email)
+        assert token_after_login is not None
+        assert newsletter == 0
+        assert master_id == 'False'

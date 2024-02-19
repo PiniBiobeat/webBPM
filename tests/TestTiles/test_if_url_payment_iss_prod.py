@@ -51,4 +51,4 @@ class TestUrlPayment(TestBase):
         parsed_url = urlparse(current_url)
         url_without_params = urlunparse(parsed_url._replace(query=''))
         expected_url = 'https://paymentsv4-ui.lupa.co.il/basket'
-        assert url_without_params == expected_url, f"Expected URL: {expected_url}, Actual URL: {current_url}"
+        assert url_without_params == expected_url, f"Expected URL: {expected_url}, Actual URL: {url_without_params}"

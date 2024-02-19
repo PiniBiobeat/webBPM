@@ -46,6 +46,9 @@ class TestSignUpOnline(TestBaseOnline):
         page.insert_user_details(firt_name,last_name,email,num_phone,num_and_pass)
         page.click_checkbox_with_newsletter()
         page.click_button_create_user()
-        aa = sql_get_status_master_id(email)
-        time.sleep(5)
-        assert aa == 'True'
+        token_after_login = page.take_token_online()
+        newsletter = sql_get_status_newsletter(email)
+        master_id = sql_get_status_master_id(email)
+        assert token_after_login is not None
+        assert newsletter == 1
+        assert master_id == 'True'
