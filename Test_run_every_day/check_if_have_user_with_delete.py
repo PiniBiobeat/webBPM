@@ -9,7 +9,7 @@ def check_if_have_user_with_delete():
 
         connection = psycopg2.connect(user="machineDBA",
                                       password="A#214Fdse!35dDC214XAzRDA12^79",
-                                      host="35.187.190.6",
+                                      host="35.233.19.13",
                                       port="5432",
                                       database="monitor_db")
         cursor = connection.cursor()
