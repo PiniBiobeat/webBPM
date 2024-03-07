@@ -41,6 +41,7 @@ class TestSignUpOnline(TestBaseOnline):
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_User_approved_newsletter(self):
         page: ConnectCreateUserPage = self.browser_online.navigate(configuration['online_url'], ConnectCreateUserPage)
+        time.sleep(10)
         page.click_icon_user()
         page.click_connect_user_up()
         page.insert_user_details(firt_name,last_name,email,num_phone,num_and_pass)
