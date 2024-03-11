@@ -34,6 +34,7 @@ class Test_me():
                             WHERE JOBID IS NULL
                               AND CAST(ORDER_CHANGED AS DATE) > '2023-06-10'
                               AND TIMESTAMPDIFF(MINUTE, ORDER_CHANGED, NOW()) > 10
+                              AND SCANNED != 1
                             ORDER BY TRANSFERTIME DESC;
                 ''')
             new_rows = cursor.fetchall()

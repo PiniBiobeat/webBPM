@@ -1,4 +1,6 @@
+import json
 
+import requests
 
 
 def test_the_server_is_up():
