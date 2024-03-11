@@ -19,6 +19,9 @@ class LoginCalendarPage(PageBase):
     text_checkbox_newswetter = "(//input[@class='PrivateSwitchBase-input css-1m9pwf3'])[1]"
     text_checkbox = "(//input[@class='PrivateSwitchBase-input css-1m9pwf3'])[2]"
     text_button_create_user = '//button[contains(.,"יצירת חשבון")]//..//..//div[@class="MuiStack-root css-ax63s"]'
+    text_user_login =  "//input[@class='MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-jnx2aw']"
+    test_pass_login = "//input[@class='MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1knobvl']"
+    text_login_button = "//button[@data-testid='btn-login']"
 
     def __init__(self, page):
         super().__init__(page)
@@ -31,6 +34,13 @@ class LoginCalendarPage(PageBase):
         self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_checkbox_newswetter).click()
         self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_checkbox).click()
 
+    def insert_user_and_pass(self, text_user, text_pass):
+        self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_user_login).fill(text_user)
+        self.pw_page.frame_locator(self.iframe_calendar).locator(self.test_pass_login).fill(text_pass)
+
+    def click_login_button(self):
+        self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_login_button).click()
+
     def click_button_create_user(self):
         self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_button_create_user).click()
 
@@ -39,31 +49,6 @@ class LoginCalendarPage(PageBase):
         token = self.pw_page.context.storage_state(path="state.json")
         user_token = token['origins'][0]['localStorage'][3]['value']
         return user_token
-
-    def click_my_book(self):
-        self.pw_page.click(self.img_user)
-
-    def click_icon_user(self):
-        self.pw_page.click(self.img_user)
-
-    def click_connect_user(self):
-        self.pw_page.click(self.text_connect_user)
-        self.pw_page.wait_for_selector(self.frame, state="visible")
-       # self.pw_page.frame_locator(self.frame).locator("//button[@class='MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1r09c7j']").click()
-
-    def click_connect_user_up(self):
-        self.pw_page.click(self.text_connect_user)
-        #self.pw_page.wait_for_selector(self.frame, state="visible")
-        self.pw_page.frame_locator(self.frame_connect).locator("//button[@class='MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1r09c7j']").click()
-
-    def click_create_account(self):
-        #time.sleep(60)
-        self.pw_page.click("//u[text()='למידע נוסף']")
-        self.pw_page.go_back()
-        #self.pw_page.click(self.text_connect_user)
-        # self.pw_page.wait_for_selector(self.frame, state="visible")
-        self.pw_page.frame_locator(self.frame).locator("//button[@class='MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1r09c7j']").click()
-
 
     def insert_user_details(self, firt_name, last_name, emailEx,num_phone, password):
         self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_first_name).fill(firt_name)
