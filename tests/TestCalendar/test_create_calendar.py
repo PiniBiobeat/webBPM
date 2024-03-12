@@ -7,7 +7,7 @@ from logic.pages.login_calendar_page import LoginCalendarPage
 from logic.pages.choose_format_calendar_page import ChooseFormatCalendarPage
 from logic.pages.settings_calendar_page import SettingsCalendarPage
 from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
-from infra.generic_helpers import sql_get_calendar
+from infra.generic_helpers import sql_get_calendar,sql_get_path_calendar
 import random
 import json
 
@@ -97,3 +97,12 @@ class TestCreateCalendar(TestBase):
         calendar_data = sql_get_calendar(token_after_calendar)
         assert 'Diamonds' == calendar_data[0][1]
         assert 260 == calendar_data[0][0]
+
+        @pytest.mark.smoke
+        @pytest.mark.usefixtures("before_after_test")
+        def test_create_calendar_and_check_in_DB_A3_and_Diamonds1(self):
+            calendar_path = sql_get_path_calendar(token_after_calendar)
+            calendar_full_path = calendar_path+'\\Dat\\projectObj.dat'
+            assert 'Diamonds' == calendar_data[0][1]
+            assert 260 == calendar_data[0][0]
+

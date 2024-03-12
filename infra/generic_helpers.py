@@ -86,5 +86,25 @@ def sql_get_calendar(token_after_calendar):
     cursor.close()
     return record
 
+def sql_get_path_calendar(token_after_calendar):
+    time.sleep(5)
+    connection = psycopg2.connect(user="machineDBA",
+                                  password="A#214Fdse!35dDC214XAzRDA12^79",
+                                  host="10.116.96.32",
+                                  port="5432",
+                                  database="calendars_test")
+    cursor = connection.cursor()
+    print("PostgreSQL server information")
+    print(connection.get_dsn_parameters(), "\n")
+    cursor.execute(
+        '''
+    SELECT path FROM public.calendars_tbl
+    WHERE token = %s
+    ORDER BY id DESC LIMIT 100
+    ''', (token_after_calendar,))
+    record = cursor.fetchall()
+    cursor.close()
+    return record
+
 
 #[lupa].[dbo].[newslleter].newsletter_ststus
