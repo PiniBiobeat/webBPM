@@ -11,6 +11,8 @@ class ChoosePhotosDeviceCalendar(PageBase):
     text_button_upload = "(//div[@class='font_xl color_gray position_flex_row_center mesures_full_height MuiBox-root css-0'])[1]"
     text_next_button = "//button[contains(.,'אישור')]"
     path_images = ["C:/Users/lupa/Desktop/london/IMG_2549.jpg"]
+    text_checkbox_approval_regulations = "//input[@type='checkbox']"
+    text_click_next_after_checkbox = "//button[contains(.,'להמשך')]"
 
     def __init__(self, page):
         super().__init__(page)
@@ -18,3 +20,9 @@ class ChoosePhotosDeviceCalendar(PageBase):
 
     def click_next_after_choose_photos(self):
         self.pw_page.click(self.text_next_button)
+
+    def checkbox_approval_regulations(self):
+        self.pw_page.click(self.text_checkbox_approval_regulations)
+
+    def click_next_after_checkbox(self):
+        self.pw_page.click(self.text_click_next_after_checkbox)

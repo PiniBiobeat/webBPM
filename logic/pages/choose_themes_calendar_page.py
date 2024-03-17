@@ -23,5 +23,5 @@ class ThemesCalendarPage(PageBase):
     def take_token_calendar(self):
         time.sleep(8)
         token = self.pw_page.context.storage_state(path="state.json")
-        user_token = token['origins'][0]['localStorage'][4]['value']
+        user_token = token['origins'][0]['localStorage'][6]['value']
         return user_token
