@@ -78,7 +78,7 @@ def sql_get_calendar(token_after_calendar):
     print(connection.get_dsn_parameters(), "\n")
     cursor.execute(
         '''
-    SELECT format, theme FROM public.calendars_tbl
+    SELECT format, theme,path FROM public.calendars_tbl
     WHERE token = %s
     ORDER BY id DESC LIMIT 100
     ''', (token_after_calendar,))

@@ -1,5 +1,5 @@
 from infra.page_base import PageBase
-
+import time
 class ChooseFormatCalendarPage(PageBase):
 
     init_indication = "(//button[@type='button'])[1]"
@@ -15,11 +15,18 @@ class ChooseFormatCalendarPage(PageBase):
 
     def getSelectorElement(self, format):
         if format == 92:
-            self.pw_page.click(f"(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[{1}]")
+            time.sleep(5)
+            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=92']", state="visible")
+            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=92']")
+
         elif format == 240:
-            self.pw_page.click(f"(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[{2}]")
+            time.sleep(5)
+            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=240']",state="visible")
+            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=240']")
         else:
-            self.pw_page.click(f"(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[{3}]")
+            time.sleep(5)
+            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']",state="visible")
+            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']")
 
     def click_choose_A5(self,a):
         self.pw_page.click(f"(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[{a}]")
