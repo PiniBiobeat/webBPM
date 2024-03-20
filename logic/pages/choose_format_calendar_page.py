@@ -28,14 +28,14 @@ class ChooseFormatCalendarPage(PageBase):
             self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']",state="visible")
             self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']")
 
-    def click_choose_A5(self,a):
-        self.pw_page.click(f"(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[{a}]")
+    def click_choose_A5(self):
+        self.pw_page.click(self.A5)
 
-    def click_choose_A4(self,b):
-        self.pw_page.click(f"(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[{b+1}]")
+    def click_choose_A4(self):
+        self.pw_page.click(self.A4)
 
-    def click_choose_A3(self,b):
-        self.pw_page.click(f"(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[{b}]")
+    def click_choose_A3(self):
+        self.pw_page.click(self.A3)
 
     def open_screen_login_from_menu(self):
         self.pw_page.click(self.text_open_menu)
