@@ -21,8 +21,8 @@ def test_check_errors_calendar():
         print("PostgreSQL server information")
         print(connection.get_dsn_parameters(), "\n")
         cursor.execute('''
-                SELECT source,api_method,user_id,created,api_version,error_code,transaction  FROM public.reporting_log_tbl 
-                WHERE source = 'calendar' AND error_code <>0
+                SELECT source,api_method,user_id,created,api_version,error_code,transaction,error_message  FROM public.reporting_log_tbl 
+                WHERE source = 'calendar' AND error_code <> 0
                 AND  created > NOW() - INTERVAL '5 minutes' LIMIT 1;
         ''')
         record = cursor.fetchall()
@@ -94,6 +94,20 @@ def test_check_errors_calendar():
                             {
                                 "type": "mrkdwn",
                                 "text": f'{record[0][6]}'
+                            }
+                        ]
+                    }
+                    ,
+                    {
+                        "type": "section",
+                        "fields": [
+                            {
+                                "type": "mrkdwn",
+                                "text": "*Error Message:*"
+                            },
+                            {
+                                "type": "mrkdwn",
+                                "text": f'Error  {record[0][7]}'
                             }
                         ]
                     }
