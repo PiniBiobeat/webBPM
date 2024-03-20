@@ -14,7 +14,7 @@ def check_orders_with_error_coupons():
     try:
         connection = psycopg2.connect(user="machineDBA",
                                       password="A#214Fdse!35dDC214XAzRDA12^79",
-                                      host="35.233.19.13",
+                                      host="35.187.190.6",
                                       port="5432",
                                       database="Tariff")
         cursor = connection.cursor()

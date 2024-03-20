@@ -11,7 +11,7 @@ def test_check_all_site_ver3_is_valid():
     try:
         connection = psycopg2.connect(user="machineDBA",
                                       password="A#214Fdse!35dDC214XAzRDA12^79",
-                                      host="35.233.19.13",
+                                      host="35.187.190.6",
                                       port="5432",
                                       database="monitor_db")
         cursor = connection.cursor()
