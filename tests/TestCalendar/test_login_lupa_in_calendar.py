@@ -24,7 +24,7 @@ class TestLoginCalendar(TestBase):
         page: LoginCalendarPage = self.browser.create_page(LoginCalendarPage)
         page.insert_user_and_pass(email1,pass1)
         page.click_login_button()
-        token_after_login = page.take_token()
+        token_after_login = page.take_token_after()
         a = json.loads(token_after_login)
         b =  a['token']
         assert b is not None

@@ -50,6 +50,12 @@ class LoginCalendarPage(PageBase):
         user_token = token['origins'][0]['localStorage'][3]['value']
         return user_token
 
+    def take_token_after(self):
+        time.sleep(8)
+        token = self.pw_page.context.storage_state(path="state.json")
+        user_token = token['origins'][0]['localStorage'][1]['value']
+        return user_token
+
     def insert_user_details(self, firt_name, last_name, emailEx,num_phone, password):
         self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_first_name).fill(firt_name)
         self.pw_page.frame_locator(self.iframe_calendar).locator(self.text_last_name).fill(last_name)
