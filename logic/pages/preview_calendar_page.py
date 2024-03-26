@@ -10,6 +10,7 @@ class PreviewCalendar(PageBase):
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
     text_button_edit_page = "//*[@id='root']/div/div[1]/div[2]/div[2]/div[2]/button"
     text_select_change = "//*[@id='SpeedDial-action-3']"
+    text_select_theme = "//*[@id='SpeedDial-action-4']"
 
 
     def __init__(self, page):
@@ -19,6 +20,9 @@ class PreviewCalendar(PageBase):
     def click_edit_page(self):
         self.pw_page.click(self.text_button_edit_page)
         self.pw_page.click(self.text_select_change)
+
+    def click_select_theme(self):
+        self.pw_page.click(self.text_select_theme)
 
 
 

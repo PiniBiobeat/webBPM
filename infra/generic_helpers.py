@@ -106,5 +106,44 @@ def sql_get_path_calendar(token_after_calendar):
     cursor.close()
     return record
 
+def sql_get_event_date(master_id):
+    time.sleep(5)
+    connection = psycopg2.connect(user="machineDBA",
+                                  password="A#214Fdse!35dDC214XAzRDA12^79",
+                                  host="10.116.96.32",
+                                  port="5432",
+                                  database="calendars_test")
+    cursor = connection.cursor()
+    print("PostgreSQL server information")
+    print(connection.get_dsn_parameters(), "\n")
+    cursor.execute(
+        '''
+    SELECT * FROM public.personal_dates_tbl
+    WHERE master_id = %s
+    ORDER BY date_id DESC LIMIT 100
+    ''', (master_id,))
+    record = cursor.fetchall()
+    cursor.close()
+    return record
+
+def sql_delete_personal_date(master_id):
+    time.sleep(5)
+    connection = psycopg2.connect(user="machineDBA",
+                                  password="A#214Fdse!35dDC214XAzRDA12^79",
+                                  host="10.116.96.32",
+                                  port="5432",
+                                  database="calendars_test")
+    cursor = connection.cursor()
+    print("PostgreSQL server information")
+    print(connection.get_dsn_parameters(), "\n")
+    cursor.execute(
+        '''
+    DELETE FROM public.personal_dates_tbl
+	WHERE master_id = %s
+    ''', (master_id,))
+    connection.commit()
+    cursor.close()
+
+
 
 #[lupa].[dbo].[newslleter].newsletter_ststus
