@@ -122,7 +122,7 @@ def test_check_errors_calendar():
 
             try:
                 # Send the message to Slack
-                response = requests.post("https://hooks.slack.com/services/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", data=payload)
+                response = requests.post("https://hooks.slack.com/services/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", data=payload)
 
                 # Check the response status code
                 if response.status_code == 200:
