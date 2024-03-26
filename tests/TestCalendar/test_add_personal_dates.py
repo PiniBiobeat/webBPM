@@ -13,8 +13,8 @@ import random
 import json
 path_images = ["./shutterstock_315831767.jpg"]
 r1 = random.randint(1, 1000)
-email1 = 'pinim@lupa.co.il'
-pass1 = "Pinimari!1"
+email1 = 'jenkinslupa@gmail.com'
+pass1 = "8777775"
 master_id = 3189204
 
 
@@ -55,7 +55,7 @@ class TestAddPersonamDate(TestBase):
         page.click_checkbox()
         page.click_checkbox_next()
 
-        calendar_date_a = sql_get_event_date(3189204)
+        calendar_date_a = sql_get_event_date(3606890)
         print(f"after script  - >{calendar_date_a}/n")
-        sql_delete_personal_date(3189204)
+        sql_delete_personal_date(3606890)
         assert len(calendar_date_a) > 0
