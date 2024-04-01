@@ -72,7 +72,7 @@ def sql_get_calendar(token_after_calendar):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars_test")
+                                  database="calendars")
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")
@@ -92,7 +92,7 @@ def sql_get_path_calendar(token_after_calendar):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars_test")
+                                  database="calendars")
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")
@@ -112,7 +112,7 @@ def sql_get_event_date(master_id):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars_test")
+                                  database="calendars")
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")
@@ -132,7 +132,7 @@ def sql_delete_personal_date(master_id):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars_test")
+                                  database="calendars")
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")

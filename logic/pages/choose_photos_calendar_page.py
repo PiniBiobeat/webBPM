@@ -9,6 +9,7 @@ class ChoosePhotosCalendar(PageBase):
     text_open_menu = '//span[contains(.,"להתחברות לחשבון")]'
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
     text_button_upload = "//input[@id='filePicker']"
+    text_link_add_photos_after = "//a[@variant='contained']"
 
 
 
@@ -18,3 +19,9 @@ class ChoosePhotosCalendar(PageBase):
 
     def add_photos_from_local(self, path):
         self.pw_page.set_input_files(self.text_button_upload, path)
+
+    def click_link_add_images_after(self):
+        self.pw_page.click(self.text_link_add_photos_after)
+
+    def do_reload(self):
+        self.pw_page.reload()

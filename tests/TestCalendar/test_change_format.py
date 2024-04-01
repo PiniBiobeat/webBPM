@@ -22,7 +22,7 @@ master_id = 3189204
 path_images = ["./shutterstock_315831767.jpg"]
 
 
-class TestCreateCalendar(TestBase):
+class TestChangeFormatCalendar(TestBase):
     testdata = [
         (1, 2, 'Diamonds'),
         (2, 1, 'Diamonds'),
@@ -31,7 +31,7 @@ class TestCreateCalendar(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     @pytest.mark.parametrize("eFrom, eTo", [(92, 240), (240, 92), (240, 260), (260, 240), (92, 260), (260, 92)])
-    def test_executeTest(self, eFrom, eTo):
+    def test_changing_all_formats(self, eFrom, eTo):
         page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()

@@ -44,6 +44,10 @@ class EditPersonalDates(PageBase):
         self.pw_page.click(self.text_save_image)
         self.pw_page.click(self.text_popap_save)
 
+    def click_save_image_in_storage(self):
+        self.pw_page.click(self.text_save_image)
+
+
     def click_add_photos(self):
         self.pw_page.click(self.text_add_image)
 

@@ -1,0 +1,181 @@
+import time
+from logic.pages.upload_storage_images_calendar_page import UploadStorageImagesCalendar
+import pytest
+from tests.TestTiles.test_base import TestBase
+from infra.config.config_provider import configuration
+from logic.pages.login_online_page import LogInOnline
+from logic.pages.personal_date_page import PersonalDates
+from logic.pages.choose_photos_device_page import ChoosePhotosDeviceCalendar
+from logic.pages.choose_photos_calendar_page import ChoosePhotosCalendar
+from logic.pages.calendar_home_page import CalendarPage
+from logic.pages.login_calendar_page import LoginCalendarPage
+from logic.pages.preview_calendar_page import PreviewCalendar
+from logic.pages.choose_format_calendar_page import ChooseFormatCalendarPage
+from logic.pages.settings_calendar_page import SettingsCalendarPage
+from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
+from infra.generic_helpers import sql_get_calendar
+from tests.TestCalendar.test_create_calendar import TestCreateCalendar
+import random
+import json
+
+r1 = random.randint(1, 1000)
+email1 = 'pinim@lupa.co.il'
+pass1 = "Pinimari!1"
+master_id = 3189204
+path_images = ["./image_london/shutterstock_300554312.jpg"
+     ,"./image_london/shutterstock_301066070.jpg"
+     ,"./image_london/shutterstock_302261093.jpg"
+    ,"./image_london/shutterstock_303371234.jpg","./image_london/shutterstock_307261706.jpg"
+    ,"./image_london/shutterstock_307343513.jpg","./image_london/shutterstock_310935740.jpg"
+    ,"./image_london/shutterstock_314718617.jpg","./image_london/shutterstock_315831839.jpg"
+    ,"./image_london/shutterstock_318750242.jpg","./image_london/shutterstock_318750290.jpg"
+    ,"./image_london/shutterstock_338033549.jpg","./image_london/shutterstock_369746171.jpg"
+    ,"./image_london/shutterstock_407506189.jpg"
+    , "./image_london/shutterstock_409552375.jpg", "./image_london/shutterstock_422969926.jpg"
+    , "./image_london/shutterstock_422970067.jpg", "./image_london/shutterstock_425742643.jpg"
+    , "./image_london/shutterstock_428941816.jpg", "./image_london/shutterstock_445141507.jpg"
+    , "./image_london/shutterstock_448948483.jpg", "./image_london/shutterstock_473627458.jpg"
+    , "./image_london/shutterstock_499513999.jpg", "./image_london/shutterstock_502044016.jpg"
+    , "./image_london/shutterstock_504251206.jpg"]
+
+
+
+
+class CalendarPagesManager(TestBase):
+
+    def openLogin(self):
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
+        page.open_menu()
+        page.open_screen_login_from_menu()
+
+        page: LoginCalendarPage = self.browser.create_page(LoginCalendarPage)
+        page.insert_user_and_pass(email1, pass1)
+        page.click_login_button()
+
+    def setFormat(self):
+        page: ChooseFormatCalendarPage = self.browser.create_page(ChooseFormatCalendarPage)
+        page.getSelectorElement("eFrom")
+
+    def setSettings(self, name):
+        page: SettingsCalendarPage = self.browser.create_page(SettingsCalendarPage)
+        page.insert_name_calendar(name)
+        page.click_button_next()
+
+    def setThemes(self):
+        page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
+        page.click_shoose_themes()
+        page.click_next_on_theme()
+
+    def setPersonalDates(self):
+        page: PersonalDates = self.browser.create_page(PersonalDates)
+        page.click_next()
+        #page.pw_page.wait_for_url("**/preview")
+
+    def setPhotos(self):
+        page: ChoosePhotosCalendar = self.browser.create_page(ChoosePhotosCalendar)
+        page.add_photos_from_local(path_images)
+
+        page: ChoosePhotosDeviceCalendar = self.browser.create_page(ChoosePhotosDeviceCalendar)
+        time.sleep(10)
+        page.click_next_after_choose_photos()
+        page.checkbox_approval_regulations()
+        page.click_next_after_checkbox()
+        time.sleep(40)
+        page.do_reload()
+
+    def createPreview(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_edit_page()
+
+    def link_add_images_after(self):
+        page: ChoosePhotosCalendar = self.browser.create_page(ChoosePhotosCalendar)
+        page.click_link_add_images_after()
+        page.do_reload()
+
+    def open_choose_laout_1(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_open_laout_1()
+
+    def open_choose_laout_2(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_open_laout_2()
+
+    def click_plus_to_add_photos(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_plus_to_add_images()
+
+    def choose_image_from_storage(self):
+        page: UploadStorageImagesCalendar = self.browser.create_page(UploadStorageImagesCalendar)
+        page.click_first_image()
+        page.click_save_image()
+        page.click_save_image_in_storage()
+
+    def choose_month_1(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month1()
+
+    def choose_month_2(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month2()
+
+    def choose_month_3(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month3()
+
+    def choose_month_4(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month4()
+
+    def choose_month_5(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month5()
+
+    def choose_month_6(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month6()
+
+    def choose_month_7(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month7()
+
+    def choose_month_8(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month8()
+
+    def choose_month_9(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month9()
+
+    def choose_month_10(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month10()
+
+    def choose_month_11(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month11()
+
+    def choose_month_12(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month12()
+
+
+
+
+
+
+
+
+
+
+    def changeThemes(self):
+        pass
+
+    def changeCalendarName(self, name):
+        pass
+
+
+
+    def executeSquence(self, pointers):
+        if len(pointers) != 0:
+            for p in pointers:
+                p()

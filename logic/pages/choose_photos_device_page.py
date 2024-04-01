@@ -26,3 +26,5 @@ class ChoosePhotosDeviceCalendar(PageBase):
 
     def click_next_after_checkbox(self):
         self.pw_page.click(self.text_click_next_after_checkbox)
+    def do_reload(self):
+        self.pw_page.reload()
