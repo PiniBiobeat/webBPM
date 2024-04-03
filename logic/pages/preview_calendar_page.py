@@ -1,5 +1,5 @@
 from infra.page_base import PageBase
-
+import time
 class PreviewCalendar(PageBase):
 
     button_click_next = "(//button[@type='button'])[3]"
@@ -15,6 +15,7 @@ class PreviewCalendar(PageBase):
     text_laout_1 = "(//li[@class='MuiListItem-root MuiListItem-gutters layout color_gray font_md mesures_padding_drawer_list position_flex_row muirtl-1tpp0wj'])[1]"
     text_laout_2 = "(//li[@class='MuiListItem-root MuiListItem-gutters layout color_gray font_md mesures_padding_drawer_list position_flex_row muirtl-1tpp0wj'])[2]"
     text_plus_to_add_images = "//button[@type='button' and img[@class='mesures_icon_md MuiBox-root css-0']]"
+    text_plus_to_add_image = "//img[@class='mesures_icon_md MuiBox-root css-0']"
     text_choose_month = "//div[@id='month_number_0']"
     text_choose_month1 = "//div[@id='month_number_1']"
     text_choose_month2 = "//div[@id='month_number_2']"
@@ -28,7 +29,9 @@ class PreviewCalendar(PageBase):
     text_choose_month10 = "//div[@id='month_number_10']"
     text_choose_month11 = "//div[@id='month_number_11']"
     text_choose_month12 = "//div[@id='month_number_12']"
-
+    text_next_to_checkout = '//button[contains(.,"לקנייה")]'
+    text_checkbox_ok = "//input[@class='PrivateSwitchBase-input muirtl-1m9pwf3']"
+    text_next_after_checkout = '//button[contains(.,"בהחלט")]'
     def __init__(self, page):
         super().__init__(page)
 
@@ -37,8 +40,14 @@ class PreviewCalendar(PageBase):
         self.pw_page.click(self.text_button_edit_page)
         self.pw_page.click(self.text_select_change)
 
+    def next_to_checkout(self):
+        self.pw_page.click(self.text_next_to_checkout)
     def click_select_theme(self):
         self.pw_page.click(self.text_select_theme)
+
+    def click_open_laout(self, number):
+        self.pw_page.click(self.text_open_select_laout)
+        self.pw_page.click(f"(//li[@class='MuiListItem-root MuiListItem-gutters layout color_gray font_md mesures_padding_drawer_list position_flex_row muirtl-1tpp0wj'])[{number}]")
 
     def click_open_laout_1(self):
         self.pw_page.click(self.text_open_select_laout)
@@ -49,7 +58,12 @@ class PreviewCalendar(PageBase):
         self.pw_page.click(self.text_laout_2)
 
     def click_plus_to_add_images(self):
+        time.sleep(5)
         self.pw_page.click(self.text_plus_to_add_images)
+
+
+    def do_reload(self):
+        self.pw_page.reload()
 
     def click_choose_month1(self):
         self.pw_page.click(self.text_choose_month1)
@@ -84,6 +98,16 @@ class PreviewCalendar(PageBase):
 
     def click_choose_month12(self):
             self.pw_page.click(self.text_choose_month12)
+
+    def get_locator_plus(self):
+        return self.pw_page.locator(self.text_plus_to_add_image).count()
+
+    def click_checkbox_accsept(self):
+        self.pw_page.click(self.text_checkbox_ok)
+
+    def click_ok_accsept(self):
+        self.pw_page.click(self.text_next_after_checkout)
+
 
         # list_element  = self.pw_page.wait_for_selector(self.text_button_edit_page, state="visible")
         # list_items = list_element.select_option(self.text_select_change)

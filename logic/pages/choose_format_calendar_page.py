@@ -15,16 +15,16 @@ class ChooseFormatCalendarPage(PageBase):
 
     def getSelectorElement(self, format):
         if format == 92:
-            time.sleep(5)
+            time.sleep(2)
             self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=92']", state="visible")
             self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=92']")
 
         elif format == 240:
-            time.sleep(5)
+            time.sleep(2)
             self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=240']",state="visible")
             self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=240']")
         else:
-            time.sleep(5)
+            time.sleep(2)
             self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']",state="visible")
             self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']")
 

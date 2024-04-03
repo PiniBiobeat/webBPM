@@ -9,7 +9,9 @@ class LoginCalendarPage(PageBase):
 
     click_open_menu =  "(//*[@type='button']//*[name()='svg'])[5]"
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
-    iframe_calendar = "//iframe[@src='https://connect-ui-v2.lupa.co/loginregister?channel=calendar']"
+    iframe_calendar = "//iframe[@src='https://connect-v2-ui.lupa.co.il/loginregister?channel=calendar']"
+    #test = 'https://connect-ui-v2.lupa.co/loginregister?channel=calendar'
+    #https://connect-v2-ui.lupa.co.il/loginregister?channel=calendar
     text_first_name = "//input[@id=':r4:']"
     text_last_name = "//input[@id=':r5:']"
     text_email = "//input[@id=':r6:']"

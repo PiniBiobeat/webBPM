@@ -72,7 +72,7 @@ def sql_get_calendar(token_after_calendar):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars")
+                                  database="calendars_test")
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")

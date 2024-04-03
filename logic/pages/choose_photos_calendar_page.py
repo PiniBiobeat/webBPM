@@ -1,5 +1,5 @@
 from infra.page_base import PageBase
-
+import time
 class ChoosePhotosCalendar(PageBase):
 
     button_click_next = "(//button[@type='button'])[3]"
@@ -10,6 +10,9 @@ class ChoosePhotosCalendar(PageBase):
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
     text_button_upload = "//input[@id='filePicker']"
     text_link_add_photos_after = "//a[@variant='contained']"
+    text_next_button = "//button[contains(.,'אישור')]"
+    text_checkbox_approval_regulations = "//input[@type='checkbox']"
+    text_click_next_after_checkbox = "//button[contains(.,'להמשך')]"
 
 
 
@@ -19,6 +22,19 @@ class ChoosePhotosCalendar(PageBase):
 
     def add_photos_from_local(self, path):
         self.pw_page.set_input_files(self.text_button_upload, path)
+        #file_chooser.is_multiple()
+
+    def click_next_after_choose_photos(self):
+        self.pw_page.click(self.text_next_button)
+
+    def checkbox_approval_regulations(self):
+        self.pw_page.click(self.text_checkbox_approval_regulations)
+
+    def click_next_after_checkbox(self):
+        self.pw_page.click(self.text_click_next_after_checkbox)
+
+
+
 
     def click_link_add_images_after(self):
         self.pw_page.click(self.text_link_add_photos_after)

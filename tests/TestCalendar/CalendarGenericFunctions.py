@@ -22,21 +22,19 @@ r1 = random.randint(1, 1000)
 email1 = 'pinim@lupa.co.il'
 pass1 = "Pinimari!1"
 master_id = 3189204
-path_images = ["./image_london/shutterstock_300554312.jpg"
-     ,"./image_london/shutterstock_301066070.jpg"
-     ,"./image_london/shutterstock_302261093.jpg"
+path_images = ["./image_london/shutterstock_302261093.jpg"
     ,"./image_london/shutterstock_303371234.jpg","./image_london/shutterstock_307261706.jpg"
     ,"./image_london/shutterstock_307343513.jpg","./image_london/shutterstock_310935740.jpg"
     ,"./image_london/shutterstock_314718617.jpg","./image_london/shutterstock_315831839.jpg"
     ,"./image_london/shutterstock_318750242.jpg","./image_london/shutterstock_318750290.jpg"
     ,"./image_london/shutterstock_338033549.jpg","./image_london/shutterstock_369746171.jpg"
-    ,"./image_london/shutterstock_407506189.jpg"
-    , "./image_london/shutterstock_409552375.jpg", "./image_london/shutterstock_422969926.jpg"
-    , "./image_london/shutterstock_422970067.jpg", "./image_london/shutterstock_425742643.jpg"
-    , "./image_london/shutterstock_428941816.jpg", "./image_london/shutterstock_445141507.jpg"
-    , "./image_london/shutterstock_448948483.jpg", "./image_london/shutterstock_473627458.jpg"
-    , "./image_london/shutterstock_499513999.jpg", "./image_london/shutterstock_502044016.jpg"
-    , "./image_london/shutterstock_504251206.jpg"]
+    ,"./image_london/shutterstock_407506189.jpg"]
+    # , "./image_london/shutterstock_409552375.jpg", "./image_london/shutterstock_422969926.jpg"
+    # , "./image_london/shutterstock_422970067.jpg", "./image_london/shutterstock_425742643.jpg"
+    # , "./image_london/shutterstock_428941816.jpg", "./image_london/shutterstock_445141507.jpg"
+    # , "./image_london/shutterstock_448948483.jpg", "./image_london/shutterstock_473627458.jpg"
+    # , "./image_london/shutterstock_499513999.jpg", "./image_london/shutterstock_502044016.jpg"
+    # , "./image_london/shutterstock_504251206.jpg"]
 
 
 
@@ -74,15 +72,9 @@ class CalendarPagesManager(TestBase):
     def setPhotos(self):
         page: ChoosePhotosCalendar = self.browser.create_page(ChoosePhotosCalendar)
         page.add_photos_from_local(path_images)
-
-        page: ChoosePhotosDeviceCalendar = self.browser.create_page(ChoosePhotosDeviceCalendar)
-        time.sleep(10)
         page.click_next_after_choose_photos()
         page.checkbox_approval_regulations()
         page.click_next_after_checkbox()
-        time.sleep(40)
-        page.do_reload()
-
     def createPreview(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_edit_page()
@@ -91,6 +83,15 @@ class CalendarPagesManager(TestBase):
         page: ChoosePhotosCalendar = self.browser.create_page(ChoosePhotosCalendar)
         page.click_link_add_images_after()
         page.do_reload()
+
+    def choose_layout(self, month):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_open_laout(month)
+
+    def get_locaors_plus(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        return page.get_locator_plus()
+
 
     def open_choose_laout_1(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
@@ -110,9 +111,24 @@ class CalendarPagesManager(TestBase):
         page.click_save_image()
         page.click_save_image_in_storage()
 
+    def click_to_checkout(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.next_to_checkout()
+
+    def next_to_checkout(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_checkbox_accsept()
+
+    def click_accsept(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_ok_accsept()
     def choose_month_1(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_choose_month1()
+
+    def wait_for_payments(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.pw_page.wait_for_url("https://paymentsv4-ui.lupa.co/")
 
     def choose_month_2(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
@@ -157,6 +173,32 @@ class CalendarPagesManager(TestBase):
     def choose_month_12(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_choose_month12()
+
+    def choose_month(self, month):
+        if month == 1:
+            self.choose_month_1()
+        elif month == 2:
+            self.choose_month_2()
+        elif month == 3:
+            self.choose_month_3()
+        elif month == 4:
+            self.choose_month_4()
+        elif month == 5:
+            self.choose_month_5()
+        elif month == 6:
+            self.choose_month_6()
+        elif month == 7:
+            self.choose_month_7()
+        elif month == 8:
+            self.choose_month_8()
+        elif month == 9:
+            self.choose_month_9()
+        elif month == 10:
+            self.choose_month_10()
+        elif month == 11:
+            self.choose_month_11()
+        elif month == 12:
+            self.choose_month_12()
 
 
 
