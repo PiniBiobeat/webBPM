@@ -26,8 +26,5 @@ class TestSendingCalendar(CalendarPagesManager):
                 self.choose_image_from_storage()
             self.choose_month(month)
         self.click_to_checkout()
-        self.next_to_checkout()
-        self.click_accsept()
         time.sleep(20)
-        #self.wait_for_payments()
         print("Success")

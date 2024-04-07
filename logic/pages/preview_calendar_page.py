@@ -68,6 +68,9 @@ class PreviewCalendar(PageBase):
     def click_choose_month1(self):
         self.pw_page.click(self.text_choose_month1)
 
+    def click_choose_month(self):
+        self.pw_page.click(self.text_choose_month)
+
     def click_choose_month2(self):
         self.pw_page.click(self.text_choose_month2)
 
@@ -107,6 +110,9 @@ class PreviewCalendar(PageBase):
 
     def click_ok_accsept(self):
         self.pw_page.click(self.text_next_after_checkout)
+
+    def click_choose_month_(self, month):
+        self.pw_page.click(f"//div[@id='month_number_{month}']")
 
 
         # list_element  = self.pw_page.wait_for_selector(self.text_button_edit_page, state="visible")

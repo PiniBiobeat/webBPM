@@ -23,12 +23,12 @@ email1 = 'pinim@lupa.co.il'
 pass1 = "Pinimari!1"
 master_id = 3189204
 path_images = ["./image_london/shutterstock_302261093.jpg"
-    ,"./image_london/shutterstock_303371234.jpg","./image_london/shutterstock_307261706.jpg"
-    ,"./image_london/shutterstock_307343513.jpg","./image_london/shutterstock_310935740.jpg"
-    ,"./image_london/shutterstock_314718617.jpg","./image_london/shutterstock_315831839.jpg"
-    ,"./image_london/shutterstock_318750242.jpg","./image_london/shutterstock_318750290.jpg"
-    ,"./image_london/shutterstock_338033549.jpg","./image_london/shutterstock_369746171.jpg"
-    ,"./image_london/shutterstock_407506189.jpg"]
+     ,"./image_london/shutterstock_303371234.jpg","./image_london/shutterstock_307261706.jpg"]
+    # ,"./image_london/shutterstock_307343513.jpg","./image_london/shutterstock_310935740.jpg"
+    # ,"./image_london/shutterstock_314718617.jpg","./image_london/shutterstock_315831839.jpg"
+    # ,"./image_london/shutterstock_318750242.jpg","./image_london/shutterstock_318750290.jpg"
+    # ,"./image_london/shutterstock_338033549.jpg","./image_london/shutterstock_369746171.jpg"
+    # ,"./image_london/shutterstock_407506189.jpg"]
     # , "./image_london/shutterstock_409552375.jpg", "./image_london/shutterstock_422969926.jpg"
     # , "./image_london/shutterstock_422970067.jpg", "./image_london/shutterstock_425742643.jpg"
     # , "./image_london/shutterstock_428941816.jpg", "./image_london/shutterstock_445141507.jpg"
@@ -92,15 +92,6 @@ class CalendarPagesManager(TestBase):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         return page.get_locator_plus()
 
-
-    def open_choose_laout_1(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_open_laout_1()
-
-    def open_choose_laout_2(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_open_laout_2()
-
     def click_plus_to_add_photos(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_plus_to_add_images()
@@ -114,14 +105,9 @@ class CalendarPagesManager(TestBase):
     def click_to_checkout(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.next_to_checkout()
-
-    def next_to_checkout(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_checkbox_accsept()
-
-    def click_accsept(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_ok_accsept()
+
     def choose_month_1(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_choose_month1()
@@ -173,6 +159,10 @@ class CalendarPagesManager(TestBase):
     def choose_month_12(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_choose_month12()
+
+    def choose_month_(self, month):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_choose_month_(month)
 
     def choose_month(self, month):
         if month == 1:
