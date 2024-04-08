@@ -14,15 +14,23 @@ class ChoosePhotosCalendar(PageBase):
     text_checkbox_approval_regulations = "//input[@type='checkbox']"
     text_click_next_after_checkbox = "//button[contains(.,'להמשך')]"
 
-
-
     def __init__(self, page):
         super().__init__(page)
 
 
     def add_photos_from_local(self, path):
         self.pw_page.set_input_files(self.text_button_upload, path)
-        #file_chooser.is_multiple()
+
+
+        # link = self.pw_page.wait_for_selector('#link-textbox', state='visible').inner_text()
+        # print(f'file link: {link}')
+
+        # with page.expect_response(
+        #         lambda response: response.url == \"https://example.com\" and response.status == 200) as response_info:
+        # page.click(\"input\")
+        # response = response_info.value
+        # return response.ok
+
 
     def click_next_after_choose_photos(self):
         self.pw_page.click(self.text_next_button)
@@ -32,8 +40,6 @@ class ChoosePhotosCalendar(PageBase):
 
     def click_next_after_checkbox(self):
         self.pw_page.click(self.text_click_next_after_checkbox)
-
-
 
 
     def click_link_add_images_after(self):

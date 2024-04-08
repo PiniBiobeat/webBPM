@@ -52,7 +52,7 @@ class CalendarPagesManager(TestBase):
 
     def setFormat(self):
         page: ChooseFormatCalendarPage = self.browser.create_page(ChooseFormatCalendarPage)
-        page.getSelectorElement("eFrom")
+        page.getSelectorElement(260)
 
     def setSettings(self, name):
         page: SettingsCalendarPage = self.browser.create_page(SettingsCalendarPage)

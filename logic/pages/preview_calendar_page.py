@@ -1,3 +1,5 @@
+
+
 from infra.page_base import PageBase
 import time
 class PreviewCalendar(PageBase):
@@ -58,8 +60,11 @@ class PreviewCalendar(PageBase):
         self.pw_page.click(self.text_laout_2)
 
     def click_plus_to_add_images(self):
-        time.sleep(5)
-        self.pw_page.click(self.text_plus_to_add_images)
+
+        if self.pw_page.wait_for_selector(self.text_plus_to_add_images, state="visible", timeout=0):
+            self.pw_page.click(self.text_plus_to_add_images)
+        else:
+            self.pw_page.wait_for_url("/preview", timeout=60000)
 
 
     def do_reload(self):
