@@ -16,4 +16,6 @@ class CalendarPage(PageBase):
 
     def open_screen_login_from_menu(self):
         self.pw_page.click(self.text_open_menu)
+       # self.pw_page.on("response", lambda response: response if key in response.body())
+
 

@@ -9,9 +9,9 @@ class EditPersonalDates(PageBase):
     text_open_menu = '//span[contains(.,"להתחברות לחשבון")]'
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
     text_select_event_type = '//li[@name="יום הולדת"]'
-    text_event_type = '(//div[@class="MuiFormControl-root  mesures_full_width position_margin_drop_down position_input_label muirtl-13sljp9"])[2]'
+    text_event_type = '(//div[@class="MuiFormControl-root mesures_full_width position_margin_drop_down position_input_label muirtl-13sljp9"])[2]'
     text_birthday_selection =  '//li[@name="אמא"]'
-    text_attribution_selection = '(//div[@class="MuiFormControl-root  mesures_full_width position_margin_drop_down position_input_label muirtl-13sljp9"])[1]'
+    text_attribution_selection = '(//div[@class="MuiFormControl-root mesures_full_width position_margin_drop_down position_input_label muirtl-13sljp9"])[1]'
     text_event_name = '//input[@id="filled-basic"]'
     text_save_button = "//button[@type='button' and contains(.,'שמירה')]"
     text_add_image = '(//div[@class="position_flex_row_start_center MuiBox-root muirtl-0"])[1]'
