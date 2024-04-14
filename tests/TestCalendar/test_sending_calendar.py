@@ -15,7 +15,7 @@ class TestSendingCalendar(CalendarPagesManager):
         self.setPersonalDates()
         self.setPhotos()
         for month in range(1, 14):
-            if month < 1:
+            if month < 6:
                 self.choose_layout(month)
                 a = self.get_locaors_plus()
                 for times in range(a):
@@ -25,6 +25,8 @@ class TestSendingCalendar(CalendarPagesManager):
                 self.click_plus_to_add_photos()
                 self.choose_image_from_storage()
             self.choose_month(month)
+        self.click_plus_to_add_photos()
+        self.choose_image_from_storage()
         self.click_to_checkout()
         time.sleep(20)
         print("Success")

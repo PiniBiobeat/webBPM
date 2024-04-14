@@ -108,96 +108,14 @@ class CalendarPagesManager(TestBase):
         page.click_checkbox_accsept()
         page.click_ok_accsept()
 
-    def choose_month_1(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month1()
 
     def wait_for_payments(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.pw_page.wait_for_url("https://paymentsv4-ui.lupa.co/")
 
-    def choose_month_2(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month2()
-
-    def choose_month_3(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month3()
-
-    def choose_month_4(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month4()
-
-    def choose_month_5(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month5()
-
-    def choose_month_6(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month6()
-
-    def choose_month_7(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month7()
-
-    def choose_month_8(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month8()
-
-    def choose_month_9(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month9()
-
-    def choose_month_10(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month10()
-
-    def choose_month_11(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month11()
-
-    def choose_month_12(self):
-        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
-        page.click_choose_month12()
-
-    def choose_month_(self, month):
+    def choose_month(self, month):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_choose_month_(month)
-
-    def choose_month(self, month):
-        if month == 1:
-            self.choose_month_1()
-        elif month == 2:
-            self.choose_month_2()
-        elif month == 3:
-            self.choose_month_3()
-        elif month == 4:
-            self.choose_month_4()
-        elif month == 5:
-            self.choose_month_5()
-        elif month == 6:
-            self.choose_month_6()
-        elif month == 7:
-            self.choose_month_7()
-        elif month == 8:
-            self.choose_month_8()
-        elif month == 9:
-            self.choose_month_9()
-        elif month == 10:
-            self.choose_month_10()
-        elif month == 11:
-            self.choose_month_11()
-        elif month == 12:
-            self.choose_month_12()
-
-
-
-
-
-
-
-
-
 
     def changeThemes(self):
         pass
