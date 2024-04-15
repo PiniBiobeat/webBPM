@@ -22,8 +22,8 @@ def test_check_errors_calendar():
         print(connection.get_dsn_parameters(), "\n")
         cursor.execute('''
                 SELECT source,api_method,user_id,created,api_version,error_code,transaction,error_message  FROM public.reporting_log_tbl 
-                WHERE source = 'calendar' AND error_code <> 0
-                AND  created > NOW() - INTERVAL '5 minutes' LIMIT 1;
+                WHERE ((source = 'calendar' AND error_code <> 0) or (api_method ='writelog' and error_code=0))
+                AND  created > NOW() - INTERVAL '5 minutes' 
         ''')
         record = cursor.fetchall()
 
