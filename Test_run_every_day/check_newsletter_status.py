@@ -17,7 +17,7 @@ def test_check_newsletter():
 		print(cursor)
 		cursor.execute(
 			'''  
-				 SELECT *
+				 	 SELECT *
 					FROM (
 						SELECT *
 					FROM (
@@ -28,8 +28,8 @@ def test_check_newsletter():
 					WHERE row_num = 1
 					) AS n
 					JOIN [lupa].[dbo].[user_master] AS m ON n.email = m.user_email
-					WHERE ((n.newsletter_ststus = 1 AND m.newsletter = 'False')
-					   OR (n.newsletter_ststus = 0 AND m.newsletter = 'True'))
+					WHERE ((n.newsletter_ststus = 1 AND n.email NOT LIKE '%cloudtestlabaccounts%' AND m.newsletter = 'False')
+					   OR (n.newsletter_ststus = 0 AND n.email NOT LIKE '%cloudtestlabaccounts%' AND m.newsletter = 'True')) 
 	   ''')
 		rows = cursor.fetchall()
 		for row in rows:
@@ -118,7 +118,7 @@ def test_check_newsletter():
 
 				except requests.RequestException as error:
 					print("Error:", error)
-
+test_check_newsletter()
 
 
 
