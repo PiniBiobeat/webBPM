@@ -16,7 +16,7 @@ from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
 from infra.generic_helpers import sql_get_calendar
 from tests.TestCalendar.test_create_calendar import TestCreateCalendar
 import random
-import json
+import os
 
 r1 = random.randint(1, 1000)
 email1 = 'pinim@lupa.co.il'
@@ -42,7 +42,7 @@ path_images = ["./image_london/shutterstock_302261093.jpg"
 class CalendarPagesManager(TestBase):
 
     def openLogin(self):
-        page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url_'+os.getenv('env')], CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 

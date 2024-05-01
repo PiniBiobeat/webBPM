@@ -10,6 +10,7 @@ from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
 from logic.pages.edit_personal_date_page import EditPersonalDates
 from infra.generic_helpers import sql_get_calendar,sql_get_path_calendar,sql_get_event_date ,sql_delete_personal_date
 import random
+import os
 import json
 path_images = ["./shutterstock_315831767.jpg"]
 r1 = random.randint(1, 1000)
@@ -24,7 +25,7 @@ class TestAddPersonamDate(TestBase):
     @pytest.mark.usefixtures("before_after_test")
     def test_add_personal_date_with_image(self):
 
-        page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url_'+os.getenv('env')], CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 

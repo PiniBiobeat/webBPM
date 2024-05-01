@@ -14,6 +14,7 @@ from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
 from infra.generic_helpers import sql_get_calendar
 import random
 import json
+import os
 
 r1 = random.randint(1, 1000)
 email1 = 'pinim@lupa.co.il'
@@ -32,7 +33,7 @@ class TestCreateCalendar(TestBase):
     @pytest.mark.usefixtures("before_after_test")
     @pytest.mark.parametrize("eFrom, eTo", [(92, 240), (240, 92), (240, 260), (260, 240), (92, 260), (260, 92)])
     def test_executeTest(self, eFrom, eTo):
-        page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
+        page: CalendarPage = self.browser.navigate('calendar_url_'+os.getenv('env'), CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 
