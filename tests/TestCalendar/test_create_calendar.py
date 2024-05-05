@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from tests.TestTiles.test_base import TestBase
 from infra.config.config_provider import configuration
@@ -23,7 +25,7 @@ class TestCreateCalendar(TestBase):
     @pytest.mark.usefixtures("before_after_test")
     def test_create_calendar_and_check_in_DB_A5_and_Diamonds(self):
 
-        page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url_'+os.getenv('env')], CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 
@@ -49,7 +51,7 @@ class TestCreateCalendar(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_create_calendar_and_check_in_DB_A4_and_Diamonds(self):
-        page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url_'+os.getenv('env')], CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 
@@ -75,7 +77,7 @@ class TestCreateCalendar(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_create_calendar_and_check_in_DB_A3_and_Diamonds(self):
-        page: CalendarPage = self.browser.navigate(configuration['calendar_url'], CalendarPage)
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url_'+os.getenv('env')], CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 
