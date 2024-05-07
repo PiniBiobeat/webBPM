@@ -5,7 +5,7 @@ import requests
 import jsonpath
 
 
-def test_check_errors_v3():
+def check_errors_v3():
 
 		connection = psycopg2.connect(user="machineDBA",
                                       password="A#214Fdse!35dDC214XAzRDA12^79",
@@ -105,5 +105,6 @@ def test_check_errors_v3():
 					print("Error:", error)
 
 
-test_check_errors_v3()
+
+check_errors_v3()
 
