@@ -5,7 +5,7 @@ from infra.page_base import PageBase
 class ThemesCalendarPage(PageBase):
 
     init_indication = "(//button[@type='button'])[1]"
-    choose_theme_diamonds = "//div[@class='font_md_bold position_flex_center MuiBox-root css-1uvj8k7' and contains(.,'יהלומים')]"
+    choose_theme_diamonds = "//div[@class='font_md_bold position_flex_center MuiBox-root css-0' and contains(.,'יהלומים')]"
     text_next_theme = "(//div[@class='MuiStack-root css-1t62lt9' and contains(.,'אישור')])[10]"
     text_add_personal_date = '(//button[@type="button"])[2]'
     def __init__(self, page):

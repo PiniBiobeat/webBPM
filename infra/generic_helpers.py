@@ -1,3 +1,4 @@
+import os
 import time
 
 import psycopg2
@@ -8,6 +9,7 @@ import requests
 import random
 import string
 import logging as logger
+from infra.config.config_provider import configuration
 
 def generate_random_email_and_password(domain=None,email_prefix=None):
 
@@ -72,7 +74,7 @@ def sql_get_calendar(token_after_calendar):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars_test")
+                                  database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")
@@ -92,7 +94,7 @@ def sql_get_path_calendar(token_after_calendar):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars")
+                                  database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")
@@ -112,7 +114,7 @@ def sql_get_event_date(master_id):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars_test")
+                                  database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")
@@ -132,7 +134,7 @@ def sql_delete_personal_date(master_id):
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="10.116.96.32",
                                   port="5432",
-                                  database="calendars")
+                                  database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
     print("PostgreSQL server information")
     print(connection.get_dsn_parameters(), "\n")
