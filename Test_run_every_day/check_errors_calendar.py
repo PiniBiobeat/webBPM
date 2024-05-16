@@ -107,7 +107,7 @@ def test_check_errors_calendar():
                             },
                             {
                                 "type": "mrkdwn",
-                                "text": f'Error `{record[0][7]}`'
+                                "text": f'Error ```{record[0][7]}```'
                             }
                         ]
                     }
