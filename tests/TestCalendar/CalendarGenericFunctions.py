@@ -52,7 +52,7 @@ class CalendarPagesManager(TestBase):
 
     def setFormat(self):
         page: ChooseFormatCalendarPage = self.browser.create_page(ChooseFormatCalendarPage)
-        page.getSelectorElement(240)
+        page.getSelectorElement(92)
 
     def setSettings(self, name):
         page: SettingsCalendarPage = self.browser.create_page(SettingsCalendarPage)
@@ -99,7 +99,7 @@ class CalendarPagesManager(TestBase):
     def choose_image_from_storage(self):
         page: UploadStorageImagesCalendar = self.browser.create_page(UploadStorageImagesCalendar)
         page.click_first_image()
-        page.click_save_image()
+        #page.click_save_image()
         page.click_save_image_in_storage()
 
     def click_to_checkout(self):
