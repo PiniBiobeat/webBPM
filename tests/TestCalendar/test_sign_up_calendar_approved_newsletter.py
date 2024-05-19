@@ -1,3 +1,4 @@
+import os
 import time
 from logic.pages.calendar_home_page import CalendarPage
 from tests.TestTiles.test_base import TestBase
@@ -34,7 +35,7 @@ class TestSignUpCalendarApproved(TestBase):
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_User_approved_newsletter(self):
 
-        page: CalendarPage = self.browser.navigate(configuration['calendar_url'],CalendarPage)
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url_'+os.getenv('env')],CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 
