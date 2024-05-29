@@ -20,6 +20,8 @@ class PreviewCalendar(PageBase):
     text_next_to_checkout = '//button[contains(.,"לקנייה")]'
     text_checkbox_ok = "//input[@class='PrivateSwitchBase-input muirtl-1m9pwf3']"
     text_next_after_checkout = '//button[contains(.,"בהחלט")]'
+    text_change_themes = '//span[@id="SpeedDial-action-3-label" and contains(.,"שינוי עיצוב")]'
+    text_open_menu_select_change_themes = '//button[@aria-label="SpeedDial"]'
     def __init__(self, page):
         super().__init__(page)
 
@@ -27,6 +29,9 @@ class PreviewCalendar(PageBase):
     def click_edit_page(self):
         self.pw_page.click(self.text_button_edit_page)
         self.pw_page.click(self.text_select_change)
+    def click_change_themes(self):
+        self.pw_page.click(self.text_open_menu_select_change_themes)
+        self.pw_page.click(self.text_change_themes)
 
     def next_to_checkout(self):
         self.pw_page.click(self.text_next_to_checkout)

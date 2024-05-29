@@ -64,6 +64,21 @@ class CalendarPagesManager(TestBase):
         page.click_shoose_themes()
         page.click_next_on_theme()
 
+    def setThemeWhite(self):
+        page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
+        page.click_shoose_themes_white()
+        page.click_next_on_theme()
+    def get_token(self):
+        page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
+        token_after_calendar = page.take_token_calendar_after_login()
+        calendar_data = sql_get_calendar(token_after_calendar)
+        return calendar_data
+    def get_calendar_theme(self):
+        page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
+        token_after_calendar = page.take_token_calendar_API()
+        return token_after_calendar
+
+
     def setPersonalDates(self):
         page: PersonalDates = self.browser.create_page(PersonalDates)
         page.click_next()
@@ -75,6 +90,10 @@ class CalendarPagesManager(TestBase):
         page.click_next_after_choose_photos()
         page.checkbox_approval_regulations()
         page.click_next_after_checkbox()
+
+    def changeChooseThemes(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_change_themes()
     def createPreview(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_edit_page()
