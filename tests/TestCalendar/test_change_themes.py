@@ -27,7 +27,7 @@ class TestChangeThemes(CalendarPagesManager):
         self.setPhotos()
         self.changeChooseThemes()
         self.setThemeWhite()
-        a = self.get_calendar_theme()
+        #a = self.get_calendar_theme()
         calendar_data = self.get_token()
         print("Success")
         with open(calendar_data[0][2] + '\\Dat\\projectObj.Dat' + '', "rb") as file:
