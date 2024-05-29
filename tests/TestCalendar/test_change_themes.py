@@ -32,7 +32,7 @@ class TestChangeThemes(CalendarPagesManager):
         print("Success")
         with open(calendar_data[0][2] + '\\Dat\\projectObj.Dat' + '', "rb") as file:
             data = json.load(file)
-        if calendar_data[0][1] != 'White':
+        if calendar_data[0][1] != 'White' and data['ThemeName'] == 'White':
             # error
             assert "Error"
         else:
