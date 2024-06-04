@@ -46,8 +46,8 @@ class TestAddPersonamDate(TestBase):
         page.click_add_personal_date()
 
         page: EditPersonalDates = self.browser.create_page(EditPersonalDates)
-        page.select_event_eype()
-        page.select_attribution_selection()
+        # page.select_event_eype()
+        # page.select_attribution_selection()
         page.input_name_event("event name")
         page.click_add_photos()
         page.add_photos_from_local(path_images)

@@ -24,7 +24,7 @@ class EditPersonalDates(PageBase):
 
     def __init__(self, page):
         super().__init__(page)
-        self.pw_page.wait_for_selector(self.text_event_type, state="visible")
+        self.pw_page.wait_for_selector(self.text_event_name, state="visible")
 
     def select_event_eype(self):
         self.pw_page.click(self.text_event_type)
