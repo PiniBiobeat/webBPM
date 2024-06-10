@@ -7,7 +7,7 @@ class ThemesCalendarPage(PageBase):
     init_indication = "(//button[@type='button'])[1]"
     choose_theme_diamonds = "//div[@class='font_md_bold position_flex_center MuiBox-root css-0' and contains(.,'יהלומים')]"
     choose_theme_white = "//div[@class='font_md_bold position_flex_center MuiBox-root css-0' and contains(.,'לבן')]"
-    text_next_theme = "(//div[@class='MuiStack-root css-n7wttp' and contains(.,'אישור')])[10]"
+    text_next_theme = "(//div[@class='MuiStack-root w-full text-center css-n7wttp' and contains(.,'אישור')])[10]"
     text_add_personal_date = '(//button[@type="button"])[2]'
     def __init__(self, page):
         super().__init__(page)
