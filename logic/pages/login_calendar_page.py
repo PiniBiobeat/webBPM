@@ -57,7 +57,7 @@ class LoginCalendarPage(PageBase):
     def take_token_after(self):
         time.sleep(8)
         token = self.pw_page.context.storage_state(path="state.json")
-        user_token = token['origins'][0]['localStorage'][1]['value']
+        user_token =  token['origins'][0]['localStorage'][6]['value']
         return user_token
 
     def insert_user_details(self, firt_name, last_name, emailEx,num_phone, password):
