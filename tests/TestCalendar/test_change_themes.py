@@ -30,7 +30,7 @@ class TestChangeThemes(CalendarPagesManager):
         #a = self.get_calendar_theme()
         calendar_data = self.get_token()
 
-        file_path = os.path.join(calendar_data[0][2], 'Dat', 'projectObj.Dat')
+        file_path = os.path.join(calendar_data[0][2], 'Dat', 'projectObj.dat')
         if os.path.exists(file_path):
             with open(file_path, "rb") as file:
                 data = json.load(file)
