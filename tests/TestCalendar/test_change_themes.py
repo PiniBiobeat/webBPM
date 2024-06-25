@@ -29,6 +29,7 @@ class TestChangeThemes(CalendarPagesManager):
         self.setThemeWhite()
         #a = self.get_calendar_theme()
         calendar_data = self.get_token()
+        print(calendar_data)
 
         file_path = os.path.join(calendar_data[0][2], 'Dat', 'projectObj.dat')
         if os.path.exists(file_path):
