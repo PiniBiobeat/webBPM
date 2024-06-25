@@ -21,7 +21,7 @@ class TestChangeThemes(CalendarPagesManager):
     def test_change_themes(self):
         self.openLogin()
         self.setFormat()
-        self.setSettings("for testing")
+        self.setSettings("for testing ")
         self.setThemes()
         self.setPersonalDates()
         self.setPhotos()
