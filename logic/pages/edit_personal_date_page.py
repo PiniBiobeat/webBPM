@@ -14,9 +14,9 @@ class EditPersonalDates(PageBase):
     text_attribution_selection = '(//div[@class="MuiFormControl-root mesures_full_width position_margin_drop_down position_input_label muirtl-13sljp9"])[1]'
     text_event_name = '//input[@id="filled-basic"]'
     text_save_button = "//button[@type='button' and contains(.,'שמירה')]"
-    text_add_image = '(//div[@class="position_flex_row_start_center MuiBox-root muirtl-0"])[1]'
+    text_add_image = '//div[@class="color_background_light_gray position_flex_center cursor_pointer MuiBox-root muirtl-4nemnn"]'
     text_add_image_from_local = "//input[@id='filePicker']"
-    text_save_image = '//button[contains(.,"Done")]'
+    text_save_image = '//button[contains(.,"שמירה")]'
     text_popap_save = '//button[contains(.,"ככה התמונה תראה")]'
     text_checkbox = "//input[@class='PrivateSwitchBase-input muirtl-1m9pwf3']"
     text_checkbox_next = "//button[@type='button' and contains(.,'להמשך')]"

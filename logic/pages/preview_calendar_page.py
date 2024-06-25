@@ -14,8 +14,8 @@ class PreviewCalendar(PageBase):
     text_select_change = "//*[@id='SpeedDial-action-3']"
     text_select_theme = "//*[@id='SpeedDial-action-4']"
     text_open_select_laout = '//*[@id="root"]/div/div[1]/div[1]/div[1]/div[1]/button'
-    text_plus_to_add_images = "//button[@type='button' and img[@class='mesures_icon_sm MuiBox-root css-0']]"
-    text_plus_to_add_image = "//img[@class='mesures_icon_sm MuiBox-root css-0']"
+    text_plus_to_add_images = "//button[@type='button' and img[@class='w-8 MuiBox-root css-0']]"
+    text_plus_to_add_image = "//img[@class='w-8 MuiBox-root css-0']"
     text_choose_month = "//div[@id='month_number_0']"
     text_next_to_checkout = '//button[contains(.,"לקנייה")]'
     text_checkbox_ok = "//input[@class='PrivateSwitchBase-input muirtl-1m9pwf3']"

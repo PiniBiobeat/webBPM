@@ -128,6 +128,8 @@ class CalendarPagesManager(TestBase):
         page.click_ok_accsept()
 
 
+
+
     def wait_for_payments(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.pw_page.wait_for_url("https://paymentsv4-ui.lupa.co/")

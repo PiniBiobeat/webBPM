@@ -3,9 +3,9 @@ import time
 class ChooseFormatCalendarPage(PageBase):
 
     init_indication = "(//button[@type='button'])[1]"
-    A5 = "(//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 position_flex_row color_box_shadow_paper mesures_format_container css-vuzb25'])[1]"
-    A4 = "(//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 position_flex_row color_box_shadow_paper mesures_format_container css-vuzb25'])[2]"
-    A3 = "(//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 position_flex_row color_box_shadow_paper mesures_format_container css-vuzb25'])[3]"
+    A5 = "(//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 position_flex_row color_box_shadow_paper mesures_format_container cursor_pointer css-vuzb25'])[1]"
+    A4 = "(//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 position_flex_row color_box_shadow_paper mesures_format_container cursor_pointer css-vuzb25'])[2]"
+    A3 = "(//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 position_flex_row color_box_shadow_paper mesures_format_container cursor_pointer css-vuzb25'])[3]"
     text_open_menu = '//span[contains(.,"להתחברות לחשבון")]'
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
 
