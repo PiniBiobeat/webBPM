@@ -29,12 +29,16 @@ class TestChangeThemes(CalendarPagesManager):
         self.setThemeWhite()
         #a = self.get_calendar_theme()
         calendar_data = self.get_token()
-        print("Success")
-        with open(calendar_data[0][2] + '\\Dat\\projectObj.Dat' + '', "rb") as file:
-            data = json.load(file)
-        if calendar_data[0][1] != 'White' and data['ThemeName'] == 'White':
-            # error
-            assert "Error"
+
+        file_path = os.path.join(calendar_data[0][2], 'Dat', 'projectObj.Dat')
+        if os.path.exists(file_path):
+            with open(file_path, "rb") as file:
+                data = json.load(file)
+
+            assert calendar_data[0][1] == 'White', "Calendar data theme is not set to White"
+            assert data['ThemeName'] == 'White', "Project object theme is not set to White"
+
+            print("Theme successfully changed to White")
         else:
-            # database update correctly!
-            assert "Success"
+            pytest.fail(f"File not found: {file_path}")
+
