@@ -27,12 +27,22 @@ class TestChangeThemes(CalendarPagesManager):
         self.setPhotos()
         self.changeChooseThemes()
         self.setThemeWhite()
-        #a = self.get_calendar_theme()
         calendar_data = self.get_token()
-        print(calendar_data)
+        print(f"Calendar data: {calendar_data}")
 
         file_path = os.path.join(calendar_data[0][2], 'Dat', 'projectObj.dat')
-        if os.path.exists(file_path):
+        print(f"Attempting to access file at: {file_path}")
+
+        dir_path = os.path.dirname(file_path)
+        if not os.path.exists(dir_path):
+            pytest.fail(f"Directory not found: {dir_path}")
+        else:
+            print(f"Directory contents: {os.listdir(dir_path)}")
+
+        if file_path.startswith('\\\\'):
+            print("This is a network path. Verify network connectivity.")
+
+        try:
             with open(file_path, "rb") as file:
                 data = json.load(file)
 
@@ -40,6 +50,11 @@ class TestChangeThemes(CalendarPagesManager):
             assert data['ThemeName'] == 'White', "Project object theme is not set to White"
 
             print("Theme successfully changed to White")
-        else:
+        except FileNotFoundError:
             pytest.fail(f"File not found: {file_path}")
-
+        except PermissionError:
+            pytest.fail(f"Permission denied: {file_path}")
+        except json.JSONDecodeError:
+            pytest.fail(f"Invalid JSON in file: {file_path}")
+        except Exception as e:
+            pytest.fail(f"Unexpected error: {str(e)}")
