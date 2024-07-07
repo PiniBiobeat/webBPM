@@ -19,7 +19,7 @@ class Browser:
         device_name = 'iPhone 12 Pro Max'
         device = available_devices[device_name]
 
-        self.browser = playwright.chromium.launch(headless=False)
+        self.browser = playwright.chromium.launch(headless=False,slow_mo=500)
         self.context = self.browser.new_context(**device)
         self.context.tracing.start(screenshots=True, snapshots=True)
         self.page = self.context.new_page()
