@@ -2,6 +2,9 @@ from typing import Type
 from playwright.sync_api import sync_playwright
 from infra.page_base import PageBase
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class Browser:
     browser = None
@@ -19,9 +22,17 @@ class Browser:
         device_name = 'iPhone 12 Pro Max'
         device = available_devices[device_name]
 
-        self.browser = playwright.chromium.launch(headless=False,slow_mo=500)
+        self.browser = playwright.chromium.launch(
+            headless= os.environ.get("HEADLESS", "True") == "True",
+            slow_mo=500,
+        )
+
         self.context = self.browser.new_context(**device)
         self.context.tracing.start(screenshots=True, snapshots=True)
+
+        # Set default timeout for all operations in this context
+        self.context.set_default_timeout(1000 * 60 * 15)  # 15 minutes
+
         self.page = self.context.new_page()
 
 

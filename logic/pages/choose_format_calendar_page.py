@@ -16,8 +16,12 @@ class ChooseFormatCalendarPage(PageBase):
     def getSelectorElement(self, format):
         if format == 92:
             time.sleep(2)
-            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co.il//img.aspx?subject=format&size=medium&format=92']", state="visible")
-            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co.il//img.aspx?subject=format&size=medium&format=92']")
+            # xpath_selector = f"//img[@src='https:////calendarv4-api.lupa.co.il//img.aspx?subject=format&size=medium&format={format}']"
+            # print("xpath_selector", xpath_selector)
+            xpath_selector = "//*[@id='root']/div/div/div[2]/div/div/div[1]/div/img"
+            self.pw_page.wait_for_selector(xpath_selector, state="visible")
+            self.pw_page.click(xpath_selector)
+
 
         elif format == 240:
             time.sleep(2)

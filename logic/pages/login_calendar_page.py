@@ -1,10 +1,9 @@
-from infra.page_base import PageBase
-import time
-import json
-from playwright.sync_api import expect
-import  pytest
-import os
 from infra.config.config_provider import configuration
+from infra.page_base import PageBase
+import time, os
+
+from dotenv import load_dotenv
+load_dotenv()
 
 
 class LoginCalendarPage(PageBase):

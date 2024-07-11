@@ -39,10 +39,11 @@ def sql_get_status_newsletter(Email):
         database = 'lupa'
         username = 'MachineDBA'
         password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+        ctx = pyodbc.connect(
+            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
+        )
 
-        cursor = cnxn.cursor()
+        cursor = ctx.cursor()
         print(cursor)
         cursor.execute("select * FROM [lupa].[dbo].[newslleter] where email =?",Email)
         row = cursor.fetchall()

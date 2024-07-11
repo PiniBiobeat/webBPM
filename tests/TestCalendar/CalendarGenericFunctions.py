@@ -15,28 +15,14 @@ from logic.pages.settings_calendar_page import SettingsCalendarPage
 from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
 from infra.generic_helpers import sql_get_calendar
 from tests.TestCalendar.test_create_calendar import TestCreateCalendar
-import random
 import os
 
-r1 = random.randint(1, 1000)
 email1 = 'pinim@lupa.co.il'
 pass1 = "Pinimari!1"
 master_id = 3189204
-path_images = ["./image_london/shutterstock_302261093.jpg"
-     ,"./image_london/shutterstock_303371234.jpg","./image_london/shutterstock_307261706.jpg"]
-    # ,"./image_london/shutterstock_307343513.jpg","./image_london/shutterstock_310935740.jpg"
-    # ,"./image_london/shutterstock_314718617.jpg","./image_london/shutterstock_315831839.jpg"
-    # ,"./image_london/shutterstock_318750242.jpg","./image_london/shutterstock_318750290.jpg"
-    # ,"./image_london/shutterstock_338033549.jpg","./image_london/shutterstock_369746171.jpg"
-    # ,"./image_london/shutterstock_407506189.jpg"]
-    # , "./image_london/shutterstock_409552375.jpg", "./image_london/shutterstock_422969926.jpg"
-    # , "./image_london/shutterstock_422970067.jpg", "./image_london/shutterstock_425742643.jpg"
-    # , "./image_london/shutterstock_428941816.jpg", "./image_london/shutterstock_445141507.jpg"
-    # , "./image_london/shutterstock_448948483.jpg", "./image_london/shutterstock_473627458.jpg"
-    # , "./image_london/shutterstock_499513999.jpg", "./image_london/shutterstock_502044016.jpg"
-    # , "./image_london/shutterstock_504251206.jpg"]
 
-
+images_base_path = "C:\\Users\\tester\\Desktop\\repositories\\pytest-lupa\\tests\\TestCalendar\\image_london\\"
+path_images = result = [f"{images_base_path} ({i}).jpg" for i in range(1, 25)]
 
 
 class CalendarPagesManager(TestBase):
@@ -87,6 +73,7 @@ class CalendarPagesManager(TestBase):
     def setPhotos(self):
         page: ChoosePhotosCalendar = self.browser.create_page(ChoosePhotosCalendar)
         page.add_photos_from_local(path_images)
+        time.sleep(5)
         page.click_next_after_choose_photos()
         page.checkbox_approval_regulations()
         page.click_next_after_checkbox()
