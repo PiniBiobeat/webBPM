@@ -94,9 +94,8 @@ def test_upload_image(filePath, album_token, token) -> None:
 
 def test_upload_file(event_token, token) -> None:
     for i in range(1, 50):
-        file_path = f'C:\\Users\\tester\\Desktop\\repositories\\pytest-lupa\\tests\\TestCalendar\\image_london\\test{i}.jpg'
+        file_path = os.path.join('image_london', f'test{i}.jpg')
         test_upload_image(file_path, event_token, token)
-
 
 
 def test_Get_login(user,password):
@@ -154,3 +153,4 @@ def test_login_all_users():
         password = user['password']
         test_Get_login(email, password)
 
+test_login_all_users()
