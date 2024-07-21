@@ -3,7 +3,7 @@ import pytest
 import time, os
 
 from dotenv import load_dotenv
-load_dotenv()
+
 
 class TestSendingCalendar(CalendarPagesManager):
 
