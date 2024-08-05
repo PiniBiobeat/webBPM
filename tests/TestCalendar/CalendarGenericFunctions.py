@@ -93,6 +93,7 @@ class CalendarPagesManager(TestBase):
 
     def changeChooseThemes(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_X()
         page.click_change_themes()
     def createPreview(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
@@ -107,6 +108,9 @@ class CalendarPagesManager(TestBase):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         page.click_open_laout(month)
 
+    def click_x_to_next(self):
+        page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_X()
     def get_locaors_plus(self):
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
         return page.get_locator_plus()

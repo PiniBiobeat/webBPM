@@ -18,6 +18,7 @@ class TestSendingCalendar(CalendarPagesManager):
             self.setThemes()
             self.setPersonalDates()
             self.setPhotos()
+            self.click_x_to_next()
             for month in range(1, 13):
                 if month < 5:
                     self.choose_layout(month)
