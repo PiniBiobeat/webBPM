@@ -2,8 +2,8 @@ from infra.page_base import PageBase
 
 class CalendarPage(PageBase):
 
-    init_indication = "(//button[@type='button'])[1]"
-    open_menu_page = "(//button[@type='button'])[1]"
+    init_indication = "(//button[@type='button'])[2]"
+    open_menu_page = "(//button[@type='button'])[2]"
     text_open_menu = '//span[contains(.,"התחברות")]'
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
 

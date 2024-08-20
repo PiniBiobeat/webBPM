@@ -10,7 +10,7 @@ class ChoosePhotosCalendar(PageBase):
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
     text_button_upload = "//input[@id='filePicker']"
     text_link_add_photos_after = "//a[@variant='contained']"
-    text_next_button = "//button[contains(.,'הבא')]"
+    text_next_button = "//button[contains(.,'שמירה')]"
     text_checkbox_approval_regulations = "//input[@type='checkbox']"
     text_click_next_after_checkbox = "//button[contains(.,'להמשך')]"
 

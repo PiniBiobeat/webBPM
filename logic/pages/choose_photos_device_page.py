@@ -9,7 +9,7 @@ class ChoosePhotosDeviceCalendar(PageBase):
     text_open_menu = '//span[contains(.,"להתחברות לחשבון")]'
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
     text_button_upload = "(//div[@class='font_xl color_gray position_flex_row_center mesures_full_height MuiBox-root css-0'])[1]"
-    text_next_button = "//button[contains(.,'אישור')]"
+    text_next_button = "//button[contains(.,'שמירה')]"
     path_images = ["C:/Users/lupa/Desktop/london/IMG_2549.jpg"]
     text_checkbox_approval_regulations = "//input[@type='checkbox']"
     text_click_next_after_checkbox = "//button[contains(.,'להמשך')]"

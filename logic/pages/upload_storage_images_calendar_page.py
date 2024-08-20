@@ -14,7 +14,7 @@ class UploadStorageImagesCalendar(PageBase):
     #text_choose_first_image = f"(//li[@class='MuiImageListItem-root css-p8pnwm'])[{random.randint(1, 24)}]"
     text_choose_first_image = "(//li[@class='MuiImageListItem-root css-p8pnwm'])[1]"
     text_ok_save = '//button[contains(.,"אישור")]'
-    text_save_image = '//button[contains(.,"הבא")]'
+    text_save_image = '//button[contains(.,"בחירה")]'
     text_save_and_next = '//button[contains(.,"בהחלט")]'
     def __init__(self, page):
         super().__init__(page)

@@ -1,5 +1,6 @@
 import pytest
 from tests.TestTiles.test_base import TestBase
+from dotenv import load_dotenv
 from infra.config.config_provider import configuration
 from logic.pages.login_online_page import LogInOnline
 from logic.pages.personal_date_page import PersonalDates
@@ -15,6 +16,7 @@ from infra.generic_helpers import sql_get_calendar
 import random
 import json
 import os
+load_dotenv()
 
 r1 = random.randint(1, 1000)
 email1 = 'pinim@lupa.co.il'
@@ -33,7 +35,7 @@ class TestChangeFormatCalendar(TestBase):
     @pytest.mark.usefixtures("before_after_test")
     @pytest.mark.parametrize("eFrom, eTo", [(92, 240), (240, 92), (240, 260), (260, 240), (92, 260), (260, 92)])
     def test_changing_all_formats(self, eFrom, eTo):
-        page: CalendarPage = self.browser.navigate('calendar_url_'+os.getenv('env'), CalendarPage)
+        page: CalendarPage = self.browser.navigate(configuration['calendar_url_'+os.getenv('env')], CalendarPage)
         page.open_menu()
         page.open_screen_login_from_menu()
 
@@ -64,10 +66,12 @@ class TestChangeFormatCalendar(TestBase):
         page.click_next_after_checkbox()
 
         page: PreviewCalendar = self.browser.create_page(PreviewCalendar)
+        page.click_X()
         page.click_edit_page()
 
         page: ChooseFormatCalendarPage = self.browser.create_page(ChooseFormatCalendarPage)
         page.getSelectorElement(eTo)
+        page.click_on_pupap()
         page.pw_page.wait_for_url("**/preview")
 
         page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)

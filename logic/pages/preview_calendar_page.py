@@ -10,9 +10,9 @@ class PreviewCalendar(PageBase):
     choose_A3 = "(//div[@class='position_direction_rtl MuiBox-root css-ktwy7h'])[3]"
     text_open_menu = '//span[contains(.,"להתחברות לחשבון")]'
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
-    text_button_edit_page = "//*[@id='root']/div/div[1]/div[2]/div[2]/div[2]/button"
+    text_button_edit_page = '//button[@aria-label="SpeedDial"]'
     text_button_next = '//button[contains(.,"לדלג")]'
-    text_select_change = "//*[@id='SpeedDial-action-3']"
+    text_select_change = '//span[@id="SpeedDial-action-3" and contains(.,"שינוי פורמט")]'
     text_select_theme = "//*[@id='SpeedDial-action-4']"
     text_open_select_laout = "(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary color_gray mesures_fit_content mesures_hight_xs css-1ujsas3'])[1]"
     text_plus_to_add_images = "//button[@type='button' and img[@class='w-8 MuiBox-root css-0']]"
@@ -21,8 +21,9 @@ class PreviewCalendar(PageBase):
     text_next_to_checkout = '//button[contains(.,"לקנייה")]'
     text_checkbox_ok = "//input[@class='PrivateSwitchBase-input muirtl-1m9pwf3']"
     text_next_after_checkout = '//button[contains(.,"בהחלט")]'
-    text_change_themes = '//span[@id="SpeedDial-action-3-label" and contains(.,"שינוי עיצוב")]'
+    text_change_themes = '//span[@id="SpeedDial-action-4" and contains(.,"שינוי עיצוב")]'
     text_open_menu_select_change_themes = '//button[@aria-label="SpeedDial"]'
+    test_click_change_format = '//button[contains(.,"לשינוי הפורמט")]'
     def __init__(self, page):
         super().__init__(page)
 
@@ -30,6 +31,10 @@ class PreviewCalendar(PageBase):
     def click_edit_page(self):
         self.pw_page.click(self.text_button_edit_page)
         self.pw_page.click(self.text_select_change)
+
+    def click_on_pupap(self):
+        self.pw_page.click(self.test_click_change_format)
+
 
     def click_X(self):
         self.pw_page.click(self.text_button_next)

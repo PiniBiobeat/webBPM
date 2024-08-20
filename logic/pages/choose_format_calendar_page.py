@@ -8,6 +8,7 @@ class ChooseFormatCalendarPage(PageBase):
     A3 = "(//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation3 position_flex_row color_box_shadow_paper mesures_format_container cursor_pointer css-vuzb25'])[3]"
     text_open_menu = '//span[contains(.,"להתחברות לחשבון")]'
     text_choose_create_user = '//button[contains(.,"ליצירת חשבון")]'
+    test_click_change_format = '//button[contains(.,"לשינוי הפורמט")]'
 
     def __init__(self, page):
         super().__init__(page)
@@ -23,20 +24,24 @@ class ChooseFormatCalendarPage(PageBase):
             self.pw_page.click(xpath_selector)
 
 
+
         elif format == 240:
             time.sleep(2)
-            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=240']",state="visible")
-            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=240']")
+            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co.il//img.aspx?subject=format&size=medium&format=240']",state="visible")
+            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co.il//img.aspx?subject=format&size=medium&format=240']")
         else:
             time.sleep(2)
-            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']",state="visible")
-            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co//img.aspx?subject=format&size=medium&format=260']")
+            self.pw_page.wait_for_selector("//img[@src='https:////calendarv4-api.lupa.co.il//img.aspx?subject=format&size=medium&format=260']",state="visible")
+            self.pw_page.click("//img[@src='https:////calendarv4-api.lupa.co.il//img.aspx?subject=format&size=medium&format=260']")
 
     def click_choose_A5(self):
         self.pw_page.click(self.A5)
 
     def click_choose_A4(self):
         self.pw_page.click(self.A4)
+
+    def click_on_pupap(self):
+        self.pw_page.click(self.test_click_change_format)
 
     def click_choose_A3(self):
         self.pw_page.click(self.A3)
