@@ -1,0 +1,2 @@
+Starting test "test_changing_all_formats"
+*****DONE*****

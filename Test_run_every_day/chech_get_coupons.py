@@ -22,14 +22,28 @@ def test_check_get_coupons_calendar():
         'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
         'Cookie': 'ASP.NET_SessionId=utbwzm5cn5tmo1hgpu00r3tx'
     }
+    #
+    # response = requests.request("POST", url, headers=headers, data=payload)
+    #
+    # json_data = json.loads(response.text)
+    #
+    # if  json_data["isValid"] != True:
+    #         send_slack(json_data)
+    try:
+        response = requests.request("POST", url, headers=headers, data=payload)
+        response.raise_for_status()  # Will raise an HTTPError for bad responses (4xx and 5xx)
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+        json_data = json.loads(response.text)
 
-    json_data = json.loads(response.text)
-
-    if  json_data["isValid"] != True:
-            send_slack(json_data)
-
+        if json_data.get("isValid") != True:
+            send_slack(f"Invalid response: {json_data}")
+    except requests.exceptions.HTTPError as http_err:
+        if response.status_code == 500:
+            send_slack(f"Server Error (500): {http_err}")
+        else:
+            send_slack(f"HTTP error occurred: {http_err}")
+    except Exception as err:
+        send_slack(f"An error occurred: {err}")
 
 def send_slack(json_data):
     # If the assert condition is not met, send a message to Slack
