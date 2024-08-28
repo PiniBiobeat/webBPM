@@ -1,7 +1,7 @@
 import json
 import requests
 
-def test_check_calendar_exsist():
+def check_calendar_exsist():
     url ="https://calendarv4-api.lupa.co.il/api.aspx?method=getcalendar&calendar_token=7cdf03f725314174ae7df740e3246f0d&token=GkQpPolB6-5iLGhWB2dELatbnyidv6FkKkC-CymN23S4AmLrl9YiHKPX2FWvVGRJ2J4D2jj-HDaclNBxYPJMxSCDblmM9zglECn3udNIRgU8DO93hpafbtcUwiH7du6WD8RnL7zejaF_Vi7gQwNJ7-NCIWuW0w-Yyo4cc2Qo2zJtZuW9ZEmUptD5z1suULxXFsRz_nR7QHvHn026d9hFUjpsF5ER-TlRDeagij0CkD3jM-d9RVyrvjxy2Kpn9ID3seCdQFtSPHIQxUkXkvIU3uYPGcp9JhUe3_Fts3q88cMO6DVN2t5OxLntk2Mn_VgAO9TXbcpX1Qcz3n7bhwKsvw2"
     try:
         response = requests.request("GET", url)
@@ -35,4 +35,4 @@ def send_slack(error_message):
         print(f"Failed to send message to Slack. Status Code: {response.status_code}")
 
 # Run the test
-test_check_calendar_exsist()
+check_calendar_exsist()
