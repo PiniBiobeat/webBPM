@@ -32,9 +32,13 @@ def test_credit_guard_screen_tiles():
         response = requests.request("POST", url, headers=headers, data=json_data)
 
         data = json.loads(response.text)
-        data_error = data["errorMessage"]
-        if response.status_code == 200 and data['isValid'] == True:
+        data_error = data.get("errorMessage", "No error message provided")
+
+        if response.status_code == 200 and data.get('isValid') == True:
             print(f"The POST request to URL '{url}' is valid and returns a successful response.")
+        elif response.status_code == 500:
+            print(f"The POST request to URL '{url}' returned an Internal Server Error (500).")
+            send_to_slack(data_error)
         else:
             print(
                 f"The POST request to URL '{url}' is valid but returns a non-successful response with status code {response.status_code}.")
