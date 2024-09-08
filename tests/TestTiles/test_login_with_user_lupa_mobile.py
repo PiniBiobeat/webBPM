@@ -8,7 +8,7 @@ from logic.pages.choose_login_or_sign_up_page import ChooseLoginOrSignUpPage
 from logic.pages.login_page import LoginPage
 
 text_login_user = 'pinim@lupa.co.il'
-text_login_pass = 'Pinimari1!'
+text_login_pass = 'Pinimari!1'
 text_user_not_valid = "NOT"
 text_error = "lupa@lup.co.il דוגמא לכתובת מייל נכונה"
 

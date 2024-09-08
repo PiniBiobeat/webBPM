@@ -9,9 +9,9 @@ class PreviewScreen(PageBase):
     icon_add_image = "//img[@class='upload_icon']"
     icon_google = "//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
     test_logout = "//div[@class='first-row-el'][1]"
-    icon_delete = "(//img[@src='/static/media/icon_trash.5d8f7be3.svg'])[1]"
+    icon_delete = "(//img[@src='/static/media/icon_trash.5106d022.svg'])[1]"
     text_yes_delete = "//span[@class='lupa-btn-content' and contains(.,'כן')]"
-    icon_edit = "(//img[@src='/static/media/icon_image_edit.d59295f7.svg'])[1]"
+    icon_edit = "(//img[@src='/static/media/icon_image_edit.12284d2b.svg'])[1]"
 
     def __init__(self, page):
         super().__init__(page)

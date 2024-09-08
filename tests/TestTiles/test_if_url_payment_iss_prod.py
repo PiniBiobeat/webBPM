@@ -10,7 +10,7 @@ from logic.pages.gallery_page import GalleryPage
 from urllib.parse import urlparse, urlunparse
 psifsPhoto = [".\\shutterstock_711632317.jpg"]
 text_login_user = 'pinim@lupa.co.il'
-text_login_pass = 'Pinimari1!'
+text_login_pass = 'Pinimari!1'
 text_user_not_valid = "NOT"
 text_error = "lupa@lup.co.il דוגמא לכתובת מייל נכונה"
 
