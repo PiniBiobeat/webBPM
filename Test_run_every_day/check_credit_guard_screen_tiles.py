@@ -1,5 +1,4 @@
 import json
-
 import requests
 
 url = "https://paymentsv4-api.lupa.co.il/api.aspx?method=credit_guard_screen&invoice_matrix=false&source_type=tiles&language=&source_device=desktop&token=bFDBc4TxgCtkOiJkqK2Z5jckOpPqapEXOwEDEFaDJ79F_w0zNpcXBJ05ft12xUAanl1cox5s3BsVJVIh3FcN0qxdCo-UjYSn1fhIISMXkp9Vx7M2MwDOlNk6M3p1VL1u7lDJU73xRHoZegBuJImLsK697K4i2jHh6iRT9L4E6Sqe75tHQ5Q-a5S78pae1EMzjU6VLVTz9o-0OkX5m0osyy9wklRVWATisry_NrpLwYDKT6T_FATQMxXZcEWtZQRuOA0WnWavvEWSwCS7WHq2W-yfGgs8KQK4SWoSOanC5-GuzzDDJ2uiz3oCijbzVu9VbbusvEc4K4mvjH6kDBd9zA2&show_header=&newsletter=true"
@@ -19,38 +18,50 @@ headers = {
   'sec-fetch-mode': 'cors',
   'sec-fetch-site': 'same-site',
   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
-  'Cookie': 'ASP.NET_SessionId=yhbybdcycvoruyttsn5yx1on'
+  'Cookie': 'ASP.NET_SessionId=ugmocsvmqovwfxjt0y0a2elh'
 }
 
-def test_credit_guard_screen_tiles():
-    data_error = None
+
+
+
+
+
+def credit_guard_screen_tiles():
     try:
         response = requests.request("POST", url, headers=headers, data=payload)
-
-        # Check if response contains JSON data
+        print(response.text)
         try:
-            data = response.json()  # This is a safer way to attempt JSON decoding
+            data = response.json()
         except json.JSONDecodeError:
             print(f"The response from the server is not JSON. Response text: {response.text}")
-            send_to_slack(
-                f"Non-JSON response received: {response.text[:100]}")  # Send the first 100 characters of the response
-            return  # Exit the function early since we can't process further without JSON
+            send_to_slack(f"Non-JSON response received from {url}: {response.text[:100]}")
+            return
 
-        # Continue processing if JSON decoding is successful
         data_error = data.get("errorMessage", "No error message provided")
+        is_valid = data.get('isValid', False)
 
-        if response.status_code == 200 and data.get('isValid') == True:
-            print(f"The POST request to URL '{url}' is valid and returns a successful response.")
+        if response.status_code == 200 and is_valid:
+            print("The POST request to URL is valid and returns a successful response.")
+        elif response.status_code == 200 and not is_valid:
+            error_details = (
+                f"Request to {url} failed with error: {data_error} "
+                f"(Code: {data.get('errorCode', 'No code provided')}) "
+                f"for method {data.get('method', 'Unknown method')}."
+            )
+            print(error_details)
+            send_to_slack(error_details)
         elif response.status_code == 500:
-            print(f"The POST request to URL '{url}' returned an Internal Server Error (500).")
-            send_to_slack(data_error)
+            print("The POST request to URL returned an Internal Server Error (500).")
+            send_to_slack(f"Internal Server Error for {url}: {data_error}")
         else:
             print(
-                f"The POST request to URL '{url}' is valid but returns a non-successful response with status code {response.status_code}.")
-            send_to_slack(data_error)
+                f"The POST request to URL is valid but returns a non-successful response with status code {response.status_code}."
+            )
+            send_to_slack(f"Non-successful response from {url}: {data_error} (Status Code: {response.status_code})")
     except requests.exceptions.RequestException as e:
-        print(f"The POST request to URL '{url}' is not valid or cannot be reached. Error: {e}")
-        send_to_slack(data_error)
+        error_msg = f"The POST request to URL {url} is not valid or cannot be reached. Error: {e}"
+        print(error_msg)
+        send_to_slack(error_msg)
 
 
 def send_to_slack(data_error):
@@ -74,3 +85,6 @@ def send_to_slack(data_error):
         print("Message sent successfully")
     else:
         print(f"Error sending message: {response.text}")
+
+credit_guard_screen_tiles()
+

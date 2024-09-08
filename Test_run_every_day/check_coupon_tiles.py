@@ -4,7 +4,7 @@ import requests
 
 
 
-def check_get_coupon_tiles():
+def test_check_get_coupon_tiles():
 
     url = "https://paymentsv4-api.lupa.co.il/api.aspx?method=check_coupon&coupon_code=T8233ZBA&is_collection_bucket=true&source_type=tiles&language=&source_device=desktop&token=tIKxzLq2DpXhfKaojAiq64JPBL7rMbrlZCVq9nzONBd2V4pkHlsc1T7a_DKxxMRk_FtOVH0Br8tM4htwMzEqmE4uD52yYfzGVoC-WrFkEVkrSLsi7XkRTf2KuMh1YjP9BhY22BFeqEHhBbFiMAmL-XwX_SmfvR02dzdD732LdYcwr0yWbnN6pTnYcVb2vAxXpO30SbjgulGG5Is2YqgyQOWqP_bupDMKJX708AyhIGqimdMM3BHgg4zKlqECP-x3qJwuqqYILU2fCk3sPCWXhTHs_lQkrIvGbKcNw1i8g4BvlHX4K87sHUzAErdsY3xqix_9qZcPbIEL3QbXC8A96Q2&show_header=&newsletter=null"
 
@@ -59,4 +59,4 @@ def send_slack(json_data):
             print(f"Failed to send message to Slack. Status Code: {response.status_code}")
 
 
-check_get_coupon_tiles()
+test_check_get_coupon_tiles()
