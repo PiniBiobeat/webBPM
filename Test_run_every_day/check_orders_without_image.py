@@ -2,7 +2,7 @@ import pyodbc
 import requests
 import json
 
-def test_check_orders_without_image():
+def check_orders_without_image():
         server = '104.155.49.95'
         database = 'master'
         username = 'MachineDBA'
@@ -24,7 +24,7 @@ def test_check_orders_without_image():
         if len(rows) > 0:
             send_slack(len(rows))
         else:
-            assert True and print("is goood")
+             print("is goood")
 
 def send_slack(order_count):
 
@@ -47,6 +47,8 @@ def send_slack(order_count):
         print(f"Failed to send message to Slack. Status Code: {response.status_code}, Response: {response.text}")
     else:
         print("Message sent successfully to Slack!")
+
+check_orders_without_image()
 
 
 
