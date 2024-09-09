@@ -11,6 +11,9 @@ def test_check_api_request():
         def log_request(request):
             if 'https://paymentsv4-api.lupa.co.il/api.aspx' in request.url:
                 print(f"Captured API request: {request.url}")
+            else:
+                send_slack()
+
 
         # Add an event listener to capture all requests
         page.on('request', log_request)
@@ -23,6 +26,28 @@ def test_check_api_request():
 
         # Close the browser
         browser.close()
+
+def send_slack(order_count):
+
+    slack_webhook_url = "https://hooks.slack.com/services/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"
+
+    # Formatted message with dynamic order count
+    message = f":warning: *Alert:* We have {order_count} orders Tiles without pictures. Please investigate the issue and resolve it as soon as possible."
+
+    payload = {
+        "text": message,  # Use the formatted message
+        "username": "Order Monitor Bot",  # Bot name
+        "channel": "#מוניטור-הזמנות",  # Slack channel
+        "icon_emoji": ":camera:"  # Optional: Bot icon emoji
+    }
+
+    response = requests.post(slack_webhook_url, json=payload)
+
+    # Handle Slack response
+    if response.status_code != 200:
+        print(f"Failed to send message to Slack. Status Code: {response.status_code}, Response: {response.text}")
+    else:
+        print("Message sent successfully to Slack!")
 
 
 test_check_api_request()
