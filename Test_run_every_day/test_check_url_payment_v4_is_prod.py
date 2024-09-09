@@ -1,5 +1,5 @@
+import requests
 from playwright.sync_api import sync_playwright
-
 
 def test_check_api_request():
     with sync_playwright() as p:
@@ -7,13 +7,15 @@ def test_check_api_request():
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
 
+        # Flag to track if the desired API request is found
+        api_request_found = False
+
         # Capture network requests
         def log_request(request):
-            if 'https://paymentsv4-api.lupa.co.il/api.aspx' in request.url:
+            nonlocal api_request_found
+            if 'https://paymentsv4-api.lupa.co/api.aspx' in request.url:
                 print(f"Captured API request: {request.url}")
-            else:
-                send_slack()
-
+                api_request_found = True
 
         # Add an event listener to capture all requests
         page.on('request', log_request)
@@ -24,16 +26,18 @@ def test_check_api_request():
         # Wait for the page to load or specific elements to appear
         page.wait_for_selector("text=בואו נמשיך", state="visible")
 
+        # After the page has loaded, check if the API request was found
+        if not api_request_found:
+            # Send a Slack notification if the request was not found
+            send_slack("API request not found after checking all network requests.")
+
         # Close the browser
         browser.close()
 
-def send_slack(order_count):
+def send_slack(message):
+    slack_webhook_url = "https://hooks.slack.com/services/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"
 
-    slack_webhook_url = "https://hooks.slack.com/services/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"
-
-    # Formatted message with dynamic order count
-    message = f":warning: *Alert:* We have {order_count} orders Tiles without pictures. Please investigate the issue and resolve it as soon as possible."
-
+    # Formatted message
     payload = {
         "text": message,  # Use the formatted message
         "username": "Order Monitor Bot",  # Bot name
@@ -48,6 +52,5 @@ def send_slack(order_count):
         print(f"Failed to send message to Slack. Status Code: {response.status_code}, Response: {response.text}")
     else:
         print("Message sent successfully to Slack!")
-
 
 test_check_api_request()
