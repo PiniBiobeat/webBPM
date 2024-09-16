@@ -1,9 +1,9 @@
 import os
+from io import BytesIO
 import pyodbc
 import pandas as pd
 import  sqlite3
-
-
+import requests
 
 db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'testDb')
 sqliteConnection = sqlite3.connect(db_path)
@@ -20,7 +20,6 @@ def join_column_values(result, column_index):
 
 def test_connect_to_db():
     result = bring_users_to_cancel()
-
     master_ids = join_column_values(result, 0)
     user_ids = join_column_values(result, 1)
 
@@ -82,17 +81,31 @@ def test_connect_to_db():
         
     """)
 
-
     rows = cursor.fetchall()
     data = [list(row) for row in rows]
     columns = [column[0] for column in cursor.description]
 
     df = pd.DataFrame(data, columns=columns)
 
-    # Construct the path to the Desktop
-    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop", "output.xlsx")
-    df.to_excel(desktop_path, index=False)
+    # Save the DataFrame to a BytesIO object
+    output = BytesIO()
+    df.to_excel(output, index=False)
+    output.seek(0)
+
+    # Send the Excel file via email
+    send_to_email(output)
 
 
-    # row = cursor.fetchall()
-
+def send_to_email(excel_file):
+    return requests.post(
+        "https://api.mailgun.net/v3/lupa.co.il/messages",
+        auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
+        files={"attachment": (
+        "output.xlsx", excel_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")},
+        data={
+            "from": "Orders without bulk id <monitor@lupa.co.il>",
+            "to": "ofirtnc@gmail.com",
+            "subject": "All orders without bulk id in 24 hours and with status Printing process!",
+            "text": "Please find the attached Excel file containing the orders."
+        }
+    )
