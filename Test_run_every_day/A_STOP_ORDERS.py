@@ -13,3 +13,5 @@ def test_connect_to_db():
     print(cursor)
     cursor.execute("")
     row = cursor.fetchall()
+
+    1
