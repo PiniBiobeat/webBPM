@@ -14,4 +14,4 @@ def test_connect_to_db():
     cursor.execute("")
     row = cursor.fetchall()
 
-1
+5
