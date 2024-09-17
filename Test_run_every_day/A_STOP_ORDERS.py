@@ -34,3 +34,4 @@ def test_connect_to_db():
     
     """)
     cnxn.commit()
+

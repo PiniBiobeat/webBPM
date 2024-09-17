@@ -11,8 +11,6 @@ sqliteConnection = sqlite3.connect(db_path)
 
 
 def bring_users_to_cancel():
-    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'testDb')
-    sqliteConnection = sqlite3.connect(db_path)
     cursor = sqliteConnection.cursor()
     query = 'select master_id , user_id from users_for_cancel'
     cursor.execute(query)
@@ -34,8 +32,8 @@ def test_connect_to_db():
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
 
     cursor = cnxn.cursor()
-    cursor.execute(f"""
-    --online/calendar
+    # --online/calendar
+    query1 = f"""
     SELECT [master_id]
           ,[order_id]
           ,[invoice_number]
@@ -46,14 +44,9 @@ def test_connect_to_db():
     AND invoice_number <> ''
     AND CONVERT(DATE, order_date) = CONVERT(DATE, GETDATE())
     order by order_date desc
-    
-    
+    """
 
-    
-    --tiles
-    
-    
-    
+    query2 = f"""
     SELECT [master_id]
           ,[order_id]
           ,[invoice_number]
@@ -64,11 +57,9 @@ def test_connect_to_db():
     AND invoice_number <> ''
     AND CONVERT(DATE, order_date) = CONVERT(DATE, GETDATE())
     order by order_date desc
-    
-    
-    --bower
-    
-    
+    """
+
+    query3 = f"""
     SELECT TOP (1000) o.[order_customer_id]
           ,o.[a_num]
           ,o.[receipt]
@@ -80,11 +71,18 @@ def test_connect_to_db():
     AND CONVERT(DATE, e.order_date) = CONVERT(DATE, GETDATE())
     AND o.receipt <> ''
     ORDER BY e.order_date DESC
+    """
 
-        
-    """)
+    cursor.execute(query1)
+    result1 = cursor.fetchall()
 
-    rows = cursor.fetchall()
+    cursor.execute(query2)
+    result2 = cursor.fetchall()
+
+    cursor.execute(query3)
+    result3 = cursor.fetchall()
+
+    rows = result1 + result2 + result3
     data = [list(row) for row in rows]
     columns = [column[0] for column in cursor.description]
     df = pd.DataFrame(data, columns=columns)
@@ -111,3 +109,4 @@ def send_to_email(excel_file):
             "text": "תודה והמשך יום נפלא :)"
         }
     )
+
