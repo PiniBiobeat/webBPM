@@ -6,11 +6,10 @@ import pandas as pd
 import  sqlite3
 import requests
 
-db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'testDb')
-sqliteConnection = sqlite3.connect(db_path)
-
 
 def bring_users_to_cancel():
+    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'testDb')
+    sqliteConnection = sqlite3.connect(db_path)
     cursor = sqliteConnection.cursor()
     query = 'select master_id , user_id from users_for_cancel'
     cursor.execute(query)
@@ -32,7 +31,6 @@ def test_connect_to_db():
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
 
     cursor = cnxn.cursor()
-    # --online/calendar
     query1 = f"""
     SELECT [master_id]
           ,[order_id]
@@ -60,7 +58,7 @@ def test_connect_to_db():
     """
 
     query3 = f"""
-    SELECT TOP (1000) o.[order_customer_id]
+    SELECT o.[order_customer_id]
           ,o.[a_num]
           ,o.[receipt]
           ,o.[total_order_price]
@@ -106,7 +104,7 @@ def send_to_email(excel_file):
             "from": "lupa automation<monitor@lupa.co.il>",
             "to": "ofirtnc@gmail.com",
             "subject": "הזמנות פיתוח לביטול",
-            "text": "תודה והמשך יום נפלא :)"
+            "text": " :) תודה והמשך יום נפלא"
         }
     )
 
