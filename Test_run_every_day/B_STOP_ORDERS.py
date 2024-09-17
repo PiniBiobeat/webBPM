@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from io import BytesIO
 import pyodbc
 import pandas as pd
@@ -10,6 +11,8 @@ sqliteConnection = sqlite3.connect(db_path)
 
 
 def bring_users_to_cancel():
+    db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'testDb')
+    sqliteConnection = sqlite3.connect(db_path)
     cursor = sqliteConnection.cursor()
     query = 'select master_id , user_id from users_for_cancel'
     cursor.execute(query)
@@ -84,28 +87,27 @@ def test_connect_to_db():
     rows = cursor.fetchall()
     data = [list(row) for row in rows]
     columns = [column[0] for column in cursor.description]
-
     df = pd.DataFrame(data, columns=columns)
-
     # Save the DataFrame to a BytesIO object
     output = BytesIO()
     df.to_excel(output, index=False)
     output.seek(0)
-
     # Send the Excel file via email
     send_to_email(output)
 
 
+
 def send_to_email(excel_file):
+    today = datetime.now().strftime("%d-%m-%Y")
     return requests.post(
         "https://api.mailgun.net/v3/lupa.co.il/messages",
         auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
         files={"attachment": (
-        "output.xlsx", excel_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")},
+        f"Orders {today}.xlsx", excel_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")},
         data={
-            "from": "Orders without bulk id <monitor@lupa.co.il>",
+            "from": "lupa automation<monitor@lupa.co.il>",
             "to": "ofirtnc@gmail.com",
-            "subject": "All orders without bulk id in 24 hours and with status Printing process!",
-            "text": "Please find the attached Excel file containing the orders."
+            "subject": "הזמנות פיתוח לביטול",
+            "text": "תודה והמשך יום נפלא :)"
         }
     )
