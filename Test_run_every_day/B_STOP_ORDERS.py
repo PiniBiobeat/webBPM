@@ -103,7 +103,7 @@ def send_to_email(excel_file):
         data={
             "from": "lupa automation<monitor@lupa.co.il>",
             "to": "ofirtnc@gmail.com",
-            "subject": "הזמנות פיתוח לביטול",
+            "subject": "ביטול הזמנות טסטים פיתוח",
             "text": " :) תודה והמשך יום נפלא"
         }
     )
