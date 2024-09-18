@@ -1,6 +1,8 @@
 import pyodbc
+import sys
 from Test_run_every_day.B_STOP_ORDERS import *
-
+sys.path.append(r'C:\path\to\Test_run_every_day')
+from B_STOP_ORDERS import *
 def test_connect_to_db():
     result = bring_users_to_cancel()
     master_ids = join_column_values(result, 0)
