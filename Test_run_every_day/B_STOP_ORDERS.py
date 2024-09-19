@@ -5,6 +5,7 @@ import pyodbc
 import pandas as pd
 import  sqlite3
 import requests
+from openpyxl.workbook import Workbook
 
 
 def bring_users_to_cancel():
@@ -71,27 +72,36 @@ def test_connect_to_db():
     ORDER BY e.order_date DESC
     """
 
+    #online
     cursor.execute(query1)
     result1 = cursor.fetchall()
-
+    #tiles
     cursor.execute(query2)
     result2 = cursor.fetchall()
-
+    #bower
     cursor.execute(query3)
     result3 = cursor.fetchall()
 
-    rows = result1 + result2 + result3
-    data = [list(row) for row in rows]
+    # יצירת קובץ אקסל
+    workbook = Workbook()
+    sheet = workbook.active
+    # כותרות
     columns = [column[0] for column in cursor.description]
-    df = pd.DataFrame(data, columns=columns)
-    # Save the DataFrame to a BytesIO object
+    sheet.append(columns)
+    # הוספת תוצאות שאילתות לאקסל
+    rows = result1 + result2 + result3
+    for row in rows:
+        sheet.append(list(row))
+    # שמירת הקובץ בזיכרון
     output = BytesIO()
-    df.to_excel(output, index=False)
+    workbook.save(output)
     output.seek(0)
-    # Send the Excel file via email
-    send_to_email(output)
-
-
+    second_row = list(sheet.iter_rows(min_row=2, max_row=2, values_only=True))[0]
+    if all(cell is None or cell == '' for cell in second_row):
+        print("No orders today. Email will not be sent.")
+    else:
+        send_to_email(output)
+        print("Email sent.")
 
 def send_to_email(excel_file):
     today = datetime.now().strftime("%d-%m-%Y")
@@ -107,4 +117,3 @@ def send_to_email(excel_file):
             "text": " :) תודה והמשך יום נפלא"
         }
     )
-
