@@ -40,5 +40,5 @@ def test_connect_to_db():
     
     """)
     cnxn.commit()
-    print("Tesr Order Stoped")
+    print("Test Order Stop")
 
