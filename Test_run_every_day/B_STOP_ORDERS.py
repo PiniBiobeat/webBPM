@@ -2,8 +2,7 @@ import os
 from datetime import datetime
 from io import BytesIO
 import pyodbc
-import pandas as pd
-import  sqlite3
+import sqlite3
 import requests
 from openpyxl.workbook import Workbook
 
