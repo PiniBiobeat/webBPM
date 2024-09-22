@@ -18,7 +18,7 @@ def bring_users_to_cancel():
 def join_column_values(result, column_index):
     return ','.join(str(row[column_index]) for row in result)
 
-def test_connect_to_db():
+def test_connect_to_db_2():
     result = bring_users_to_cancel()
     master_ids = join_column_values(result, 0)
     user_ids = join_column_values(result, 1)
