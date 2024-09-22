@@ -1,6 +1,7 @@
 import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Test_run_every_day.B_STOP_ORDERS import *
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 
