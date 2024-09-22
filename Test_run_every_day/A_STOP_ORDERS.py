@@ -1,6 +1,6 @@
 import sys
-sys.path.append(r'C:\Users\tester\PycharmProjects\pytest-lupa')
 from Test_run_every_day.B_STOP_ORDERS import *
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 
@@ -39,4 +39,5 @@ def test_connect_to_db():
     
     """)
     cnxn.commit()
+    print("Tesr Order Stoped")
 
