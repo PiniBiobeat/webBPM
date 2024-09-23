@@ -11,7 +11,7 @@ def bring_users_to_cancel():
     db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'testDb')
     sqliteConnection = sqlite3.connect(db_path)
     cursor = sqliteConnection.cursor()
-    query = 'select master_id , user_id from users_for_cancel'
+    query = 'select master_id , bower_id from users_for_cancel'
     cursor.execute(query)
     result = cursor.fetchall()
     return result
