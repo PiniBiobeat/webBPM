@@ -111,7 +111,7 @@ def send_to_email(excel_file):
         f"Orders {today}.xlsx", excel_file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")},
         data={
             "from": "lupa automation<monitor@lupa.co.il>",
-            "to": "ofirtnc@gmail.com",
+            "to": "dosowep914@marchub.com,ofirtnc@gmail.com",
             "subject": "ביטול הזמנות טסטים פיתוח",
             "text": " :) תודה והמשך יום נפלא"
         }
