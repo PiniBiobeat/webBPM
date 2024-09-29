@@ -28,12 +28,12 @@ def test_connect_to_db():
  
 
     update lupa_online.dbo.orders_tbl set in_status = '24' where master_id in ({master_ids}) AND in_status NOT IN (22, 23) AND in_status <> '24';
-    update lupa_online.dbo.order_item_tbl set in_status = '24' where master_id in ({master_ids}) AND in_status NOT IN (22, 23) AND in_status <> '24' and bulk_id IS NOT NULL;
+    update lupa_online.dbo.order_item_tbl set in_status = '24' where master_id in ({master_ids}) AND in_status NOT IN (22, 23) AND in_status <> '24' and bulk_id IS NULL;
     
 
     
     update lupa_square.dbo.orders_tbl set in_status = '24' where master_id in ({master_ids}) AND in_status NOT IN (22, 23) AND in_status <> '24';
-    update lupa_square.dbo.order_item_tbl set in_status = '24' where master_id in ({master_ids}) AND in_status NOT IN (22, 23) AND in_status <> '24' and bulk_id IS NOT NULL;
+    update lupa_square.dbo.order_item_tbl set in_status = '24' where master_id in ({master_ids}) AND in_status NOT IN (22, 23) AND in_status <> '24' and bulk_id IS NULL;
 
 
     update lupa.dbo.orders_tbl set in_status = 'Stopped' where order_customer_id in ({user_ids}) AND in_status NOT IN ('Delivered', 'Printed', 'Phone order') AND in_status <> 'Stopped'; 
