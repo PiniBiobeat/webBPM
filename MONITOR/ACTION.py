@@ -13,7 +13,7 @@ from MONITOR.payment_element import *
 
 async def evrey_5_minute():
     test_stop_status_30()
-
+    asyncio.run(check_element())
 
 
 
