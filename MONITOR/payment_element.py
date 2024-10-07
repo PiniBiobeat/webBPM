@@ -31,7 +31,7 @@ async def check_element():
             # Wait for the element and get its text content
             element = await page.wait_for_selector(f'xpath={xpath_selector}', timeout=5000)
             text_content = await element.text_content()
-
+            assert text_content.strip() == "סל קניות"
             # Print the extracted text content
             print(f"Element text: {text_content.strip()}")
 
