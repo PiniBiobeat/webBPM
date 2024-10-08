@@ -14,8 +14,6 @@ async def evrey_5_minute():
 
 
 
-async def evrey_10_minute():
-    asyncio.run(check_element())
 
 
 
