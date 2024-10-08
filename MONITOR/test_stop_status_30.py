@@ -17,7 +17,7 @@ def test_stop_status_30():
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": ":alert: *הזמנות שתקועות מעל 5 דקות בסטטוס 30* :alert:",
+                "text": ":loading: *הזמנות שתקועות מעל 5 דקות בסטטוס 30* :loading:",
             }
         },
         {
