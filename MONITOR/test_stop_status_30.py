@@ -2,7 +2,7 @@ from data_base import *
 
 
 def test_stop_status_30():
-    select_query = "select [order_id],[master_id],[tree_version],[insert_date] from [lupa_online].[dbo].[order_item_tbl] where in_status = 30  AND DATEADD(MINUTE, 5, insert_date) < GETDATE() AND DATEADD(MINUTE, 6, insert_date) > GETDATE();"
+    select_query = "select [order_id],[master_id],[tree_version],[insert_date] from [lupa_online].[dbo].[order_item_tbl] where in_status = 30  AND DATEADD(MINUTE, 5, insert_date) < GETDATE() AND DATEADD(MINUTE, 9, insert_date) > GETDATE();"
     data = mysql(select_query)
     print("\n")
     temp_list = []

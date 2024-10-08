@@ -29,7 +29,7 @@ async def evrey_5_minute():
 
 async def job_scheduler():
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(evrey_5_minute, 'interval', minutes=5)
+    scheduler.add_job(evrey_5_minute, 'interval', minutes=4)
     scheduler.start()
     while True:
         await asyncio.sleep(1)
