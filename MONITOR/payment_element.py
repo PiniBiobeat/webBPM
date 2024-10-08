@@ -3,7 +3,7 @@ import requests
 from playwright.async_api import async_playwright
 
 # Slack webhook URL (replace with your actual webhook URL)
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
 
 # Function to send a message to Slack
 def send_slack_message(message):
