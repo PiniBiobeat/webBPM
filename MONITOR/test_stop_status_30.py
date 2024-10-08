@@ -32,4 +32,4 @@ def test_stop_status_30():
 
 
     if not temp_list == []:
-        send_slack(block)
+        send_slack_orders(block)
