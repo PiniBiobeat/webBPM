@@ -3,7 +3,7 @@ from slack import send_slack_orders
 
 
 def test_stop_status_30():
-    select_query = "select [order_id],[master_id],[tree_version],[insert_date] from [lupa_online].[dbo].[order_item_tbl] where in_status = 30  AND DATEADD(MINUTE, 0.1, insert_date) < GETDATE() AND DATEADD(MINUTE, 9, insert_date) > GETDATE();"
+    select_query = "select [order_id],[master_id],[tree_version],[insert_date] from [lupa_online].[dbo].[order_item_tbl] where in_status = 30  AND DATEADD(MINUTE, 5, insert_date) < GETDATE() AND DATEADD(MINUTE, 9, insert_date) > GETDATE();"
     data = mysql(select_query)
     print("\n")
     temp_list = []
@@ -34,5 +34,3 @@ def test_stop_status_30():
 
     if not temp_list == []:
         send_slack_orders(block)
-        delete_query = "delete from [lupa_online].[dbo].[order_item_tbl] where in_status = 30  AND DATEADD(MINUTE, 0.1, insert_date) < GETDATE() AND DATEADD(MINUTE, 9, insert_date) > GETDATE();"
-        mysql(delete_query)
