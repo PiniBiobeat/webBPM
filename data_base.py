@@ -38,9 +38,11 @@ def mysql(mysql_execute):
 #     }
 
 
+orders = "https://hooks.slack.com/services/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"
+demoapp = "https://hooks.slack.com/services/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"
 def send_slack(block):
     """Send a message to Slack using a webhook URL."""
-    paymentv4 = "https://hooks.slack.com/services/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"
+    paymentv4 = demoapp
 
     payload = {
         "blocks": block,

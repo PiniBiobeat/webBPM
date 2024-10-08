@@ -3,8 +3,8 @@ import json
 import psycopg2
 import requests
 import jsonpath
-
-
+import paymentTestsForBen
+import testPaymentIsUp
 def test_check_errors_calendar():
 
     class Error:
@@ -145,4 +145,5 @@ def test_check_errors_calendar():
 
 
 test_check_errors_calendar()
-
+paymentTestsForBen.test_check_errors_calendar()
+testPaymentIsUp.check_element()
