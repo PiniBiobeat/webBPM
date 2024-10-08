@@ -6,21 +6,11 @@ import asyncio
 
 # Import the function
 from MONITOR.test_stop_status_30 import *
-from MONITOR.payment_element import *
+
 
 
 async def evrey_5_minute():
     test_stop_status_30()
-
-
-
-
-
-
-
-
-
-
 
 
 
