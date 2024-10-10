@@ -6,6 +6,7 @@ import asyncio
 
 # Import the function
 from MONITOR.test_stop_status_30 import *
+from MONITOR.test_paymentv4_connect import test_paymentv4_connect_book, test_paymentv4_connect_tiles
 
 
 
@@ -15,11 +16,22 @@ async def evrey_5_minute():
 
 
 
+async def payment_connection():
+    test_paymentv4_connect_tiles()
+    test_paymentv4_connect_book()
+
+
+
+
+
+
+
 
 
 async def job_scheduler():
     scheduler = AsyncIOScheduler()
     scheduler.add_job(evrey_5_minute, 'interval', minutes=4)
+    scheduler.add_job(payment_connection, 'interval', minutes=10)
     scheduler.start()
     while True:
         await asyncio.sleep(1)
