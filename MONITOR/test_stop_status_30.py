@@ -1,6 +1,5 @@
 from data_base import *
-from slack import send_slack_orders
-
+from slack import send_slack
 
 
 def test_stop_status_30():
@@ -34,7 +33,7 @@ def test_stop_status_30():
 
 
     if not temp_list == []:
-        send_slack_orders(block)
+        send_slack(block, "oder_monitor")
         test_delete_status30()
 
 
