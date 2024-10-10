@@ -33,7 +33,7 @@ def test_stop_status_30():
 
 
     if not temp_list == []:
-        send_slack(block, "oder_monitor")
+        send_slack(block, "order_monitor")
         test_delete_status30()
 
 
