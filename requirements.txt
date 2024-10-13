@@ -16,3 +16,4 @@ dotenv
 apscheduler
 requests
 pyodbc
+jsonpath

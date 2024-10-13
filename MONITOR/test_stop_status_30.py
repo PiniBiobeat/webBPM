@@ -38,5 +38,5 @@ def test_stop_status_30():
 
 
 def test_delete_status30():
-        delete_query3 = "delete from [lupa_online].[dbo].[order_item_tbl] where in_status = 30  AND DATEADD(MINUTE, 5, insert_date) < GETDATE() AND DATEADD(MINUTE, 9, insert_date) > GETDATE();"
+        delete_query3 = "delete from [lupa_online].[dbo].[order_item_tbl] where in_status = 30 AND DATEADD(MINUTE, 5, insert_date) < GETDATE() AND DATEADD(MINUTE, 9, insert_date) > GETDATE();"
         mysql(delete_query3)
