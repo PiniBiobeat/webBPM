@@ -33,9 +33,17 @@ def send_slack(block,slack_app_bot, slack_folder):
     except requests.exceptions.RequestException as e:
         print(f"Error sending message to Slack: {e}")
 
+
+
+
+
+
+
+
+
 """
 example call:
-send_slack(block, "paymentv4","order_monitor")
+send_slack(block, "paymentv4","#order_monitor")
 """
 
 
@@ -46,19 +54,42 @@ send_slack(block, "paymentv4","order_monitor")
 
 
 
-def demoapps(block):
-    """Send a message to Slack using a webhook URL."""
-    demoapp = "https://hooks.slack.com/services/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"
 
-    payload = {
-        "blocks": block,
 
-    }
 
-    try:
-        response = requests.post(demoapp, json=payload)
-        response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        print(f"Error sending message to Slack: {e}")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def demoapps(block):
+#     """Send a message to Slack using a webhook URL."""
+#     demoapp = "https://hooks.slack.com/services/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"
+#
+#     payload = {
+#         "blocks": block,
+#
+#     }
+#
+#     try:
+#         response = requests.post(demoapp, json=payload)
+#         response.raise_for_status()
+#     except requests.exceptions.RequestException as e:
+#         print(f"Error sending message to Slack: {e}")
+#
 
