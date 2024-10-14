@@ -9,14 +9,14 @@ webhook_paymentv4 = {
 }
 
 
-def send_slack(block, user_paymentv4):
+def send_slack(block, user_hook_paymentv4):
     """Send a message to Slack using a webhook URL."""
     payload = {
         "blocks": block,
 
     }
     try:
-        response = requests.post(webhook_paymentv4[user_paymentv4], json=payload)
+        response = requests.post(webhook_paymentv4[user_hook_paymentv4], json=payload)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         print(f"Error sending message to Slack: {e}")
