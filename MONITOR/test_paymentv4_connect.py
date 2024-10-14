@@ -48,7 +48,7 @@ def test_paymentv4_connect_book():
                     }
                 },
             ]
-            send_slack(block, "system_monitor")
+            send_slack(block,"paymentv4","#system_monitor")
 
 
 
@@ -97,7 +97,7 @@ def test_paymentv4_connect_tiles():
                     }
                 },
             ]
-            send_slack(block, "system_monitor")
+            send_slack(block,"paymentv4","#system_monitor")
 
 
 
