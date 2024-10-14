@@ -7,6 +7,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 my_dict_lupa = dict()
+from data_base import mysql
 
 #'ben@lupa.co.il','pinim@lupa.co.il'
 
@@ -53,6 +54,7 @@ class Test_me():
             print(my_dict_lupa)
             #self.send_to_email(my_dict_lupa)
 
+
         cursor.close()
 
     def test_connect_to_db_in_lupa_tiles_DB(self):
@@ -75,6 +77,13 @@ class Test_me():
         if len(my_dict_lupa) > 0:
             self.send_to_email(my_dict_lupa)
             self.send_to_slack(my_dict_lupa)
+
+
+
+            #set 26 to orders without bulk id
+            update_withoutbalk = "update [lupa_online].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and product_id = 3 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
+            mysql(update_withoutbalk)
+
 
 
 

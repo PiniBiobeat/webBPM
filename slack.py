@@ -9,7 +9,7 @@ webhook = {
         "#system_monitor": "https://hooks.slack.com/services/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"
     },
     "demo": {
-        "#demo_app": "https://hooks.slack.com/services/T01EPT4V4B0/B07ABC12345/xyz0987654321"
+        "#demo_app": "https://hooks.slack.com/services/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"
     },
     "App_V3": {
         "#proj_app_v3": "https://hooks.slack.com/services/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",
