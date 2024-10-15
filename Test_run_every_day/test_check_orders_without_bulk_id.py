@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import pyodbc
 from datetime import datetime
 import datetime
@@ -8,6 +11,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 my_dict_lupa = dict()
 from data_base import mysql
+
 
 #'ben@lupa.co.il','pinim@lupa.co.il'
 
