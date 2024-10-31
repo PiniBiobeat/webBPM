@@ -71,6 +71,9 @@ def page_mobile(mobile_browser_context):
 
 
 
+
+
+
 from infra.config.config_provider import init_config
 config_path = ""
 browser = {}

@@ -1,24 +1,83 @@
+from conftest import *
 
 
 
-import re
-from playwright.sync_api import sync_playwright, Page, expect
 
-def test_example(page: Page) -> None:
-    page.goto("https://tiles.lupa.co.il/")
-    page.get_by_role("button", name="בחירת תמונות").click()
-    page.locator(".rounded_box").first.click()
-    page.locator("li").filter(has_text="ריבוע עם מסגרת20X20").click()
-    page.get_by_label("").set_input_files("tests/TestTiles/shutterstock_711632317.jpg")
-    page.goto("https://tiles.lupa.co.il/preview")
+# page object modol desktop
+class SearchPage():
+    search_term_input_selector = '#sb_form_q'
+    selector = "#finish"
+
+    def __init__(self, page: Page):
+        self.page = page
+
+    def navigate(self):
+        self.page.goto("http://the-internet.herokuapp.com/dynamic_loading/1")
+
+    def search(self):
+        self.page.get_by_role("button", name="Start").click()
+        self.page.get_by_role("heading", name="Hello World!").is_enabled()
+        self.page.wait_for_selector(self.selector, state="visible")
 
 
-with sync_playwright() as p:
-    browser = p.chromium.launch(headless=False)
-    page = browser.new_page()
-    test_example(page)
-    page.wait_for_timeout(5000)
-    browser.close()
+
+def test_play(page):
+    searchclass = SearchPage(page)
+    searchclass.navigate()
+    searchclass.search()
+
+
+
+
+# page object modul mobile
+class SearchPage2():
+    search_term_input_selector = '#sb_form_q'
+    selector = "#finish"
+
+    def __init__(self, page_mobile: Page):
+        self.page_mobile = page_mobile
+
+    def navigate2(self):
+        self.page_mobile.goto("http://the-internet.herokuapp.com/dynamic_loading/1")
+
+    def search2(self):
+        self.page_mobile.get_by_role("button", name="Start").click()
+        self.page_mobile.get_by_role("heading", name="Hello World!").is_enabled()
+        self.page_mobile.wait_for_selector(self.selector, state="visible")
+
+
+
+def test_play2(page_mobile):
+    searchclass2 = SearchPage2(page_mobile)
+    searchclass2.navigate2()
+    searchclass2.search2()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
