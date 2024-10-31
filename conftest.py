@@ -10,7 +10,7 @@ def browser_context(playwright: Playwright,request):
     viewport = {'width': 1280, 'height': 1080}
     device = playwright.devices['iPhone 15 Pro Max']
 
-    browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False,)
+    browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
     context = browser.new_context(http_credentials=test_co,color_scheme='light')
     context.tracing.start(screenshots=True, snapshots=True, sources=False)
 
