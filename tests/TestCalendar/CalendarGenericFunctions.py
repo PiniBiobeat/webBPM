@@ -50,6 +50,7 @@ class CalendarPagesManager(TestBase):
         page.insert_user_and_pass(email1, pass1)
         page.click_login_button()
 
+
     def setFormat(self):
         page: ChooseFormatCalendarPage = self.browser.create_page(ChooseFormatCalendarPage)
         page.getSelectorElement(92)
