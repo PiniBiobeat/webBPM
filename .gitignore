@@ -4,7 +4,7 @@
 
 trace.zip
 zone_trace.zip
-
+zone_mobile_trace
 # Ignore local virtualenvs
 lib/
 bin/

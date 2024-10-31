@@ -5,10 +5,11 @@ import pytest
 
 
 test_co = ({"username": "test","password": "Acf325A12!"})
+
+#desktop
 @pytest.fixture(scope="session")
 def browser_context(playwright: Playwright,request):
     viewport = {'width': 1280, 'height': 1080}
-    device = playwright.devices['iPhone 15 Pro Max']
 
     browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
     context = browser.new_context(http_credentials=test_co,color_scheme='light')
@@ -21,23 +22,39 @@ def browser_context(playwright: Playwright,request):
     context.close()
     browser.close()
 
+#mobile
+@pytest.fixture(scope="session")
+def mobile_browser_context(playwright: Playwright,request):
+    device = playwright.devices['iPhone 15 Pro Max']
+
+    browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
+    context = browser.new_context(http_credentials=test_co,color_scheme='light',**device)
+    context.tracing.start(screenshots=True, snapshots=True, sources=False)
+
+    failed_before = request.session.testsfailed
+    yield context
+    if request.session.testsfailed != failed_before:
+        context.tracing.stop(path="zone_mobile_trace.zip")
+    context.close()
+    browser.close()
 
 
-
+#desktop
 @pytest.fixture(scope="session")
 def page(browser_context):
     page = browser_context.new_page()
     yield page
     page.close()
 
+#mobile
+@pytest.fixture(scope="session")
+def page_mobile(mobile_browser_context):
+    page_mobile = mobile_browser_context.new_page()
+    yield page_mobile
+    page_mobile.close()
 
 
 
-
-def test_play2(page):
-    page.goto("https://tiles.lupa.co.il")
-    expect(page.get_by_role("button", name="בחירת תמונות")).to_be_visible()
-    page.pause()
 
 
 
