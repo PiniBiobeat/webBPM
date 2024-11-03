@@ -67,6 +67,7 @@ def test_send_event():
     page.fill(locators_pass,text_pass)
     page.click(click_login)
     page.click(button_click_to_buy)
+    #------------------------------------------
     page.click(click_sum_order)
     page.click(add_coupon)
     page.fill(imput_code,code_coupon)

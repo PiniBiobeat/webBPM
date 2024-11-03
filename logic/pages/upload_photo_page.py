@@ -9,6 +9,8 @@ class UploadPhotoPage(PageBase):
     set_size_tiles = "(//li[@class='MuiListItem-root list_model_ul MuiListItem-gutters'])[1]"
     instagram_button = "//img[@src='/static/media/icon_instagram.ae47004e.svg']"
     googlePhotos_button = "//img[@src='/static/media/icon_google_photos.776cf4ac.svg']"
+    group_images = "//div[@class='skewed_border lupa-gallery']"
+    choose_image_1 = "//div[@class='photo_thumbnail' and contains(@data-id,'791')]"
     #'(//li[@class='MuiListItem-root list_model_ul MuiListItem-gutters'])[1]'
 
     def __init__(self, page):
@@ -22,6 +24,8 @@ class UploadPhotoPage(PageBase):
     def upload_photo_gallery(self):
         self.pw_page.click(self.gallery_button)
         self.pw_page.click(self.set_size_tiles)
+        self.pw_page.click(self.group_images)
+        self.pw_page.click(self.choose_image_1)
 
     def open_instagram(self):
         with self.pw_page.expect_popup() as popup_info:

@@ -13,7 +13,7 @@ def test_check_api_request():
         # Capture network requests
         def log_request(request):
             nonlocal api_request_found
-            if 'https://paymentsv4-api.lupa.co/api.aspx' in request.url:
+            if 'https://paymentsv4-api.lupa.co.il/api.aspx' in request.url:
                 print(f"Captured API request: {request.url}")
                 api_request_found = True
 
