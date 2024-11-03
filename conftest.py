@@ -1,6 +1,7 @@
-from playwright.sync_api import Playwright, Page , expect
-import pytest_playwright
+from playwright.sync_api import Playwright
 import pytest
+
+
 
 
 
@@ -9,11 +10,11 @@ test_co = ({"username": "test","password": "Acf325A12!"})
 #desktop
 @pytest.fixture(scope="session")
 def browser_context(playwright: Playwright,request):
-    viewport = {'width': 1280, 'height': 1080}
+    viewport = {'width': 1280, 'height': 720}
 
     browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
-    context = browser.new_context(http_credentials=test_co,color_scheme='light')
-    context.tracing.start(screenshots=True, snapshots=True, sources=False)
+    context = browser.new_context(http_credentials=test_co,color_scheme='light',viewport=viewport)
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     failed_before = request.session.testsfailed
     yield context
@@ -29,7 +30,7 @@ def mobile_browser_context(playwright: Playwright,request):
 
     browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
     context = browser.new_context(http_credentials=test_co,color_scheme='light',**device)
-    context.tracing.start(screenshots=True, snapshots=True, sources=False)
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     failed_before = request.session.testsfailed
     yield context
