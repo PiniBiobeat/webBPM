@@ -12,6 +12,9 @@ class PreviewScreen(PageBase):
     icon_delete = "(//img[@src='/static/media/icon_trash.5106d022.svg'])[1]"
     text_yes_delete = "//span[@class='lupa-btn-content' and contains(.,'כן')]"
     icon_edit = "(//img[@src='/static/media/icon_image_edit.12284d2b.svg'])[1]"
+    click_to_buy = "//button[@class='lupa-btn']"
+    same_user = "//span[@class='lupa-btn-content' and contains(.,'כניסה')]"
+    text_payment = "//button[@type='button' and contains(.,'בואו נמשיך')]"
 
     def __init__(self, page):
         super().__init__(page)
@@ -22,9 +25,28 @@ class PreviewScreen(PageBase):
         num_of_image = len(images)
         return num_of_image
 
+    def get_url(self):
+        # Use a broader pattern to match any URL under the base domain
+        self.pw_page.wait_for_selector(self.text_payment, state="visible")
+
+        # Get the current URL
+        current_url = self.pw_page.url
+        return current_url
+
+
     def get_price(self):
         text = self.pw_page.text_content(self.title_button)
         return text
+
+    def button_click_to_buy(self):
+        self.pw_page.click(self.click_to_buy)
+        self.pw_page.click(self.click_to_buy)
+
+    def button_click_to_payment(self):
+        self.pw_page.click(self.click_to_buy)
+
+    def click_with_same_user(self):
+        self.pw_page.click(self.same_user)
 
     def click_add_image(self):
         self.pw_page.click(self.icon_add_image)
