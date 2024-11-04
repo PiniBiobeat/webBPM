@@ -50,9 +50,9 @@ def page(browser_context):
 #mobile
 @pytest.fixture(scope="session")
 def page_mobile(mobile_browser_context):
-    page_mobile = mobile_browser_context.new_page()
-    yield page_mobile
-    page_mobile.close()
+    page = mobile_browser_context.new_page()
+    yield page
+    page.close()
 
 
 
