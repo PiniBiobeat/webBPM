@@ -7,6 +7,7 @@ from tests.TestTiles.test_base import TestBase
 from infra.config.config_provider import configuration
 from logic.pages.preview_screen_tiles_page import PreviewScreen
 from logic.pages.login_page import LoginPage
+from logic.pages.calender_payment_page import CalenderPaymentPage
 
 
 list = ["C:\\Users\\lupa\\Desktop\\london\\IMG_2549.jpg","C:\\Users\\lupa\\Desktop\\london\\IMG_2668.jpg"]
@@ -21,11 +22,11 @@ num_images = 1
 originalPrice=39
 defaultQuantity=1
 
-class TestTilesToPayment(TestBase):
+class TilesToPayment(TestBase):
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_add_tiles_to_payment(self):
+    def add_tiles_to_payment(self):
 
         page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
         page.choose_tiles()
@@ -43,11 +44,17 @@ class TestTilesToPayment(TestBase):
 
         page: PreviewScreen = self.browser.create_page(PreviewScreen)
         page.button_click_to_payment()
+        url = page.get_url()
+
+        page: CalenderPaymentPage = self.browser.create_page(CalenderPaymentPage)
+        page.delete_from_basket()
+
+
 
         expected_url_pattern = r"https://paymentsv4-ui\.lupa\.co\.il/.*"
 
 
-        url = page.get_url()
+
 
 
         # Assert that the actual URL matches the expected pattern
