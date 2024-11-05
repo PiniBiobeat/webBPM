@@ -19,14 +19,16 @@ class SearchPage:
 
 
 #test_page.py desktop
-def test_play(page):
+def test_play(page: Page):
     searchclass = SearchPage(page)
     searchclass.navigate()
     searchclass.search()
+    page.goto("https://www.bing.com")
+
 
 
 #test_page.py mobile
-def test_play_mobile(page_mobile):
+def test_play_mobile(page_mobile: Page):
     searchclass = SearchPage(page_mobile)
     searchclass.navigate()
     searchclass.search()
