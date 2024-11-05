@@ -13,12 +13,13 @@ from logic.pages.preview_calendar_page import PreviewCalendar
 from logic.pages.choose_format_calendar_page import ChooseFormatCalendarPage
 from logic.pages.settings_calendar_page import SettingsCalendarPage
 from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
+from logic.pages.my_calendar_page import MyCalendarPage
 from infra.generic_helpers import sql_get_calendar
 from tests.TestCalendar.test_create_calendar import TestCreateCalendar
 import os
 
-email1 = 'pinim@lupa.co.il'
-pass1 = "Pinimari!1"
+email1 = 'automation@lupa.co.il'
+pass1 = "a123123"
 master_id = 3189204
 
 images_base_path = "C:\\Users\\tester\\Desktop\\repositories\\pytest-lupa\\tests\\TestCalendar\\image_london\\"
@@ -50,6 +51,10 @@ class CalendarPagesManager(TestBase):
         page.insert_user_and_pass(email1, pass1)
         page.click_login_button()
 
+    def clickMyCalendar(self):
+        page: CalendarPage = self.browser.create_page(CalendarPage)
+        page.open_menu_after_login()
+        page.open_screen_my_calendar_from_menu()
 
     def setFormat(self):
         page: ChooseFormatCalendarPage = self.browser.create_page(ChooseFormatCalendarPage)
@@ -64,6 +69,11 @@ class CalendarPagesManager(TestBase):
         page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
         page.click_shoose_themes()
         page.click_next_on_theme()
+
+    def addToBasket(self):
+        page: MyCalendarPage = self.browser.create_page(MyCalendarPage)
+        page.click_add_calendar_to_basket()
+
 
     def setThemeWhite(self):
         page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
