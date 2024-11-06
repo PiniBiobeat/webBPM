@@ -40,19 +40,61 @@ def mobile_browser_context(playwright: Playwright,request):
     browser.close()
 
 
-#desktop
+#desktop page
 @pytest.fixture(scope="session")
 def page(browser_context):
     page = browser_context.new_page()
     yield page
     page.close()
 
-#mobile
+#mobile page
 @pytest.fixture(scope="session")
 def page_mobile(mobile_browser_context):
     page = mobile_browser_context.new_page()
     yield page
     page.close()
+
+
+
+#URLS
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+@pytest.fixture(scope="module")
+def Payment_url_books_prod(page):
+    page.goto(config['urls']['Payment_url_books_prod'])
+
+@pytest.fixture(scope="module")
+def Payment_url_books_test(page):
+    page.goto(config['urls']['Payment_url_books_test'])
+
+@pytest.fixture(scope="module")
+def Payment_url_tiles_prod(page):
+    page.goto(config['urls']['Payment_url_tiles_prod'])
+
+@pytest.fixture(scope="module")
+def Payment_url_tiles_test(page):
+    page.goto(config['urls']['Payment_url_tiles_test'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
