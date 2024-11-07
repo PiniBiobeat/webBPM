@@ -35,7 +35,7 @@ def mysql(mysql_execute):
 
 
 #Postgres database: PaymentV4 / calendar
-def postgres14(postgres_execute="select",database="Tariff"):
+def postgres14(postgres_execute,database="Tariff"):
     connection = psycopg2.connect(user="machineDBA",
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
                                   host="35.187.190.6",

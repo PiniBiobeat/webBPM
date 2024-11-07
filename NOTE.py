@@ -1,8 +1,8 @@
 #page.py (page object model)
 from playwright.sync_api import Page
+import pytest
 
-
-class SearchPage:
+class SearchPage():
     search_term_input_selector = '#sb_form_q'
     selector = "#finish"
 
@@ -18,17 +18,22 @@ class SearchPage:
         self.page.wait_for_selector(self.selector, state="visible")
 
 
+
+
+
+
 #test_page.py desktop
-def test_play(page: Page):
+@pytest.mark.usefixtures("Payment_url_tiles_prod")
+def test_play(page):
     searchclass = SearchPage(page)
     searchclass.navigate()
     searchclass.search()
-    page.goto("https://www.bing.com")
 
 
 
 #test_page.py mobile
-def test_play_mobile(page_mobile: Page):
+@pytest.mark.usefixtures("Payment_url_tiles_prod")
+def test_play_mobile(page_mobile):
     searchclass = SearchPage(page_mobile)
     searchclass.navigate()
     searchclass.search()
@@ -71,7 +76,7 @@ def test_play_mobile(page_mobile: Page):
 
 
 
-0
+
 # #another example: Dependency Injection
 # @pytest.fixture
 # def searchclass(page: Page):
@@ -82,7 +87,7 @@ def test_play_mobile(page_mobile: Page):
 #     searchclass.navigate()
 #     searchclass.search()
 
-0
+
 
 # import os
 # import pyautogui
