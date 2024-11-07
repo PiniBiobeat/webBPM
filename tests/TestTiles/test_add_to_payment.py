@@ -52,7 +52,7 @@ class TilesToPayment(TestBase):
             pytest.fail(error_message)
 
     def send_slack_message(self, message):
-        webhook_url = "https://hooks.slack.com/services/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"  # Replace with your actual webhook URL
+        webhook_url = "https://hooks.slack.com/services/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"  # Replace with your actual webhook URL
 
         payload = {
             "text": message,

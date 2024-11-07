@@ -12,7 +12,7 @@ class TilesToPayment1(TilesToPayment):
 
         except AssertionError as e:
             # Send a notification to Slack if the test fails
-            self.send_slack_notification(f"Test failed: {e}")
+            self.send_slack_notification(f"Tiles not add to basket: {e}")
             raise  # Re-raise the exception to mark the test as failed
 
     def send_slack_notification(self, message_text):
