@@ -4,7 +4,7 @@ class MyCalendarPage(PageBase):
 
     init_indication = "(//button[@type='button'])[1]"
     test_click_change_format = '//button[contains(.,"לשינוי הפורמט")]'
-    text_add_to_basket = '//button[contains(.,"הוספה לסל")'
+    text_add_to_basket = '//button[contains(.,"הוספה לסל")]'
 
     def __init__(self, page):
         super().__init__(page)
