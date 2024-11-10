@@ -60,19 +60,23 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 @pytest.fixture(scope="module")
-def Payment_url_books_prod(page):
+def Payment_url_books_prod(request):
+    page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
     page.goto(config['GLOBAL']['Payment_url_books_prod'])
 
 @pytest.fixture(scope="module")
-def Payment_url_books_test(page):
+def Payment_url_books_test(request):
+    page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
     page.goto(config['GLOBAL']['Payment_url_books_test'])
 
 @pytest.fixture(scope="module")
-def Payment_url_tiles_prod(page):
+def Payment_url_tiles_prod(request):
+    page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
     page.goto(config['GLOBAL']['Payment_url_tiles_prod'])
 
 @pytest.fixture(scope="module")
-def Payment_url_tiles_test(page):
+def Payment_url_tiles_test(request):
+    page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
     page.goto(config['GLOBAL']['Payment_url_tiles_test'])
 
 
