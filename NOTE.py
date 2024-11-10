@@ -1,15 +1,20 @@
 #page.py (page object model)
 from playwright.sync_api import Page
 import pytest
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
 
-class SearchPage():
+
+class SearchPage:
     search_term_input_selector = '#sb_form_q'
     selector = "#finish"
 
     def __init__(self, page: Page):
         self.page = page
 
-    def navigate(self):
+    def navigate(self, site):
+        self.page.goto(config['GLOBAL'][site])
         self.page.goto("http://the-internet.herokuapp.com/dynamic_loading/1")
 
     def search(self):
@@ -23,19 +28,19 @@ class SearchPage():
 
 
 #test_page.py desktop
-@pytest.mark.usefixtures("Payment_url_tiles_prod")
+@pytest.mark.usefixtures("payment_url_tiles_prod")
 def test_play(page):
     searchclass = SearchPage(page)
-    searchclass.navigate()
+    searchclass.navigate('payment_url_books_prod')
     searchclass.search()
 
 
 
 #test_page.py mobile
-@pytest.mark.usefixtures("Payment_url_tiles_prod")
+@pytest.mark.usefixtures("payment_url_tiles_prod")
 def test_play_mobile(page_mobile):
     searchclass = SearchPage(page_mobile)
-    searchclass.navigate()
+    searchclass.navigate('payment_url_books_prod')
     searchclass.search()
 
 

@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 
 
@@ -12,5 +12,14 @@ class BasketItems:
 
     def __init__(self, page: Page):
         self.page = page
+
+
+    def delete_all_items(self):
+        self.page.locator(self.select_item_button).nth(0).click()
+        self.page.locator(self.select_item_button).first.check()
+        self.page.locator(self.delete_button).click()
+        self.page.get_by_role("button", name="כן").click()
+        expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
+
 
 

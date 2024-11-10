@@ -55,29 +55,30 @@ def page_mobile(mobile_browser_context):
 
 
 
+
 #URLS
 import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 @pytest.fixture(scope="module")
-def Payment_url_books_prod(request):
+def payment_url_books_prod(request):
     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
-    page.goto(config['GLOBAL']['Payment_url_books_prod'])
+    page.goto(config['GLOBAL']['payment_url_books_prod'])
 
 @pytest.fixture(scope="module")
-def Payment_url_books_test(request):
+def payment_url_books_test(request):
     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
-    page.goto(config['GLOBAL']['Payment_url_books_test'])
+    page.goto(config['GLOBAL']['payment_url_books_test'])
 
 @pytest.fixture(scope="module")
-def Payment_url_tiles_prod(request):
+def payment_url_tiles_prod(request):
     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
-    page.goto(config['GLOBAL']['Payment_url_tiles_prod'])
+    page.goto(config['GLOBAL']['payment_url_tiles_prod'])
 
 @pytest.fixture(scope="module")
-def Payment_url_tiles_test(request):
+def payment_url_tiles_test(request):
     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
-    page.goto(config['GLOBAL']['Payment_url_tiles_test'])
+    page.goto(config['GLOBAL']['payment_url_tiles_test'])
 
 
 
