@@ -1,7 +1,7 @@
 import requests
 from playwright.sync_api import sync_playwright
 
-def test_check_api_request():
+def check_api_request():
     with sync_playwright() as p:
         # Start a browser and open a new page
         browser = p.chromium.launch(headless=False)
@@ -21,7 +21,7 @@ def test_check_api_request():
         page.on('request', log_request)
 
         # Navigate to the page that triggers the API call
-        page.goto("https://paymentsv4-ui.lupa.co.il/basket?source_type=tiles&token=LIKezgzQA5jXOcN7_piBvNtZ1et3xGx1O3Xp4DwyHImuKHnE37eN5fSv_mEZbidf5H_QhK_0MfmyZERsHqvEXo9BbRLkoHolS8uyCwBOHdlZiqfh5Gmgc05EQQzA9pXu1sIPc-N0Sd5XjDuMdBet-dj3cnxxvHad_uWvgMlmJXRjIJLntrKzYyPoNQAYYrGasVDbE2MO6ibBzT8xOJSgc8Tu967bECtNU3UV3illIFWZxJXo4EHq6je0f0qbWlUVDYQ5_45OTbYna5OdCtBR9FApjqtLPA8vFll2CzV7xeWRZX7AWdAm3Vl2YFQggR7PThgR37QWrWmqtYG5-zUeMw2&source_device=desktop")
+        page.goto("https://paymentsv4-ui.lupa.co.il/basketItems?&source_type=tiles&token=Mgxr0W4OG7n-JrsIluGGTKHJCx8Fsb4DbYn5fNYvFgmG9rc8glQaAHmxp-SJq1xNvJO2g0ahUDVSDWlelIInjRGEO9tEGL50phGnF-mkdKPful_buisslmuVJcdsGDN5WP76ciQDQp0O7WoHdHiFnOM6Q7T3cnF4yEcs07Rq1bfnUIExo4TdbtFkTieyzo9apnmU-UxrSU7bJM1WDb7AB_0ORM0I685yaVR8wBaakulP5LBUQtlZBYgqCDU_yp43SZ-72sJB_bjguroUM5mQ7s01fn4dW0EKhVrweRfYBsZE09FgPOUU7uiiFxz8whMVT6vNDM8VUMbkPC_lw0oyIg2&source_device=desktop&")
 
         # Wait for the page to load or specific elements to appear
         page.wait_for_selector("text=בואו נמשיך", state="visible")
@@ -53,4 +53,4 @@ def send_slack(message):
     else:
         print("Message sent successfully to Slack!")
 
-test_check_api_request()
+check_api_request()
