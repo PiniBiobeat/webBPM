@@ -1,7 +1,7 @@
 import json
 import os
 
-issue_data= open('issueData.json')
+issue_data= open('tests/archive/issueData.json')
 json_data = json.load(issue_data)
 linked_issues = json_data["fields"]["issuelinks"]
 linked_ids = []

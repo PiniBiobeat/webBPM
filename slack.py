@@ -19,7 +19,11 @@ webhook = {
     },
     "Orders_bot": {
         "#order_monitor": "https://hooks.slack.com/services/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",
+    },
+    "post_online": {
+            "#system-monitor": "https://hooks.slack.com/services/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",
     }
+
 }
 
 
