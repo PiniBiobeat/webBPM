@@ -23,9 +23,10 @@ class BasketItems:
 
 
 
-
     def update_item_quantity(self, item_index: int, button: str, times: int):
-        button_selector = "(//button[contains(text(), '+')])" if button == "+" else "(//button[contains(text(), '-')])"
-        item_button = f"({button_selector})[{item_index}]"
+        button_selector = self.plus_items_button if button == "+" else self.minus_items_button
+        item_button = f"{button_selector}[{item_index}]"
         for _ in range(times):
             self.page.click(item_button)
+
+

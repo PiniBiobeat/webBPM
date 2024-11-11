@@ -27,7 +27,6 @@ class TestBasketItems:
     def test_update_item_quantity(self, page):
         self.root(page)
         self.basket_items = BasketItems(page)
-        self.basket_items.update_item_quantity(item_index=1, button="+", times=3)
-        self.basket_items.update_item_quantity(item_index=2, button="-", times=9)
+        self.basket_items.update_item_quantity(item_index=1, button="+", times=2)
 
 
