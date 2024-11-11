@@ -13,20 +13,20 @@ def page(request):
 class TestBasketItems:
 
 
-    def root(self, page):
+    def test_root(self, page):
         self.generalfunction = Generalfunction(page)
         self.generalfunction.navigate('ofir_test')
 
     @pytest.mark.skip
     def test_delete_all_items(self, page):
-        self.root(page)
+        self.test_root(page)
         self.basketitems = BasketItems(page)
         self.basketitems.delete_all_items()
 
 
     def test_update_item_quantity(self, page):
-        self.root(page)
-        self.basket_items = BasketItems(page)
-        self.basket_items.update_item_quantity(item_index=1, button="+", times=2)
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=1, button="-", times=1)
+
 
 
