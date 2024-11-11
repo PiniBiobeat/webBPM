@@ -25,4 +25,4 @@ def test_error_insufficient():
         }
     ]
     if data:
-        send_slack(blocks, "post_online", "#system_monitor")
+        send_slack(blocks, "post_online", "#system-monitor")
