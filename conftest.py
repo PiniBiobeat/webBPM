@@ -12,7 +12,7 @@ def browser_context(playwright: Playwright,request):
     viewport = {'width': 1280, 'height': 720}
 
     browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
-    context = browser.new_context(http_credentials=test_co,color_scheme='light',viewport=viewport)
+    context = browser.new_context(http_credentials=test_co, color_scheme='light', viewport=viewport, record_video_dir=None)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     failed_before = request.session.testsfailed
@@ -28,7 +28,7 @@ def mobile_browser_context(playwright: Playwright,request):
     device = playwright.devices['iPhone 15 Pro Max']
 
     browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
-    context = browser.new_context(http_credentials=test_co,color_scheme='light',**device)
+    context = browser.new_context(http_credentials=test_co, color_scheme='light', **device, record_video_dir=None)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     failed_before = request.session.testsfailed
