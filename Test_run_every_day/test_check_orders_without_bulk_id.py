@@ -12,7 +12,7 @@ from data_base import mysql
 
 #'ben@lupa.co.il','pinim@lupa.co.il'
 
-operators = ['ben@lupa.co.il']
+operators = ['pinim@lupa.co.il']
 hours = 8
 class Test_me():
     my_dict_lupa = dict()
@@ -82,10 +82,10 @@ class Test_me():
 
 
             #set 26 to orders without bulk id
-            update_withoutbalk = f"update [lupa_online].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and product_id = 3 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
-            update_withoutbalk2 = f"update [lupa_square].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
-            mysql(update_withoutbalk)
-            mysql(update_withoutbalk2)
+            # update_withoutbalk = f"update [lupa_online].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and product_id = 3 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
+            # update_withoutbalk2 = f"update [lupa_square].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
+            # mysql(update_withoutbalk)
+            # mysql(update_withoutbalk2)
 
 
 
@@ -182,9 +182,23 @@ class Test_me():
           )
 
     def send_to_slack(self, my_dict_lupa):
-        payload = self.json_to_slack_message(my_dict_lupa)
-        requests.post("https://hooks.slack.com/services/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",data=payload)
-        print(payload)
+
+
+        message_text = "\n".join(f"{key}: {value}" for key, value in my_dict_lupa.items())
+
+        # Build the payload in the format Slack expects
+        payload = {
+            "text": message_text  # Ensure it’s a plain-text string
+        }
+
+        # Send the payload as JSON
+        response = requests.post(
+            "https://hooks.slack.com/services/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",
+            json=payload
+        )
+
+        # Print response details for debugging
+        print(response.status_code, response.text)
 
 
 
