@@ -29,3 +29,4 @@ class BasketItems:
         for _ in range(times):
             self.page.click(item_button)
 
+

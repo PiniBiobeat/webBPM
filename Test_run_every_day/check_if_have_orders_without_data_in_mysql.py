@@ -23,7 +23,7 @@ def check_if_have_orders_without_data_in_mysql():
                                 FROM [lupa].[dbo].[orders_tbl] AS o
                                 LEFT JOIN [lupa].[dbo].[orders_extra_data_tbl] AS e
                                 ON o.[order_id] = e.[order_id]
-                                WHERE e.[order_id] IS NULL and o.in_status <> 'Delivered' and  o.in_status <> 'Canceled' and  o.in_status <> 'Stopped' and o.a_num > 1911781
+                                WHERE e.[order_id] IS NULL and o.in_status <> 'Delivered' and  o.in_status <> 'Canceled' and  o.in_status <> 'Stopped' and o.a_num > 1912126
                                 order by o.a_num desc
         ''')
         rows = cursor.fetchall()
