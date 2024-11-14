@@ -35,7 +35,7 @@ def check_if_have_orders_without_data_in_mysql():
 
 def send_slack(order_count):
 
-    slack_webhook_url = "https://hooks.slack.com/services/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"
+    slack_webhook_url = "https://hooks.slack.com/services/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"
 
     # Formatted message with dynamic order count
     message = f":warning: *Alert:* We have {order_count} orders Desktop without line in order extra data. Please investigate the issue and resolve it as soon as possible."
