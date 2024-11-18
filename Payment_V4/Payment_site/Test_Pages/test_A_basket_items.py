@@ -14,15 +14,16 @@ class TestBasketItems:
 
 
     def test_root(self, page):
-        self.generalfunction = Generalfunction(page)
-        self.generalfunction.navigate('ofir_test')
+        Generalfunction(page).navigate('ofir_test')
 
 
     def test_update_item_quantity(self, page):
+        self.test_root(page)
         BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
         BasketItems(page).update_item_quantity(item_index=1, button="-", times=1)
 
-    def test_next_button(self, page):
+    def test_first_page(self, page):
+        self.test_root(page)
         Generalfunction(page).next_button()
 
 
