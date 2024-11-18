@@ -14,14 +14,14 @@ class Shipping:
     shops_menu_point = "#select_collecting_point"
     shops_list_point = "//ul[@id='select_collecting_point-listbox']/li"
 
-    isof_code = "//p[contains(text(), 'קוד להזמנה מרוכזת')]"
-    isof_fill = "//input[@id=':rb:']"
-    isof_error = "//p[@id=':r6:-helper-text']"
-
     bar_shops_valid_city = "#city-helper-text"
     bar_shops_valid_point = "#select_collecting_point-helper-text"
     close_icon = 'data-testid=CloseIcon'
 
+    isof_button = "//p[contains(text(), 'קוד להזמנה מרוכזת')]"
+    isof_fill = "//label[text()='קוד קופון']"
+    isof_confirm = "//button[text()='אישור']"
+    isof_error = "//p[@id=':r6:-helper-text']"
 
     def __init__(self, page: Page):
         self.page = page
@@ -88,3 +88,25 @@ class Shipping:
         self.page.go_forward()
         self.page.get_by_role("button", name="בואו נמשיך").click()
         expect(self.page.get_by_text("אי אפשר להמשיך בלי לבחור משלוח ללופה שלך")).to_be_visible()
+
+
+
+    ###################################################################################################
+
+
+
+    def add_isof_code(self, isof_code):
+        self.page.locator(self.isof_button).click()
+        self.page.locator(self.isof_fill).fill(isof_code)
+        self.page.locator(self.isof_confirm).click()
+        try:
+            expect(self.page.locator("h1")).to_have_text("פרטים אישיים")
+        except:
+            error_isof_msg = self.page.locator(self.isof_error).inner_text()
+            print(error_isof_msg)
+            return error_isof_msg
+
+
+
+
+
