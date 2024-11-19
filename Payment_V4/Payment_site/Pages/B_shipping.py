@@ -9,6 +9,8 @@ class Shipping:
     post_il = "//div[@class='shipping_method']/h3[contains(text(), 'דואר רשום')]"
     bar_home = "//div[@class='shipping_method']/h3[contains(text(), 'שליחות עד הבית')]"
 
+    shipping_selector_price = "//div[@class='shipping_methods selected available']/div/h3"
+
     shops_menu_city = "#city"
     shops_list_city = "//ul[@id='city-listbox']/li"
     shops_menu_point = "#select_collecting_point"
@@ -30,7 +32,7 @@ class Shipping:
     def asafta(self):
         self.page.click(self.asafta_b)
         self.page.get_by_role("button", name="מידע נוסף").click()
-
+        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
 
     def shops(self, city, point):
         self.page.click(self.bar_shops)
@@ -39,16 +41,19 @@ class Shipping:
         self.page.locator(self.shops_list_city).get_by_text(city, exact=True).click()
         self.page.locator(self.shops_menu_point).click()
         self.page.locator(self.shops_list_point).get_by_text(point, exact=True).click()
+        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
 
 
     def post(self):
         self.page.click(self.post_il)
         self.page.get_by_role("button", name="מידע נוסף").click()
+        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
 
 
     def home(self):
         self.page.click(self.bar_home)
         self.page.get_by_role("button", name="מידע נוסף").click()
+        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
 
 
     def no_shops_selection(self):
@@ -88,10 +93,6 @@ class Shipping:
         self.page.go_forward()
         self.page.get_by_role("button", name="בואו נמשיך").click()
         expect(self.page.get_by_text("אי אפשר להמשיך בלי לבחור משלוח ללופה שלך")).to_be_visible()
-
-
-
-    ###################################################################################################
 
 
 
