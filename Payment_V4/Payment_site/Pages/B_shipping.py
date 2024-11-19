@@ -76,7 +76,7 @@ class Shipping:
         self.page.locator(self.shops_list_city).get_by_text("תנובות", exact=True).click()
         self.page.locator(self.shops_menu_point).last.click()
         self.page.locator(self.shops_list_point).get_by_text("E-MOBILE", exact=True).click()
-        self.page.locator(self.close_icon).first.click(force=True)
+        self.page.locator(self.close_icon).first.dblclick(force=True)
         self.page.get_by_role("button", name="בואו נמשיך").click()
         expect(self.page.locator(self.bar_shops_valid_city)).to_be_visible()
         expect(self.page.locator(self.bar_shops_valid_point)).to_be_visible()
