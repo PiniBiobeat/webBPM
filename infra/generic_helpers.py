@@ -1,6 +1,7 @@
 import os
 import time
-
+#import mysql.connector  # if using mysql-connector-python
+import pymysql
 import psycopg2
 import pyodbc
 from datetime import datetime
