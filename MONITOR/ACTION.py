@@ -44,9 +44,7 @@ async def job_scheduler():
 
     scheduler.add_job(evrey_5_minute, 'interval', minutes=4)
     scheduler.add_job(payment_connection, 'interval', minutes=10)
-    scheduler.add_job(insufficent, 'cron', hour=15, minute=0)
-
-
+    scheduler.add_job(insufficent, 'cron', hour='7,12,17', minute=0)
     scheduler.start()
     while True:
         await asyncio.sleep(1)
