@@ -3,7 +3,7 @@ from playwright.sync_api import Page, expect
 
 class PersonalDetails:
 
-    first_name = "#:6:"
+    first_name = "#:r6:"
     last_name = "#:7:"
     city = "#:8:"
     city_list = "#:9:"
@@ -39,6 +39,8 @@ class PersonalDetails:
 
     def __init__(self, page: Page):
         self.page = page
+
+
 
 
     def fill_personal_details(self, first_name, last_name, city_list, street_list, house_num, apt_num, zip_num, phone_num, phone_area):

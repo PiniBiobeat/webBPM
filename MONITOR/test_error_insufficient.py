@@ -4,12 +4,9 @@ from slack import send_slack
 from data_base import *
 
 
-
-
 def test_error_insufficient():
-    command = "select * from [social].[dbo].[smartbook_tbl] where progress = -1 and error_ex = 'insufficient system resources' order by error_date desc"
+    command = "select * from [social].[dbo].[smartbook_tbl] where error_ex = 'Insufficient system resources'"
     data = mysql(command)
-
 
     blocks = [
         {
@@ -18,6 +15,13 @@ def test_error_insufficient():
                 "type": "plain_text",
                 "text": "insufficient system resources",
                 "emoji": True
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "<@U03E109PX0R>"
             }
         },
         {
