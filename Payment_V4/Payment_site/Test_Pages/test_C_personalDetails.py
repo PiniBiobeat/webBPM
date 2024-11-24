@@ -13,6 +13,9 @@ def page(request) -> Page:
 
 class TestPersonalDetails:
 
+
+
+
     def test_fill_personal_details(self, page: Page):
         TestShipping().test_asafta(page)
         personal_details = PersonalDetails(page)

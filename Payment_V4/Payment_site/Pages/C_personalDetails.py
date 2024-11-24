@@ -3,47 +3,48 @@ from playwright.sync_api import Page, expect
 
 class PersonalDetails:
 
-    first_name = "#:r6:"
-    last_name = "#:7:"
-    city = "#:8:"
-    city_list = "#:9:"
-    street = "#:ra:"
-    street_list = "/ul[@id=':ra:-listbox']/li"
-    house_num = "#:rd"
-    apt_num = "#:rd:-label"
-    zip_num = "#:re:"
-    phone_num = "#:rf:"
+    first_name = '[data-testid="first_name_sender"] input'
+    last_name = '[data-testid="last_name_sender"] input'
+    city = '[data-testid="city_sender"]'
+    city_list = "(//div/ul/li)"
+    street = '[data-testid="street_sender"]'
+    street_list = "(//div/ul/li)"
+    house_num = '[data-testid="building_num_sender"] input'
+    apt_num = '[data-testid="apartment_num_sender"] input'
+    zip_num = '[data-testid="zip_sender"] input'
+    phone_num = '[data-testid="phone_number_sender"] input'
     phone_area = "(//div[@class='font_m'])[1]"
 
     checkbox_business = "(//input[@type='checkbox'])[1]"
-    company_name = "#:r2o:"
-    company_id = "#:r2p:"
-    company_city = "#:r2q:"
-    company_city_list = "/ul[@id=':r2q:-listbox']/li"
-    company_street = "#:r2s:"
-    company_street_list = "/ul[@id=':r2s:-listbox']/li"
+    company_name = '[data-testid="company_business"] input'
+    company_id = '[data-testid="company_id_business"] input'
+    company_city = 'data-testid="company_city_business"'
+    company_city_list = "(//div/ul/li)"
+    company_street = '[data-testid="company_street_business"]'
+    company_street_list = "(//div/ul/li)"
 
     checkbox_shipping = "(//input[@type='checkbox'])[2]"
-    first_name_for = "#:6:"
-    last_name_for = "#:r2v:"
-    city_for = "#:r30:"
-    city_list_for = "/ul[@id=':r30:-listbox']/li"
-    street_for = "#:r32:"
-    street_list_for = "/ul[@id=':r32:-listbox']/li"
-    house_num_for = "#:r34:"
-    apt_num_for = "#:r35:"
-    zip_num_for = "#:r36:"
-    phone_num_for = "#:r37:"
+    first_name_for = '[data-testid="first_name_receiver"] input'
+    last_name_for = '[data-testid="last_name_receiver"] input'
+    city_for = '[data-testid="city_receiver"]'
+    city_list_for = "(//div/ul/li)"
+    street_for = '[data-testid="street_receiver"]'
+    street_list_for = "(//div/ul/li)"
+    house_num_for = '[data-testid="building_num_receiver"] input'
+    apt_num_for = '[data-testid="apartment_num_receiver"] input'
+    zip_num_for = '[data-testid="zip_receiver"] input'
+    phone_num_for = '[data-testid="phone_number_receiver"] input'
     phone_area_for = "(//div[@class='font_m'])[2]"
 
 
     def __init__(self, page: Page):
         self.page = page
 
+    def sap(self):
+        self.page.fill(self.first_name,"1")
 
 
-
-    def fill_personal_details(self, first_name, last_name, city_list, street_list, house_num, apt_num, zip_num, phone_num, phone_area):
+    def fill_personal_details(self, first_name, last_name, city_list, street_list, house_num, apt_num, zip_num, phone_num, phone_area2):
         self.page.fill(self.first_name, first_name)
         self.page.fill(self.last_name, last_name)
         self.page.locator(self.city).click()
@@ -54,8 +55,10 @@ class PersonalDetails:
         self.page.fill(self.apt_num, apt_num)
         self.page.fill(self.zip_num, zip_num)
         self.page.fill(self.phone_num, phone_num)
-        self.page.locator(self.phone_area).click()
-        self.page.get_by_role("option", name=phone_area,exact=True).click()
+        # self.page.locator(self.phone_area).click()
+        # self.page.get_by_role("option", name=phone_area2, exact=True).click()
+        self.page.locator(self.phone_area).click().get_by_role("option", name=phone_area2, exact=True).click()
+
 
 
 
@@ -82,6 +85,6 @@ class PersonalDetails:
         self.page.fill(self.zip_num_for, zip_num_for)
         self.page.fill(self.phone_num_for, phone_num_for)
         self.page.locator(self.phone_area_for).click()
-        self.page.get_by_role("option", name=phone_area_for,exact=True).click()
+        self.page.get_by_role("option", name=phone_area_for, exact=True).click()
 
 
