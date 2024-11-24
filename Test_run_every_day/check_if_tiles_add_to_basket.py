@@ -16,7 +16,7 @@ class TilesToPayment1(TilesToPayment):
             raise  # Re-raise the exception to mark the test as failed
 
     def send_slack_notification(self, message_text):
-        webhook_url = "https://hooks.slack.com/services/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"  # Replace with your actual Slack webhook URL
+        webhook_url = "https://hooks.slack.com/services/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"  # Replace with your actual Slack webhook URL
 
         # Create the message payload
         message = {
