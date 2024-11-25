@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, expect
 
+from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
 
 class Shipping:
@@ -25,6 +26,7 @@ class Shipping:
     isof_confirm = "//button[text()='אישור']"
     isof_error = "//p[@id=':r6:-helper-text']"
 
+
     def __init__(self, page: Page):
         self.page = page
 
@@ -32,7 +34,10 @@ class Shipping:
     def asafta(self):
         self.page.click(self.asafta_b)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        Generalfunction(self.page).next_button()
+        return price
+
 
     def shops(self, city, point):
         self.page.click(self.bar_shops)
@@ -41,19 +46,25 @@ class Shipping:
         self.page.locator(self.shops_list_city).get_by_text(city, exact=True).click()
         self.page.locator(self.shops_menu_point).click()
         self.page.locator(self.shops_list_point).get_by_text(point, exact=True).click()
-        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        Generalfunction(self.page).next_button()
+        return price
 
 
     def post(self):
         self.page.click(self.post_il)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        Generalfunction(self.page).next_button()
+        return price
 
 
     def home(self):
         self.page.click(self.bar_home)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        return self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        Generalfunction(self.page).next_button()
+        return price
 
 
     def no_shops_selection(self):
@@ -93,7 +104,6 @@ class Shipping:
         self.page.go_forward()
         self.page.get_by_role("button", name="בואו נמשיך").click()
         expect(self.page.get_by_text("אי אפשר להמשיך בלי לבחור משלוח ללופה שלך")).to_be_visible()
-
 
 
     def add_isof_code(self, isof_code):

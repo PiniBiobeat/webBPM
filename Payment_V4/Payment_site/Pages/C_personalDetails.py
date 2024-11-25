@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
 
 class PersonalDetails:
@@ -40,11 +41,17 @@ class PersonalDetails:
     def __init__(self, page: Page):
         self.page = page
 
-    def sap(self):
-        self.page.fill(self.first_name,"1")
+
+    def filler_detail(self):
+        self.page.locator(self.city).click()
+        self.page.locator(self.city_list).get_by_text("פתח תקוה", exact=True).click()
+        self.page.locator(self.street).click()
+        self.page.locator(self.street_list).get_by_text("תוצרת הארץ", exact=True).click()
+        self.page.fill(self.house_num, "3")
+        Generalfunction(self.page).next_button()
 
 
-    def fill_personal_details(self, first_name, last_name, city_list, street_list, house_num, apt_num, zip_num, phone_num, phone_area2):
+    def fill_personal_details(self, first_name, last_name, city_list, street_list, house_num, apt_num, zip_num, phone_num, phone_area_list):
         self.page.fill(self.first_name, first_name)
         self.page.fill(self.last_name, last_name)
         self.page.locator(self.city).click()
@@ -55,11 +62,8 @@ class PersonalDetails:
         self.page.fill(self.apt_num, apt_num)
         self.page.fill(self.zip_num, zip_num)
         self.page.fill(self.phone_num, phone_num)
-        # self.page.locator(self.phone_area).click()
-        # self.page.get_by_role("option", name=phone_area2, exact=True).click()
-        self.page.locator(self.phone_area).click().get_by_role("option", name=phone_area2, exact=True).click()
-
-
+        self.page.locator(self.phone_area).click()
+        self.page.get_by_role("option", name=phone_area_list, exact=True).click()
 
 
     def fill_company_details(self, company_name, company_id, company_city_list, company_street_list):

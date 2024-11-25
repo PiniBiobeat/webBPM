@@ -12,28 +12,26 @@ def page(request) -> Page:
 
 class TestShipping:
 
+
     def test_asafta(self, page):
         TestBasketItems().test_first_page(page)
         Shipping(page).asafta()
-        Generalfunction(page).next_button()
 
 
     def test_shops(self, page):
         TestBasketItems().test_first_page(page)
         Shipping(page).shops("פתח תקוה", "ברזיל הקטנה")
-        Generalfunction(page).next_button()
 
 
     def test_post(self, page):
         TestBasketItems().test_first_page(page)
         Shipping(page).post()
-        Generalfunction(page).next_button()
+
 
     @pytest.mark.xfail
     def test_home(self, page):
         TestBasketItems().test_first_page(page)
         Shipping(page).home()
-        Generalfunction(page).next_button()
 
 
 class TestShippingError:

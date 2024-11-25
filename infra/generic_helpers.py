@@ -1,7 +1,6 @@
 import os
 import time
 #import mysql.connector  # if using mysql-connector-python
-import pymysql
 import psycopg2
 import pyodbc
 from datetime import datetime
@@ -147,6 +146,8 @@ def sql_delete_personal_date(master_id):
     ''', (master_id,))
     connection.commit()
     cursor.close()
+
+
 
 
 
