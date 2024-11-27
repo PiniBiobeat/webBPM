@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
 
 class BasketItems:
@@ -17,6 +18,7 @@ class BasketItems:
     def valid_image_item(self):
         link = "https://paymentsv4-api.lupa.co.il/ImageBasket.aspx?order_id=7816706&token=fPon5DahDbeWopYCcxzXTnAGVt0aeH2JDwVIhEy5DeOu1HlPZr-OOMCkYIIBndkzP5Dyehgr8S6nzvsQ1NkaxqvhIX7wD4SV09trsj28fg8RO44luwaemoCav5F2T6NHZpJL1RqF5XckCOVlxMFBs0IP00a1sv0X840kgB2Xv5dVT0RPdkZ7YrUtubY5rSupBUUQ9X6hhgwJpzMxRrPmARybNbkpGld7uvx9tb8FsVIxk279kv0SCjKM0Q0UEUnj5wVEyEE9KMikQuK1vDUrFIeAnJSkaMWCcvdq02L8Tp4vkv9xhr9h-H4TQQ2R_pGuAL_PUc4l_e78t0QDQaACCQ2&project_tick=241125094640183-9"
         expect(self.page.locator(self.image_src).first).not_to_have_attribute("src", link)
+        Generalfunction(self.page).next_button()
 
 
     def delete_all_items(self):
