@@ -3,6 +3,7 @@ from infra.config.config_provider import configuration
 from logic.pages.calendar_home_page import CalendarPage
 from logic.pages.login_calendar_page import LoginCalendarPage
 from tests.TestTiles.test_add_tiles_to_payment import TestTilesToPayment
+from tests.TestOnline.test_add_book_to_payment import TestAddBookOnliToPayment
 import os
 
 email1 = 'automation@lupa.co.il'
@@ -34,5 +35,6 @@ class PaymentPagesManager(TestBase):
             case 2:
                 print("You chose product 2.")
                 # Add logic for product 2
+                TestAddBookOnliToPayment.test_add_book_to_payment_from_mybooks_with_link()
             case _:
                 print("Invalid product selection.")

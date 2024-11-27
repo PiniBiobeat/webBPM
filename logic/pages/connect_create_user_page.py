@@ -46,7 +46,7 @@ class ConnectCreateUserPage(PageBase):
 
     def __init__(self, page):
         super().__init__(page)
-        self.pw_page.wait_for_selector(self.text_my_books, state="visible")
+        #self.pw_page.wait_for_selector(self.text_my_books, state="visible")
 
 
     def click_my_book(self):
@@ -70,6 +70,14 @@ class ConnectCreateUserPage(PageBase):
         new_page.click(self.text_choose_cover)
         new_page.click(self.text_next_to_choose_cover)
         new_page.click(self.text_next_to_choose_cover)
+
+    def click_add_book_to_payment_with_link(self):
+        self.pw_page.click(self.text_add_book_to_payment)
+        self.pw_page.click(self.text_choose_format)
+        self.pw_page.click(self.text_next_to_choose_cover)
+        self.pw_page.click(self.text_choose_cover)
+        self.pw_page.click(self.text_next_to_choose_cover)
+        self.pw_page.click(self.text_next_to_choose_cover)
 
     def wait_payment_url(self):
         target_url = "https://paymentsv4-ui.lupa.co.il/marketing"

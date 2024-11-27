@@ -30,7 +30,14 @@ pass_not_same = "pinim123"
 
 
 
-class TestAddBookToPayment(TestBaseOnline):
+class TestAddBookOnliToPayment(TestBaseOnline):
+
+    @pytest.mark.smoke
+    @pytest.mark.usefixtures("before_after_test")
+    def test_add_book_to_payment_from_mybooks_with_link(self):
+        page: ConnectCreateUserPage = self.browser_online.navigate(configuration['my_book_url'], ConnectCreateUserPage)
+        page.click_add_book_to_payment()
+
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
