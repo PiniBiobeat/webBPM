@@ -1,4 +1,4 @@
-from playwright.sync_api import Playwright
+from playwright.sync_api import Playwright, BrowserContext
 import pytest
 
 
@@ -8,7 +8,7 @@ test_co = ({"username": "test","password": "Acf325A12!"})
 
 #desktop
 @pytest.fixture(scope="session")
-def browser_context(playwright: Playwright,request):
+def browser_context(playwright: Playwright, request) -> [BrowserContext, None, None]:
     viewport = {'width': 1280, 'height': 720}
 
     browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
@@ -24,7 +24,7 @@ def browser_context(playwright: Playwright,request):
 
 #mobile
 @pytest.fixture(scope="session")
-def mobile_browser_context(playwright: Playwright,request):
+def mobile_browser_context(playwright: Playwright,request) -> [BrowserContext, None, None]:
     device = playwright.devices['iPhone 15 Pro Max']
 
     browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
