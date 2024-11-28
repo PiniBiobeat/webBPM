@@ -31,7 +31,7 @@ class TestAlbumCopuns:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("AlbumTest1")
 
-
+4
 
     @pytest.mark.parametrize("coupon_code", copun_albums.values())
     def test_order_album_v3_f35_with_all_coupon(self, page, coupon_code):
