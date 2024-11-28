@@ -23,7 +23,7 @@ class SearchPage:
         self.page.wait_for_selector(self.selector, state="visible")
 
 
-    # def new_tab(self, page):
+    # def test_new_tab(self, page):
     #     general_function = Generalfunction(page=page, context=page.context)
     #     general_function.navigate("google")
     #     general_function.open_new_tab_and_navigate("gmail")
@@ -48,12 +48,10 @@ def test_play_mobile(page_mobile):
 
 
 
-
-
-
-
-
-
+# def test_new_tab(page):
+#     general_function = Generalfunction(page=page, context=page.context)
+#     general_function.navigate("google")
+#     general_function.open_new_tab_and_navigate("gmail")
 
 
 
