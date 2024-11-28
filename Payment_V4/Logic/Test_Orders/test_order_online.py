@@ -20,7 +20,7 @@ def page(request) -> Page:
     return request.getfixturevalue('page')
 
 
-class TestAlbumCopuns:
+class TestOnlineCoupon:
 
     def test_order_album_v3_f35n(self, page):
         Generalfunction(page).navigate("my_book_url")
