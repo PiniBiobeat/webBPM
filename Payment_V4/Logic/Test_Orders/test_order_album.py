@@ -25,7 +25,7 @@ class TestAlbumCopuns:
     def test_order_album_v3_f35n(self, page):
         Generalfunction(page).navigate("my_book_url")
         ConnectCreateUserPage(page).click_add_book_to_payment()
-        Generalfunction(page).navigate("payment_url_books_test")
+        Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_image_item()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()

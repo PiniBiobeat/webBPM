@@ -35,14 +35,14 @@ class TestAddBookOnliToPayment(TestBaseOnline):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_add_book_to_payment_from_mybooks_with_link(self):
-        page: ConnectCreateUserPage = self.browser_online.navigate(configuration['my_book_url'], ConnectCreateUserPage)
+        page: ConnectCreateUserPage = self.browser_online.navigate(configuration['my_book_url_prod'], ConnectCreateUserPage)
         page.click_add_book_to_payment()
 
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_add_book_to_payment_from_mybooks(self):
-        page: ConnectCreateUserPage = self.browser_online.navigate(configuration['online_url'], ConnectCreateUserPage)
+        page: ConnectCreateUserPage = self.browser_online.navigate(configuration['online_url_prod'], ConnectCreateUserPage)
         page.click_icon_user()
         page.click_connect_user()
 
