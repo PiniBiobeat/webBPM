@@ -12,6 +12,9 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 
 
 
+from logic.pages.connect_create_user_page import ConnectCreateUserPage
+
+
 @pytest.fixture
 def page(request) -> Page:
     return request.getfixturevalue('page')
@@ -19,10 +22,22 @@ def page(request) -> Page:
 
 class TestAlbumCopuns:
 
+    def test_order_album_v3_f35n(self, page):
+        Generalfunction(page).navigate("my_book_url")
+        ConnectCreateUserPage(page).click_add_book_to_payment()
+        Generalfunction(page).navigate("payment_url_books_test")
+        BasketItems(page).valid_image_item()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("AlbumTest1")
+
+
+
     @pytest.mark.parametrize("coupon_code", copun_albums.values())
-    def test_order_album_v3_f35(self, page, coupon_code):
-        # add_basket(page).format_35()
-        Generalfunction(page).navigate("payment_url_books")
+    def test_order_album_v3_f35_with_all_coupon(self, page, coupon_code):
+        Generalfunction(page).navigate("my_book_url")
+        ConnectCreateUserPage(page).click_add_book_to_payment()
+        Generalfunction(page).navigate("payment_url_books_test")
         BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
         BasketItems(page).valid_image_item()
         Shipping(page).asafta()

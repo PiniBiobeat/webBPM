@@ -25,7 +25,7 @@ class Summary:
 
         self.page.locator(self.loader).wait_for(state="hidden")
         try:
-            check = self.page.locator(self.coupon_error).inner_text(timeout=1000)
+            check = self.page.locator(self.coupon_error).inner_text(timeout=2000)
             if check:
                 raise Exception(f"Coupon error: {check}")
         except Exception as e:

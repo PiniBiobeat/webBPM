@@ -70,6 +70,7 @@ class ConnectCreateUserPage(PageBase):
         new_page.click(self.text_choose_cover)
         new_page.click(self.text_next_to_choose_cover)
         new_page.click(self.text_next_to_choose_cover)
+        new_page.close()
 
     def click_add_book_to_payment_with_link(self):
         self.pw_page.click(self.text_add_book_to_payment)
