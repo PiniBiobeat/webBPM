@@ -14,6 +14,5 @@ def page(request) -> Page:
 class TestSummary:
 
     def test_add_coupon(self, page):
-        TestAddBookV3().test_api_request(page)
         TestPersonalDetails().test_filler_detail(page)
         Summary(page).add_coupon("AlbumTest1")
