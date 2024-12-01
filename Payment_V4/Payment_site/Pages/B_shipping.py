@@ -9,7 +9,7 @@ class Shipping:
     post_il = "//div[@class='shipping_method']/h3[contains(text(), 'דואר רשום')]"
     bar_home = "//div[@class='shipping_method']/h3[contains(text(), 'שליחות עד הבית')]"
 
-    shipping_selector_price = "//div[@class='shipping_methods selected available']/div/h3"
+    selector_ship_price = "//div[@class='shipping_methods selected available']/div/h3"
 
     shops_menu_city = "#city"
     shops_list_city = "//ul[@id='city-listbox']/li"
@@ -33,9 +33,9 @@ class Shipping:
     def asafta(self):
         self.page.click(self.asafta_b)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return price
+        return ship_price
 
 
     def shops(self, city, point):
@@ -45,25 +45,25 @@ class Shipping:
         self.page.locator(self.shops_list_city).get_by_text(city, exact=True).click()
         self.page.locator(self.shops_menu_point).click()
         self.page.locator(self.shops_list_point).get_by_text(point, exact=True).click()
-        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return price
+        return ship_price
 
 
     def post(self):
         self.page.click(self.post_il)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return price
+        return ship_price
 
 
     def home(self):
         self.page.click(self.bar_home)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        price = self.page.locator(self.shipping_selector_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return price
+        return ship_price
 
 
     def no_shops_selection(self):

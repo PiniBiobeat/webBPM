@@ -25,6 +25,7 @@ class TestAppCoupon:
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
         # Summary(page).add_coupon("12930")
+        Summary(page).checkout()
         page.pause()
 
 
