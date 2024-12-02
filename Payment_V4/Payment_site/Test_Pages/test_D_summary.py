@@ -16,3 +16,8 @@ class TestSummary:
     def test_add_coupon(self, page):
         TestPersonalDetails().test_filler_detail(page)
         Summary(page).add_coupon("AlbumTest1")
+
+    def test_checkout(self, page):
+        TestPersonalDetails().test_filler_detail(page)
+        Summary(page).checkout()
+        page.pause()

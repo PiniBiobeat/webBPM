@@ -1,18 +1,13 @@
 from playwright.sync_api import Page
 import pytest
-
-from Payment_V4.Logic.Logic_Orders.copuns_album import copun_albums
-
-
+from logic.pages.connect_create_user_page import ConnectCreateUserPage
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
 from Payment_V4.Payment_site.Pages.B_shipping import Shipping
 from Payment_V4.Payment_site.Pages.C_personalDetails import PersonalDetails
 from Payment_V4.Payment_site.Pages.D_summary import Summary
 
-
-
-from logic.pages.connect_create_user_page import ConnectCreateUserPage
+from Payment_V4.Logic.Logic_Orders.copuns_album import copun_albums
 
 
 @pytest.fixture
@@ -22,7 +17,8 @@ def page(request) -> Page:
 
 class TestOnlineCoupon:
 
-    def test_order_album_v3_f35n(self, page):
+
+    def test_order_online_f35(self, page):
         Generalfunction(page).navigate("my_book_url")
         ConnectCreateUserPage(page).click_add_book_to_payment()
         Generalfunction(page).navigate("payment_url_books")
@@ -32,9 +28,8 @@ class TestOnlineCoupon:
         Summary(page).add_coupon("AlbumTest1")
 
 
-
     @pytest.mark.parametrize("coupon_code", copun_albums.values())
-    def test_order_album_v3_f35_with_all_coupon(self, page, coupon_code):
+    def test_order_online_f35_with_all_coupon(self, page, coupon_code):
         Generalfunction(page).navigate("my_book_url")
         ConnectCreateUserPage(page).click_add_book_to_payment()
         Generalfunction(page).navigate("payment_url_books_test")
@@ -43,3 +38,6 @@ class TestOnlineCoupon:
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(coupon_code)
+
+
+
