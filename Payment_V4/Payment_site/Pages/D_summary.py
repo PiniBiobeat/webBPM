@@ -6,7 +6,7 @@ class Summary:
 
     coupon_field = '.MuiInputBase-input'
     coupon_confirm = ".MuiButton-text"
-    coupon_error = "//div[@class='summary_page container page MuiBox-root css-0']/div//p"
+    coupon_error = "//div[@class='summary_page container page MuiBox-root css-0']//p"
     coupon_value_price = "(//div[@class='content_selected_coupon MuiBox-root css-0']/div[@class='box_item_l MuiBox-root css-0'])"
     loader = ".MuiBackdrop-root css-xuaqpw"
 
@@ -16,7 +16,7 @@ class Summary:
     shipping_price = "(//p[text()=':משלוח']//..//p[@class='box_itemL'])[1]"
     final_price = "//h3[text()=':סה״כ לתשלום']//..//h3[@class='box_itemL']"
 
-    checkbox = "(//input[@type='checkbox' and @aria-label='controlled'])[2]"
+    checkbox = "(//input[@type='checkbox'])[3]"
     payment_button = "//button[text()='לתשלום']"
 
 
@@ -29,7 +29,10 @@ class Summary:
         self.page.click(self.coupon_confirm)
         self.page.locator(self.loader).wait_for(state="hidden")
         try:
-            check = self.page.locator(self.coupon_error).inner_text(timeout=3000)
+            self.page.get_by_role("button", name="הבנתי").click(timeout=2000)
+        except: pass
+        try:
+            check = self.page.locator(self.coupon_error).inner_text(timeout=5000)
             if check:
                 raise Exception(f"Coupon error: {check}")
         except Exception as e:
