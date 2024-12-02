@@ -7,7 +7,7 @@ server = '104.155.49.95'
 username = 'MachineDBA'
 password = 'Kk28!32Zx'
 database = 'lupa_online'  # Any valid database to establish the connection
-slack_webhook_url = 'https://hooks.slack.com/services/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'  # Replace with your Slack webhook URL
+slack_webhook_url = 'https://hooks.slack.com/services/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'  # Replace with your Slack webhook URL
 
 # Create a connection to SQL Server
 def get_connection():
