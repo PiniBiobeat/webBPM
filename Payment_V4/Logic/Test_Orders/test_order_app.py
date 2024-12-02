@@ -26,7 +26,7 @@ class TestAppCoupon:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930")
         # Summary(page).checkout()
-        page.pause()
+        # page.pause()
 
 
     @pytest.mark.parametrize("coupon_code", copun_albums.values())

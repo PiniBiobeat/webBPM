@@ -29,7 +29,7 @@ class Summary:
         self.page.click(self.coupon_confirm)
         self.page.locator(self.loader).wait_for(state="hidden")
         try:
-            self.page.get_by_role("button", name="הבנתי").click(timeout=2000)
+            self.page.get_by_role("button", name="הבנתי").click(timeout=3000)
         except: pass
         try:
             check = self.page.locator(self.coupon_error).inner_text(timeout=5000)
