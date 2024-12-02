@@ -16,7 +16,7 @@ class Summary:
     shipping_price = "(//p[text()=':משלוח']//..//p[@class='box_itemL'])[1]"
     final_price = "//h3[text()=':סה״כ לתשלום']//..//h3[@class='box_itemL']"
 
-    checkbox = "(//input[@type='checkbox'])[3]"
+    checkbox = 'input[type="checkbox"][aria-label="controlled"]'
     payment_button = "//button[text()='לתשלום']"
 
 
@@ -32,7 +32,7 @@ class Summary:
             self.page.get_by_role("button", name="הבנתי").click(timeout=3000)
         except: pass
         try:
-            check = self.page.locator(self.coupon_error).inner_text(timeout=5000)
+            check = self.page.locator(self.coupon_error).inner_text(timeout=4000)
             if check:
                 raise Exception(f"Coupon error: {check}")
         except Exception as e:
@@ -48,10 +48,11 @@ class Summary:
         base_price = float(self.page.locator(self.base_price).inner_text().replace("₪", ""))
         shipping_price = float(self.page.locator(self.shipping_price).inner_text().replace("₪", ""))
         final_price = float(self.page.locator(self.final_price).inner_text().replace("₪", ""))
-        self.page.locator(self.checkbox).check()
+        self.page.locator(self.checkbox).last.click()
         # self.page.screenshot(path="a_summary.png")
         self.page.click(self.payment_button)
         print(item_count, base_price, total_discount, shipping_price, final_price)
+        return item_count, base_price, total_discount, shipping_price, final_price
 
 
 

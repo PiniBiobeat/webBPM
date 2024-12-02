@@ -19,14 +19,14 @@ class TestAppCoupon:
 
 
     def test_order_app_f35_hard(self, page):
-        # AddBookV3().api_request(page, "הגדה פורמט 6 קלאסי פלוס")
+        AddBookV3().api_request(page, "הגדה פורמט 6 קלאסי פלוס")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_image_item()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930")
         Summary(page).checkout()
-        # page.pause()
+        page.pause()
 
 
     @pytest.mark.parametrize("coupon_code", copun_albums.values())
