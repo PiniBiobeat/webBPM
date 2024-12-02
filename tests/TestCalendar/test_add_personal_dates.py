@@ -15,7 +15,7 @@ import json
 path_images = ["./shutterstock_315831767.jpg"]
 r1 = random.randint(1, 1000)
 email1 = 'jenkinslupa@gmail.com'
-pass1 = "8777775"
+pass1 = "Pinimari!1"
 master_id = 3189204
 
 

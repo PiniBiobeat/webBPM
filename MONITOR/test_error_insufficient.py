@@ -5,7 +5,7 @@ from data_base import *
 
 
 def test_error_insufficient():
-    command = "select * from [social].[dbo].[smartbook_tbl] where error_ex = 'Insufficient system resources'"
+    command = "select * from [social].[dbo].[smartbook_tbl] where error_ex like '%Insufficient system resources%'"
     data = mysql(command)
 
     blocks = [

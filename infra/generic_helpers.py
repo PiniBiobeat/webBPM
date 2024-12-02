@@ -1,7 +1,6 @@
 import os
 import time
 #import mysql.connector  # if using mysql-connector-python
-import pymysql
 import psycopg2
 import pyodbc
 from datetime import datetime
@@ -33,6 +32,25 @@ def generate_random_email_and_password(domain=None,email_prefix=None):
     random_info = {"email":email,"password":rand_password}
 
     return random_info
+
+def sql_updade_status_in_order_V3():
+
+        server = '104.155.49.95'
+        database = 'lupa'
+        username = 'MachineDBA'
+        password = 'Kk28!32Zx'
+        ctx = pyodbc.connect(
+            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
+        )
+        cursor = ctx.cursor()
+        print(cursor)
+        cursor.execute('''
+                       UPDATE TOP (3) [lupa_online].[dbo].[order_item_tbl]
+                       SET in_status = 1
+                       WHERE master_id = 3657774 AND in_status = 30
+                       ''')
+        ctx.commit()
+
 
 def sql_get_status_newsletter(Email):
 
@@ -147,6 +165,8 @@ def sql_delete_personal_date(master_id):
     ''', (master_id,))
     connection.commit()
     cursor.close()
+
+
 
 
 

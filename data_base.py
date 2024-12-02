@@ -1,10 +1,13 @@
-import json
 import os
-from datetime import time
-import psycopg2
+import json
 import pyodbc
 import requests
-from infra.config.config_provider import configuration
+import psycopg2
+from datetime import time
+import configparser
+from dotenv import load_dotenv
+config = configparser.ConfigParser()
+config.read('config.ini'), load_dotenv()
 
 
 
@@ -33,7 +36,6 @@ def mysql(mysql_execute):
 
 
 
-
 #Postgres database: PaymentV4 / calendar
 def postgres14(postgres_execute,database="Tariff"):
     connection = psycopg2.connect(user="machineDBA",
@@ -55,7 +57,6 @@ def postgres14(postgres_execute,database="Tariff"):
 
 
 
-
 #Postgres database: Groupa / App V3
 def groupa(groupa_execute):
     connection = psycopg2.connect(user="machineDBA",
@@ -74,6 +75,36 @@ def groupa(groupa_execute):
     connection.commit()
     cursor.close()
     return result3
+
+
+
+#postgress database: PaymentV4 prod and test
+def postgres_env(postgres_execute):
+    connection = psycopg2.connect(user="machineDBA",
+                                  password="A#214Fdse!35dDC214XAzRDA12^79",
+                                  host="35.187.190.6",
+                                  port="5432",
+                                  database=config['DATABASE']['postgress_' + os.getenv('env')])
+    cursor = connection.cursor()
+    query4 = postgres_execute
+    cursor.execute(query4)
+    if query4.strip().lower().startswith('select'):
+        result4 = cursor.fetchall()
+    else:
+        result4 = cursor.rowcount
+        print(f"{result4} rows affected")
+    connection.commit()
+    cursor.close()
+    return result4
+
+
+
+
+
+
+
+
+
 
 
 

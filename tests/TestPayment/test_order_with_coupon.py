@@ -1,27 +1,36 @@
+from datetime import timedelta, datetime
+
 import pytest
 from tests.TestTiles.test_base import TestBase
+from dotenv import load_dotenv
 from infra.config.config_provider import configuration
-from logic.pages.login_online_page import LogInOnline
 from logic.pages.calendar_home_page import CalendarPage
-from logic.pages.login_calendar_page import LoginCalendarPage
-from logic.pages.choose_format_calendar_page import ChooseFormatCalendarPage
-from logic.pages.settings_calendar_page import SettingsCalendarPage
-from logic.pages.choose_themes_calendar_page import ThemesCalendarPage
-from logic.pages.edit_personal_date_page import EditPersonalDates
-from infra.generic_helpers import sql_get_calendar,sql_get_path_calendar,sql_get_event_date ,sql_delete_personal_date
-from tests.TestCalendar.CalendarGenericFunctions import CalendarPagesManager
+from tests.TestPayment.PaymantGenericFunctions import PaymentPagesManager
 import random
 import json
-path_images = ["./shutterstock_315831767.jpg"]
+import os
+load_dotenv()
+
 r1 = random.randint(1, 1000)
-email1 = 'jenkinslupa@gmail.com'
-pass1 = "8777775"
+email1 = 'pinim@lupa.co.il'
+pass1 = "Pinimari!1"
 master_id = 3189204
+path_images = ["./shutterstock_315831767.jpg"]
 
 
-class TestAddPersonamDate(CalendarPagesManager):
+class TestChangeFormatCalendar(TestBase):
+    testdata = [
+        1, 'H7GMH36J', '52',
+        1, 'H7GMH36J', '60',
+    ]
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_order_with_coupon(self):
-        self.openLogin()
+    @pytest.mark.parametrize("a,b,expected", testdata)
+    def test_timedistance_v0(self,a, b, expected):
+        PaymentPagesManager.choose_prod(a)
+        #Add_coupon
+        #Add_cal
+        #Add_tiles
+        page.open_menu()
+        page.open_screen_login_from_menu()

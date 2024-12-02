@@ -7,8 +7,8 @@ from playwright.sync_api import expect
 
 class LogInOnline(PageBase):
 
-    text_user_login =  "(//input[@class='MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-mnn31'])[1]"
-    test_pass_login = "(//input[@class='MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-mnn31'])[2]"
+    text_user_login =  "(//input[@class='MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-jnx2aw'])[1]"
+    test_pass_login = "//input[@class='MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd css-1knobvl']"
     frame = "//iframe[@frameborder='0']"
     text_login_button = "//button[@data-testid='btn-login']"
     text_my_books = "//img[@src='/assets/img/my_books.svg']"

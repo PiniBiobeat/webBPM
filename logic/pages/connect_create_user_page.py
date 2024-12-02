@@ -38,17 +38,61 @@ class ConnectCreateUserPage(PageBase):
     text_11_day = "(//button[@class='MuiButtonBase-root MuiPickersDay-root MuiPickersDay-dayWithMargin css-ub1r1'])[1]"
     text_approve_date = "(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1ujsas3'])[2]"
     text_popup_title = " //h2[@id='alert-dialog-title']"
+    text_my_books_name = "//img[@src='/assets/img/my_books.svg']//..//..//..//button[@class='header_button ng-star-inserted']"
+    text_add_book_to_payment = "(//*[contains(text(), 'הוספת ספר לסל')])[1]"
+    text_choose_format = 'img[alt="ריבועי גדול"]'
+    text_next_to_choose_cover= "//button[@class='mat-raised-button mat-accent' and contains(.,'המשיכו')]"
+    text_choose_cover = 'img[alt="כריכה קשה"]'
 
     def __init__(self, page):
         super().__init__(page)
-        self.pw_page.wait_for_selector(self.text_my_books, state="visible")
+        #self.pw_page.wait_for_selector(self.text_my_books, state="visible")
 
 
     def click_my_book(self):
-        self.pw_page.click(self.img_user)
+        self.pw_page.click(self.text_my_books)
+
+    def wait_for_mybooks(self):
+        target_url = "https://account.lupa.co.il/my-projects.aspx"
+        self.pw_page.wait_for_url(target_url)
 
     def click_icon_user(self):
         self.pw_page.click(self.img_user)
+
+    def click_add_book_to_payment(self):
+        with self.pw_page.context.expect_page() as new_page_info:
+            self.pw_page.click(self.text_add_book_to_payment)  # Opens a new tab
+        new_page = new_page_info.value
+
+        # Interact with the new page normally
+        new_page.click(self.text_choose_format)
+        new_page.click(self.text_next_to_choose_cover)
+        new_page.click(self.text_choose_cover)
+        new_page.click(self.text_next_to_choose_cover)
+        new_page.click(self.text_next_to_choose_cover)
+        new_page.close()
+
+    def click_add_book_to_payment_with_link(self):
+        self.pw_page.click(self.text_add_book_to_payment)
+        self.pw_page.click(self.text_choose_format)
+        self.pw_page.click(self.text_next_to_choose_cover)
+        self.pw_page.click(self.text_choose_cover)
+        self.pw_page.click(self.text_next_to_choose_cover)
+        self.pw_page.click(self.text_next_to_choose_cover)
+
+    def wait_payment_url(self):
+        target_url = "https://paymentsv4-ui.lupa.co.il/marketing"
+        self.pw_page.wait_for_url(target_url)
+
+
+
+    def wait_for_lupa_online(self):
+        target_url = "https://online.lupa.co.il/"
+        self.pw_page.wait_for_url(target_url)
+
+    def click_my_book_name(self):
+        time.sleep(20)
+        self.pw_page.click(self.text_my_books_name)
 
     def click_connect_user(self):
         self.pw_page.click(self.text_connect_user)
