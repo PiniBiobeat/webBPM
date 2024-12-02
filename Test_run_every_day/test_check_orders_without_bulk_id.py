@@ -82,10 +82,10 @@ class Test_me():
 
 
             #set 26 to orders without bulk id
-            # update_withoutbalk = f"update [lupa_online].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and product_id = 3 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
-            # update_withoutbalk2 = f"update [lupa_square].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
-            # mysql(update_withoutbalk)
-            # mysql(update_withoutbalk2)
+            update_withoutbalk = f"update [lupa_online].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and product_id = 3 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
+            update_withoutbalk2 = f"update [lupa_square].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
+            mysql(update_withoutbalk)
+            mysql(update_withoutbalk2)
 
 
 
