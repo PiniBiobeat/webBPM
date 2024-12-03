@@ -16,7 +16,7 @@ class CreditGuard:
         self.page = page
 
 
-    def fill_credit_card(self, card="card", year="2028", month="08", cvv="684"):
+    def fill_credit_card(self, card="card", year="2028", month="05", cvv="684"):
         self.page.frame_locator(self.iframe).locator(self.credit_num).fill(config['GLOBAL'][card+"_"+os.getenv('env')])
         self.page.frame_locator(self.iframe).locator(self.exp_year_num).select_option(value=year)
         self.page.frame_locator(self.iframe).locator(self.exp_month_num).select_option(value=month)

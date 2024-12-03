@@ -31,8 +31,10 @@ class BasketItems:
             print(f"Total Sale sum: {total_sum} ₪")
             print(f"Total Sale item: {prices.count()}")
             return total_sum
-        except Exception: pass
-        Generalfunction(self.page).next_button()
+        except Exception as e:
+            print(f"error sale: {e}")
+        finally:
+            Generalfunction(self.page).next_button()
 
 
     def update_item_quantity(self, item_index: int, button: str, times: int):

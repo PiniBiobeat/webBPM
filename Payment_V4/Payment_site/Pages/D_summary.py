@@ -38,9 +38,9 @@ class Summary:
         except Exception as e:
             if "Coupon error" in str(e):
                 raise
+        return self
 
-
-    def checkout(self):
+    def checkouts(self):
         try:
             total_discount = float(self.page.locator(self.total_discount).inner_text().replace("₪", "").replace("(", "").replace(")", ""))
         except Exception: total_discount = 0
@@ -52,7 +52,7 @@ class Summary:
         # self.page.screenshot(path="a_summary.png")
         self.page.click(self.payment_button)
         print(item_count, base_price, total_discount, shipping_price, final_price)
-        return item_count, base_price, total_discount, shipping_price, final_price
+        return self, item_count, base_price, total_discount, shipping_price, final_price
 
 
 
