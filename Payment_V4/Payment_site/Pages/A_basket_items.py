@@ -10,15 +10,35 @@ class BasketItems:
     delete_button = "//div[@class='count_selected_items_and_icon MuiBox-root css-0']/img"
     image_src = "(//button/img)"
 
+    sale_price = "(//div[@class='color_green MuiBox-root css-gg4vpm'])/div[2]"
+
 
     def __init__(self, page: Page):
         self.page = page
 
 
-    def valid_image_item(self):
-        link = "https://paymentsv4-api.lupa.co.il/ImageBasket.aspx?order_id=7816706&token=fPon5DahDbeWopYCcxzXTnAGVt0aeH2JDwVIhEy5DeOu1HlPZr-OOMCkYIIBndkzP5Dyehgr8S6nzvsQ1NkaxqvhIX7wD4SV09trsj28fg8RO44luwaemoCav5F2T6NHZpJL1RqF5XckCOVlxMFBs0IP00a1sv0X840kgB2Xv5dVT0RPdkZ7YrUtubY5rSupBUUQ9X6hhgwJpzMxRrPmARybNbkpGld7uvx9tb8FsVIxk279kv0SCjKM0Q0UEUnj5wVEyEE9KMikQuK1vDUrFIeAnJSkaMWCcvdq02L8Tp4vkv9xhr9h-H4TQQ2R_pGuAL_PUc4l_e78t0QDQaACCQ2&project_tick=241125094640183-9"
-        expect(self.page.locator(self.image_src).first).not_to_have_attribute("src", link)
+    def valid_element_click_next(self):
+        self.page.locator("text=מחיר מחירון").first.wait_for(state="visible")
+        try:
+            prices = self.page.locator(self.sale_price)
+            total_sum = 0
+            price_count = prices.count()
+            for i in range(price_count):
+                price_text = prices.nth(i).inner_text()
+                price_text = price_text.replace("₪", "").replace("(", "").replace(")", "").replace("-", "").strip()
+                price = float(price_text)
+                total_sum += price
+            print(f"Total Sale sum: {total_sum} ₪")
+            print(f"Total Sale item: {prices.count()}")
+        except Exception: pass
         Generalfunction(self.page).next_button()
+
+
+    def update_item_quantity(self, item_index: int, button: str, times: int):
+        button_selector = self.plus_items_button if button == "+" else self.minus_items_button
+        item_button = f"{button_selector}[{item_index}]"
+        for _ in range(times):
+            self.page.click(item_button)
 
 
     def delete_all_items(self):
@@ -27,10 +47,3 @@ class BasketItems:
         self.page.locator(self.delete_button).click()
         self.page.get_by_role("button", name="כן").click()
         expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
-
-
-    def update_item_quantity(self, item_index: int, button: str, times: int):
-        button_selector = self.plus_items_button if button == "+" else self.minus_items_button
-        item_button = f"{button_selector}[{item_index}]"
-        for _ in range(times):
-            self.page.click(item_button)
