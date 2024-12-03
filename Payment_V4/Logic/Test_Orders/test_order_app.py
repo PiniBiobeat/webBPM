@@ -26,8 +26,7 @@ class TestAppCoupon:
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
-        # Summary(page).add_coupon("12930")
-        Summary(page).checkout()
+        Summary(page).add_coupon("AlbumTest1").checkout()
         # page.pause()
         CreditGuard(page).fill_credit_card().to_pay()
 
@@ -37,10 +36,11 @@ class TestAppCoupon:
     def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
         AddBookV3().api_request(page, "פורמט 35 ריבועי גדול קשה")
         Generalfunction(page).navigate("payment_url_books")
-        BasketItems(page).valid_image_item()
+        BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(coupon_code)
+        Summary(page).add_coupon(coupon_code).checkout()
+        CreditGuard(page).fill_credit_card().to_pay()
 
 
 

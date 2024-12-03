@@ -30,6 +30,7 @@ class BasketItems:
                 total_sum += price
             print(f"Total Sale sum: {total_sum} ₪")
             print(f"Total Sale item: {prices.count()}")
+            return total_sum
         except Exception: pass
         Generalfunction(self.page).next_button()
 
