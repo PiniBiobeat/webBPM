@@ -17,7 +17,7 @@ class Summary:
     final_price = "//h3[text()=':סה״כ לתשלום']//..//h3[@class='box_itemL']"
 
     checkbox = 'input[type="checkbox"][aria-label="controlled"]'
-    payment_button = "//button[text()='לתשלום']"
+    payment_button = '.MuiButton-contained'
 
 
     def __init__(self, page: Page):
