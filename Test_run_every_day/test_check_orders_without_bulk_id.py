@@ -31,7 +31,7 @@ class Test_me():
         rows = cursor.fetchall()
         if rows != []:
             for row in rows:
-                my_dict_lupa[row[0]] = row[1]
+                my_dict_lupa[row[0]] = " 🖼️ Photo Album Desktop"
         print(my_dict_lupa)
 
 
@@ -51,7 +51,10 @@ class Test_me():
         rows = cursor.fetchall()
         if rows != []:
             for row in rows:
-                my_dict_lupa[row[1]] = row[2]
+                if row[37] == 3:  # Check if row[37] equals 1
+                    my_dict_lupa[row[1]] =  " 🗓️ Calendar"
+                else:
+                    my_dict_lupa[row[1]] = " 📓 Photo Album Online"
             print(my_dict_lupa)
             #self.send_to_email(my_dict_lupa)
 
@@ -72,7 +75,7 @@ class Test_me():
         rows = cursor.fetchall()
         if rows != []:
             for row in rows:
-                my_dict_lupa[row[1]] = row[2]
+                my_dict_lupa[row[1]] = " 🖼️ Tiles Photo"
             print(my_dict_lupa)
         cursor.close()
         if len(my_dict_lupa) > 0:
@@ -193,7 +196,7 @@ class Test_me():
 
         # Send the payload as JSON
         response = requests.post(
-            "https://hooks.slack.com/services/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",
+            "https://hooks.slack.com/services/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",
             json=payload
         )
 
