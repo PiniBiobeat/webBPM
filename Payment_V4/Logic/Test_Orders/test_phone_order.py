@@ -37,3 +37,13 @@ class TestPhoneOrder:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930").checkouts()
         Thanks(page).status()
+
+
+    def test_phone_order_tiles(self, page):
+        #wait for add tiles function from pini
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
