@@ -11,8 +11,7 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
-from Payment_V4.Logic.Logic_Orders.copuns_album import copun_albums
-
+from Payment_V4.Logic.Logic_Orders.copuns_album import coupon_albums
 
 @pytest.fixture
 def page(request) -> Page:
@@ -34,7 +33,7 @@ class TestCalendarCoupon:
 
 
 
-    @pytest.mark.parametrize("coupon_code", copun_albums.values())
+    @pytest.mark.parametrize("coupon_code", coupon_albums.values())
     def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
         #wait for add calendar function from pini
         Generalfunction(page).navigate("payment_url_books")
