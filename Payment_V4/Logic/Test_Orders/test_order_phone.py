@@ -2,6 +2,7 @@ from playwright.sync_api import Page
 import pytest
 
 from tests.TestPayment.test_add_book_V3 import AddBookV3
+from logic.pages.connect_create_user_page import ConnectCreateUserPage
 
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
@@ -11,41 +12,28 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
-from Payment_V4.Logic.Logic_Orders.copuns_album import coupon_calendar
+from Payment_V4.Logic.Logic_Orders.copuns_album import copun_albums
 
 
-@pytest.fixture
-def page(request) -> Page:
-    return request.getfixturevalue('page')
+class TestPhoneOrder:
 
 
-class TestAppCoupon:
-
-
-    def test_order_app_f35_hard(self, page):
+    def test_phone_order_app(self, page):
         AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930").checkouts()
-        CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
 
-
-    @pytest.mark.parametrize("coupon_code", coupon_calendar.values())
-    def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
-        AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
+    def test_phone_order_online(self, page):
+        Generalfunction(page).navigate("my_book_url")
+        ConnectCreateUserPage(page).click_add_book_to_payment()
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(coupon_code).checkouts()
-        CreditGuard(page).fill_credit_card().to_pay()
+        Summary(page).add_coupon("12930").checkouts()
         Thanks(page).status()
-
-
-
-
-
