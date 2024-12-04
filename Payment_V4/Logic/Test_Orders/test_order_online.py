@@ -11,7 +11,7 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
-from Payment_V4.Logic.Logic_Orders.coupon_list import copun_albums
+from Payment_V4.Logic.Logic_Orders.coupon_list import coupon_albums
 
 
 @pytest.fixture
@@ -34,7 +34,7 @@ class TestOnlineCoupon:
         Thanks(page).status()
 
 
-    @pytest.mark.parametrize("coupon_code", copun_albums.values())
+    @pytest.mark.parametrize("coupon_code", coupon_albums.values())
     def test_order_online_f35_all_coupon_sanity(self, page, coupon_code):
         Generalfunction(page).navigate("my_book_url")
         ConnectCreateUserPage(page).click_add_book_to_payment()
