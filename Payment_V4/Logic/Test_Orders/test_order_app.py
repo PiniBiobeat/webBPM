@@ -1,5 +1,5 @@
-from playwright.sync_api import Page
 import pytest
+from playwright.sync_api import Page
 
 from tests.TestPayment.test_add_book_V3 import AddBookV3
 
@@ -31,7 +31,6 @@ class TestAppCoupon:
         Summary(page).add_coupon("AlbumTest1").checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-
 
 
     @pytest.mark.parametrize("coupon_code", coupon_calendar.values())
