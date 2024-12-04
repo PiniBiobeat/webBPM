@@ -21,9 +21,8 @@ def page(request) -> Page:
 
 class TestCalendarCoupon:
 
-
     def test_calendar_a5(self, page):
-        #wait for add calendar function from pini
+        # wait for add calendar function from pini
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -35,7 +34,7 @@ class TestCalendarCoupon:
 
     @pytest.mark.parametrize("coupon_code", coupon_calendar.values())
     def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
-        #wait for add calendar function from pini
+        # wait for add calendar function from pini
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

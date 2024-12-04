@@ -21,7 +21,6 @@ def page(request) -> Page:
 
 class TestAppCoupon:
 
-
     def test_order_app_f35_hard(self, page):
         AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
@@ -43,8 +42,3 @@ class TestAppCoupon:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-
-
-
-
-

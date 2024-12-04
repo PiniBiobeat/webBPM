@@ -20,7 +20,6 @@ def page(request) -> Page:
 
 class TestPhoneOrder:
 
-
     def test_phone_order_app(self, page):
         AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
@@ -43,7 +42,7 @@ class TestPhoneOrder:
 
 
     def test_phone_order_calendar(self, page):
-        #wait for add calendar function from pini
+        # wait for add calendar function from pini
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -53,7 +52,7 @@ class TestPhoneOrder:
 
 
     def test_phone_order_tiles(self, page):
-        #wait for add tiles function from pini
+        # wait for add tiles function from pini
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

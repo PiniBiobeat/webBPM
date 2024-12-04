@@ -21,7 +21,6 @@ def page(request) -> Page:
 
 class TestOnlineCoupon:
 
-
     def test_order_online_f35(self, page):
         Generalfunction(page).navigate("my_book_url")
         ConnectCreateUserPage(page).click_add_book_to_payment()
@@ -46,6 +45,3 @@ class TestOnlineCoupon:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-
-
-

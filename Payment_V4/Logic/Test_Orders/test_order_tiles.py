@@ -21,9 +21,8 @@ def page(request) -> Page:
 
 class TestTilesCoupon:
 
-
     def test_tiles_20x20(self, page):
-        #wait for add tiles function from pini
+        # wait for add tiles function from pini
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -35,7 +34,7 @@ class TestTilesCoupon:
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles.values())
     def test_order_tiles_20x20_with_all_coupon(self, page, coupon_code):
-        #wait for add tiles function from pini
+        # wait for add tiles function from pini
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
