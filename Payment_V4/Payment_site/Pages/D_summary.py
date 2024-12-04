@@ -43,7 +43,7 @@ class Summary:
 
     def checkouts(self):
         try:
-            total_discount = float(self.page.locator(self.total_discount).inner_text().replace("₪", "").replace("(", "").replace(")", ""))
+            total_discount = float(self.page.locator(self.total_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", ""))
         except Exception: total_discount = 0
         item_count = int(self.page.locator(self.item_count).inner_text().replace("₪", ""))
         base_price = float(self.page.locator(self.base_price).inner_text().replace("₪", ""))
