@@ -30,8 +30,7 @@ class Summary:
         self.page.locator(self.loader).wait_for(state="hidden")
         try:
             self.page.get_by_role("button", name="הבנתי").click(timeout=3000)
-        except Exception:
-            pass
+        except Exception: pass
         try:
             check = self.page.locator(self.coupon_error).inner_text(timeout=4000)
             if check:
@@ -40,6 +39,7 @@ class Summary:
             if "Coupon error" in str(e):
                 raise
         return self
+
 
     def checkouts(self):
         try:

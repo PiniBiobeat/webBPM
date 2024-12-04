@@ -13,6 +13,7 @@ from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 from Payment_V4.Logic.Logic_Orders.coupon_list import coupon_calendar
 
+
 @pytest.fixture
 def page(request) -> Page:
     return request.getfixturevalue('page')
@@ -30,7 +31,6 @@ class TestCalendarCoupon:
         Summary(page).add_coupon("Testofir").checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-
 
 
     @pytest.mark.parametrize("coupon_code", coupon_calendar.values())
