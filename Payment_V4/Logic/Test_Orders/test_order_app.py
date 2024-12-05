@@ -22,7 +22,7 @@ def page(request) -> Page:
 class TestAppCoupon:
 
     def test_order_app_f35_hard(self, page):
-        # AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
