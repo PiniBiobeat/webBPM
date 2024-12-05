@@ -6,9 +6,10 @@ import psycopg2
 from datetime import time
 import configparser
 from dotenv import load_dotenv
+load_dotenv()
 config = configparser.ConfigParser()
-config.read('config.ini'), load_dotenv()
-
+config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
+config.read(config_path)
 
 
 #MySQL database
@@ -96,8 +97,6 @@ def postgres_env(postgres_execute):
     connection.commit()
     cursor.close()
     return result4
-
-
 
 
 

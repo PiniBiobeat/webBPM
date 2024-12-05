@@ -11,7 +11,7 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
-from Payment_V4.Logic.Logic_Orders.coupon_list import coupon_calendar
+from Payment_V4.Logic.Logic_Orders.coupon_list import coupon_albums
 
 
 @pytest.fixture
@@ -32,7 +32,7 @@ class TestAppCoupon:
         Thanks(page).status()
 
 
-    @pytest.mark.parametrize("coupon_code", coupon_calendar.values())
+    @pytest.mark.parametrize("coupon_code", coupon_albums)
     def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
         AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
