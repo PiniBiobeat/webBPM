@@ -1,44 +1,39 @@
-
 from data_base import postgres_env
 
-coupon_code = "AlbumTest1"
-getcoupon = f"SELECT x.* FROM cpn.coupon_tbl x WHERE name = '{coupon_code}' and use_date is null"
-setcoupon = postgres_env(getcoupon)
-print(setcoupon)
 
 
 
 
 
-# def coupon_value(coupon_code):
-#     getcoupon = f"SELECT x.* FROM cpn.coupon_tbl x WHERE name = '{coupon_code}' and use_date is null"
-#     setcoupon = postgres_env(getcoupon)
-#     print(setcoupon)
+def coupon_value(coupon_code):
+    getcoupon = f"SELECT x.* FROM cpn.coupon_tbl x WHERE name = '{coupon_code}' and use_date is null"
+    setcoupon = postgres_env(getcoupon)
+    print(setcoupon[1][2])
+
+
+coupon_albums = {
+    "AlbumShip": coupon_value,
+    "Album-Lior": coupon_value,
+    "Album-isof": coupon_value,
+    "AlbumFormat": coupon_value,
+    "AlbumBundle": coupon_value,
+    "AlbumTest6": coupon_value,
+    "AlbumTest5": coupon_value,
+    "AlbumTest4": coupon_value,
+    "AlbumTest3": coupon_value,
+    "AlbumTest2": coupon_value,
+    "AlbumTest1": coupon_value,
+    "AlbumTest": coupon_value
+}
 #
-# coupon_value("AlbumTest1")
+coupon_albums1 = list(coupon_albums.keys())
+coupon = coupon_value(coupon_albums1[0])
 
-# coupon_albums = {
-#     "AlbumShip": coupon_value,
-#     "Album-Lior": coupon_value,
-#     "Album-isof": coupon_value,
-#     "AlbumFormat": coupon_value,
-#     "AlbumBundle": coupon_value,
-#     "AlbumTest6": coupon_value,
-#     "AlbumTest5": coupon_value,
-#     "AlbumTest4": coupon_value,
-#     "AlbumTest3": coupon_value,
-#     "AlbumTest2": coupon_value,
-#     "AlbumTest1": coupon_value,
-#     "AlbumTest": coupon_value
-# }
-# coupon_albums1 = list(coupon_albums.keys())
-# coupon = coupon_value(coupon_albums1[1])
-#
-#
-# #
 # for coupon_code in coupon_albums1:
 #     coupon = coupon_value(coupon_code)
 #     print(coupon)
+
+
 
 
 
