@@ -11,7 +11,7 @@ test_co = ({"username": "test","password": "Acf325A12!"})
 def browser_context(playwright: Playwright, request) -> [BrowserContext, None, None]:
     viewport = {'width': 1280, 'height': 720}
 
-    browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
+    browser = playwright.chromium.launch(headless=False, slow_mo=0, args=["--window-position=-1920,0"] * False)
     context = browser.new_context(http_credentials=test_co, color_scheme='light', viewport=viewport, record_video_dir=None)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
 

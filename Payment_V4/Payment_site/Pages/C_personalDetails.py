@@ -8,7 +8,7 @@ class PersonalDetails:
     last_name = '[data-testid="last_name_sender"] input'
     city = '[data-testid="city_sender"]'
     city_list = "(//div/ul/li)"
-    street = '[data-testid="street_sender"]'
+    street = '[data-testid="street_sender"] > div > input:not([disabled])'
     street_list = "(//div/ul/li)"
     house_num = '[data-testid="building_num_sender"] input'
     apt_num = '[data-testid="apartment_num_sender"] input'
@@ -21,7 +21,7 @@ class PersonalDetails:
     company_id = '[data-testid="company_id_business"] input'
     company_city = 'data-testid="company_city_business"'
     company_city_list = "(//div/ul/li)"
-    company_street = '[data-testid="company_street_business"]'
+    company_street = '[data-testid="company_street_business"] > div > input:not([disabled])'
     company_street_list = "(//div/ul/li)"
 
     checkbox_shipping = "(//input[@type='checkbox'])[2]"
@@ -29,7 +29,7 @@ class PersonalDetails:
     last_name_for = '[data-testid="last_name_receiver"] input'
     city_for = '[data-testid="city_receiver"]'
     city_list_for = "(//div/ul/li)"
-    street_for = '[data-testid="street_receiver"]'
+    street_for = '[data-testid="street_receiver"] > div > input:not([disabled])'
     street_list_for = "(//div/ul/li)"
     house_num_for = '[data-testid="building_num_receiver"] input'
     apt_num_for = '[data-testid="apartment_num_receiver"] input'
