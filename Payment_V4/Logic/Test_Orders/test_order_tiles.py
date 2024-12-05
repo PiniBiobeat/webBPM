@@ -22,7 +22,7 @@ def page(request) -> Page:
 class TestTilesCoupon:
 
     def test_tiles_20x20(self, page):
-        # wait for add tiles function from pini
+        # wait for add tiles function from pini.
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
