@@ -11,7 +11,7 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
-from Payment_V4.Logic.Logic_Orders.coupon_list import coupon_albums
+from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon, coupon_albums
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ class TestAppCoupon:
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("AlbumTest1").checkouts()
+        Summary(page).add_coupon("AlbumTest5").checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -39,6 +39,6 @@ class TestAppCoupon:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(coupon_code).checkouts()
+        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
