@@ -8,10 +8,14 @@ from data_base import postgres_env
 def coupon_value(coupon_code):
     getcoupon = f"SELECT x.* FROM cpn.coupon_tbl x WHERE name = '{coupon_code}' and use_date is null"
     setcoupon = postgres_env(getcoupon)
-    print(setcoupon[1][2])
+    print(setcoupon[0][1])
+    return setcoupon[0][1]
+
+def get_coupon(coupon_code):
+    return coupon_albums1[coupon_code](coupon_code)
 
 
-coupon_albums = {
+coupon_albums1 = {
     "AlbumShip": coupon_value,
     "Album-Lior": coupon_value,
     "Album-isof": coupon_value,
@@ -25,9 +29,26 @@ coupon_albums = {
     "AlbumTest1": coupon_value,
     "AlbumTest": coupon_value
 }
-#
-coupon_albums1 = list(coupon_albums.keys())
-coupon = coupon_value(coupon_albums1[0])
+
+
+
+coupon_albums = list(coupon_albums1.keys())
+
+
+# coupon_albums = list(coupon_albums1.keys())
+# coupon = coupon_value(coupon_albums[10])
+
+
+
+
+
+
+
+
+
+
+
+
 
 # for coupon_code in coupon_albums1:
 #     coupon = coupon_value(coupon_code)
