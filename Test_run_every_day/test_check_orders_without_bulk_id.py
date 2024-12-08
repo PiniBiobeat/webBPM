@@ -196,7 +196,7 @@ class Test_me():
 
         # Send the payload as JSON
         response = requests.post(
-            "https://hooks.slack.com/services/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",
+            "https://hooks.slack.com/services/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",
             json=payload
         )
 
