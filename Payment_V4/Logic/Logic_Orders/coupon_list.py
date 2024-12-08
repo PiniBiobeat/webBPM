@@ -51,6 +51,12 @@ coupon_calendar = [
 ]
 
 
+
 @pytest.mark.parametrize("coupon_code", coupon_albums)
 def test_list(coupon_code):
     print(get_coupon(coupon_code))
+
+
+
+
+# coupon_albums = coupon_albums + ["new_coupon"]
