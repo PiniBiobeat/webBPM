@@ -15,17 +15,10 @@ def get_coupon(coupon_name):
 
 
 
-coupon_test = [
-    "AlbumTest3",
-]
-
 
 coupon_albums = [
-    "AlbumShip",
-    "Album-Lior",
-    "Album-isof",
-    "AlbumFormat",
-    "AlbumBundle",
+    "Album-All-Code",
+    "Album-All-Name",
     "AlbumTest6",
     "AlbumTest5",
     "AlbumTest4",
@@ -35,19 +28,23 @@ coupon_albums = [
     "AlbumTest"
 ]
 
-coupon_calendar = [
-    "AlbumShip",
-    "Album-Lior",
-    "Album-isof",
-    "AlbumFormat",
-    "AlbumBundle",
-    "AlbumTest6",
-    "AlbumTest5",
+coupon_albums_items = [
     "AlbumTest4",
-    "AlbumTest3",
-    "AlbumTest2",
-    "AlbumTest1",
-    "AlbumTest"
+    "AlbumTest5"
+    "AlbumTest6",
+]
+coupon_albums_isof = [
+    "Album-isof",
+]
+
+coupon_albums_shipping = [
+    "AlbumShipNamePoint",
+    "AlbumShipNamePost",
+    "AlbumShipNameHome",
+    "AlbumShipCodePoint",
+    "AlbumShipCodePost",
+    "AlbumShipCodeHome",
+
 ]
 
 

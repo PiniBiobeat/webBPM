@@ -32,6 +32,7 @@ class TestAppCoupon:
         Thanks(page).status()
 
 
+    coupon_albums = coupon_albums + ["AlbumFormat"]
     @pytest.mark.parametrize("coupon_code", coupon_albums)
     def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
         AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
