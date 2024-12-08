@@ -20,22 +20,20 @@ coupon_albums = [
     "Album-All-Code",
     "Album-All-Name",
     "AlbumTest6",
-    "AlbumTest5",
+    "AlbumTest5_Code",
     "AlbumTest4",
-    "AlbumTest3",
+    "AlbumTest3_Code",
     "AlbumTest2",
-    "AlbumTest1",
+    "AlbumTest1_Code",
     "AlbumTest"
 ]
 
 coupon_albums_items = [
     "AlbumTest4",
-    "AlbumTest5"
-    "AlbumTest6",
+    "AlbumTest5",
+    "AlbumTest6"
 ]
-coupon_albums_isof = [
-    "Album-isof",
-]
+
 
 coupon_albums_shipping = [
     "AlbumShipNamePoint",
@@ -43,8 +41,17 @@ coupon_albums_shipping = [
     "AlbumShipNameHome",
     "AlbumShipCodePoint",
     "AlbumShipCodePost",
-    "AlbumShipCodeHome",
+    "AlbumShipCodeHome"
 
+]
+
+coupon_albums_isof = [
+    "Album-isof-Name",
+    "Album-isof-Code"
+]
+coupon_pay_for_40 = [
+    "PayFor40_Code",
+    "PayFor40_Name"
 ]
 
 

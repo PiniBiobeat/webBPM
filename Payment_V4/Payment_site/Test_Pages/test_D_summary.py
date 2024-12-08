@@ -19,4 +19,4 @@ class TestSummary:
 
     def test_checkout(self, page):
         TestPersonalDetails().test_filler_detail(page)
-        Summary(page).checkout()
+        Summary(page).checkouts()
