@@ -15,7 +15,7 @@ from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 @pytest.fixture
 def page(request) -> Page:
-    return request.getfixturevalue('page_mobile')
+    return request.getfixturevalue('page')
 
 
 class TestPhoneOrder:
