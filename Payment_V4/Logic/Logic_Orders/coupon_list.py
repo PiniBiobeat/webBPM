@@ -7,15 +7,16 @@ def get_coupon(coupon_name):
         getcoupon = f"SELECT x.* FROM cpn.coupon_tbl x WHERE name = '{coupon_name}' and use_date is null"
         setcoupon = postgres_env(getcoupon)
         if setcoupon[0][27] == "MANUAL_BY_CODE":
-            return print(getcoupon)
+            return setcoupon[0][12]
         else:
             return coupon_name
     except:
         return coupon_name
 
 
-# album sanity
-coupon_albums_free_shipping = [
+
+#album sanity
+coupon_albums_shipping = [
     "AlbumShipNamePoint",
     "AlbumShipNamePost",
     "AlbumShipNameHome",
@@ -52,8 +53,10 @@ coupon_albums = [
     "AlbumTest"
 ]
 
-# Calendar sanity
-coupon_calendars_free_shipping = [
+
+
+#Calendar sanity
+coupon_calendars_shipping = [
     "CalendarShipNamePoint",
     "CalendarShipNamePost",
     "CalendarShipNameHome",
@@ -85,8 +88,11 @@ coupon_calendars = [
     "CalendarTest"
 ]
 
-# Tiles sanity
-coupon_tiles__free_shipping = [
+
+
+
+#Tiles sanity
+coupon_tiles_shipping = [
     "TilesShipNamePoint",
     "TilesShipNamePost",
     "TilesShipNameHome",
@@ -119,8 +125,15 @@ coupon_tiles = [
 ]
 
 
+
+
+
+
 @pytest.mark.parametrize("coupon_code", coupon_albums)
 def test_list(coupon_code):
     print(get_coupon(coupon_code))
+
+
+
 
 # coupon_albums = coupon_albums + ["new_coupon"]
