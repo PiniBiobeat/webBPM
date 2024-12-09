@@ -13,7 +13,6 @@ def get_coupon(coupon_name):
     except:
         return coupon_name
 
-print(get_coupon("AlbumTest1_Code"))
 
 #album sanity
 coupon_albums_free_shipping = [
@@ -129,9 +128,9 @@ coupon_tiles = [
 
 
 
-# @pytest.mark.parametrize("coupon_code", coupon_albums)
-# def test_list(coupon_code):
-#     print(get_coupon(coupon_code))
+@pytest.mark.parametrize("coupon_code", coupon_albums)
+def test_list(coupon_code):
+    print(get_coupon(coupon_code))
 
 
 
