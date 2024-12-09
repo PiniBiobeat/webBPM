@@ -43,3 +43,6 @@ class TestAppCoupon:
         Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+
+
+

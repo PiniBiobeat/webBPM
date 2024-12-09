@@ -4,7 +4,7 @@ import pytest
 
 def get_coupon(coupon_name):
     try:
-        getcoupon = f"SELECT x.* FROM cpn.coupon_tbl x WHERE name = '{coupon_name}' and use_date is null"
+        getcoupon = f"SELECT * FROM cpn.coupon_tbl WHERE name = '{coupon_name}' and use_date is null"
         setcoupon = postgres_env(getcoupon)
         if setcoupon[0][27] == "MANUAL_BY_CODE":
             return setcoupon[0][12]
@@ -56,7 +56,7 @@ coupon_albums = [
 
 
 #Calendar sanity
-coupon_calendars_shipping = [
+coupon_calendar_shipping = [
     "CalendarShipNamePoint",
     "CalendarShipNamePost",
     "CalendarShipNameHome",
@@ -65,7 +65,7 @@ coupon_calendars_shipping = [
     "CalendarShipCodeHome"
 ]
 
-coupon_calendars_isof = [
+coupon_calendar_isof = [
     "Calendar-isof-Name",
     "Calendar-isof-Code"
 ]
@@ -76,7 +76,7 @@ coupon_calendars_items = [
     "CalendarTest7_items",
 ]
 
-coupon_calendars = [
+coupon_calendar = [
     "Calendar-All-Code",
     "Calendar-All-Name",
     "CalendarTest6",
