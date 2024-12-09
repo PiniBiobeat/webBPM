@@ -16,7 +16,7 @@ def get_coupon(coupon_name):
 
 
 #album sanity
-coupon_albums_shipping = [
+coupon_albums_free_shipping = [
     "AlbumShipNamePoint",
     "AlbumShipNamePost",
     "AlbumShipNameHome",
@@ -56,7 +56,7 @@ coupon_albums = [
 
 
 #Calendar sanity
-coupon_calendars_shipping = [
+coupon_calendars_free_shipping = [
     "CalendarShipNamePoint",
     "CalendarShipNamePost",
     "CalendarShipNameHome",
@@ -92,7 +92,7 @@ coupon_calendars = [
 
 
 #Tiles sanity
-coupon_tiles_shipping = [
+coupon_tiles__free_shipping = [
     "TilesShipNamePoint",
     "TilesShipNamePost",
     "TilesShipNameHome",
