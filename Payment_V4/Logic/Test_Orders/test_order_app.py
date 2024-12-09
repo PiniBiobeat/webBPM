@@ -27,7 +27,7 @@ class TestAppCoupon:
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("AlbumTest1")).checkouts()
+        Summary(page).add_coupon(get_coupon("TilesTest")).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -43,3 +43,6 @@ class TestAppCoupon:
         Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+
+
+
