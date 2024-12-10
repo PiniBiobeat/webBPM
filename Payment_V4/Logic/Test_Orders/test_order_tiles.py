@@ -27,7 +27,8 @@ class TestTilesCoupon:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("Testofir")).checkouts()
+        Summary(page).add_coupon(get_coupon("Testofir"))
+        Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
