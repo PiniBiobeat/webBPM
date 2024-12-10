@@ -17,6 +17,12 @@ def get_coupon(coupon_name):
 
 #album sanity
 coupon_albums_shipping = [
+    "AlbumShipCodeHomeSAL",
+    "AlbumShipCodePostSAL",
+    "AlbumShipCodePointSAL",
+    "AlbumShipNameHomeSAL",
+    "AlbumShipNamePostSAL",
+    "AlbumShipNamePointSAL",
     "AlbumShipNamePoint",
     "AlbumShipNamePost",
     "AlbumShipNameHome",
@@ -57,12 +63,18 @@ coupon_albums = [
 
 #Calendar sanity
 coupon_calendar_shipping = [
-    "CalendarShipNamePoint",
-    "CalendarShipNamePost",
-    "CalendarShipNameHome",
-    "CalendarShipCodePoint",
-    "CalendarShipCodePost",
+    "CalendarShipCodeHomeSAL",
+    "CalendarShipCodePostSAL",
+    "CalendarShipCodePointSAL",
+    "CalendarShipNameHomeSAL",
+    "CalendarShipNamePostSAL",
+    "CalendarShipNamePointSAL",
     "CalendarShipCodeHome"
+    "CalendarShipCodePost",
+    "CalendarShipCodePoint",
+    "CalendarShipNameHome",
+    "CalendarShipNamePost",
+    "CalendarShipNamePoint",
 ]
 
 coupon_calendar_isof = [
@@ -93,12 +105,18 @@ coupon_calendar = [
 
 #Tiles sanity
 coupon_tiles_shipping = [
-    "TilesShipNamePoint",
-    "TilesShipNamePost",
+    "TilesShipCodeHomeSAL",
+    "TilesShipCodePostSAL",
+    "TilesShipCodePointSAL",
+    "TilesShipNameHomeSAL",
+    "TilesShipNamePostSAL",
+    "TilesShipNamePointSAL",
     "TilesShipNameHome",
-    "TilesShipCodePoint",
-    "TilesShipCodePost",
+    "TilesShipNamePost",
+    "TilesShipNamePoint",
     "TilesShipCodeHome"
+    "TilesShipCodePost",
+    "TilesShipCodePoint",
 ]
 
 coupon_tiles_isof = [
