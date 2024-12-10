@@ -1,8 +1,6 @@
 from playwright.sync_api import Page
 import pytest
 
-
-
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
 from Payment_V4.Payment_site.Pages.B_shipping import Shipping
@@ -32,7 +30,7 @@ class TestCalendarCoupon:
         Thanks(page).status()
 
 
-    @pytest.mark.parametrize("coupon_code", coupon_calendar.values())
+    @pytest.mark.parametrize("coupon_code", coupon_calendar)
     def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
         # wait for add calendar function from pini
         Generalfunction(page).navigate("payment_url_books")
