@@ -22,7 +22,7 @@ def page(request) -> Page:
 class TestOnlineCoupon:
 
     def test_order_online_f35(self, page):
-        AddBookOnline().api_request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -36,7 +36,7 @@ class TestOnlineCoupon:
     coupon_albums = coupon_albums + ["AlbumFormat"]
     @pytest.mark.parametrize("coupon_code", coupon_albums)
     def test_order_online_f35_all_coupon_sanity(self, page, coupon_code):
-        AddBookOnline().api_request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

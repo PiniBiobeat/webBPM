@@ -17,7 +17,7 @@ class AddCalendar:
 
 
 
-    def api_request_calendar(self, page, album_name):
+    def request_calendar(self, page, album_name):
         token = self.token.get(album_name)
         response = page.context.request.get(token)
         assert response.ok
@@ -27,4 +27,6 @@ class AddCalendar:
 
 class TestAddCalendar:
     def test_api_request(self, page):
-        AddCalendar().api_request_calendar(page, "לוח_A5")
+        AddCalendar().request_calendar(page, "לוח_A3")
+        AddCalendar().request_calendar(page, "לוח_A4")
+        AddCalendar().request_calendar(page, "לוח_A5")

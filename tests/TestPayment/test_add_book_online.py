@@ -14,7 +14,7 @@ class AddBookOnline:
     }
 
 
-    def api_request_online(self, page, album_name):
+    def request_online(self, page, album_name):
         token = self.token.get(album_name)
         response = page.context.request.get(token)
         assert response.ok
@@ -23,5 +23,5 @@ class AddBookOnline:
 
 class TestAddBookOnline:
     def test_api_request(self, page):
-        AddBookOnline().api_request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
 

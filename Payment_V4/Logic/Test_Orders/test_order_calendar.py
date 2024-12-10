@@ -1,6 +1,8 @@
 from playwright.sync_api import Page
 import pytest
 
+from tests.TestPayment.test_add_calendar import AddCalendar
+
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
 from Payment_V4.Payment_site.Pages.B_shipping import Shipping
@@ -20,19 +22,20 @@ def page(request) -> Page:
 class TestCalendarCoupon:
 
     def test_calendar_a5(self, page):
-        # wait for add calendar function from pini
+        AddCalendar().request_calendar(page, "לוח_A5")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("Testofir")).checkouts()
+        Summary(page).add_coupon(get_coupon("Testofir"))
+        Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_calendar)
-    def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
-        # wait for add calendar function from pini
+    def test_test_calendar_a5_with_all_coupon(self, page, coupon_code):
+        AddCalendar().request_calendar(page, "לוח_A5")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

@@ -22,7 +22,7 @@ class AddBookV3:
     }
 
 
-    def api_request(self, page, album_name):
+    def requestV3(self, page, album_name):
         token = self.token.get(album_name)
         response = page.context.request.get(token)
         assert response.ok
@@ -32,4 +32,4 @@ class AddBookV3:
 
 class TestAddBookV3:
     def test_api_request(self, page):
-        AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")

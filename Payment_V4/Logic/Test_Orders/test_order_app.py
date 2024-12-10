@@ -22,7 +22,7 @@ def page(request) -> Page:
 class TestAppCoupon:
 
     def test_order_app_f35(self, page):
-        AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -35,7 +35,7 @@ class TestAppCoupon:
     coupon_albums = coupon_albums + ["AlbumFormat"]
     @pytest.mark.parametrize("coupon_code", coupon_albums)
     def test_order_app_f35_hard_with_all_coupon(self, page, coupon_code):
-        AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
