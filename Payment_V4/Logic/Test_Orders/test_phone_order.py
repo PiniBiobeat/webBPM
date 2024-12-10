@@ -2,7 +2,8 @@ import pytest
 from playwright.sync_api import Page
 
 from tests.TestPayment.test_add_book_V3 import AddBookV3
-from logic.pages.connect_create_user_page import ConnectCreateUserPage
+from tests.TestPayment.test_add_book_online import AddBookOnline
+
 
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
@@ -31,8 +32,7 @@ class TestPhoneOrder:
 
 
     def test_phone_order_online(self, page):
-        Generalfunction(page).navigate("my_book_url")
-        ConnectCreateUserPage(page).click_add_book_to_payment()
+        AddBookOnline().api_request_online(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

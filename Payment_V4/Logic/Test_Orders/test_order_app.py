@@ -21,13 +21,13 @@ def page(request) -> Page:
 
 class TestAppCoupon:
 
-    def test_order_app_f35_hard(self, page):
+    def test_order_app_f35(self, page):
         AddBookV3().api_request(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("TilesTest")).checkouts()
+        Summary(page).add_coupon(get_coupon("AlbumTest")).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -43,6 +43,3 @@ class TestAppCoupon:
         Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-
-
-
