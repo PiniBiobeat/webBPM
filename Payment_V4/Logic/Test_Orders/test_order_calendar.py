@@ -1,5 +1,5 @@
-from playwright.sync_api import Page
 import pytest
+from playwright.sync_api import Page
 
 from tests.TestPayment.test_add_calendar import AddCalendar
 
