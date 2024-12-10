@@ -32,10 +32,11 @@ class TestOnlineCoupon:
         Thanks(page).status()
 
 
-    @pytest.mark.parametrize("coupon_code", coupon_albums.values())
+    coupon_albums = coupon_albums + ["AlbumFormat"]
+    @pytest.mark.parametrize("coupon_code", coupon_albums)
     def test_order_online_f35_all_coupon_sanity(self, page, coupon_code):
         AddBookOnline().api_request_online(page, "פורמט_35_ריבועי_גדול_קשה")
-        Generalfunction(page).navigate("payment_url_books_test")
+        Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
