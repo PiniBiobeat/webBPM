@@ -33,7 +33,6 @@ class TestOnlineCoupon:
         Thanks(page).status()
 
 
-    coupon_albums = coupon_albums + ["AlbumFormat"]
     @pytest.mark.parametrize("coupon_code", coupon_albums)
     def test_order_online_f35_all_coupon_sanity(self, page, coupon_code):
         AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
