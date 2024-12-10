@@ -1,14 +1,9 @@
-import time
 import pytest
 from playwright.sync_api import Page
 from infra.generic_helpers import sql_updade_status_in_order_V3
 
 
-
-
-
 class AddBookV3:
-
     token = {
         "הגדה_פורמט_6_קלאסי_פלוס": "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&isCustomErr=false&cloudcode=public&app_version=3.5.51.d&device_type=android&lang=he&token=J9kO4Y050-_cRqANIiQNVFdRPw9cOZ-aJDgrL_ACYY6sgFmO0u0FagSfp1akYgB4YBRXsFe14umv8hR7ekAWRp-kVKvSKRzXf_8y3qDRr7y97W-ye7VI4b2_mPyUWhd0HclkoZzN9KFXV7aOIOlMzKxplaY_xraOujHT3YKCv-iqtn0TyYDjFobEaX_b6M2TgpWe_DTUnnxxxbJr9rwqgT70NYYa4JKkmEamkBduo9e2l-wps4T60Fc1kMe1bPxs3ia--LK44oc0bhTLkR7S4AnxMAjj6vxm5eeXs1wwB7ZqeNMaWGgWmdZriHLFZdvY7kjC0tdMNhAPkqbx1qn30A2&event_token=121dfc6615ca48e083d4cc016036a489&eventtype=HAGGADAH&format=6&cover_type=0&page_type=0&theme=hagada_spring&pages=36&quantity=1&platform=app&source_type=books&source_device=mobile&flow=v4",
         "הגדה_פורמט_27_ריבועי_קטן": "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&isCustomErr=false&cloudcode=public&app_version=3.5.51.d&device_type=android&lang=he&token=J9kO4Y050-_cRqANIiQNVFdRPw9cOZ-aJDgrL_ACYY6sgFmO0u0FagSfp1akYgB4YBRXsFe14umv8hR7ekAWRp-kVKvSKRzXf_8y3qDRr7y97W-ye7VI4b2_mPyUWhd0HclkoZzN9KFXV7aOIOlMzKxplaY_xraOujHT3YKCv-iqtn0TyYDjFobEaX_b6M2TgpWe_DTUnnxxxbJr9rwqgT70NYYa4JKkmEamkBduo9e2l-wps4T60Fc1kMe1bPxs3ia--LK44oc0bhTLkR7S4AnxMAjj6vxm5eeXs1wwB7ZqeNMaWGgWmdZriHLFZdvY7kjC0tdMNhAPkqbx1qn30A2&event_token=d6d329cfa2234fb9aeadd11618713dc8&eventtype=HAGGADAH&format=27&cover_type=0&page_type=0&theme=hagada_boho&pages=36&quantity=1&platform=app&source_type=books&source_device=mobile&flow=v4",
@@ -23,8 +18,8 @@ class AddBookV3:
         "פורמט_26_פנורמי_קשה": "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&isCustomErr=false&cloudcode=public&app_version=3.5.51.d&device_type=android&lang=he&token=J9kO4Y050-_cRqANIiQNVFdRPw9cOZ-aJDgrL_ACYY6sgFmO0u0FagSfp1akYgB4YBRXsFe14umv8hR7ekAWRp-kVKvSKRzXf_8y3qDRr7y97W-ye7VI4b2_mPyUWhd0HclkoZzN9KFXV7aOIOlMzKxplaY_xraOujHT3YKCv-iqtn0TyYDjFobEaX_b6M2TgpWe_DTUnnxxxbJr9rwqgT70NYYa4JKkmEamkBduo9e2l-wps4T60Fc1kMe1bPxs3ia--LK44oc0bhTLkR7S4AnxMAjj6vxm5eeXs1wwB7ZqeNMaWGgWmdZriHLFZdvY7kjC0tdMNhAPkqbx1qn30A2&event_token=70d9d57e2aee43a2869e5f83855d0dee&eventtype=REGULAR&format=26&cover_type=0&page_type=0&theme=yassou&pages=24&quantity=1&platform=app&source_type=books&source_device=mobile&flow=v4",
         "פורמט_27_ריבועי_קטן_קשה_רכה": "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&isCustomErr=false&cloudcode=public&app_version=3.5.51.d&device_type=android&lang=he&token=J9kO4Y050-_cRqANIiQNVFdRPw9cOZ-aJDgrL_ACYY6sgFmO0u0FagSfp1akYgB4YBRXsFe14umv8hR7ekAWRp-kVKvSKRzXf_8y3qDRr7y97W-ye7VI4b2_mPyUWhd0HclkoZzN9KFXV7aOIOlMzKxplaY_xraOujHT3YKCv-iqtn0TyYDjFobEaX_b6M2TgpWe_DTUnnxxxbJr9rwqgT70NYYa4JKkmEamkBduo9e2l-wps4T60Fc1kMe1bPxs3ia--LK44oc0bhTLkR7S4AnxMAjj6vxm5eeXs1wwB7ZqeNMaWGgWmdZriHLFZdvY7kjC0tdMNhAPkqbx1qn30A2&event_token=a21fefee1d0845c0b50812b669183002&eventtype=REGULAR&format=27&cover_type=0&page_type=0&theme=blue&pages=24&quantity=1&platform=app&source_type=books&source_device=mobile&flow=v4",
         "פורמט_35_ריבועי_גדול_קשה": "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&isCustomErr=false&cloudcode=public&app_version=3.5.51.d&device_type=android&lang=he&token=J9kO4Y050-_cRqANIiQNVFdRPw9cOZ-aJDgrL_ACYY6sgFmO0u0FagSfp1akYgB4YBRXsFe14umv8hR7ekAWRp-kVKvSKRzXf_8y3qDRr7y97W-ye7VI4b2_mPyUWhd0HclkoZzN9KFXV7aOIOlMzKxplaY_xraOujHT3YKCv-iqtn0TyYDjFobEaX_b6M2TgpWe_DTUnnxxxbJr9rwqgT70NYYa4JKkmEamkBduo9e2l-wps4T60Fc1kMe1bPxs3ia--LK44oc0bhTLkR7S4AnxMAjj6vxm5eeXs1wwB7ZqeNMaWGgWmdZriHLFZdvY7kjC0tdMNhAPkqbx1qn30A2&event_token=be2b30408f834a74a66fbb863c4e589e&eventtype=REGULAR&format=35&cover_type=0&page_type=0&theme=white_new&pages=24&quantity=1&platform=app&source_type=books&source_device=mobile&flow=v4",
-    }
 
+    }
 
 
     def api_request(self, page, album_name):
@@ -32,7 +27,6 @@ class AddBookV3:
         response = page.context.request.get(token)
         assert response.ok
         assert response.status == 200
-        time.sleep(5)
         sql_updade_status_in_order_V3()
 
 
