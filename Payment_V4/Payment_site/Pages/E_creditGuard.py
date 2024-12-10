@@ -10,6 +10,8 @@ class CreditGuard:
     exp_month_num = '#expMonth'
     cvv_num = "#cvv"
     pay = '#cg-submit-btn'
+    price = '#cg-amount-sum'
+
 
 
     def __init__(self, page: Page):
@@ -21,7 +23,8 @@ class CreditGuard:
         self.page.frame_locator(self.iframe).locator(self.exp_year_num).select_option(value=year)
         self.page.frame_locator(self.iframe).locator(self.exp_month_num).select_option(value=month)
         self.page.frame_locator(self.iframe).locator(self.cvv_num).fill(cvv)
-        return self
+        creditprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().replace("₪", ""))
+        return self, creditprice
 
 
     def to_pay(self):
