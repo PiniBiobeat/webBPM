@@ -18,7 +18,7 @@ def browser_context(playwright: Playwright, request) -> [BrowserContext, None, N
     failed_before = request.session.testsfailed
     yield context
     if request.session.testsfailed != failed_before:
-        context.tracing.stop(path="zone_trace.zip")
+        context.tracing.stop(path="trace_.zip")
     context.close()
     browser.close()
 
@@ -34,7 +34,7 @@ def mobile_browser_context(playwright: Playwright,request) -> [BrowserContext, N
     failed_before = request.session.testsfailed
     yield context
     if request.session.testsfailed != failed_before:
-        context.tracing.stop(path="zone_mobile_trace.zip")
+        context.tracing.stop(path="trace_mobile_.zip")
     context.close()
     browser.close()
 
