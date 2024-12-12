@@ -14,8 +14,15 @@ def get_coupon(coupon_name):
         return coupon_name
 
 
+# album sanity ------------------------------------------------
 
-#album sanity
+coupon_albums_fix = [
+    "AlbumFixCodeShip",
+    "AlbumFixNameShip",
+    "AlbumFixCode",
+    "AlbumFixName"
+]
+
 coupon_albums_shipping = [
     "AlbumShipCodeHomeSAL",
     "AlbumShipCodePostSAL",
@@ -59,9 +66,14 @@ coupon_albums = [
     "AlbumTest"
 ]
 
+# Calendar sanity ------------------------------------------------
 
-
-#Calendar sanity
+coupon_calendar_fix = [
+    "CalendarFixCodeShip",
+    "CalendarFixNameShip",
+    "CalendarFixCode",
+    "CalendarFixName"
+]
 coupon_calendar_shipping = [
     "CalendarShipCodeHomeSAL",
     "CalendarShipCodePostSAL",
@@ -100,10 +112,14 @@ coupon_calendar = [
     "CalendarTest"
 ]
 
+# Tiles sanity ------------------------------------------------
+coupon_tiles_fix = [
+    "TilesFixCodeShip",
+    "TilesFixNameShip",
+    "TilesFixCode",
+    "TilesFixName"
+]
 
-
-
-#Tiles sanity
 coupon_tiles_shipping = [
     "TilesShipCodeHomeSAL",
     "TilesShipCodePostSAL",
@@ -143,15 +159,8 @@ coupon_tiles = [
 ]
 
 
-
-
-
-
 @pytest.mark.parametrize("coupon_code", coupon_albums)
 def test_list(coupon_code):
     print(get_coupon(coupon_code))
-
-
-
 
 # coupon_albums = coupon_albums + ["new_coupon"]
