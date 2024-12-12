@@ -39,6 +39,10 @@ coupon_albums_shipping = [
 ]
 
 coupon_albums_isof = [
+    "Album-isof-Fix-Code",
+    "Album-isof-Fix-Name",
+    "Album-isof-Code%",
+    "Album-isof-Name%",
     "Album-isof-Name",
     "Album-isof-Code"
 ]
@@ -90,6 +94,10 @@ coupon_calendar_shipping = [
 ]
 
 coupon_calendar_isof = [
+    "Calendar-isof-Fix-Code",
+    "Calendar-isof-Fix-Name",
+    "Calendar-isof-Code%",
+    "Calendar-isof-Name%",
     "Calendar-isof-Name",
     "Calendar-isof-Code"
 ]
@@ -127,17 +135,21 @@ coupon_tiles_shipping = [
     "TilesShipNameHomeSAL",
     "TilesShipNamePostSAL",
     "TilesShipNamePointSAL",
+    "TilesShipCodeHome"
+    "TilesShipCodePoint",
+    "TilesShipCodePost",
     "TilesShipNameHome",
     "TilesShipNamePost",
     "TilesShipNamePoint",
-    "TilesShipCodeHome"
-    "TilesShipCodePost",
-    "TilesShipCodePoint",
 ]
 
 coupon_tiles_isof = [
+    "Tiles-isof-Fix-Code",
     "Tiles-isof-Name",
-    "Tiles-isof-Code"
+    "Tiles-isof-Code%",
+    "Tiles-isof-Name%",
+    "Tiles-isof-Code",
+    "Tiles-isof-Name"
 ]
 
 coupon_tiles_items = [
