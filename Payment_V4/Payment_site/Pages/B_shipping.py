@@ -34,7 +34,7 @@ class Shipping:
             self.home()
         elif "Post" in coupon_code:
             self.post()
-        elif "Point" in coupon_code:
+        elif "Shops" in coupon_code:
             self.shops("פתח תקוה", "ברזיל הקטנה")
 
 

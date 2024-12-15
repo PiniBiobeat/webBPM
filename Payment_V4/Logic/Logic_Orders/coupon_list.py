@@ -31,16 +31,16 @@ coupon_albums_fix = [
 coupon_albums_shipping = [
     "AlbumShipCodeHomeSAL",
     "AlbumShipCodePostSAL",
-    "AlbumShipCodePointSAL",
+    "AlbumShipCodeShopsSAL",
     "AlbumShipNameHomeSAL",
     "AlbumShipNamePostSAL",
-    "AlbumShipNamePointSAL",
+    "AlbumShipNameShopsSAL",
     "AlbumShipCodeHome"
     "AlbumShipCodePost",
-    "AlbumShipCodePoint",
+    "AlbumShipCodeShops",
     "AlbumShipNameHome",
     "AlbumShipNamePost",
-    "AlbumShipNamePoint",
+    "AlbumShipNameShops",
 ]
 
 coupon_albums_isof = [
@@ -91,16 +91,16 @@ coupon_calendar_fix = [
 coupon_calendar_shipping = [
     "CalendarShipCodeHomeSAL",
     "CalendarShipCodePostSAL",
-    "CalendarShipCodePointSAL",
+    "CalendarShipCodeShopsSAL",
     "CalendarShipNameHomeSAL",
     "CalendarShipNamePostSAL",
-    "CalendarShipNamePointSAL",
+    "CalendarShipNameShopsSAL",
     "CalendarShipCodeHome",
     "CalendarShipCodePost",
-    "CalendarShipCodePoint",
+    "CalendarShipCodeShops",
     "CalendarShipNameHome",
     "CalendarShipNamePost",
-    "CalendarShipNamePoint",
+    "CalendarShipNameShops",
 ]
 
 coupon_calendar_isof = [
@@ -150,16 +150,16 @@ coupon_tiles_fix = [
 coupon_tiles_shipping = [
     "TilesShipCodeHomeSAL",
     "TilesShipCodePostSAL",
-    "TilesShipCodePointSAL",
+    "TilesShipCodeShopsSAL",
     "TilesShipNameHomeSAL",
     "TilesShipNamePostSAL",
-    "TilesShipNamePointSAL",
+    "TilesShipNameShopsSAL",
     "TilesShipCodeHome",
     "TilesShipCodePost",
-    "TilesShipCodePoint",
+    "TilesShipCodeShops",
     "TilesShipNameHome",
     "TilesShipNamePost",
-    "TilesShipNamePoint",
+    "TilesShipNameShops",
 ]
 
 coupon_tiles_isof = [
