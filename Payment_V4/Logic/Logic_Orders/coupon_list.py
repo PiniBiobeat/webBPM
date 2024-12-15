@@ -53,8 +53,9 @@ coupon_pay_for_40 = [
 ]
 
 coupon_albums_items = [
-    "AlbumTest9_items_code"
-    "AlbumTest8_items",
+    "AlbumTest10_items_code"
+    "AlbumTest9_items",
+    "AlbumTest8_items_code",
     "AlbumTest7_items",
 ]
 
@@ -103,8 +104,9 @@ coupon_calendar_isof = [
 ]
 
 coupon_calendars_items = [
-    "CalendarTest9_items_code"
-    "CalendarTest8_items",
+    "CalendarTest10_items_Code"
+    "CalendarTest9_items",
+    "CalendarTest8_items_Code",
     "CalendarTest7_items",
 ]
 
@@ -152,9 +154,10 @@ coupon_tiles_isof = [
     "Tiles-isof-Name"
 ]
 
-coupon_tiles_items = [
-    "TilesTest9_items_code"
-    "TilesTest8_items",
+coupon_tiless_items = [
+    "TilesTest10_items_code"
+    "TilesTest9_items",
+    "TilesTest8_items_code",
     "TilesTest7_items",
 ]
 
