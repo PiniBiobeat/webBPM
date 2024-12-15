@@ -35,12 +35,12 @@ coupon_albums_shipping = [
     "AlbumShipNameHomeSAL",
     "AlbumShipNamePostSAL",
     "AlbumShipNamePointSAL",
-    "AlbumShipNamePoint",
-    "AlbumShipNamePost",
-    "AlbumShipNameHome",
-    "AlbumShipCodePoint",
-    "AlbumShipCodePost",
     "AlbumShipCodeHome"
+    "AlbumShipCodePost",
+    "AlbumShipCodePoint",
+    "AlbumShipNameHome",
+    "AlbumShipNamePost",
+    "AlbumShipNamePoint",
 ]
 
 coupon_albums_isof = [
@@ -155,8 +155,8 @@ coupon_tiles_shipping = [
     "TilesShipNamePostSAL",
     "TilesShipNamePointSAL",
     "TilesShipCodeHome",
-    "TilesShipCodePoint",
     "TilesShipCodePost",
+    "TilesShipCodePoint",
     "TilesShipNameHome",
     "TilesShipNamePost",
     "TilesShipNamePoint",
