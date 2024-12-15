@@ -21,7 +21,7 @@ def page(request) -> Page:
 
 class TestCalendarCouponSanity:
 
-    def test_calendar_a5(self, page):
+    def test_order_calendar_a5(self, page):
         AddCalendar().request_calendar(page, "לוח_A5")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
@@ -34,7 +34,7 @@ class TestCalendarCouponSanity:
 
 
     @pytest.mark.parametrize("coupon_code", coupon_calendar)
-    def test_test_calendar_a5_with_all_coupon(self, page, coupon_code):
+    def test_order_online_sanity_coupon(self, page, coupon_code):
         AddCalendar().request_calendar(page, "לוח_A5")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
@@ -60,6 +60,7 @@ class TestCalendarCouponItems:
 
 
 class TestCalendarCouponIsof:
+
     @pytest.mark.parametrize("coupon_code", coupon_calendar_isof)
     def test_order_calendar_isof(self, page, coupon_code):
         AddCalendar().request_calendar(page, "לוח_A5")
@@ -98,6 +99,3 @@ class TestCalendarCouponFix:
         Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-
-
-

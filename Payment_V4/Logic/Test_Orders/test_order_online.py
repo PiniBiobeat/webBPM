@@ -34,7 +34,7 @@ class TestOnlineCouponSanity:
 
 
     @pytest.mark.parametrize("coupon_code", coupon_albums)
-    def test_order_online_f35_all_coupon_sanity(self, page, coupon_code):
+    def test_order_online_sanity_coupon(self, page, coupon_code):
         AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()

@@ -171,7 +171,7 @@ coupon_tiles_isof = [
     "Tiles-isof-Name"
 ]
 
-coupon_tiless_items = [
+coupon_tiles_items = [
     "TilesTest6_per_Code",
     "TilesTest5_per_Name",
     "TilesTest4_items_code",
