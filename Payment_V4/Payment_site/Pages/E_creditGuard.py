@@ -23,13 +23,13 @@ class CreditGuard:
         self.page.frame_locator(self.iframe).locator(self.exp_year_num).select_option(value=year)
         self.page.frame_locator(self.iframe).locator(self.exp_month_num).select_option(value=month)
         self.page.frame_locator(self.iframe).locator(self.cvv_num).fill(cvv)
-        creditprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().replace("₪", ""))
-        return self, creditprice
+        return self
 
 
     def to_pay(self):
+        creditprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().replace("₪", ""))
         self.page.frame_locator(self.iframe).locator(self.pay).click()
-        return self
+        return self, creditprice
 
 
 
