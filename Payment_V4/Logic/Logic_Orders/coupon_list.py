@@ -65,6 +65,7 @@ coupon_albums_items = [
 coupon_albums = [
     "Album-All-Code",
     "Album-All-Name",
+    "AlbumTest8_Code",
     "AlbumTest7",
     "AlbumTest6_Code",
     "AlbumTest5",
@@ -118,6 +119,7 @@ coupon_calendars_items = [
 coupon_calendar = [
     "Calendar-All-Code",
     "Calendar-All-Name",
+    "CalendarTest8_Code",
     "CalendarTest7",
     "CalendarTest6_Code",
     "CalendarTest5",
@@ -171,6 +173,7 @@ coupon_tiless_items = [
 coupon_tiles = [
     "Tiles-All-Code",
     "Tiles-All-Name",
+    "TilesTest8_Code",
     "TilesTest7",
     "TilesTest6_Code",
     "TilesTest5",
