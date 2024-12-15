@@ -95,7 +95,7 @@ coupon_calendar_shipping = [
     "CalendarShipNameHomeSAL",
     "CalendarShipNamePostSAL",
     "CalendarShipNamePointSAL",
-    "CalendarShipCodeHome"
+    "CalendarShipCodeHome",
     "CalendarShipCodePost",
     "CalendarShipCodePoint",
     "CalendarShipNameHome",
@@ -154,7 +154,7 @@ coupon_tiles_shipping = [
     "TilesShipNameHomeSAL",
     "TilesShipNamePostSAL",
     "TilesShipNamePointSAL",
-    "TilesShipCodeHome"
+    "TilesShipCodeHome",
     "TilesShipCodePoint",
     "TilesShipCodePost",
     "TilesShipNameHome",
