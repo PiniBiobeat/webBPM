@@ -50,7 +50,12 @@ class TestCalendarCouponItems:
     @pytest.mark.parametrize("coupon_code", coupon_calendars_items)
     def test_order_calendar_items(self, page, coupon_code):
         AddCalendar().request_calendar(page, "לוח_A5")
+        AddCalendar().request_calendar(page, "לוח_A4")
+        AddCalendar().request_calendar(page, "לוח_A3")
         Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=2, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=3, button="+", times=1)
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()

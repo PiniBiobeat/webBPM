@@ -51,6 +51,9 @@ class TestTilesCouponItems:
     def test_order_tiles_items(self, page, coupon_code):
         # wait for add tiles function from pini
         Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=2, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=3, button="+", times=1)
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
