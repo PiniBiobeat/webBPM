@@ -11,7 +11,7 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
-from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon, coupon_calendar
+from Payment_V4.Logic.Logic_Orders.coupon_list import *
 
 
 @pytest.fixture
@@ -19,7 +19,7 @@ def page(request) -> Page:
     return request.getfixturevalue('page')
 
 
-class TestCalendarCoupon:
+class TestCalendarCouponSanity:
 
     def test_calendar_a5(self, page):
         AddCalendar().request_calendar(page, "לוח_A5")
@@ -40,6 +40,64 @@ class TestCalendarCoupon:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_calendar)).checkouts()
+        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+
+
+class TestCalendarCouponItems:
+
+    @pytest.mark.parametrize("coupon_code", coupon_calendars_items)
+    def test_order_calendar_items(self, page, coupon_code):
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+
+
+class TestCalendarCouponIsof:
+    @pytest.mark.parametrize("coupon_code", coupon_calendar_isof)
+    def test_order_calendar_isof(self, page, coupon_code):
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+
+
+class TestCalendarCouponShipping:
+
+    @pytest.mark.parametrize("coupon_code", coupon_calendar_shipping)
+    def test_order_calendar_shipping(self, page, coupon_code):
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+
+
+class TestCalendarCouponFix:
+
+    @pytest.mark.parametrize("coupon_code", coupon_calendar_fix)
+    def test_order_calendar_fix(self, page, coupon_code):
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+
+
+

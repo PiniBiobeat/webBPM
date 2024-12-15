@@ -19,7 +19,7 @@ def page(request) -> Page:
     return request.getfixturevalue('page')
 
 
-class TestAppCouponAlbums:
+class TestAppCouponSanity:
 
     def test_order_app_f35(self, page):
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
