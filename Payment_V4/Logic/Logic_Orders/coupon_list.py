@@ -16,6 +16,11 @@ def get_coupon(coupon_name):
 
 # album sanity ------------------------------------------------
 
+coupon_pay_for_40 = [
+    "PayFor40_Code",
+    "PayFor40_Name"
+]
+
 coupon_albums_fix = [
     "AlbumFixCodeShip",
     "AlbumFixNameShip",
@@ -47,30 +52,26 @@ coupon_albums_isof = [
     "Album-isof-Code"
 ]
 
-coupon_pay_for_40 = [
-    "PayFor40_Code",
-    "PayFor40_Name"
-]
 
 coupon_albums_items = [
-    "AlbumTest12_per_Code",
-    "AlbumTest11_per_Name",
-    "AlbumTest10_items_code"
-    "AlbumTest9_items",
-    "AlbumTest8_items_code",
-    "AlbumTest7_items",
+    "AlbumTest6_per_Code",
+    "AlbumTest5_per_Name",
+    "AlbumTest4_items_code",
+    "AlbumTest3_items",
+    "AlbumTest2_items_code",
+    "AlbumTest1_items"
 ]
 
 coupon_albums = [
     "Album-All-Code",
     "Album-All-Name",
-    "AlbumTest6",
-    "AlbumTest5_Code",
-    "AlbumTest4",
-    "AlbumTest3_Code",
-    "AlbumTest2",
-    "AlbumTest1_Code",
-    "AlbumTest"
+    "AlbumTest7",
+    "AlbumTest6_Code",
+    "AlbumTest5",
+    "AlbumTest4_Code",
+    "AlbumTest3",
+    "AlbumTest2_Code",
+    "AlbumTest1",
 ]
 
 # Calendar sanity ------------------------------------------------
@@ -106,24 +107,24 @@ coupon_calendar_isof = [
 ]
 
 coupon_calendars_items = [
-    "Calendar12_per_Code",
-    "Calendar11_per_Name",
-    "CalendarTest10_items_Code"
-    "CalendarTest9_items",
-    "CalendarTest8_items_Code",
-    "CalendarTest7_items",
+    "CalendarTest6_per_Code",
+    "CalendarTest5_per_Name",
+    "CalendarTest4_items_code",
+    "CalendarTest3_items",
+    "CalendarTest2_items_code",
+    "CalendarTest1_items"
 ]
 
 coupon_calendar = [
     "Calendar-All-Code",
     "Calendar-All-Name",
-    "CalendarTest6",
-    "CalendarTest5_Code",
-    "CalendarTest4",
-    "CalendarTest3_Code",
-    "CalendarTest2",
-    "CalendarTest1_Code",
-    "CalendarTest"
+    "CalendarTest7",
+    "CalendarTest6_Code",
+    "CalendarTest5",
+    "CalendarTest4_Code",
+    "CalendarTest3",
+    "CalendarTest2_Code",
+    "CalendarTest1",
 ]
 
 # Tiles sanity ------------------------------------------------
@@ -159,24 +160,24 @@ coupon_tiles_isof = [
 ]
 
 coupon_tiless_items = [
-    "TilesTest12_per_Code",
-    "TilesTest11_per_Name",
-    "TilesTest10_items_code"
-    "TilesTest9_items",
-    "TilesTest8_items_code",
-    "TilesTest7_items",
+    "TilesTest6_per_Code",
+    "TilesTest5_per_Name",
+    "TilesTest4_items_code",
+    "TilesTest3_items",
+    "TilesTest2_items_code",
+    "TilesTest1_items"
 ]
 
 coupon_tiles = [
     "Tiles-All-Code",
     "Tiles-All-Name",
-    "TilesTest6",
-    "TilesTest5_Code",
-    "TilesTest4",
-    "TilesTest3_Code",
-    "TilesTest2",
-    "TilesTest1_Code",
-    "TilesTest"
+    "TilesTest7",
+    "TilesTest6_Code",
+    "TilesTest5",
+    "TilesTest4_Code",
+    "TilesTest3",
+    "TilesTest2_Code",
+    "TilesTest1",
 ]
 
 
