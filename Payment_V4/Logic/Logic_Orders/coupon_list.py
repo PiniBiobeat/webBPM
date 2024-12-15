@@ -65,6 +65,9 @@ coupon_albums_items = [
 coupon_albums = [
     "Album-All-Code",
     "Album-All-Name",
+    "AlbumTest13_campaign%",
+    "AlbumTest12_campSal_Code",
+    "AlbumTest11_campSal",
     "AlbumTest10_campaign_Code",
     "AlbumTest9_campaign",
     "AlbumTest8_Code",
@@ -121,6 +124,9 @@ coupon_calendars_items = [
 coupon_calendar = [
     "Calendar-All-Code",
     "Calendar-All-Name",
+    "CalendarTest13_campaign%",
+    "CalendarTest12_campSal_Code",
+    "CalendarTest11_campSal",
     "CalendarTest10_campaign_Code",
     "CalendarTest9_campaign",
     "CalendarTest8_Code",
@@ -177,6 +183,9 @@ coupon_tiless_items = [
 coupon_tiles = [
     "Tiles-All-Code",
     "Tiles-All-Name",
+    "TilesTest13_campaign%",
+    "TilesTest12_campSal_Code",
+    "TilesTest11_campSal",
     "TilesTest10_campaign_Code",
     "TilesTest9_campaign",
     "TilesTest8_Code",
