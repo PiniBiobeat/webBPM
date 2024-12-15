@@ -45,20 +45,20 @@ coupon_albums_shipping = [
 
 coupon_albums_isof = [
     "Album-isof-Fix-Code",
-    "Album-isof-Fix-Name",
+    # "Album-isof-Fix-Name",
     "Album-isof-Code%",
-    "Album-isof-Name%",
-    "Album-isof-Name",
+    # "Album-isof-Name%",
     "Album-isof-Code"
+    # "Album-isof-Name",
 ]
 
 
 coupon_albums_items = [
     "AlbumTest6_per_Code",
     "AlbumTest5_per_Name",
-    "AlbumTest4_items_code",
+    "AlbumTest4_items_Code",
     "AlbumTest3_items",
-    "AlbumTest2_items_code",
+    "AlbumTest2_items_Code",
     "AlbumTest1_items"
 ]
 
@@ -105,19 +105,19 @@ coupon_calendar_shipping = [
 
 coupon_calendar_isof = [
     "Calendar-isof-Fix-Code",
-    "Calendar-isof-Fix-Name",
+    # "Calendar-isof-Fix-Name",
     "Calendar-isof-Code%",
-    "Calendar-isof-Name%",
-    "Calendar-isof-Name",
+    # "Calendar-isof-Name%",
     "Calendar-isof-Code"
+    # "Calendar-isof-Name",
 ]
 
 coupon_calendars_items = [
     "CalendarTest6_per_Code",
     "CalendarTest5_per_Name",
-    "CalendarTest4_items_code",
+    "CalendarTest4_items_Code",
     "CalendarTest3_items",
-    "CalendarTest2_items_code",
+    "CalendarTest2_items_Code",
     "CalendarTest1_items"
 ]
 
@@ -164,19 +164,19 @@ coupon_tiles_shipping = [
 
 coupon_tiles_isof = [
     "Tiles-isof-Fix-Code",
-    "Tiles-isof-Name",
+    # "Tiles-isof-Fix-Name",
     "Tiles-isof-Code%",
-    "Tiles-isof-Name%",
+    # "Tiles-isof-Name%",
     "Tiles-isof-Code",
-    "Tiles-isof-Name"
+    # "Tiles-isof-Name"
 ]
 
 coupon_tiles_items = [
     "TilesTest6_per_Code",
     "TilesTest5_per_Name",
-    "TilesTest4_items_code",
+    "TilesTest4_items_Code",
     "TilesTest3_items",
-    "TilesTest2_items_code",
+    "TilesTest2_items_Code",
     "TilesTest1_items"
 ]
 

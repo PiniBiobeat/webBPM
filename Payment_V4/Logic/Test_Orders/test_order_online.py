@@ -50,6 +50,11 @@ class TestOnlineCouponItems:
     @pytest.mark.parametrize("coupon_code", coupon_albums_items)
     def test_order_online_items(self, page, coupon_code):
         AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=2, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=3, button="+", times=1)
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

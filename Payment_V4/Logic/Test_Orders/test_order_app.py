@@ -50,6 +50,11 @@ class TestAppCouponItems:
     @pytest.mark.parametrize("coupon_code", coupon_albums_items)
     def test_order_app_items(self, page, coupon_code):
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "הגדה_פורמט_35_ריבועי_גדול")
+        AddBookV3().requestV3(page, "פורמט_38_מיני_לופה_קשה_רכה")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=2, button="+", times=1)
+        BasketItems(page).update_item_quantity(item_index=3, button="+", times=1)
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -63,7 +68,7 @@ class TestAppCouponIsof:
 
     @pytest.mark.parametrize("coupon_code", coupon_albums_isof)
     def test_order_app_isof(self, page, coupon_code):
-        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "פורמט_6_קלאסי_פלוס_הולנדי")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -91,7 +96,7 @@ class TestAppCouponFix:
 
     @pytest.mark.parametrize("coupon_code", coupon_albums_fix)
     def test_order_app_fix_price(self, page, coupon_code):
-        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "פורמט_26_פנורמי_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -105,7 +110,7 @@ class TestAppCouponPay40:
 
     @pytest.mark.parametrize("coupon_code", coupon_pay_for_40)
     def test_order_app_pay_40_pages(self, page, coupon_code):
-        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "אלבום_לבדיקת_144_עמודים")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
