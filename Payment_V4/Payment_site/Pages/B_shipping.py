@@ -29,6 +29,14 @@ class Shipping:
     def __init__(self, page: Page):
         self.page = page
 
+    def ship_by_code_name(self, coupon_code):
+        if "Home" in coupon_code:
+            self.home()
+        elif "Post" in coupon_code:
+            self.post()
+        elif "Point" in coupon_code:
+            self.shops("פתח תקוה", "ברזיל הקטנה")
+
 
     def asafta(self):
         self.page.click(self.selector_asafta_b)

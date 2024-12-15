@@ -85,7 +85,7 @@ class TestOnlineCouponShipping:
         AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
-        Shipping(page).asafta()
+        Shipping(page).ship_by_code_name(coupon_code)
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
