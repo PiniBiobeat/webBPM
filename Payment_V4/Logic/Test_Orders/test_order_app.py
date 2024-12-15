@@ -90,7 +90,7 @@ class TestAppCouponShipping:
         elif "Post" in coupon_code:
             Shipping(page).post()
         elif "Point" in coupon_code:
-            Shipping(page).shops()
+            Shipping(page).shops("פתח תקוה", "ברזיל הקטנה")
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
