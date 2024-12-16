@@ -23,7 +23,7 @@ def page(request) -> Page:
 class TestTilesCouponSanity:
 
     def test_order_tiles_20x20(self, page):
-        AddTiles().request(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -36,7 +36,7 @@ class TestTilesCouponSanity:
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles)
     def test_order_tiles_sanity_coupon(self, page, coupon_code):
-        AddTiles().request(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -50,9 +50,9 @@ class TestTilesCouponItems:
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_items)
     def test_order_tiles_items(self, page, coupon_code):
-        AddTiles().request(page, "tiles20x20")
-        AddTiles().request(page, "tiles20x20kapa")
-        AddTiles().request(page, "tiles30x30")
+        AddTiles().request_tiles(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20kapa")
+        AddTiles().request_tiles(page, "tiles30x30")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
         BasketItems(page).update_item_quantity(item_index=2, button="+", times=1)
@@ -69,7 +69,7 @@ class TestTilesCouponIsof:
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_isof)
     def test_order_tiles_isof(self, page, coupon_code):
-        AddTiles().request(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -83,7 +83,7 @@ class TestTilesCouponShipping:
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_shipping)
     def test_order_tiles_shipping(self, page, coupon_code):
-        AddTiles().request(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).ship_coupon_name(coupon_code)
@@ -97,7 +97,7 @@ class TestTilesCouponFix:
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_fix)
     def test_order_tiles_fix(self, page, coupon_code):
-        AddTiles().request(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

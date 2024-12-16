@@ -53,7 +53,7 @@ class TestPhoneOrder:
 
 
     def test_phone_order_tiles(self, page):
-        AddTiles().request(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()

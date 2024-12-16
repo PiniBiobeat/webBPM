@@ -27,7 +27,7 @@ class AddTiles:
             'Cookie': os.getenv("COOKIE")
         }
     @classmethod
-    def request(cls, page, tile_type):
+    def request_tiles(cls, page, tile_type):
 
         if tile_type not in cls.tiles_format:
             raise ValueError(f"Invalid tile type. Choose from: {list(cls.tiles_format.keys())}")
@@ -48,10 +48,10 @@ class AddTiles:
 class TestAddTiles:
 
     def test_tiles_request(self, page):
-        AddTiles().request(page, "tiles20x20")
-        AddTiles().request(page, "tiles20x20white")
-        AddTiles().request(page, "tiles20X20kapa")
-        AddTiles().request(page, "tiles30X30")
-        AddTiles().request(page, "tiles30X30kapa")
+        AddTiles().request_tiles(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20x20white")
+        AddTiles().request_tiles(page, "tiles20X20kapa")
+        AddTiles().request_tiles(page, "tiles30X30")
+        AddTiles().request_tiles(page, "tiles30X30kapa")
 
 
