@@ -14,6 +14,7 @@ class Summary:
     base_price = "(//p[text()=':מחיר מחירון']//..//p[@class='box_itemL'])[1]"
     total_discount = "(//p[text()=':הנחות נוספות']//..//p[@class='box_itemL'])[1]"
     shipping_price = "(//p[text()=':משלוח']//..//p[@class='box_itemL'])[1]"
+    shipping_price_discount = "(//p[text()=':הנחת משלוח']//..//p[@class='box_itemL'])[1]"
     final_price = "//h3[text()=':סה״כ לתשלום']//..//h3[@class='box_itemL']"
 
     checkbox = 'input[type="checkbox"][aria-label="controlled"]'
@@ -45,6 +46,9 @@ class Summary:
         try:
             total_discount = float(self.page.locator(self.total_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", ""))
         except: total_discount = 0
+        try:
+            shipping_price_discount = float(self.page.locator(self.shipping_price_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", ""))
+        except: shipping_price_discount = 0
         item_count = int(self.page.locator(self.item_count).inner_text().replace("₪", ""))
         base_price = float(self.page.locator(self.base_price).inner_text().replace("₪", ""))
         shipping_price = float(self.page.locator(self.shipping_price).inner_text().replace("₪", ""))
@@ -53,7 +57,7 @@ class Summary:
         # self.page.screenshot(path="a_summary.png")
         self.page.click(self.payment_button)
         print(f"item_count={item_count}, base_price={base_price}, total_discount={total_discount}, shipping_price={shipping_price}, final_price={final_price}")
-        return self, item_count, base_price, total_discount, shipping_price, final_price
+        return self, item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price
 
 
 

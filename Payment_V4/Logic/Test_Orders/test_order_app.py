@@ -81,7 +81,7 @@ class TestAppCouponIsof:
 class TestAppCouponShipping:
 
     @pytest.mark.parametrize("coupon_code", coupon_albums_shipping)
-    def test_order_app_free_shipping(self, page, coupon_code):
+    def test_order_app_free_shipping(self, page, coupon_code, shipping_price=None):
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
