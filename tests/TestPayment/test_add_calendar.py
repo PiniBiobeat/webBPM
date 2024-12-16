@@ -13,8 +13,8 @@ class AddCalendar:
     }
 
 
-    def request_calendar(self, page, album_name):
-        items = self.items.get(album_name)
+    def request_calendar(self, page, calendar_name):
+        items = self.items.get(calendar_name)
         response = page.context.request.get(items)
         assert response.ok
         assert response.status == 200
