@@ -4,6 +4,7 @@ from playwright.sync_api import Page
 from tests.TestPayment.test_add_book_V3 import AddBookV3
 from tests.TestPayment.test_add_book_online import AddBookOnline
 from tests.TestPayment.test_add_calendar import AddCalendar
+from tests.TestPayment.test_add_tiles import AddTiles
 
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
@@ -52,7 +53,7 @@ class TestPhoneOrder:
 
 
     def test_phone_order_tiles(self, page):
-        # wait for add tiles function from pini
+        AddTiles().request(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
