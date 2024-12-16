@@ -27,11 +27,11 @@ class AddTiles:
             'Cookie': os.getenv("COOKIE")
         }
     @classmethod
-    def request_tiles(cls, page, tile_type):
+    def request_tiles(cls, page, tiles_name):
 
-        if tile_type not in cls.tiles_format:
+        if tiles_name not in cls.tiles_format:
             raise ValueError(f"Invalid tile type. Choose from: {list(cls.tiles_format.keys())}")
-        payload = cls.tiles_format[tile_type]
+        payload = cls.tiles_format[tiles_name]
         response = page.context.request.post(
             cls.URL,
             headers=cls._get_headers(),
