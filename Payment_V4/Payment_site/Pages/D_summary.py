@@ -57,7 +57,7 @@ class Summary:
         # self.page.screenshot(path="a_summary.png")
         self.page.click(self.payment_button)
         print(f"item_count={item_count}, base_price={base_price}, total_discount={total_discount}, shipping_price={shipping_price}, final_price={final_price}")
-        return self, item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price
+        return self
 
 
 
