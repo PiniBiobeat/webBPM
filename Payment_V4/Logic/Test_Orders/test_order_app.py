@@ -12,8 +12,8 @@ from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 from Payment_V4.Logic.Logic_Orders.coupon_list import *
-
 from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
+
 
 @pytest.fixture
 def page(request) -> Page:
