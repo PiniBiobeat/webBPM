@@ -74,9 +74,9 @@ class TestChangeFormatCalendar(TestBase):
         page.click_on_pupap()
         page.pw_page.wait_for_url("**/preview")
 
-        page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
-        token_after_calendar = page.take_token_calendar_after_login()
-        calendar_data = sql_get_calendar(token_after_calendar)
+        #page: ThemesCalendarPage = self.browser.create_page(ThemesCalendarPage)
+        #token_after_calendar = page.take_token_calendar_after_login()
+        calendar_data = sql_get_calendar()
         with open(calendar_data[0][2]+'\\Dat\\projectObj.Dat'+'', "rb") as file:
             data = json.load(file)
         if calendar_data[0][0] != eTo and data['Format'] == eTo:
