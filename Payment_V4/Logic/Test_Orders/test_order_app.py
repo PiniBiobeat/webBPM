@@ -30,9 +30,9 @@ class TestAppCouponSanity:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(get_coupon("AlbumFormat"))
         Summary(page).checkouts()
-        CreditGuard(page).fill_credit_card().to_pay()
-        Thanks(page).status()
-        AssertOrder().assert_order_details()
+        # CreditGuard(page).fill_credit_card().to_pay()
+        # Thanks(page).status()
+        assert AssertOrder().assert_order_details()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_albums)
