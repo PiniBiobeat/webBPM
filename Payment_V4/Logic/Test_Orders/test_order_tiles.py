@@ -14,7 +14,6 @@ from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 from Payment_V4.Logic.Logic_Orders.coupon_list import *
 
 
-
 @pytest.fixture
 def page(request) -> Page:
     return request.getfixturevalue('page')
@@ -75,6 +74,16 @@ class TestTilesCouponIsof:
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+
+
+    @pytest.mark.parametrize("coupon_code", coupon_tiles_isof)
+    def test_order_tiles_isof(self, page, coupon_code):
+        AddTiles().request_tiles(page, "tiles20x20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).add_isof_code(get_coupon(coupon_code))
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 

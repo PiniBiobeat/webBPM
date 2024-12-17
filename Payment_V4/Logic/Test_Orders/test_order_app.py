@@ -79,6 +79,16 @@ class TestAppCouponIsof:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
+    @pytest.mark.parametrize("coupon_code", coupon_albums_isof)
+    def test_order_app_isof_short(self, page, coupon_code):
+        AddBookV3().requestV3(page, "פורמט_6_קלאסי_פלוס_הולנדי")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).add_isof_code(get_coupon(coupon_code))
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+
 
 class TestAppCouponShipping:
 
