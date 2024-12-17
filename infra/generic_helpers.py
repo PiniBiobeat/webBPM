@@ -88,7 +88,7 @@ def sql_get_status_master_id(Email):
         return i[15]
     cursor.close()
 
-def sql_get_calendar(token_after_calendar):
+def sql_get_calendar():
     time.sleep(5)
     connection = psycopg2.connect(user="machineDBA",
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
@@ -101,9 +101,9 @@ def sql_get_calendar(token_after_calendar):
     cursor.execute(
         '''
     SELECT format, theme,path FROM public.calendars_tbl
-    WHERE token = %s
-    ORDER BY id DESC LIMIT 100
-    ''', (token_after_calendar,))
+    WHERE master_id = 3189204 
+    ORDER BY id DESC LIMIT 1
+    ''', )
     record = cursor.fetchall()
     cursor.close()
     return record
