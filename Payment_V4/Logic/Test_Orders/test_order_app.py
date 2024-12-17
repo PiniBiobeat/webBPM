@@ -13,6 +13,7 @@ from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 from Payment_V4.Logic.Logic_Orders.coupon_list import *
 
+from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 @pytest.fixture
 def page(request) -> Page:
@@ -31,6 +32,7 @@ class TestAppCouponSanity:
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        AssertOrder().assert_order_details()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_albums)
