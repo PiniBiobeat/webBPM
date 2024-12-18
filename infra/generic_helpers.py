@@ -43,7 +43,6 @@ def sql_updade_status_in_order_V3():
             'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
         )
         cursor = ctx.cursor()
-        print(cursor)
         cursor.execute('''
                        UPDATE TOP (3) [lupa_online].[dbo].[order_item_tbl]
                        SET in_status = 1
