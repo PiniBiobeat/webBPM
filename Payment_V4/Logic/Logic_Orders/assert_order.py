@@ -1,13 +1,13 @@
-
+import pytest
 from Payment_V4.Payment_site.Pages.D_summary import Summary
-
 
 
 class AssertOrder:
 
     def assert_order_details(self):
         item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price = Summary.checkouts
-        assert item_count == 1
+        assert item_count == 2
+        # assert 1+1==3
 
 
 
