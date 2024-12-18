@@ -13,7 +13,7 @@ class TestBasketItems:
 
 
     def test_root(self, page):
-        Generalfunction(page).navigate('ofir')
+        Generalfunction(page).navigate('payment_url_books')
 
 
     def test_update_item_quantity(self, page):
@@ -27,9 +27,9 @@ class TestBasketItems:
         Generalfunction(page).next_button()
 
 
-    def test_valid_image_item(self, page):
+    def test_valid_element(self, page):
         self.test_root(page)
-        BasketItems(page).valid_image_item()
+        BasketItems(page).valid_element_click_next()
 
 
 class TestDeleteBasket:

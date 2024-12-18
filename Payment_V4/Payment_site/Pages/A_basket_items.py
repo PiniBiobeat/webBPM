@@ -28,8 +28,9 @@ class BasketItems:
                 price_text = price_text.replace("₪", "").replace("(", "").replace(")", "").replace("-", "").strip()
                 price = float(price_text)
                 total_sum += price
-            print(f"Total Sale sum: {total_sum} ₪")
-            print(f"Total Sale item: {prices.count()}")
+            if price_count > 0:
+                print(f"Total Sale sum: {total_sum} ₪")
+                print(f"Total Sale item: {prices.count()}")
             return total_sum
         except Exception as e:
             print(f"error sale: {e}")
