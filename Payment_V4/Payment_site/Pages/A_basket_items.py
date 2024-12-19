@@ -20,18 +20,20 @@ class BasketItems:
     def valid_element_click_next(self):
         self.page.locator("text=מחיר מחירון").first.wait_for(state="visible")
         try:
-            prices = self.page.locator(self.sale_price)
-            total_sum = 0
-            price_count = prices.count()
+            sale_item = self.page.locator(self.sale_price)
+            sale_price = 0
+            price_count = sale_item.count()
             for i in range(price_count):
-                price_text = prices.nth(i).inner_text()
+                price_text = sale_item.nth(i).inner_text()
                 price_text = price_text.replace("₪", "").replace("(", "").replace(")", "").replace("-", "").strip()
                 price = float(price_text)
-                total_sum += price
+                sale_price += price
             if price_count > 0:
-                print(f"Total Sale sum: {total_sum} ₪")
-                print(f"Total Sale item: {prices.count()}")
-            return total_sum
+                sale_items = sale_item.count()
+                print(f"Total Sale sum: {sale_price} ₪")
+                print(f"Total Sale item: {sale_items}")
+                BasketItems.valid_element_click_next = (sale_price, sale_items)
+            return self
         except Exception as e:
             print(f"error sale: {e}")
         finally:

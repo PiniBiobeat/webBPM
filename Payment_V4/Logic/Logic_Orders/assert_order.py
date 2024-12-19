@@ -1,13 +1,21 @@
 import pytest
+
+from Payment_V4.Payment_site.Pages._General_function import Generalfunction
+from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
+from Payment_V4.Payment_site.Pages.B_shipping import Shipping
+from Payment_V4.Payment_site.Pages.C_personalDetails import PersonalDetails
 from Payment_V4.Payment_site.Pages.D_summary import Summary
+from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
+from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 
-class AssertOrder:
+item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price = Summary.checkouts
+
+class AssertOrders:
 
     def assert_order_details(self):
-        item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price = Summary.checkouts
         assert item_count == 2
-        # assert 1+1==3
+
 
 
 
