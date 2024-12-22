@@ -15,7 +15,7 @@ class Summary:
     total_discount = "(//p[text()=':הנחות נוספות']//..//p[@class='box_itemL'])[1]"
     shipping_price = "(//p[text()=':משלוח']//..//p[@class='box_itemL'])[1]"
     shipping_price_discount = "(//p[text()=':הנחת משלוח']//..//p[@class='box_itemL'])[1]"
-    final_price = "//h3[text()=':סה״כ לתשלום']//..//h3[@class='box_itemL']"
+    final_prices = "//h3[text()=':סה״כ לתשלום']//..//h3[@class='box_itemL']"
 
     checkbox = 'input[type="checkbox"][aria-label="controlled"]'
     payment_button = '.MuiButton-contained'
@@ -54,7 +54,7 @@ class Summary:
         item_count = int(self.page.locator(self.item_count).inner_text().replace("₪", ""))
         base_price = float(self.page.locator(self.base_price).inner_text().replace("₪", ""))
         shipping_price = float(self.page.locator(self.shipping_price).inner_text().replace("₪", ""))
-        final_price = float(self.page.locator(self.final_price).inner_text().replace("₪", ""))
+        final_price = float(self.page.locator(self.final_prices).inner_text().replace("₪", ""))
         self.page.locator(self.checkbox).last.click()
         # self.page.screenshot(path="a_summary.png")
         self.page.click(self.payment_button)

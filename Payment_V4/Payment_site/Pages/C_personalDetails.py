@@ -6,7 +6,7 @@ class PersonalDetails:
 
     first_name = '[data-testid="first_name_sender"] input'
     last_name = '[data-testid="last_name_sender"] input'
-    city = '[data-testid="city_sender"]'
+    city = '[data-testid="city_sender"] input'
     city_list = "(//div/ul/li)"
     street = '[data-testid="street_sender"] > div > input:not([disabled])'
     street_list = "(//div/ul/li)"
@@ -43,9 +43,9 @@ class PersonalDetails:
 
 
     def filler_detail(self):
-        self.page.locator(self.city).click()
+        self.page.locator(self.city).fill("פתח תקוה")
         self.page.locator(self.city_list).get_by_text("פתח תקוה", exact=True).click()
-        self.page.locator(self.street).click()
+        self.page.locator(self.street).fill("תוצרת הארץ")
         self.page.locator(self.street_list).get_by_text("תוצרת הארץ", exact=True).click()
         self.page.fill(self.house_num, "3")
         Generalfunction(self.page).next_button()
@@ -54,9 +54,9 @@ class PersonalDetails:
     def fill_personal_details(self, first_name, last_name, city_list, street_list, house_num, apt_num, zip_num, phone_num, phone_area_list):
         self.page.fill(self.first_name, first_name)
         self.page.fill(self.last_name, last_name)
-        self.page.locator(self.city).click()
+        self.page.locator(self.city).fill(city_list)
         self.page.locator(self.city_list).get_by_text(city_list, exact=True).click()
-        self.page.locator(self.street).click()
+        self.page.locator(self.street).fill(street_list)
         self.page.locator(self.street_list).get_by_text(street_list, exact=True).click()
         self.page.fill(self.house_num, house_num)
         self.page.fill(self.apt_num, apt_num)
@@ -70,9 +70,9 @@ class PersonalDetails:
         self.page.locator(self.checkbox_business).check()
         self.page.fill(self.company_name, company_name)
         self.page.fill(self.company_id, company_id)
-        self.page.locator(self.company_city).click()
+        self.page.locator(self.company_city).fill(company_city_list)
         self.page.locator(self.company_city_list).get_by_text(company_city_list, exact=True).click()
-        self.page.locator(self.company_street).click()
+        self.page.locator(self.company_street).fill(company_street_list)
         self.page.locator(self.company_street_list).get_by_text(company_street_list, exact=True).click()
 
 
@@ -80,9 +80,9 @@ class PersonalDetails:
         self.page.locator(self.checkbox_shipping).check()
         self.page.fill(self.first_name_for, first_name_for)
         self.page.fill(self.last_name_for, last_name_for)
-        self.page.locator(self.city_for).click()
+        self.page.locator(self.city_for).fill(city_list_for)
         self.page.locator(self.city_list_for).get_by_text(city_list_for, exact=True).click()
-        self.page.locator(self.street_for).click()
+        self.page.locator(self.street_for).fill(street_list_for)
         self.page.locator(self.street_list_for).get_by_text(street_list_for, exact=True).click()
         self.page.fill(self.house_num_for, house_num_for)
         self.page.fill(self.apt_num_for, apt_num_for)

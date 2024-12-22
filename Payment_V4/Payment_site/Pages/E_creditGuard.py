@@ -27,9 +27,10 @@ class CreditGuard:
 
 
     def to_pay(self):
-        creditprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().replace("₪", ""))
+        creditcardprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().replace("₪", ""))
         self.page.frame_locator(self.iframe).locator(self.pay).click()
-        return self, creditprice
+        CreditGuard.to_pay = creditcardprice
+        return self
 
 
 

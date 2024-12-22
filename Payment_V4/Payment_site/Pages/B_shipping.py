@@ -41,9 +41,10 @@ class Shipping:
     def asafta(self):
         self.page.click(self.selector_asafta_b)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        asafta_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return ship_price
+        Shipping.asafta = asafta_ship_price
+        return self
 
 
     def shops(self, city, point):
@@ -53,25 +54,28 @@ class Shipping:
         self.page.locator(self.shops_list_city).get_by_text(city, exact=True).click()
         self.page.locator(self.shops_menu_point).click()
         self.page.locator(self.shops_list_point).get_by_text(point, exact=True).click()
-        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        shops_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return ship_price
+        Shipping.shops = shops_ship_price
+        return self
 
 
     def post(self):
         self.page.click(self.selector_post_il)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        post_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return ship_price
+        Shipping.post = post_ship_price
+        return self
 
 
     def home(self):
         self.page.click(self.selector_bar_home)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        home_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        return ship_price
+        Shipping.home = home_ship_price
+        return self
 
 
     def no_shops_selection(self):
