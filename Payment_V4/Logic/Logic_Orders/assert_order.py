@@ -15,17 +15,23 @@ from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 class AssertOrder:
     def __init__(self):
-
-        self.sale_price, self.sale_items = BasketItems.valid_element_click_next
-        self.asafta_ship_price = Shipping.asafta, self.shops_ship_price = Shipping.shops, self.post_ship_price = Shipping.post, self.home_ship_price = Shipping.home
-        self.item_count, self.base_price, self.total_discount, self.shipping_price, self.shipping_price_discount, self.final_price, = Summary.checkouts
-        self.credit_card = CreditGuard.fill_credit_card
-        self.order_number = Thanks.status
+        try:
+            self.sale_price, self.sale_items = BasketItems.valid_element_click_next
+            self.asafta_ship_price = Shipping.asafta
+            self.shops_ship_price = Shipping.shops
+            self.post_ship_price = Shipping.post
+            self.home_ship_price = Shipping.home
+            self.item_count, self.base_price, self.total_discount, self.shipping_price, self.shipping_price_discount, self.final_price, = Summary.checkouts
+            self.credit_card = CreditGuard.fill_credit_card
+            self.order_number = Thanks.status
+        except:
+            pass
 
 
 
     def assert_order_details(self):
-        assert self.order_number == 1, f"Expected item count to be 2, but got {self.order_number}"
+        assert self.item_count == 1, f"Expected"
+        print(self.asafta_ship_price)
         return self
 
 

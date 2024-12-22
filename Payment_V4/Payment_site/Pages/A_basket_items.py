@@ -22,6 +22,7 @@ class BasketItems:
         try:
             sale_item = self.page.locator(self.sale_price)
             sale_price = 0
+            sale_items = 0
             price_count = sale_item.count()
             for i in range(price_count):
                 price_text = sale_item.nth(i).inner_text()
@@ -32,7 +33,7 @@ class BasketItems:
                 sale_items = sale_item.count()
                 print(f"Total Sale sum: {sale_price} ₪")
                 print(f"Total Sale item: {sale_items}")
-                BasketItems.valid_element_click_next = (sale_price, sale_items)
+            BasketItems.valid_element_click_next = (sale_price, sale_items)
             return self
         except Exception as e:
             print(f"error sale: {e}")
