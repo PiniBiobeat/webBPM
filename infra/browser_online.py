@@ -15,7 +15,7 @@ class BrowserOnline:
 
         playwright = sync_playwright().start()
         self.browser = playwright.chromium.launch(headless=False)
-        self.context = self.browser.new_context(http_credentials={'username':'engine','password':'Api12345'})
+        self.context = self.browser.new_context()
         self.context.tracing.start(screenshots=True, snapshots=True)
         self.page = self.context.new_page()
 
