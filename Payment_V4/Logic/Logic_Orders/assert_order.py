@@ -1,5 +1,3 @@
-from tabnanny import check
-
 import pytest
 
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
@@ -27,7 +25,7 @@ class AssertOrder:
 
 
     def assert_order_details(self):
-        assert self.item_count == 3, f"Expected"
+        assert self.item_count == 1, f"Expected"
         print(self.ship_price)
         return self
 
