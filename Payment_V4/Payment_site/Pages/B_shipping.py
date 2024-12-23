@@ -3,7 +3,6 @@ from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
 
 class Shipping:
-
     selector_asafta_b = "//div[@class='shipping_method']/h3[contains(text(), 'אספתא')]"
     selector_bar_shops = "//div[@class='shipping_method']/h3[contains(text(), 'איסוף מנקודות מסירה')]"
     selector_post_il = "//div[@class='shipping_method']/h3[contains(text(), 'דואר רשום')]"
@@ -29,6 +28,7 @@ class Shipping:
     def __init__(self, page: Page):
         self.page = page
 
+
     def ship_coupon_name(self, coupon_code):
         if "Home" in coupon_code:
             self.home()
@@ -41,9 +41,9 @@ class Shipping:
     def asafta(self):
         self.page.click(self.selector_asafta_b)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        asafta_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        Shipping.asafta = asafta_ship_price
+        self.return_ship_price(ship_price)
         return self
 
 
@@ -54,27 +54,32 @@ class Shipping:
         self.page.locator(self.shops_list_city).get_by_text(city, exact=True).click()
         self.page.locator(self.shops_menu_point).click()
         self.page.locator(self.shops_list_point).get_by_text(point, exact=True).click()
-        shops_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        Shipping.shops = shops_ship_price
+        self.return_ship_price(ship_price)
         return self
 
 
     def post(self):
         self.page.click(self.selector_post_il)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        post_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        Shipping.post = post_ship_price
+        self.return_ship_price(ship_price)
         return self
 
 
     def home(self):
         self.page.click(self.selector_bar_home)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        home_ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        Shipping.home = home_ship_price
+        self.return_ship_price(ship_price)
+        return self
+
+
+    def return_ship_price(self, ship_price):
+        Shipping.return_ship_price = ship_price
         return self
 
 
@@ -129,8 +134,3 @@ class Shipping:
             error_isof_msg = self.page.locator(self.isof_error).inner_text()
             print(error_isof_msg)
             return error_isof_msg
-
-
-
-
-

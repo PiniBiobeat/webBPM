@@ -31,7 +31,7 @@ class TestAppCouponSanity:
         # Summary(page).add_coupon(get_coupon("AlbumFormat"))
         Summary(page).checkouts()
         page.pause()
-        # CreditGuard(page).fill_credit_card().to_pay()
+        CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert AssertOrder().assert_order_details()
 
