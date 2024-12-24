@@ -1,7 +1,5 @@
 import pytest
 
-from Payment_V4.Logic.Logic_Orders.data_order import DataConnection
-
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
 from Payment_V4.Payment_site.Pages.B_shipping import Shipping
@@ -27,14 +25,11 @@ class AssertOrder:
 
 
     def assert_order_details(self):
-        self.item_count = 1
         assert self.item_count == 1, f"Expected"
-        print(self.item_count)
+        print(self.ship_price)
         return self
 
 
-
-AssertOrder().assert_order_details()
 
 
 
