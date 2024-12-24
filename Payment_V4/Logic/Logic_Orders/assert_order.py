@@ -31,8 +31,12 @@ class AssertOrder:
             print(f"Element Not Return, Error{e}")
 
 
-    def assert_order_details(self):
+    def general_assert_orders(self):
         assert self.item_count == self.total_items_quantity
+        assert self.base_price == self.total_items_price
+        assert self.total_discount == self.total_items_quantity
+        assert self.item_count == self.total_items_quantity
+        assert self.final_price == self.total_order_price
         return self
 
 
