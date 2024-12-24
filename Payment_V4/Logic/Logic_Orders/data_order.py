@@ -5,19 +5,21 @@ from data_base import mysql
 class DataConnection:
 
     def orders_tbl(self):
-        command = f"""SELECT [order_id]
-                        ,[master_id]
-                        ,[in_status]
-                        ,[total_items_quantity]
-                        ,[total_items_price]
-                        ,[total_order_price]
-                        ,[discount_admin_value]
-                        ,[discount_checkout_value]
-                        ,[shipping_value]
-                        ,[shipping_method]
-                        ,[invoice_number]
-                     FROM [lupa_online].[dbo].[orders_tbl] 
-                     WHERE order_id = 7823898"""
+        command = """
+        SELECT [order_id]
+              ,[master_id]
+              ,[in_status]
+              ,[total_items_quantity]
+              ,[total_items_price]
+              ,[total_order_price]
+              ,[discount_admin_value]
+              ,[discount_checkout_value]
+              ,[shipping_value]
+              ,[shipping_method]
+              ,[invoice_number]
+        FROM [lupa_online].[dbo].[orders_tbl] 
+        WHERE order_id = 7823898
+        """
         data_command = mysql(command)
         order_id, master_id, in_status, total_items_quantity, total_items_price, total_order_price, discount_admin_value, \
         discount_checkout_value, shipping_value, shipping_method, invoice_number = data_command[0]
@@ -27,4 +29,4 @@ class DataConnection:
 
 
 
-DataConnection().orders_tbl()
+# DataConnection().orders_tbl()
