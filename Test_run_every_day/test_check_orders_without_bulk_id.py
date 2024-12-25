@@ -191,7 +191,7 @@ class Test_me():
 
         # Build the payload in the format Slack expects
         payload = {
-            "text": message_text  # Ensure it’s a plain-text string
+            "text":  "Orders without bulk id\n" + message_text  # Ensure it’s a plain-text string
         }
 
         # Send the payload as JSON

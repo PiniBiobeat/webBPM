@@ -24,6 +24,7 @@ class TestAdmin(TestBaseOnline):
         page.click_ok()
         page.click_open_link()
         page.get_url_from_new_page()
+        page.pay_order()
         print("")
 
 
