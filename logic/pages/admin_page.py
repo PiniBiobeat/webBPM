@@ -1,6 +1,8 @@
 import time
 
 from infra.page_base import PageBase
+from Payment_V4.Payment_site.Pages.F_thanks import Thanks
+from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 
 class AdminPage(PageBase):
 
@@ -12,6 +14,13 @@ class AdminPage(PageBase):
     test_open_option = "//select[@id='couponReason']"
     text_click_ok = "//input[@id='btnAddAdminCoupon']"
     text_open_link = "//div[@onclick='sentPaymentLink()' and contains(.,'send payment link')]"
+    iframe = "//div[@class='iframe_container MuiBox-root css-0']/iframe"
+    credit_num = '#card-number'
+    exp_year_num = '#expYear'
+    exp_month_num = '#expMonth'
+    cvv_num = "#cvv"
+    pay = '#cg-submit-btn'
+    price = '#cg-amount-sum'
     def __init__(self, page):
         super().__init__(page)
 
@@ -22,7 +31,7 @@ class AdminPage(PageBase):
 
     def click_login_button(self):
         self.pw_page.click(self.text_button_login)
-        details_url = self.pw_page.url.replace("order_list.aspx", "Order_Details.aspx?id=7822408")
+        details_url = self.pw_page.url.replace("order_list.aspx", "Order_Details.aspx?id=7823989")
         return details_url
 
     def add_num_sale(self, num_coupons):
@@ -52,11 +61,23 @@ class AdminPage(PageBase):
         print(new_page)
 
     def get_url_from_new_page(self):
-        pages = self.pw_page.context.pages
+        self.pw_page.wait_for_load_state()
+        self.pw_page.goto("https://admin.lupa.co.il/admin_online/ajax/sendPaymentToCustomer.aspx?orderid=7823989")
+        body_text = self.pw_page.locator("body").text_content()
+        self.pw_page.goto(body_text)
+        self.pw_page.wait_for_load_state()
+        print(body_text)
+        #
+        # return body_text
 
-        second_page = pages[2]  # Ensure this index is valid based on your context
+    def pay_order(self, card="5451365000064667", year="2030", month="01", cvv="973"):
+        self.pw_page.frame_locator(self.iframe).locator(self.credit_num).fill(card)
+        self.pw_page.frame_locator(self.iframe).locator(self.exp_year_num).select_option(value=year)
+        self.pw_page.frame_locator(self.iframe).locator(self.exp_month_num).select_option(value=month)
+        self.pw_page.frame_locator(self.iframe).locator(self.cvv_num).fill(cvv)
+        self.pw_page.frame_locator(self.iframe).locator(self.pay).click()
+        Thanks(self.pw_page).status()
 
-        # Get the body text from the second page
-        body_text = second_page.locator("body").text_content()
 
-        return body_text
+
+
