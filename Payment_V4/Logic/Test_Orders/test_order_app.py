@@ -26,14 +26,14 @@ class TestAppCouponSanity:
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
-        Shipping(page).asafta()
+        Shipping(page).home()
         PersonalDetails(page).filler_detail()
-        # Summary(page).add_coupon(get_coupon("AlbumFormat"))
+        Summary(page).add_coupon(get_coupon("ChargeZero"))
         Summary(page).checkouts()
         page.pause()
-        # CreditGuard(page).fill_credit_card().to_pay()
+        CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder().assert_order_details()
+        assert AssertOrder().general_assert_orders()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_albums)

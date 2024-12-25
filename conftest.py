@@ -4,7 +4,7 @@ import pytest
 
 
 
-test_co = ({"username": "test","password": "Acf325A12!"})
+test_co = ({"username": "test", "password": "Acf325A12!"})
 
 #desktop
 @pytest.fixture(scope="session")
