@@ -1,5 +1,5 @@
 # from Payment_V4.Payment_site.Pages.F_thanks import Thanks
-from data_base import mysql
+from data_base import mysql, postgres_env
 
 
 class DataConnection:
@@ -12,8 +12,6 @@ class DataConnection:
               ,[total_items_quantity]
               ,[total_items_price]
               ,[total_order_price]
-              ,[discount_admin_value]
-              ,[discount_checkout_value]
               ,[shipping_value]
               ,[shipping_method]
               ,[invoice_number]
@@ -28,7 +26,13 @@ class DataConnection:
 
 
 
-# DataConnection().orders_tbl()
+    def total_discount_sum(self,order_number):
+        command = f"select SUM(discount_actual_value) FROM cpn.coupon_tbl x WHERE x.use_date is not null and order_id = {order_number}"
+        data_command = postgres_env(command)
+        if not data_command[0]:
+            return None
+        else:
+            return print(data_command[0][0])
 
 
 
@@ -36,8 +40,12 @@ class DataConnection:
 
 
 
+# DataConnection().total_discount_sum("7824149")
 
 
-        # order_id, master_id, in_status, total_items_quantity, total_items_price, total_order_price, discount_admin_value, \
-        # discount_checkout_value, shipping_value, shipping_method, invoice_number = data_command[0]
-        # print(order_id)
+
+
+
+
+# 7823844
+
