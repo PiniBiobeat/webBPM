@@ -55,16 +55,13 @@ class AssertOrder:
 
 
 
-# AssertOrder().assert_order_details()               #תמיד להשאיר ממורקר
 
 
 
 
 
-#     def assert_order_details(self, summary):
-#         assert summary.item_count == 1, f"Expected item count to be 1, but got {summary.item_count}"
-#         assert summary.final_price == summary.base_price + summary.shipping_price - summary.total_discount - summary.shipping_price_discount, "Final price calculation mismatch"
-#         assert summary.final_price > 0, f"Final price should be greater than 0, but got {summary.final_price}"
-#         # Add more assertions as needed
+
+
+# AssertOrder().general_assert_orders()               #תמיד להשאיר ממורקר
 
 # assert self.delivery_method == self.shipping_method, f"delivery selected method is: {self.delivery_method}, not match signed db: {self.shipping_method}."

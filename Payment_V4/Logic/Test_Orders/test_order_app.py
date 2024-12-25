@@ -15,6 +15,8 @@ from Payment_V4.Logic.Logic_Orders.coupon_list import *
 from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 
+
+
 @pytest.fixture
 def page(request) -> Page:
     return request.getfixturevalue('page')
@@ -28,9 +30,8 @@ class TestAppCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("ChargeZero"))
+        Summary(page).add_coupon(get_coupon("AlbumFormat"))
         Summary(page).checkouts()
-        page.pause()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert AssertOrder().general_assert_orders()
