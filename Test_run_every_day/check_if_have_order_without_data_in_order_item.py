@@ -60,7 +60,7 @@ if __name__ == "__main__":
         "PWD=Kk28!32Zx;"  # Replace with your password
     )
 
-    slack_webhook_url = "https://hooks.slack.com/services/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"  # Replace with your Slack webhook URL
+    slack_webhook_url = "https://hooks.slack.com/services/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"  # Replace with your Slack webhook URL
 
     checker = OrderChecker(conn_string, slack_webhook_url)
     checker.check_and_notify()
