@@ -27,7 +27,7 @@ class Test_me():
 
         cursor = cnxn.cursor()
         print(cursor)
-        cursor.execute(f"select *  FROM [lupa].[dbo].[orders_tbl] where bulk_id is null  and in_status = 'Printing process' and charged_date < DATEADD(hour, -{hours}, GETDATE())")
+        cursor.execute(f"select *  FROM [lupa].[dbo].[orders_tbl] where bulk_id is null and consolidate IS NULL and in_status = 'Printing process' and charged_date < DATEADD(hour, -{hours}, GETDATE())")
         rows = cursor.fetchall()
         if rows != []:
             for row in rows:

@@ -6,7 +6,7 @@ from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 user = 'pini'
 passw = 'pinim1'
-
+order_id = 7824569
 
 class TestAdmin(TestBaseOnline):
 
@@ -16,16 +16,12 @@ class TestAdmin(TestBaseOnline):
     def test_add_coupons(self):
         page: AdminPage = self.browser_online.navigate(configuration['admin_url_prod'], AdminPage)
         page.log_in_admin(user, passw)
-        details_url =  page.click_login_button()
+        details_url =  page.click_login_button(order_id)
         page.pw_page.goto(details_url)
-        #self.browser_online.get(details_url)
-        page.add_num_sale(2)
-        page.select_option()
-        page.click_ok()
         page.click_open_link()
-        page.get_url_from_new_page()
+        page.get_url_from_new_page(order_id)
         page.pay_order()
-        print("")
+
 
 
 
