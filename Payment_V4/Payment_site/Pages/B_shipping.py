@@ -47,7 +47,7 @@ class Shipping:
         return self
 
 
-    def shops(self, city, point):
+    def shops(self, city="פתח תקוה", point="ברזיל הקטנה"):
         self.page.click(self.selector_bar_shops)
         self.page.get_by_role("button", name="מידע נוסף").click()
         self.page.locator(self.shops_menu_city).click()
