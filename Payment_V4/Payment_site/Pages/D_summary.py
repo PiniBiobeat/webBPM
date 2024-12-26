@@ -46,10 +46,10 @@ class Summary:
 
     def checkouts(self):
         try:
-            total_discount = float(self.page.locator(self.total_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", ""))
+            total_discount = float(self.page.locator(self.total_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", "").replace("-", ""))
         except: total_discount = None
         try:
-            shipping_price_discount = float(self.page.locator(self.shipping_price_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", ""))
+            shipping_price_discount = float(self.page.locator(self.shipping_price_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", "").replace("-", ""))
         except: shipping_price_discount = 0.00
         item_count = int(self.page.locator(self.item_count).inner_text().replace("₪", ""))
         base_price = float(self.page.locator(self.base_price).inner_text().replace("₪", ""))

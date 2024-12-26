@@ -29,10 +29,10 @@ class DataConnection:
     def total_discount_sum(self,order_number):
         command = f"select SUM(discount_actual_value) FROM cpn.coupon_tbl x WHERE x.use_date is not null and order_id = {order_number}"
         data_command = postgres_env(command)
-        if not data_command[0]:
+        if not data_command[0][0]:
             return None
         else:
-            return print(data_command[0][0])
+            return data_command[0][0]
 
 
 
@@ -40,7 +40,7 @@ class DataConnection:
 
 
 
-# DataConnection().total_discount_sum("7824149")
+# DataConnection().total_discount_sum("7824652")
 
 
 
