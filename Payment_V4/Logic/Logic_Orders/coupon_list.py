@@ -4,7 +4,7 @@ import pytest
 
 def get_coupon(coupon_name):
     try:
-        getcoupon = f"SELECT * FROM cpn.coupon_tbl WHERE name = '{coupon_name}' and use_date is null"
+        getcoupon = f"SELECT * FROM cpn.coupon_tbl WHERE name = '{coupon_name}' and use_date is null and user_id = 0"
         setcoupon = postgres_env(getcoupon)
         if setcoupon[0][27] == "MANUAL_BY_CODE":
             return setcoupon[0][12]
