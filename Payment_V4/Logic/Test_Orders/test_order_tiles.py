@@ -24,6 +24,7 @@ class TestTilesCouponSanity:
     def test_order_tiles_20x20(self, page):
         AddTiles().request_tiles(page, "tiles20x20")
         Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).update_item_quantity(item_index=1, button="-", times=9)
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
