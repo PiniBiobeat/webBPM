@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from decimal import Decimal
 
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
@@ -54,7 +55,7 @@ class Summary:
         item_count = int(self.page.locator(self.item_count).inner_text().replace("₪", ""))
         base_price = float(self.page.locator(self.base_price).inner_text().replace("₪", ""))
         shipping_price = float(self.page.locator(self.shipping_price).inner_text().replace("₪", ""))
-        final_price = float(self.page.locator(self.final_prices).inner_text().replace("₪", ""))
+        final_price = Decimal(self.page.locator(self.final_prices).inner_text().replace("₪", ""))
         self.page.locator(self.checkbox).last.click()
         # self.page.screenshot(path="a_summary.png")
         self.page.click(self.payment_button)
