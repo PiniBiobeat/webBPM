@@ -51,10 +51,10 @@ class Summary:
         except: total_discount = None
         try:
             shipping_price_discount = float(self.page.locator(self.shipping_price_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", "").replace("-", ""))
-        except: shipping_price_discount = 0.00
+        except: shipping_price_discount = Decimal(0.00)
         item_count = int(self.page.locator(self.item_count).inner_text().replace("₪", ""))
-        base_price = float(self.page.locator(self.base_price).inner_text().replace("₪", ""))
-        shipping_price = float(self.page.locator(self.shipping_price).inner_text().replace("₪", ""))
+        base_price = Decimal(self.page.locator(self.base_price).inner_text().replace("₪", ""))
+        shipping_price = Decimal(self.page.locator(self.shipping_price).inner_text().replace("₪", ""))
         final_price = Decimal(self.page.locator(self.final_prices).inner_text().replace("₪", ""))
         self.page.locator(self.checkbox).last.click()
         # self.page.screenshot(path="a_summary.png")

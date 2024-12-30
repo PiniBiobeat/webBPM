@@ -23,12 +23,13 @@ def page(request) -> Page:
 class TestAppCouponSanity:
 
     def test_order_app_f35(self, page):
-        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "הגדה_פורמט_6_קלאסי_פלוס")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("AlbumFormat"))
+        Summary(page).add_coupon(get_coupon("Test_Bundle"))
+        page.pause()
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
