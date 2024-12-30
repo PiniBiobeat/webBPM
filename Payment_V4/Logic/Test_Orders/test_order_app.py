@@ -15,8 +15,6 @@ from Payment_V4.Logic.Logic_Orders.coupon_list import *
 from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 
-
-
 @pytest.fixture
 def page(request) -> Page:
     return request.getfixturevalue('page')
@@ -81,6 +79,7 @@ class TestAppCouponIsof:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
+
     @pytest.mark.parametrize("coupon_code", coupon_albums_isof)
     def test_order_app_isof_short(self, page, coupon_code):
         AddBookV3().requestV3(page, "פורמט_6_קלאסי_פלוס_הולנדי")
@@ -120,6 +119,23 @@ class TestAppCouponFix:
         Thanks(page).status()
 
 
+class TestAppCouponType:
+
+    @pytest.mark.parametrize("coupon_code", coupon_albums_type)
+    def test_order_app_type(self, page, coupon_code):
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(get_coupon(coupon_code))
+        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+
+
+# add new before
 class TestAppCouponPay40:
 
     @pytest.mark.parametrize("coupon_code", coupon_pay_for_40)

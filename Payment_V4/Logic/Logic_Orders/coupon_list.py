@@ -21,6 +21,17 @@ coupon_pay_for_40 = [
     "PayFor40_Name"
 ]
 
+coupon_albums_type = [
+    "AlbumTypeCodeSal_Double2"
+    "AlbumTypeCodeSal_Double"
+    "AlbumTypeCodeSal"
+    "AlbumTypeNameSal"
+    "AlbumTypeCode%"
+    "AlbumTypeName%"
+    "AlbumTypeCode"
+    "AlbumTypeName"
+]
+
 coupon_albums_fix = [
     "AlbumFixCodeShip",
     "AlbumFixNameShip",
@@ -52,7 +63,6 @@ coupon_albums_isof = [
     # "Album-isof-Name",
 ]
 
-
 coupon_albums_items = [
     "AlbumTest6_per_Code",
     "AlbumTest5_per_Name",
@@ -82,12 +92,24 @@ coupon_albums = [
 
 # Calendar sanity ------------------------------------------------
 
+copoun_calendar_type = [
+    "CalendarTypeCodeSal_Double2"
+    "CalendarTypeCodeSal_Double"
+    "CalendarTypeCodeSal"
+    "CalendarTypeNameSal"
+    "CalendarTypeCode%"
+    "CalendarTypeName%"
+    "CalendarTypeCode"
+    "CalendarTypeName"
+]
+
 coupon_calendar_fix = [
     "CalendarFixCodeShip",
     "CalendarFixNameShip",
     "CalendarFixCode",
     "CalendarFixName"
 ]
+
 coupon_calendar_shipping = [
     "CalendarShipCodeHomeSAL",
     "CalendarShipCodePostSAL",
@@ -140,6 +162,19 @@ coupon_calendar = [
 ]
 
 # Tiles sanity ------------------------------------------------
+
+coupon_tiles_type = [
+    "TilesTypeCodeSal_Double2"
+    "TilesTypeCodeSal_Double1"
+    "TilesTypeCodeSal"        
+    "TilesTypeNameSal"        
+    "TilesTypeCode%"          
+    "TilesTypeName%"          
+    "TilesTypeCode"           
+    "TilesTypeName"
+
+]
+
 coupon_tiles_fix = [
     "TilesFixCodeShip",
     "TilesFixNameShip",
