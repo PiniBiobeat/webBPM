@@ -28,7 +28,7 @@ class TestCalendarCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("CalendarFormat"))
+        Summary(page).add_coupon("CalendarFormat")
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
@@ -42,7 +42,7 @@ class TestCalendarCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -61,7 +61,7 @@ class TestCalendarCouponItems:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -75,7 +75,7 @@ class TestCalendarCouponIsof:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -99,7 +99,7 @@ class TestCalendarCouponShipping:
         BasketItems(page).valid_element_click_next()
         Shipping(page).ship_coupon_name(coupon_code)
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -113,6 +113,6 @@ class TestCalendarCouponFix:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()

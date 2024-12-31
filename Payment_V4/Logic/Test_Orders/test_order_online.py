@@ -28,7 +28,7 @@ class TestOnlineCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("AlbumFormat"))
+        Summary(page).add_coupon("AlbumFormat")
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
@@ -42,7 +42,7 @@ class TestOnlineCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -61,7 +61,7 @@ class TestOnlineCouponItems:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -75,7 +75,7 @@ class TestOnlineCouponIsof:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -99,7 +99,7 @@ class TestOnlineCouponShipping:
         BasketItems(page).valid_element_click_next()
         Shipping(page).ship_coupon_name(coupon_code)
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -113,7 +113,7 @@ class TestOnlineCouponFix:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -129,7 +129,7 @@ class TestOnlineCouponType:
             Shipping(page).asafta()
             PersonalDetails(page).filler_detail()
             Summary(page).add_coupon(get_coupon(coupon_code))
-            Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+            Summary(page).add_coupon(coupon_code).checkouts()
             CreditGuard(page).fill_credit_card().to_pay()
             Thanks(page).status()
 
@@ -143,6 +143,6 @@ class TestOnlineCouponPay40:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()

@@ -1,6 +1,7 @@
 from playwright.sync_api import Page, expect
 from decimal import Decimal
 
+from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon, get_coupon_title
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
 class Summary:
@@ -18,6 +19,8 @@ class Summary:
     shipping_price_discount = "(//p[text()=':הנחת משלוח']//..//p[@class='box_itemL'])[1]"
     final_prices = "//h3[text()=':סה״כ לתשלום']//..//h3[@class='box_itemL']"
 
+    coupon_switch = "//div[@class='box_item_l bold' and text()='{coupon_title}']//following::span[contains(@class, 'MuiSwitch-switchBase') and not(contains(@class, 'Mui-checked'))][1]"
+
     checkbox = 'input[type="checkbox"][aria-label="controlled"]'
     payment_button = '.MuiButton-contained'
 
@@ -27,9 +30,9 @@ class Summary:
 
 
 
-
-    def add_coupon(self, coupon):
-        self.page.fill(self.coupon_field, coupon)
+    def add_coupon(self, coupon_name):
+        coupon_fill = get_coupon(coupon_name)
+        self.page.fill(self.coupon_field, coupon_fill)
         self.page.click(self.coupon_confirm)
         self.page.locator(self.loader).wait_for(state="hidden")
         try:
@@ -42,6 +45,9 @@ class Summary:
         except Exception as e:
             if "Coupon error" in str(e):
                 raise
+        locator = self.page.locator(self.coupon_switch.format(coupon_title=get_coupon_title(coupon_name)))
+        if locator.is_visible(timeout=0):
+            locator.click(timeout=0)
         return self
 
 

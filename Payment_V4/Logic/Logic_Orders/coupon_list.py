@@ -1,7 +1,6 @@
 from data_base import postgres_env
 import pytest
 
-
 def get_coupon(coupon_name):
     try:
         getcoupon = f"SELECT * FROM cpn.coupon_tbl WHERE name = '{coupon_name}' and use_date is null and user_id = 0"
@@ -12,6 +11,13 @@ def get_coupon(coupon_name):
             return coupon_name
     except:
         return coupon_name
+
+def get_coupon_title(coupon_name):
+        getcoupon1 = f"SELECT title FROM cpn.coupon_tbl WHERE name = '{coupon_name}'"
+        coupon_title = postgres_env(getcoupon1)
+        return coupon_title[0][0]
+
+
 
 
 # album sanity ------------------------------------------------
@@ -234,8 +240,8 @@ coupon_tiles = [
 ]
 
 
-@pytest.mark.parametrize("coupon_code", coupon_albums)
-def test_list(coupon_code):
-    print(get_coupon(coupon_code))
+# @pytest.mark.parametrize("coupon_code", coupon_albums)
+# def test_list(coupon_code):
+#     print(get_coupon(coupon_code))
 
 # coupon_albums = coupon_albums + ["new_coupon"]

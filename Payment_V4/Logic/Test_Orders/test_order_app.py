@@ -17,7 +17,7 @@ from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 @pytest.fixture
 def page(request) -> Page:
-    return request.getfixturevalue('page')
+    return request.getfixturevalue('page_mobile')
 
 
 class TestAppCouponSanity:
@@ -28,8 +28,7 @@ class TestAppCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon("Test_Bundle"))
-        page.pause()
+        Summary(page).add_coupon("AlbumFormat")
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
@@ -43,7 +42,7 @@ class TestAppCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -62,7 +61,7 @@ class TestAppCouponItems:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -76,7 +75,7 @@ class TestAppCouponIsof:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -101,7 +100,7 @@ class TestAppCouponShipping:
         BasketItems(page).valid_element_click_next()
         Shipping(page).ship_coupon_name(coupon_code)
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -115,7 +114,7 @@ class TestAppCouponFix:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -131,7 +130,7 @@ class TestAppCouponType:
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(get_coupon(coupon_code))
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
 
@@ -146,6 +145,6 @@ class TestAppCouponPay40:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(get_coupon(coupon_code)).checkouts()
+        Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
