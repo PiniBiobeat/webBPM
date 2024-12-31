@@ -45,6 +45,7 @@ class TestOnlineCouponSanity:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestOnlineCouponItems:
@@ -64,6 +65,7 @@ class TestOnlineCouponItems:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestOnlineCouponIsof:
@@ -78,6 +80,7 @@ class TestOnlineCouponIsof:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_albums_isof)
@@ -88,6 +91,7 @@ class TestOnlineCouponIsof:
         Shipping(page).add_isof_code(get_coupon(coupon_code))
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestOnlineCouponShipping:
@@ -102,6 +106,7 @@ class TestOnlineCouponShipping:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestOnlineCouponFix:
@@ -116,6 +121,7 @@ class TestOnlineCouponFix:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestOnlineCouponType:
@@ -128,10 +134,11 @@ class TestOnlineCouponType:
             BasketItems(page).valid_element_click_next()
             Shipping(page).asafta()
             PersonalDetails(page).filler_detail()
-            Summary(page).add_coupon(get_coupon(coupon_code))
+            Summary(page).add_coupon(coupon_code)
             Summary(page).add_coupon(coupon_code).checkouts()
             CreditGuard(page).fill_credit_card().to_pay()
             Thanks(page).status()
+            assert AssertOrder().general_assert_orders()
 
 # add new before
 class TestOnlineCouponPay40:
@@ -146,3 +153,4 @@ class TestOnlineCouponPay40:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()

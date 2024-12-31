@@ -45,6 +45,7 @@ class TestCalendarCouponSanity:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestCalendarCouponItems:
@@ -64,6 +65,7 @@ class TestCalendarCouponItems:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestCalendarCouponIsof:
@@ -78,6 +80,7 @@ class TestCalendarCouponIsof:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_calendar_isof)
@@ -88,6 +91,7 @@ class TestCalendarCouponIsof:
         Shipping(page).add_isof_code(get_coupon(coupon_code))
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestCalendarCouponShipping:
@@ -102,6 +106,7 @@ class TestCalendarCouponShipping:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestCalendarCouponFix:
@@ -116,3 +121,4 @@ class TestCalendarCouponFix:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
