@@ -12,6 +12,7 @@ from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 from Payment_V4.Logic.Logic_Orders.coupon_list import *
+from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 
 @pytest.fixture
@@ -22,7 +23,7 @@ def page(request) -> Page:
 class TestTilesCouponSanity:
 
     def test_order_tiles_20x20(self, page):
-        AddTiles().request_tiles(page, "tiles20x20")
+        AddTiles().request_tiles(page, "tiles20X20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
@@ -31,6 +32,7 @@ class TestTilesCouponSanity:
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder(db="lupa_square").general_assert_orders()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles)

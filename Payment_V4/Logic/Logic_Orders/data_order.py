@@ -4,7 +4,7 @@ from data_base import mysql, postgres_env
 
 class DataConnection:
 
-    def orders_tbl(self,order_number):
+    def orders_tbl(self, order_number, db):
         command = f"""
         SELECT [order_id]
               ,[master_id]
@@ -15,7 +15,7 @@ class DataConnection:
               ,[shipping_value]
               ,[shipping_method]
               ,[invoice_number]
-        FROM [lupa_online].[dbo].[orders_tbl] 
+        FROM [{db}].[dbo].[orders_tbl] 
         WHERE order_id = {order_number}
         """
         data_command = mysql(command)

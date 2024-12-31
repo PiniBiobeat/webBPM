@@ -17,13 +17,13 @@ from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 @pytest.fixture
 def page(request) -> Page:
-    return request.getfixturevalue('page_mobile')
+    return request.getfixturevalue('page')
 
 
 class TestAppCouponSanity:
 
     def test_order_app_f35(self, page):
-        AddBookV3().requestV3(page, "הגדה_פורמט_6_קלאסי_פלוס")
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
