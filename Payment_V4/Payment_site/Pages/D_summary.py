@@ -3,7 +3,7 @@ from decimal import Decimal
 
 from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon, get_coupon_title
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
-import time
+
 class Summary:
 
     coupon_field = '.MuiInputBase-input'
@@ -32,7 +32,6 @@ class Summary:
 
 
     def add_coupon(self, coupon_name):
-        start_time = time.time()
         coupon_fill = get_coupon(coupon_name)
         self.page.fill(self.coupon_field, coupon_fill)
         self.page.click(self.coupon_confirm)
@@ -50,8 +49,6 @@ class Summary:
         locator = self.page.locator(self.coupon_switch.format(coupon_title=get_coupon_title(coupon_name)))
         if locator.is_visible(timeout=0):
             locator.click(timeout=0)
-        elapsed_time = time.time() - start_time
-        print(f" Time: {elapsed_time:.4f}")
         return self
 
 
