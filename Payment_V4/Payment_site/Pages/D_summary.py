@@ -3,14 +3,15 @@ from decimal import Decimal
 
 from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon, get_coupon_title
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
-
+import time
 class Summary:
 
     coupon_field = '.MuiInputBase-input'
     coupon_confirm = ".MuiButton-text"
     coupon_error = "//div[@class='summary_page container page MuiBox-root css-0']//p"
     coupon_value_price = "(//div[@class='content_selected_coupon MuiBox-root css-0']/div[@class='box_item_l MuiBox-root css-0'])"
-    loader = ".MuiBackdrop-root css-xuaqpw"
+    loader = '[class*="MuiCircularProgress-circle"]'
+
 
     item_count = "(//p[text()=':סה״כ פריטים']//..//p[@class='box_itemL'])[1]"
     base_price = "(//p[text()=':מחיר מחירון']//..//p[@class='box_itemL'])[1]"
@@ -31,15 +32,16 @@ class Summary:
 
 
     def add_coupon(self, coupon_name):
+        start_time = time.time()
         coupon_fill = get_coupon(coupon_name)
         self.page.fill(self.coupon_field, coupon_fill)
         self.page.click(self.coupon_confirm)
-        self.page.locator(self.loader).wait_for(state="hidden")
+        self.page.locator(self.loader).wait_for(state="detached")
         try:
-            self.page.get_by_role("button", name="הבנתי").click(timeout=3000)
+            self.page.get_by_role("button", name="הבנתי").click(timeout=500)
         except Exception: pass
         try:
-            check = self.page.locator(self.coupon_error).inner_text(timeout=4000)
+            check = self.page.locator(self.coupon_error).inner_text(timeout=500)
             if check:
                 raise Exception(f"Coupon error: {check}")
         except Exception as e:
@@ -48,6 +50,8 @@ class Summary:
         locator = self.page.locator(self.coupon_switch.format(coupon_title=get_coupon_title(coupon_name)))
         if locator.is_visible(timeout=0):
             locator.click(timeout=0)
+        elapsed_time = time.time() - start_time
+        print(f" Time: {elapsed_time:.4f}")
         return self
 
 
