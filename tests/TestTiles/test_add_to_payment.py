@@ -38,10 +38,10 @@ class TilesToPayment(TestBase):
 
             page: PreviewScreen = self.browser.create_page(PreviewScreen)
             page.button_click_to_payment()
-            url = page.get_url()
 
             page: CalenderPaymentPage = self.browser.create_page(CalenderPaymentPage)
             page.delete_from_basket()
+            url = page.get_url()
 
             expected_url_pattern = r"https://paymentsv4-ui\.lupa\.co\.il/.*"
             assert re.match(expected_url_pattern, url), f"Expected URL pattern: {expected_url_pattern}, but got {url}"
