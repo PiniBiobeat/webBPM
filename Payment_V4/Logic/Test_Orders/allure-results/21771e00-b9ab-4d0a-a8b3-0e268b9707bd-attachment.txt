@@ -1,4 +1,0 @@
-Total Sale sum: 560.4 ₪
-Total Sale item: 8
-item_count=8, base_price=1773.00, total_discount=50.0, shipping_price=0.00, final_price=1723.00
-7827508
