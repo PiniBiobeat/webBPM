@@ -16,3 +16,8 @@ class CalenderPaymentPage(PageBase):
         self.pw_page.click(self.text_checkbox)
         self.pw_page.click(self.icon_delete)
         self.pw_page.click(self.pupa_yes_delete)
+
+    def get_url(self):
+        # Get the current URL
+        current_url = self.pw_page.url
+        return current_url

@@ -26,13 +26,9 @@ class PreviewScreen(PageBase):
         return num_of_image
 
     def get_url(self):
-        # Use a broader pattern to match any URL under the base domain
-        self.pw_page.wait_for_selector(self.text_payment, state="visible")
-
         # Get the current URL
         current_url = self.pw_page.url
         return current_url
-
 
     def get_price(self):
         text = self.pw_page.text_content(self.title_button)

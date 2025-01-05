@@ -27,6 +27,7 @@ def check_orders_not_equal_items():
                                 and a.in_status <> 24
                                 and a.in_status <> 21
 								and a.in_status <> 22
+								and a.in_status <> 1
                                 order by a.insert_date desc''')
         rows = cursor.fetchall()
         if rows != []:
