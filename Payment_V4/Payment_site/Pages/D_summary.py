@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
 from decimal import Decimal
-
+import allure
 from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon, get_coupon_title
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
@@ -65,6 +65,7 @@ class Summary:
         final_price = Decimal(self.page.locator(self.final_prices).inner_text().replace("₪", ""))
         self.page.locator(self.checkbox).last.click()
         # self.page.screenshot(path="a_summary.png")
+        allure.attach(body=self.page.screenshot(), name="picture", attachment_type=allure.attachment_type.PNG)
         self.page.click(self.payment_button)
         print(f"item_count={item_count}, base_price={base_price}, total_discount={total_discount}, shipping_price={shipping_price}, final_price={final_price}")
         Summary.checkouts = (item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price)
