@@ -11,7 +11,7 @@ class CreditGuard:
     cvv_num = "#cvv"
     pay = '#cg-submit-btn'
     price = '#cg-amount-sum'
-
+    replacements = str.maketrans({"₪": "", "(": "", ")": "", "-": "",",":""})
 
 
     def __init__(self, page: Page):
@@ -27,7 +27,7 @@ class CreditGuard:
 
 
     def to_pay(self):
-        creditcardprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().replace("₪", ""))
+        creditcardprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().translate(self.replacements))
         self.page.frame_locator(self.iframe).locator(self.pay).click()
         CreditGuard.to_pay = creditcardprice
         return self
