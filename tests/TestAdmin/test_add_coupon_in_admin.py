@@ -23,5 +23,17 @@ class TestAdmin(TestBaseOnline):
         page.pay_order()
 
 
+    @pytest.mark.smoke
+    @pytest.mark.usefixtures("before_after_test")
+    def test_add_coupons(self):
+        page: AdminPage = self.browser_online.navigate(configuration['admin_url_prod'], AdminPage)
+        page.log_in_admin(user, passw)
+        page.pw_page.goto('https://admin.lupa.co.il/admin_tiles/couponFromMaster.aspx')
+        page.input_coupon_value('118')
+        page.input_email_user('pinim@lupa.co.il')
+        page.choose_date()
+        page.click_ok()
+
+
 
 
