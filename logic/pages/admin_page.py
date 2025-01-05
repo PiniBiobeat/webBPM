@@ -15,7 +15,7 @@ class AdminPage(PageBase):
     text_click_ok = "//input[@id='btnAddAdminCoupon']"
     text_open_link = "//div[@onclick='sentPaymentLink()' and contains(.,'send payment link')]"
     text_coupon_value = "//input[@id='ctl00_main_couponValueTextBox']"
-    text_click_ok= "//input[@id='ctl00_main_CreateButton']"
+    text_click_ok1= "//input[@id='ctl00_main_CreateButton']"
     text_email_user = "//input[@id='ctl00_main_couponEmailTextBox']"
     text_choose_date = "//input[@id='ctl00_main_couponEndDateTextBox']"
     text_date = "//a[@class='ui-state-default' and contains(.,'10')]"
@@ -48,11 +48,17 @@ class AdminPage(PageBase):
         self.pw_page.click(self.text_date)
 
     def click_ok(self):
-        self.pw_page.click(self.text_click_ok)
+        self.pw_page.click(self.text_click_ok1)
     def click_login_button(self,order_id):
-        details_url = self.pw_page.url.replace("order_list.aspx", f"Order_Details.aspx?id={order_id}")
-        return details_url
 
+        if order_id.startswith('7'):  # Check if the order_id starts with '7'
+            details_url = self.pw_page.url.replace("order_list.aspx", f"Order_Details.aspx?id={order_id}")
+        else:
+            # Handle the case where order_id does not start with '7'
+            details_url = self.pw_page.url.replace("admin_online/order_list.aspx",
+                                                   f"admin_tiles/Order_Details.aspx?id={order_id}")
+
+        return details_url
     def add_num_sale(self, num_coupons):
         self.pw_page.locator(self.text_num_coupons).fill(str(num_coupons))
         self.pw_page.locator(self.test_open_option).select_option(value="הטבה שירותית")
@@ -76,23 +82,26 @@ class AdminPage(PageBase):
 
     def get_url_from_new_page(self,order_id):
 
-            # Navigate to the initial URL
+        if order_id.startswith('7'):
+        # Navigate to the initial URL
             url = f"https://admin.lupa.co.il/admin_online/ajax/sendPaymentToCustomer.aspx?orderid={order_id}"
-            self.pw_page.goto(url)
+        else:
+            url = f"https://admin.lupa.co.il/admin_tiles/ajax/sendPaymentToCustomer.aspx?orderid={order_id}"
+        self.pw_page.goto(url)
 
             # Wait for the body locator to be visible
-            body_locator = self.pw_page.locator("body")
-            body_locator.wait_for(state="visible")
+        body_locator = self.pw_page.locator("body")
+        body_locator.wait_for(state="visible")
 
             # Retrieve the body text
-            body_text = body_locator.text_content()
+        body_text = body_locator.text_content()
 
             # Validate the extracted URL
-            if not body_text.startswith("http"):
-                raise ValueError(f"Invalid URL found in body text: {body_text}")
+        if not body_text.startswith("http"):
+            raise ValueError(f"Invalid URL found in body text: {body_text}")
 
             # Navigate to the extracted URL
-            self.pw_page.goto(body_text)
+        self.pw_page.goto(body_text)
 
 
     def pay_order(self, card="5451365000064667", year="2030", month="01", cvv="973"):
