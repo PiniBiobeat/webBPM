@@ -14,6 +14,11 @@ class AdminPage(PageBase):
     test_open_option = "//select[@id='couponReason']"
     text_click_ok = "//input[@id='btnAddAdminCoupon']"
     text_open_link = "//div[@onclick='sentPaymentLink()' and contains(.,'send payment link')]"
+    text_coupon_value = "//input[@id='ctl00_main_couponValueTextBox']"
+    text_click_ok= "//input[@id='ctl00_main_CreateButton']"
+    text_email_user = "//input[@id='ctl00_main_couponEmailTextBox']"
+    text_choose_date = "//input[@id='ctl00_main_couponEndDateTextBox']"
+    text_date = "//a[@class='ui-state-default' and contains(.,'10')]"
     iframe = "//div[@class='iframe_container MuiBox-root css-0']/iframe"
     credit_num = '#card-number'
     exp_year_num = '#expYear'
@@ -28,9 +33,23 @@ class AdminPage(PageBase):
     def log_in_admin(self, text_user, text_pass):
         self.pw_page.locator(self.text_user_login).fill(text_user)
         self.pw_page.locator(self.test_pass_login).fill(text_pass)
-
-    def click_login_button(self,order_id):
         self.pw_page.click(self.text_button_login)
+
+    def input_coupon_value(self,value):
+        self.pw_page.locator(self.text_coupon_value).fill(value)
+
+
+    def input_email_user(self,user):
+        self.pw_page.locator(self.text_email_user).fill(user)
+
+
+    def choose_date(self):
+        self.pw_page.click(self.text_choose_date)
+        self.pw_page.click(self.text_date)
+
+    def click_ok(self):
+        self.pw_page.click(self.text_click_ok)
+    def click_login_button(self,order_id):
         details_url = self.pw_page.url.replace("order_list.aspx", f"Order_Details.aspx?id={order_id}")
         return details_url
 
