@@ -1,26 +1,62 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################################################################
 #page.py (page object model)
-from playwright.sync_api import Page
-import pytest
-import configparser
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-
-class SearchPage:
-    search_term_input_selector = '#sb_form_q'
-    selector = "#finish"
-
-    def __init__(self, page: Page):
-        self.page = page
-
-    def navigate(self, site):
-        self.page.goto(config['GLOBAL'][site])
-        self.page.goto("http://the-internet.herokuapp.com/dynamic_loading/1")
-
-    def search(self):
-        self.page.get_by_role("button", name="Start").click()
-        self.page.get_by_role("heading", name="Hello World!").is_enabled()
-        self.page.wait_for_selector(self.selector, state="visible")
+# from playwright.sync_api import Page
+# import pytest
+# import configparser
+# config = configparser.ConfigParser()
+# config.read('config.ini')
+#
+#
+# class SearchPage:
+#     search_term_input_selector = '#sb_form_q'
+#     selector = "#finish"
+#
+#     def __init__(self, page: Page):
+#         self.page = page
+#
+#     def navigate(self, site):
+#         self.page.goto(config['GLOBAL'][site])
+#         self.page.goto("http://the-internet.herokuapp.com/dynamic_loading/1")
+#
+#     def search(self):
+#         self.page.get_by_role("button", name="Start").click()
+#         self.page.get_by_role("heading", name="Hello World!").is_enabled()
+#         self.page.wait_for_selector(self.selector, state="visible")
 
 
     # def test_new_tab(self, page):
@@ -30,21 +66,30 @@ class SearchPage:
 
 
 
+
+
+
+
+
+
+
+#########################################################################
+
 #test_page.py desktop
-@pytest.mark.usefixtures("payment_url_tiles_prod")
-def test_play(page):
-    searchclass = SearchPage(page)
-    searchclass.navigate('payment_url_books_prod')
-    searchclass.search()
-
-
-
-#test_page.py mobile
-@pytest.mark.usefixtures("payment_url_tiles_prod")
-def test_play_mobile(page_mobile):
-    searchclass = SearchPage(page_mobile)
-    searchclass.navigate('payment_url_books_prod')
-    searchclass.search()
+# @pytest.mark.usefixtures("payment_url_tiles_prod")
+# def test_play(page):
+#     searchclass = SearchPage(page)
+#     searchclass.navigate('payment_url_books_prod')
+#     searchclass.search()
+#
+#
+#
+# #test_page.py mobile
+# @pytest.mark.usefixtures("payment_url_tiles_prod")
+# def test_play_mobile(page_mobile):
+#     searchclass = SearchPage(page_mobile)
+#     searchclass.navigate('payment_url_books_prod')
+#     searchclass.search()
 
 
 
@@ -58,51 +103,11 @@ def test_play_mobile(page_mobile):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# #another example: Dependency Injection
-# @pytest.fixture
-# def searchclass(page: Page):
-#     return SearchPage(page)
-#
-#
-# def test_play2(searchclass):
-#     searchclass.navigate()
-#     searchclass.search()
-
-
-
+#############################################################
 # import os
 # import pyautogui
 # import time
-#
-#
-#
 # import subprocess
-#
 #
 # def git_and_update_monitor():
 #     server = "146.148.2.80"
@@ -132,3 +137,32 @@ def test_play_mobile(page_mobile):
 #
 #
 # git_and_update_monitor()
+
+
+
+
+
+
+#URLS IN FIXTURES
+# import configparser
+# config = configparser.ConfigParser()
+# config.read('config.ini')
+# @pytest.fixture(scope="module")
+# def payment_url_books_prod(request):
+#     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
+#     page.goto(config['GLOBAL']['payment_url_books_prod'])
+#
+# @pytest.fixture(scope="module")
+# def payment_url_books_test(request):
+#     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
+#     page.goto(config['GLOBAL']['payment_url_books_test'])
+#
+# @pytest.fixture(scope="module")
+# def payment_url_tiles_prod(request):
+#     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
+#     page.goto(config['GLOBAL']['payment_url_tiles_prod'])
+#
+# @pytest.fixture(scope="module")
+# def payment_url_tiles_test(request):
+#     page = request.getfixturevalue('page' if 'page' in request.fixturenames else 'page_mobile')
+#     page.goto(config['GLOBAL']['payment_url_tiles_test'])
