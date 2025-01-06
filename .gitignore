@@ -111,7 +111,7 @@ Thumbs.db
 *.wmv
 
 /*/allure-results/
-.trace
+.trace.zip
 .trace_
 .trace_mobile
 

@@ -3,8 +3,7 @@ from dotenv import load_dotenv
 import configparser
 import os
 config = configparser.ConfigParser()
-config.read('../../../config.ini'), load_dotenv()
-
+config.read(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'config.ini')), load_dotenv()
 
 class Generalfunction:
 
