@@ -6,20 +6,20 @@ from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 user = 'pini'
 passw = 'pinim1'
-order_id = 7824569
+order_id = 14142705
 
 class TestAdmin(TestBaseOnline):
 
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_add_coupons(self):
+    def test_add_coupons_pay_with_link(self):
         page: AdminPage = self.browser_online.navigate(configuration['admin_url_prod'], AdminPage)
         page.log_in_admin(user, passw)
-        details_url =  page.click_login_button(order_id)
+        details_url =  page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
         page.click_open_link()
-        page.get_url_from_new_page(order_id)
+        page.get_url_from_new_page(str(order_id))
         page.pay_order()
 
 
