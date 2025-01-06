@@ -99,12 +99,16 @@ class AdminPage(PageBase):
             # Validate the extracted URL
         if not body_text.startswith("http"):
             raise ValueError(f"Invalid URL found in body text: {body_text}")
+        return body_text
 
             # Navigate to the extracted URL
-        self.pw_page.goto(body_text)
 
 
-    def pay_order(self, card="5451365000064667", year="2030", month="01", cvv="973"):
+
+    def pay_order(self,url_pay, card="5451365000064667", year="2030", month="01", cvv="973"):
+        self.pw_page.goto(url_pay)
+
+        self.pw_page.frame_locator(self.iframe).locator(self.credit_num).wait_for(state="visible")
         self.pw_page.frame_locator(self.iframe).locator(self.credit_num).fill(card)
         self.pw_page.frame_locator(self.iframe).locator(self.exp_year_num).select_option(value=year)
         self.pw_page.frame_locator(self.iframe).locator(self.exp_month_num).select_option(value=month)
