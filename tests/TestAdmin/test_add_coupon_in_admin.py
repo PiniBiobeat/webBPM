@@ -6,7 +6,7 @@ from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 user = 'pini'
 passw = 'pinim1'
-order_id = 14142705
+order_id = 7827901
 
 class TestAdmin(TestBaseOnline):
 
@@ -18,6 +18,7 @@ class TestAdmin(TestBaseOnline):
         page.log_in_admin(user, passw)
         details_url =  page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
+        page.add_num_sale(2)
         page.click_open_link()
         page.get_url_from_new_page(str(order_id))
         page.pay_order()
