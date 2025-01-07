@@ -6,7 +6,7 @@ from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 user = 'pini'
 passw = 'pinim1'
-order_id = 7827943
+order_id = 7827970
 
 class TestAdmin(TestBaseOnline):
 

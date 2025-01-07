@@ -65,20 +65,41 @@ class AdminPage(PageBase):
         self.pw_page.click(self.text_click_ok)
 
     def click_open_link(self):
+        # Set up dialog handling
         self.pw_page.once("dialog", lambda dialog: dialog.accept())
 
         def handle_dialog(dialog):
             print(f"Dialog message: {dialog.message}")
-            dialog.accept()  # Use dialog.dismiss() to cancel
+            dialog.accept()  # Accept the dialog
+            # dialog.dismiss()  # Use this if you need to cancel the dialog
 
         self.pw_page.on("dialog", handle_dialog)
 
-        # Trigger the popup
-
+        # Trigger the action that opens a new page
         with self.pw_page.context.expect_page() as new_page_info:
             self.pw_page.get_by_text("send payment link").click()
+
+        # Get the new page object
         new_page = new_page_info.value
-        print(new_page)
+
+        # Wait for the new page to load fully
+        try:
+            new_page.wait_for_load_state("domcontentloaded")  # Wait for the DOM to be loaded
+            print(f"New Page URL: {new_page.url}")  # Debug: Print the URL of the new page
+        except Exception as e:
+            print(f"Error while waiting for the new page to load: {e}")
+
+        # Wait for a more specific element instead of <body>
+        try:
+            body_locator = new_page.locator("body")
+            body_locator.wait_for(state="visible", timeout=30000)  # Increase timeout if necessary
+            print("Body is visible on the new page.")
+        except Exception as e:
+            print(f"Body did not become visible: {e}")
+            print(f"New Page Content:\n{new_page.content()}")  # Debug: Print page content
+
+        # Return the new page object for further interactions if needed
+
 
     def get_url_from_new_page(self,order_id):
 
@@ -87,7 +108,9 @@ class AdminPage(PageBase):
             url = f"https://admin.lupa.co.il/admin_online/ajax/sendPaymentToCustomer.aspx?orderid={order_id}"
         else:
             url = f"https://admin.lupa.co.il/admin_tiles/ajax/sendPaymentToCustomer.aspx?orderid={order_id}"
+
         self.pw_page.goto(url)
+        self.pw_page.wait_for_load_state()
 
             # Wait for the body locator to be visible
         body_locator = self.pw_page.locator("body")
