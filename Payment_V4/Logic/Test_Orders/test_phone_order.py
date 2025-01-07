@@ -1,6 +1,7 @@
 import pytest
 from playwright.sync_api import Page
 
+from tests.TestAdmin.add_admin_coupon import AdminCoupon
 from tests.TestPayment.test_add_book_V3 import AddBookV3
 from tests.TestPayment.test_add_book_online import AddBookOnline
 from tests.TestPayment.test_add_calendar import AddCalendar
@@ -11,7 +12,7 @@ from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
 from Payment_V4.Payment_site.Pages.B_shipping import Shipping
 from Payment_V4.Payment_site.Pages.C_personalDetails import PersonalDetails
 from Payment_V4.Payment_site.Pages.D_summary import Summary
-# from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
+from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
 
@@ -30,6 +31,9 @@ class TestPhoneOrder:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930").checkouts()
         Thanks(page).status()
+        AdminCoupon().add_admin_discount(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
 
 
     def test_phone_order_online(self, page):
