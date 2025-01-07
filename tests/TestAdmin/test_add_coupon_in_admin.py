@@ -6,7 +6,7 @@ from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 user = 'pini'
 passw = 'pinim1'
-order_id = 7827894
+order_id = 7827943
 
 class TestAdmin(TestBaseOnline):
 
@@ -20,8 +20,8 @@ class TestAdmin(TestBaseOnline):
         page.pw_page.goto(details_url)
         page.add_num_sale(2)
         page.click_open_link()
-        url_crdid_gard = page.get_url_from_new_page(str(order_id))
-        page.pay_order(url_crdid_gard)
+        page.get_url_from_new_page(str(order_id))
+        page.pay_order()
 
 
     @pytest.mark.smoke
