@@ -5,11 +5,8 @@ from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 
-user = 'pini'
-passw = 'pinim1'
-
-
-
+user = 'ofir'
+passw = 'of2023'
 
 
 class AdminCoupon:
@@ -32,9 +29,10 @@ class AdminCoupon:
         page.log_in_admin(user, passw)
         page.pw_page.goto('https://admin.lupa.co.il/admin_tiles/couponFromMaster.aspx')
         page.input_coupon_value('118')
-        page.input_email_user('pinim@lupa.co.il')
+        page.input_email_user('automation@lupa.co.il')
         page.choose_date()
         page.click_ok()
+
 
 
 # class TestTest:
