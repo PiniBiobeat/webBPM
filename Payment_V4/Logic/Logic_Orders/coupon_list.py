@@ -1,6 +1,7 @@
 from data_base import postgres_env
 import pytest
 
+
 def get_coupon(coupon_name):
     try:
         getcoupon = f"SELECT * FROM cpn.coupon_tbl WHERE name = '{coupon_name}' and use_date is null and user_id = 0"
@@ -12,12 +13,11 @@ def get_coupon(coupon_name):
     except:
         return coupon_name
 
+
 def get_coupon_title(coupon_name):
-        getcoupon1 = f"SELECT title FROM cpn.coupon_tbl WHERE name = '{coupon_name}'"
-        coupon_title = postgres_env(getcoupon1)
-        return coupon_title[0][0]
-
-
+    getcoupon1 = f"SELECT title FROM cpn.coupon_tbl WHERE name = '{coupon_name}'"
+    coupon_title = postgres_env(getcoupon1)
+    return coupon_title[0][0]
 
 
 # album sanity ------------------------------------------------
@@ -27,14 +27,16 @@ coupon_pay_for_40 = [
     "PayFor40_Name"
 ]
 
-coupon_albums_type = [
+coupon_albums_type_code = [
     "AlbumTypeCodeSal_Double2"
     "AlbumTypeCodeSal_Double"
     "AlbumTypeCodeSal"
-    "AlbumTypeNameSal"
     "AlbumTypeCode%"
-    "AlbumTypeName%"
     "AlbumTypeCode"
+]
+coupon_albums_type_name = [
+    "AlbumTypeNameSal"
+    "AlbumTypeName%"
     "AlbumTypeName"
 ]
 
@@ -98,14 +100,17 @@ coupon_albums = [
 
 # Calendar sanity ------------------------------------------------
 
-copoun_calendar_type = [
+coupon_calendar_type_code = [
     "CalendarTypeCodeSal_Double2"
     "CalendarTypeCodeSal_Double"
     "CalendarTypeCodeSal"
-    "CalendarTypeNameSal"
     "CalendarTypeCode%"
-    "CalendarTypeName%"
     "CalendarTypeCode"
+    "CalendarTypeCode"
+]
+coupon_calendar_type_name = [
+    "CalendarTypeNameSal"
+    "CalendarTypeName%"
     "CalendarTypeName"
 ]
 
@@ -169,16 +174,17 @@ coupon_calendar = [
 
 # Tiles sanity ------------------------------------------------
 
-coupon_tiles_type = [
+coupon_tiles_type_code = [
     "TilesTypeCodeSal_Double2"
     "TilesTypeCodeSal_Double1"
-    "TilesTypeCodeSal"        
-    "TilesTypeNameSal"        
-    "TilesTypeCode%"          
-    "TilesTypeName%"          
-    "TilesTypeCode"           
+    "TilesTypeCodeSal"
+    "TilesTypeCode%"
+    "TilesTypeCode"
+]
+coupon_tiles_type_name = [
+    "TilesTypeNameSal"
+    "TilesTypeName%"
     "TilesTypeName"
-
 ]
 
 coupon_tiles_fix = [
@@ -238,7 +244,6 @@ coupon_tiles = [
     "TilesTest2_Code",
     "TilesTest1",
 ]
-
 
 # @pytest.mark.parametrize("coupon_code", coupon_albums)
 # def test_list(coupon_code):
