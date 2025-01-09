@@ -22,7 +22,7 @@ defaultQuantity=1
 
 class TestUpload(TestBase):
 
-    @pytest.mark.smoke
+    @pytest.mark.smoke3
     @pytest.mark.usefixtures("before_after_test")
     def test_upload_photo(self):
         page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
