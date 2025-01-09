@@ -39,6 +39,7 @@ class AdminPage(PageBase):
         self.pw_page.click(self.text_button_login)
 
     def input_coupon_value(self,value):
+        self.pw_page.select_option("#ctl00_main_control_coupon_name", "222383")
         self.pw_page.locator(self.text_coupon_value).fill(value)
 
 
