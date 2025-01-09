@@ -11,7 +11,6 @@ def page(request) -> Page:
 
 class TestBasketItems:
 
-
     def test_root(self, page):
         Generalfunction(page).navigate('payment_url_books')
 
@@ -37,5 +36,3 @@ class TestDeleteBasket:
     def test_delete_all_items(self, page):
         Generalfunction(page).navigate('payment_url_books')
         BasketItems(page).delete_all_items()
-
-
