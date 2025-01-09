@@ -44,6 +44,7 @@ class TestPhoneOrder:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930").checkouts()
         Thanks(page).status()
+        AdminCoupon().add_admin_discount(page)
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).thank_page_status()
 
@@ -56,8 +57,9 @@ class TestPhoneOrder:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930").checkouts()
         Thanks(page).status()
-        # CreditGuard(page).fill_credit_card().to_pay()
-        # Thanks(page).thank_page_status()
+        AdminCoupon().add_admin_discount(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
 
 
     def test_phone_order_tiles(self, page):
@@ -68,8 +70,9 @@ class TestPhoneOrder:
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("12930").checkouts()
         Thanks(page).status()
-        # CreditGuard(page).fill_credit_card().to_pay()
-        # Thanks(page).thank_page_status()
+        AdminCoupon().add_admin_discount(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
 
 
 class TestChangeShippingOrder:
