@@ -35,7 +35,7 @@ class TestBasketItems:
 class TestDeleteBasket:
     @pytest.mark.skip
     def test_delete_all_items(self, page):
-        TestBasketItems().test_root(page)
+        Generalfunction(page).navigate('payment_url_books')
         BasketItems(page).delete_all_items()
 
 
