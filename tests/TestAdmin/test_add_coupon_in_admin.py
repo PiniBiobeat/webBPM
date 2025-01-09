@@ -29,7 +29,7 @@ class TestAdmin(TestBaseOnline):
     def test_add_coupons(self):
         page: AdminPage = self.browser_online.navigate(configuration['coupon_manager_'+os.getenv('env')], AdminPage)
         page.log_in_admin(user, passw)
-        page.input_coupon_value('118')
+        page.input_coupon_value('50')
         page.input_email_user('pinim@lupa.co.il')
         page.choose_date()
         page.click_ok()
