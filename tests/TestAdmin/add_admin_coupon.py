@@ -14,7 +14,7 @@ class AdminCoupon:
     def add_admin_discount(self, page):
         order_id = Thanks.status
         page: AdminPage = AdminPage(page)
-        page.pw_page.goto(configuration['admin_url_prod'])
+        page.pw_page.goto(configuration['admin_url_'+os.getenv('env')])
         page.log_in_admin(user, passw)
         details_url = page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
@@ -25,7 +25,7 @@ class AdminCoupon:
 
     def add_coupon_manual(self, page):
         page: AdminPage = AdminPage(page)
-        page.pw_page.goto(configuration['admin_url_prod'])
+        page.pw_page.goto(configuration['admin_url_'+os.getenv('env')])
         page.log_in_admin(user, passw)
         page.pw_page.goto('https://admin.lupa.co.il/admin_tiles/couponFromMaster.aspx')
         page.input_coupon_value('118')
