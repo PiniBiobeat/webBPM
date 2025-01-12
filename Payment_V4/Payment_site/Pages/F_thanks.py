@@ -3,12 +3,10 @@ from Payment_V4.Payment_site.Pages._General_function import Generalfunction, con
 
 
 class Thanks:
-
-
     order_status_msg = "(//h3)[1]"
     order_number_msg = "(//h3)[3]"
-
     return_status = None
+
 
     def __init__(self, page: Page):
         self.page = page
@@ -31,4 +29,3 @@ class Thanks:
             return self
         except:
             print("phone order")
-

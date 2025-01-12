@@ -24,7 +24,8 @@ class Summary:
 
     checkbox = 'input[type="checkbox"][aria-label="controlled"]'
     payment_button = '.MuiButton-contained'
-    checkout_return = None
+    return_checkout = None
+
 
     def __init__(self, page: Page):
         self.page = page

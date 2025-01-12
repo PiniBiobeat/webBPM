@@ -23,8 +23,8 @@ class Shipping:
     isof_fill = "//label[text()='קוד קופון']"
     isof_confirm = "//button[text()='אישור']"
     isof_error = "//p[@id=':r6:-helper-text']"
-
     return_ship_price_value = None
+
 
     def __init__(self, page: Page):
         self.page = page
