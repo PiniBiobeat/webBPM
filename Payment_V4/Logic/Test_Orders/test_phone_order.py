@@ -15,6 +15,8 @@ from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 
+from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
+
 
 @pytest.fixture
 def page(request) -> Page:
@@ -92,10 +94,10 @@ class TestAddCouponManual:
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
-        page.pause()
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
     def test_add_coupon_manual_online(self, page):
@@ -108,27 +110,30 @@ class TestAddCouponManual:
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
-    # def test_add_coupon_manual_calendar(self, page):
-    #     AdminCoupon().add_coupon_manual(page)
-    #     AddCalendar().request_calendar(page, "לוח_A5")
-    #     Generalfunction(page).navigate("payment_url_books")
-    #     BasketItems(page).valid_element_click_next()
-    #     Shipping(page).asafta()
-    #     PersonalDetails(page).filler_detail()
-    #     Summary(page).checkouts()
-    #     CreditGuard(page).fill_credit_card().to_pay()
-    #     Thanks(page).status()
-    #
-    #
-    # def test_add_coupon_manual_tiles(self, page):
-    #     AdminCoupon().add_coupon_manual(page)
-    #     AddTiles().request_tiles(page, "tiles20X20")
-    #     Generalfunction(page).navigate("payment_url_tiles")
-    #     BasketItems(page).valid_element_click_next()
-    #     Shipping(page).asafta()
-    #     PersonalDetails(page).filler_detail()
-    #     Summary(page).checkouts()
-    #     CreditGuard(page).fill_credit_card().to_pay()
-    #     Thanks(page).status()
+    def test_add_coupon_manual_calendar(self, page):
+        AdminCoupon().add_coupon_manual(page)
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_add_coupon_manual_tiles(self, page):
+        AdminCoupon().add_coupon_manual(page)
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
