@@ -26,10 +26,10 @@ class TestAdmin(TestBaseOnline):
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
-    def test_add_coupons(self):
+    def test_add_coupons(self, value='50'):
         page: AdminPage = self.browser_online.navigate(configuration['coupon_manager_'+os.getenv('env')], AdminPage)
         page.log_in_admin(user, passw)
-        page.input_coupon_value('50')
+        page.input_coupon_value(value)
         page.input_email_user('pinim@lupa.co.il')
         page.choose_date()
         page.click_ok()
