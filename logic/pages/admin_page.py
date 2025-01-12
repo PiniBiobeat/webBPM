@@ -6,6 +6,7 @@ from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from infra.config.config_provider import configuration
 from dotenv import load_dotenv
 load_dotenv()
+from datetime import date
 
 class AdminPage(PageBase):
 
@@ -21,7 +22,10 @@ class AdminPage(PageBase):
     text_click_ok1= "//input[@id='ctl00_main_CreateButton']"
     text_email_user = "//input[@id='ctl00_main_couponEmailTextBox']"
     text_choose_date = "//input[@id='ctl00_main_couponEndDateTextBox']"
-    text_date = "//a[@class='ui-state-default' and contains(.,'10')]"
+    current_date = date.today()
+    formatted_date = current_date.strftime("%d")
+    date_new = int(formatted_date)
+    text_date = f"//a[@class='ui-state-default' and contains(.,'{date_new+1}')]"
     iframe = "//div[@class='iframe_container MuiBox-root css-0']/iframe"
     credit_num = '#card-number'
     exp_year_num = '#expYear'
