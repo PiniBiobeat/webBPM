@@ -28,7 +28,7 @@ class AdminCoupon:
         page: AdminPage = AdminPage(page)
         page.pw_page.goto(configuration['coupon_manager_'+os.getenv('env')])
         page.log_in_admin(user, passw)
-        page.input_coupon_value('50')
+        page.input_coupon_value('33')
         page.input_email_user('automation@lupa.co.il')
         page.choose_date()
         page.click_ok()

@@ -54,7 +54,7 @@ class Summary:
 
     def checkouts(self):
         try:
-            total_discount = Decimal(self.page.locator(self.total_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", "").replace("-", ""))
+            total_discount = float(self.page.locator(self.total_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", "").replace("-", ""))
         except: total_discount = None
         try:
             shipping_price_discount = Decimal(self.page.locator(self.shipping_price_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", "").replace("-", ""))
