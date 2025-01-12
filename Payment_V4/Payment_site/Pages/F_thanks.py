@@ -9,6 +9,7 @@ class Thanks:
     order_number_msg = "(//h3)[3]"
 
     return_status = None
+
     def __init__(self, page: Page):
         self.page = page
 
