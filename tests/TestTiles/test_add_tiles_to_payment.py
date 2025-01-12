@@ -37,6 +37,9 @@ class TestTilesToPayment(TestBase):
 
             page: PreviewScreen = self.browser.create_page(PreviewScreen)
             page.button_click_to_payment()
+
+            page: CalenderPaymentPage = self.browser.create_page(CalenderPaymentPage)
+            page.delete_from_basket()
             url = page.get_url()
             print(url)
 
