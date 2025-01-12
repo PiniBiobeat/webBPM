@@ -8,7 +8,7 @@ class Thanks:
     order_status_msg = "(//h3)[1]"
     order_number_msg = "(//h3)[3]"
 
-
+    return_status = None
     def __init__(self, page: Page):
         self.page = page
 
@@ -26,7 +26,7 @@ class Thanks:
         try:
             order_number = self.page.locator(self.order_number_msg).inner_text()
             print(order_number)
-            Thanks.status = order_number
+            Thanks.return_status = order_number
             return self
         except:
             print("phone order")

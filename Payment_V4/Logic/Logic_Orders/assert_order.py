@@ -16,11 +16,11 @@ class AssertOrder:
     def __init__(self, db="lupa_online"):
         try:
             # Elements From Pages
-            self.sale_price, self.sale_items = BasketItems.valid_element_click_next  #wait
-            self.ship_selected_price = Shipping.return_ship_price #wait
-            self.item_count, self.base_price, self.total_discount, self.shipping_price, self.shipping_price_discount, self.final_price, = Summary.checkouts
-            self.credit_card = CreditGuard.to_pay  #wait
-            self.order_number = Thanks.status
+            (self.sale_price, self.sale_items) = BasketItems.valid_element  #wait
+            (self.ship_selected_price) = Shipping.return_ship_price_value #wait
+            (self.item_count, self.base_price, self.total_discount, self.shipping_price, self.shipping_price_discount, self.final_price) = Summary.checkout_return
+            (self.credit_card) = CreditGuard.to_pay  #wait
+            (self.order_number) = Thanks.return_status
 
 
             # DABA BASE SQL: Orders.tbl

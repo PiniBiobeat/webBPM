@@ -82,10 +82,7 @@ coupon_albums_items = [
 
 coupon_albums = [
     "Album-All-Code",
-    "Album-All-Name",
-    "AlbumTest13_campaign%",
     "AlbumTest12_campSal_Code",
-    "AlbumTest11_campSal",
     "AlbumTest10_campaign_Code",
     "AlbumTest9_campaign",
     "AlbumTest8_Code",

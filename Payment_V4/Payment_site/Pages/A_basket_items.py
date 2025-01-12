@@ -11,7 +11,7 @@ class BasketItems:
     image_src = "(//button/img)"
 
     sale_price = "(//div[@class='color_green MuiBox-root css-gg4vpm'])/div[2]"
-
+    valid_element = None
 
     def __init__(self, page: Page):
         self.page = page
@@ -32,9 +32,9 @@ class BasketItems:
                 sale_items = sale_item.count()
                 print(f"Total Sale sum: {sale_price} ₪")
                 print(f"Total Sale item: {sale_items}")
-                BasketItems.valid_element_click_next = (sale_price, sale_items)
+                BasketItems.valid_element = (sale_price, sale_items)
             else:
-                BasketItems.valid_element_click_next = (0, 0)
+                BasketItems.valid_element = (0, 0)
             return self
         except Exception as e:
             print(f"error sale: {e}")

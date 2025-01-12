@@ -24,7 +24,7 @@ class Summary:
 
     checkbox = 'input[type="checkbox"][aria-label="controlled"]'
     payment_button = '.MuiButton-contained'
-
+    checkout_return = None
 
     def __init__(self, page: Page):
         self.page = page
@@ -68,7 +68,7 @@ class Summary:
         allure.attach(body=self.page.screenshot(), name="picture", attachment_type=allure.attachment_type.PNG)
         self.page.click(self.payment_button)
         print(f"item_count={item_count}, base_price={base_price}, total_discount={total_discount}, shipping_price={shipping_price}, final_price={final_price}")
-        Summary.checkouts = (item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price)
+        Summary.checkout_return = (item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price)
         return self
 
 

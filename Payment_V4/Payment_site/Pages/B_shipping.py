@@ -24,6 +24,7 @@ class Shipping:
     isof_confirm = "//button[text()='אישור']"
     isof_error = "//p[@id=':r6:-helper-text']"
 
+    return_ship_price_value = None
 
     def __init__(self, page: Page):
         self.page = page
@@ -79,7 +80,7 @@ class Shipping:
 
 
     def return_ship_price(self, ship_selected_price):
-        Shipping.return_ship_price = ship_selected_price
+        Shipping.return_ship_price_value = ship_selected_price
         return self
 
 
