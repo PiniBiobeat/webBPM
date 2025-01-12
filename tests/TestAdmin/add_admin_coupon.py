@@ -24,11 +24,11 @@ class AdminCoupon:
         page.pay_order()
 
 
-    def add_coupon_manual(self, page):
+    def add_coupon_manual(self, page, value='50'):
         page: AdminPage = AdminPage(page)
         page.pw_page.goto(configuration['coupon_manager_'+os.getenv('env')])
         page.log_in_admin(user, passw)
-        page.input_coupon_value('33')
+        page.input_coupon_value(value)
         page.input_email_user('automation@lupa.co.il')
         page.choose_date()
         page.click_ok()

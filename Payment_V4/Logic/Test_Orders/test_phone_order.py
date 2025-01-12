@@ -127,7 +127,7 @@ class TestAddCouponManual:
 
 
     def test_add_coupon_manual_tiles(self, page):
-        AdminCoupon().add_coupon_manual(page)
+        AdminCoupon().add_coupon_manual(page,"33")
         AddTiles().request_tiles(page, "tiles20X20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
