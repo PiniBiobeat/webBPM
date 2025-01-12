@@ -44,7 +44,7 @@ class Shipping:
         self.page.get_by_role("button", name="מידע נוסף").click()
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        self.return_ship_price(ship_selected_price)
+        Shipping.return_ship_price_value = ship_selected_price
         return self
 
 
@@ -57,7 +57,7 @@ class Shipping:
         self.page.locator(self.shops_list_point).get_by_text(point, exact=True).click()
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        self.return_ship_price(ship_selected_price)
+        Shipping.return_ship_price_value = ship_selected_price
         return self
 
 
@@ -66,7 +66,7 @@ class Shipping:
         self.page.get_by_role("button", name="מידע נוסף").click()
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        self.return_ship_price(ship_selected_price)
+        Shipping.return_ship_price_value = ship_selected_price
         return self
 
 
@@ -75,13 +75,10 @@ class Shipping:
         self.page.get_by_role("button", name="מידע נוסף").click()
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
-        self.return_ship_price(ship_selected_price)
-        return self
-
-
-    def return_ship_price(self, ship_selected_price):
         Shipping.return_ship_price_value = ship_selected_price
         return self
+
+
 
 
     def no_shops_selection(self):
