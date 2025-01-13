@@ -56,7 +56,7 @@ class TestAppCouponItems:
     def test_order_app_items(self, page, coupon_code):
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_הולנדי")
-        AddBookV3().requestV3(page, "פורמט_38_מיני_לופה_קשה_רכה")
+        AddBookV3().requestV3(page, "פורמט_38_מיני_לופה_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
         BasketItems(page).update_item_quantity(item_index=2, button="+", times=1)
@@ -132,7 +132,7 @@ class TestAppCouponType:
     @pytest.mark.parametrize("coupon_code", coupon_albums_type_name)
     def test_order_app_type_name(self, page, coupon_code):
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
-        AddBookV3().requestV3(page, "פורמט_27_ריבועי_קטן_קשה_רכה")
+        AddBookV3().requestV3(page, "פורמט_27_ריבועי_קטן_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).update_item_quantity(item_index=1, button="+", times=1)
         BasketItems(page).update_item_quantity(item_index=2, button="+", times=1)
