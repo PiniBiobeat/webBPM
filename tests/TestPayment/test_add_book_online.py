@@ -27,7 +27,7 @@ class TestAddBookOnline:
 
 
 
-# class Test_add_book_online:
+# class Test_add_all_online_book:
 #     def test_api_request(self, page):
 #         token = AddBookOnline().token.keys()
 #         print(token)
