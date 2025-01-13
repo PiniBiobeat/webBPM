@@ -25,6 +25,20 @@ def get_coupon_title(coupon_name):
 
 # album sanity ------------------------------------------------
 
+coupon_haggadah = [
+    "AlbumHaggadahCodeShipPostSal%",
+    "AlbumHaggadahNameShipPostSal",
+    "AlbumHaggadahNameShipHome",
+    "AlbumHaggadahCodeSal_Item",
+    "AlbumHaggadahNameSal_Item",
+    "AlbumHaggadahCodeSal",
+    "AlbumHaggadahNameSal",
+    "AlbumHaggadahCode%",
+    "AlbumHaggadahName%",
+    "AlbumHaggadahCode",
+    "AlbumHaggadahName",
+]
+
 coupon_pay_for_40 = [
     "PayFor40_Code",
     "PayFor40_Name"

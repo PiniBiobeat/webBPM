@@ -171,3 +171,18 @@ class TestOnlineCouponPay40:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert AssertOrder().general_assert_orders()
+
+
+class TestOnlineHaggadah:
+
+    @pytest.mark.parametrize("coupon_code", coupon_haggadah)
+    def test_order_online_haggadah(self, page, coupon_code):
+        AddBookOnline().request_online(page, "הגדה_פורמט_35_ריבועי_גדול")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
