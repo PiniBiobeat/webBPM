@@ -99,7 +99,7 @@ class Shipping:
         except:
             error_isof_msg = self.page.locator(self.isof_error).inner_text()
             print(error_isof_msg)
-            raise
+            raise Exception(error_isof_msg)
 
 
 
