@@ -1,4 +1,6 @@
 from playwright.sync_api import Page, expect
+
+from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
 
@@ -84,6 +86,22 @@ class Shipping:
         return self
 
 
+    def add_isof_code(self, isof_code):
+        coupon_fill = get_coupon(isof_code)
+        self.page.locator(self.isof_button).click()
+        self.page.locator(self.isof_fill).fill(coupon_fill)
+        self.page.locator(self.isof_confirm).click()
+        try:
+            expect(self.page.locator("h1")).to_have_text("פרטים אישיים")
+            Generalfunction(self.page).next_button()
+            Shipping.return_ship_method_value = 16
+
+        except:
+            error_isof_msg = self.page.locator(self.isof_error).inner_text()
+            print(error_isof_msg)
+            raise
+
+
 
 
     def no_shops_selection(self):
@@ -125,16 +143,3 @@ class Shipping:
         expect(self.page.get_by_text("אי אפשר להמשיך בלי לבחור משלוח ללופה שלך")).to_be_visible()
 
 
-    def add_isof_code(self, isof_code):
-        self.page.locator(self.isof_button).click()
-        self.page.locator(self.isof_fill).fill(isof_code)
-        self.page.locator(self.isof_confirm).click()
-        try:
-            expect(self.page.locator("h1")).to_have_text("פרטים אישיים")
-            Generalfunction(self.page).next_button()
-            Shipping.return_ship_method_value = 16
-
-        except:
-            error_isof_msg = self.page.locator(self.isof_error).inner_text()
-            print(error_isof_msg)
-            return error_isof_msg
