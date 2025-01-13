@@ -13,7 +13,7 @@ class PreviewScreen(PageBase):
     text_yes_delete = "//span[@class='lupa-btn-content' and contains(.,'כן')]"
     icon_edit = "(//img[@src='/static/media/icon_image_edit.12284d2b.svg'])[1]"
     click_to_buy = "//button[@class='lupa-btn' and contains(.,'לסל הקניות')]"
-    click_to_next = "//button[@class='lupa-btn' and contains(.,'המשך')]"
+    click_to_next = "//button[@class='lupa-btn']"
     same_user = "//span[@class='lupa-btn-content' and contains(.,'כניסה')]"
     text_payment = "//button[@type='button' and contains(.,'בואו נמשיך')]"
 
@@ -42,12 +42,10 @@ class PreviewScreen(PageBase):
     def button_click_to_payment(self):
         try:
             # Wait for the button to be visible and enabled
-            self.pw_page.wait_for_selector("//button[@class='lupa-btn' and contains(.,'המשך')]", state="visible",
-                                           timeout=5000)
-            self.pw_page.wait_for_selector("//button[@class='lupa-btn' and contains(.,'המשך')]", state="enabled",
+            self.pw_page.wait_for_selector("//button[@class='lupa-btn' and contains(.,'לסל הקניות')]", state="visible",
                                            timeout=5000)
             # Click the button
-            self.pw_page.click("//button[@class='lupa-btn' and contains(.,'המשך')]")
+            self.pw_page.click("//button[@class='lupa-btn' and contains(.,'לסל הקניות')]")
         except TimeoutError as e:
             # Handle timeout errors gracefully
             print(f"TimeoutError: {e}. Button not interactable.")
