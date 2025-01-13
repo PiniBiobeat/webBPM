@@ -24,3 +24,12 @@ class AddBookOnline:
 class TestAddBookOnline:
     def test_api_request(self, page):
         AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_רכה")
+
+
+
+# class Test_add_book_online:
+#     def test_api_request(self, page):
+#         token = AddBookOnline().token.keys()
+#         print(token)
+#         for asp in token:
+#             AddBookOnline().request_online(page, asp)
