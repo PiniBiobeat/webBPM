@@ -17,7 +17,10 @@ def get_coupon(coupon_name):
 def get_coupon_title(coupon_name):
     getcoupon1 = f"SELECT title FROM cpn.coupon_tbl WHERE name = '{coupon_name}'"
     coupon_title = postgres_env(getcoupon1)
-    return coupon_title[0][0]
+    if coupon_title:
+        return coupon_title[0][0]
+    else:
+        return coupon_name
 
 
 # album sanity ------------------------------------------------

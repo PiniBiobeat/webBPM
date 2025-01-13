@@ -24,6 +24,7 @@ class Shipping:
     isof_confirm = "//button[text()='אישור']"
     isof_error = "//p[@id=':r6:-helper-text']"
     return_ship_price_value = None
+    return_ship_method_value = None
 
 
     def __init__(self, page: Page):
@@ -45,6 +46,7 @@ class Shipping:
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
+        Shipping.return_ship_method_value = 17
         return self
 
 
@@ -58,6 +60,7 @@ class Shipping:
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
+        Shipping.return_ship_method_value = 21
         return self
 
 
@@ -67,6 +70,7 @@ class Shipping:
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
+        Shipping.return_ship_method_value = 3
         return self
 
 
@@ -76,6 +80,7 @@ class Shipping:
         ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
+        Shipping.return_ship_method_value = 23
         return self
 
 
@@ -127,6 +132,7 @@ class Shipping:
         try:
             expect(self.page.locator("h1")).to_have_text("פרטים אישיים")
             Generalfunction(self.page).next_button()
+            Shipping.return_ship_method_value = 16
 
         except:
             error_isof_msg = self.page.locator(self.isof_error).inner_text()

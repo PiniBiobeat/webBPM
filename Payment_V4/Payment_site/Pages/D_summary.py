@@ -2,6 +2,7 @@ from playwright.sync_api import Page, expect
 from decimal import Decimal
 import allure
 from Payment_V4.Logic.Logic_Orders.coupon_list import get_coupon, get_coupon_title
+from Payment_V4.Payment_site.Pages.B_shipping import Shipping
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
 class Summary:
@@ -24,6 +25,7 @@ class Summary:
 
     checkbox = 'input[type="checkbox"][aria-label="controlled"]'
     payment_button = '.MuiButton-contained'
+    shipping_method = "//div[contains(@class,'summary_box_item MuiBox-root')]//div[contains(text(),'איסוף ממשרדי החברה')]"
     return_checkout = None
 
 
@@ -54,6 +56,10 @@ class Summary:
 
 
     def checkouts(self):
+        try:
+            if self.page.locator(self.shipping_method).is_visible():
+                Shipping.return_ship_method_value = 16
+        except: pass
         try:
             total_discount = float(self.page.locator(self.total_discount).inner_text(timeout=1000).replace("₪", "").replace("(", "").replace(")", "").replace("-", ""))
         except: total_discount = None

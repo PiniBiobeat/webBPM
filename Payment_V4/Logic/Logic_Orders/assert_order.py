@@ -18,6 +18,7 @@ class AssertOrder:
             # Elements From Pages
             (self.sale_price, self.sale_items) = BasketItems.return_sale_element  #wait
             (self.ship_selected_price) = Shipping.return_ship_price_value #wait
+            (self.ship_selected_method) = Shipping.return_ship_method_value #wait
             (self.item_count, self.base_price, self.total_discount, self.shipping_price, self.shipping_price_discount, self.final_price) = Summary.return_checkout
             (self.credit_card) = CreditGuard.return_credit_price  #wait
             (self.order_number) = Thanks.return_status
@@ -38,6 +39,7 @@ class AssertOrder:
         assert self.total_discount == self.discount_actual_value, f"Element discount: {self.total_discount}, not match signed db: {self.discount_actual_value}."
         assert self.shipping_price - self.shipping_price_discount == self.shipping_value, f"Element ship {self.shipping_price_discount} and summary ship {self.shipping_price} not match signed db: {self.shipping_value}."
         assert self.final_price == self.total_order_price, f"Element final price: {self.final_price}, not match signed db: {self.total_order_price}."
+        assert self.ship_selected_method == self.shipping_method, f"delivery selected method is: {self.ship_selected_method}, not match signed db: {self.shipping_method}."
         assert self.invoice_number.isdigit(), f"invoice not created"
         return self
 
