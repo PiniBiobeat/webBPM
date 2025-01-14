@@ -1,4 +1,3 @@
-# from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 from data_base import mysql, postgres_env
 
 

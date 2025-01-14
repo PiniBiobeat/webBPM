@@ -44,6 +44,8 @@ coupon_pay_for_40 = [
     "PayFor40_Name"
 ]
 
+#░░░░░░░░░░░░░░ ⬉ coupons only for album ⬉ ░░░░░░░░░░░░░░
+
 coupon_albums_type_code = [
     "AlbumTypeCodeSal_Double2"
     "AlbumTypeCodeSal_Double"
