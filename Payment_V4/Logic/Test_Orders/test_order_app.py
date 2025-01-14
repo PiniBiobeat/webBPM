@@ -29,7 +29,7 @@ class TestAppCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("AlbumFormat")
+        Summary(page).add_coupon("NONE")
         page.pause()
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
@@ -160,7 +160,7 @@ class TestAppCouponType:
         assert AssertOrder().general_assert_orders()
 
 
-# add new before
+# for sanity add new before
 class TestAppCouponPay40:
 
     @pytest.mark.parametrize("coupon_code", coupon_pay_for_40)
@@ -186,6 +186,35 @@ class TestAppHaggadah:
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
+
+class TestAppShortWay:
+
+    @pytest.mark.parametrize("coupon_code", coupon_short_way)
+    def test_order_app_short_way(self, page, coupon_code):
+        AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).home()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
+
+class TestAppMiniLupa:
+
+    def test_order_app_mini_lupa(self, page):
+        AddBookV3().requestV3(page, "פורמט_38_מיני_לופה_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert AssertOrder().general_assert_orders()

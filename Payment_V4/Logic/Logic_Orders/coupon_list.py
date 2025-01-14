@@ -25,7 +25,14 @@ def get_coupon_title(coupon_name):
 
 # album sanity ------------------------------------------------
 
+coupon_short_way = [
+    "NONE",
+    "AlbumShortWayCode",
+    "AlbumShortWayName",
+]
+
 coupon_haggadah = [
+    "NONE",
     "AlbumHaggadahCodeShipPostSal%",
     "AlbumHaggadahNameShipPostSal",
     "AlbumHaggadahNameShipHome",
@@ -44,7 +51,7 @@ coupon_pay_for_40 = [
     "PayFor40_Name"
 ]
 
-#░░░░░░░░░░░░░░ ⬉ coupons only for album ⬉ ░░░░░░░░░░░░░░
+# ░░░░░░░░░░░░░░ ⬉ coupons only for album ⬉ ░░░░░░░░░░░░░░
 
 coupon_albums_type_code = [
     "AlbumTypeCodeSal_Double2"
