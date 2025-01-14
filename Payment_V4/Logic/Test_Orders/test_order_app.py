@@ -29,7 +29,7 @@ class TestAppCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("NONE")
+        Summary(page).add_coupon("AlbumFormat")
         page.pause()
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
