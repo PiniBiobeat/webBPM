@@ -186,22 +186,24 @@ class Test_me():
 
     def send_to_slack(self, my_dict_lupa):
 
+        if datetime.now().weekday() != 4:
 
-        message_text = "\n".join(f"{key}: {value}" for key, value in my_dict_lupa.items())
 
-        # Build the payload in the format Slack expects
-        payload = {
-            "text":  "Orders without bulk id\n" + message_text  # Ensure it’s a plain-text string
-        }
+            message_text = "\n".join(f"{key}: {value}" for key, value in my_dict_lupa.items())
 
-        # Send the payload as JSON
-        response = requests.post(
-            "https://hooks.slack.com/services/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",
-            json=payload
-        )
+            # Build the payload in the format Slack expects
+            payload = {
+                "text":  "Orders without bulk id\n" + message_text  # Ensure it’s a plain-text string
+            }
 
-        # Print response details for debugging
-        print(response.status_code, response.text)
+            # Send the payload as JSON
+            response = requests.post(
+                "https://hooks.slack.com/services/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",
+                json=payload
+            )
+
+            # Print response details for debugging
+            print(response.status_code, response.text)
 
 
 
