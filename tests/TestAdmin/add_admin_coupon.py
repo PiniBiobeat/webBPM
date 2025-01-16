@@ -12,7 +12,7 @@ passw = 'of2023'
 class AdminCoupon:
 
     def add_admin_discount(self, page):
-        order_id = Thanks.status
+        order_id = Thanks.return_status
         page: AdminPage = AdminPage(page)
         page.pw_page.goto(configuration['admin_url_' + os.getenv('env')])
         page.log_in_admin(user, passw)
