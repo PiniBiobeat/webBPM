@@ -3,7 +3,7 @@ from infra.page_base import PageBase
 class HomePage(PageBase):
 
     init_indication = '(//span[@class="lupa-btn-content"])[1]'
-    tiles_button = '(//span[@class="lupa-btn-content"])[1]'
+    tiles_button = '//button[@class="lupa-btn"]'
     pesipas_button = '(//span[@class="lupa-btn-content"])[2]'
     menu_button = '//img[@class="burger_menu"]'
     open_login_sceen_button = '//div[@class="menu-item" and contains(.,"כניסה ")]'
