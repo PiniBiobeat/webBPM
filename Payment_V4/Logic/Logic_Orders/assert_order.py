@@ -38,7 +38,7 @@ class AssertOrder:
         assert self.base_price == self.total_items_price, f"Element Base price: {self.base_price}, not match signed db: {self.total_items_price}."
         assert self.total_discount == self.discount_actual_value, f"Element discount: {self.total_discount}, not match signed db: {self.discount_actual_value}."
         assert self.shipping_price - self.shipping_price_discount == self.shipping_value, f"Element ship {self.shipping_price_discount} and summary ship {self.shipping_price} not match signed db: {self.shipping_value}."
-        assert self.final_price == self.total_order_price, f"Element final price: {self.final_price}, not match signed db: {self.total_order_price}."
+        assert self.final_price == self.credit_card == self.total_order_price, f"Element final price: {self.final_price} not match to {self.credit_card}, not match signed db: {self.total_order_price}."
         assert self.ship_selected_method == self.shipping_method, f"delivery selected method is: {self.ship_selected_method}, not match signed db: {self.shipping_method}."
         assert self.invoice_number.isdigit(), f"invoice not created"
         return self

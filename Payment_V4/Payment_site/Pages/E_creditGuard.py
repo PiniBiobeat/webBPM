@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction, config, os
-
+from decimal import Decimal
 
 class CreditGuard:
 
@@ -28,7 +28,7 @@ class CreditGuard:
 
 
     def to_pay(self):
-        creditcardprice = float(self.page.frame_locator(self.iframe).locator(self.price).inner_text().translate(self.replacements))
+        creditcardprice = Decimal(self.page.frame_locator(self.iframe).locator(self.price).inner_text().translate(self.replacements))
         self.page.frame_locator(self.iframe).locator(self.pay).click()
         CreditGuard.return_credit_price = creditcardprice
         return self

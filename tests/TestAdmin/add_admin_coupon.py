@@ -32,3 +32,18 @@ class AdminCoupon:
         page.input_email_user('automation@lupa.co.il')
         page.choose_date()
         page.click_ok()
+
+
+    def change_shipping(self, page):
+        order_id = Thanks.return_status
+        page: AdminPage = AdminPage(page)
+        page.log_in_admin(user, passw)
+        details_url = page.click_login_button(str(order_id))
+        page.pw_page.goto(details_url)
+        page.change_shipping()
+        page.click_open_link()
+        page.get_url_from_new_page(str(order_id))
+
+        get_total_pay =  page.pay_order()
+        get_total_pay_sql = sql_get_total_order_price(order_id)
+        assert str(get_total_pay_sql[0][0]) == get_total_pay.replace('₪', '')
