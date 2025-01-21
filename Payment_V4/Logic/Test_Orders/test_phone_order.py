@@ -82,7 +82,61 @@ class TestChangeShippingOrder:
 
 
 class TestChangeShippingPhoneOrder:
-    pass
+
+    def test_change_shipping_phone_order_app(self, page):
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).home()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminCoupon().change_shipping(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_phone_order_online(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminCoupon().change_shipping(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_phone_order_calendar(self, page):
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminCoupon().change_shipping(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_phone_order_tiles(self, page):
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminCoupon().change_shipping(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestAddCouponManual:
@@ -127,7 +181,7 @@ class TestAddCouponManual:
 
 
     def test_add_coupon_manual_tiles(self, page):
-        AdminCoupon().add_coupon_manual(page,"33")
+        AdminCoupon().add_coupon_manual(page, "33")
         AddTiles().request_tiles(page, "tiles20X20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()

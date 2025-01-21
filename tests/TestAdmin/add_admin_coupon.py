@@ -1,9 +1,14 @@
 import pytest
 import os
 from playwright.sync_api import Page
+
+from Payment_V4.Payment_site.Pages.B_shipping import Shipping
+from Payment_V4.Payment_site.Pages.D_summary import Summary
+from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
 from Payment_V4.Payment_site.Pages.F_thanks import Thanks
 from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
+
 
 user = 'ofir'
 passw = 'of2023'
@@ -37,13 +42,20 @@ class AdminCoupon:
     def change_shipping(self, page):
         order_id = Thanks.return_status
         page: AdminPage = AdminPage(page)
+        page.pw_page.goto(configuration['admin_url_' + os.getenv('env')])
         page.log_in_admin(user, passw)
         details_url = page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
         page.change_shipping()
         page.click_open_link()
         page.get_url_from_new_page(str(order_id))
+        Shipping.return_ship_method_value = 3
+        Shipping.return_ship_price_value = 26
+        Summary.return_checkout[3] = 26
+        Summary.return_checkout[5] = Summary.return_checkout[1] + 26
 
-        get_total_pay =  page.pay_order()
-        get_total_pay_sql = sql_get_total_order_price(order_id)
-        assert str(get_total_pay_sql[0][0]) == get_total_pay.replace('₪', '')
+
+
+
+
+

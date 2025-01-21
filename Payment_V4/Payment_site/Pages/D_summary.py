@@ -75,7 +75,7 @@ class Summary:
         allure.attach(body=self.page.screenshot(), name="picture", attachment_type=allure.attachment_type.PNG)
         self.page.click(self.payment_button)
         print(f"item_count={item_count}, base_price={base_price}, total_discount={total_discount}, shipping_price={shipping_price}, final_price={final_price}")
-        Summary.return_checkout = (item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price)
+        Summary.return_checkout = [item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price]
         return self
 
 
