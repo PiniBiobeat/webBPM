@@ -111,7 +111,7 @@ class AdminPage(PageBase):
             url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
         else:
             url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
-        self.pw_page.goto(url)
+        self.pw_page.goto(url ,timeout=30000)
         self.pw_page.wait_for_load_state()
         body_locator = self.pw_page.locator("body")
         body_locator.wait_for(state="visible")
