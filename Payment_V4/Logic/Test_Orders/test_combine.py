@@ -34,7 +34,6 @@ class TestCombineCouponSanity:
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon("CombineFormat")
-        page.pause()
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
@@ -57,10 +56,86 @@ class TestCombineCouponSanity:
         assert AssertOrder().general_assert_orders()
 
 
+class TestBundleCoupon:
+
+    @pytest.mark.parametrize("coupon_code", coupon_bundle)
+    def test_order_app_bundle_coupon(self, page, coupon_code):
+        AddBookV3().requestV3(page, "פורמט_26_פנורמי_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).shops()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
+    @pytest.mark.parametrize("coupon_code", coupon_bundle)
+    def test_order_online_bundle_coupon(self, page, coupon_code):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).shops()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
+    @pytest.mark.parametrize("coupon_code", coupon_bundle)
+    def test_order_calendar_bundle_coupon(self, page, coupon_code):
+        AddCalendar().request_calendar(page, "לוח_A3")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).shops()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
 
+    @pytest.mark.parametrize("coupon_code", coupon_bundle)
+    def test_order_tiles_bundle_coupon(self, page, coupon_code):
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).shops()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
 
+
+class TestCombineBundleCoupon:
+
+    @pytest.mark.parametrize("coupon_code", coupon_bundle)
+    def test_order_combine_bundle_coupon(self, page, coupon_code):
+        AddCalendar().request_calendar(page, "לוח_A4")
+        AddBookV3().requestV3(page, "פורמט_26_פנורמי_הולנדי")
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).shops()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_order_combine_haggadah_and_short_bundle_coupon(self, page):
+        AddBookOnline().request_online(page, "הגדה_פורמט_27_ריבועי_קטן")
+        AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).shops()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("Test_Bundle_Haggadah")
+        Summary(page).add_coupon("Test_Bundle_Mix").checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()

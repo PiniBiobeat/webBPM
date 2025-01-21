@@ -23,16 +23,32 @@ def get_coupon_title(coupon_name):
         return coupon_name
 
 
+
+
+# bundle sanity ------------------------------------------------
+
+coupon_bundle = [
+    "Test_Bundle_FIX"
+    "Test_Bundle_₪_Quantity_Sal"
+    "Test_Bundle_₪_sal_item"
+    "Test_Bundle_₪_sal"
+    "Test_Bundle_%_Item"
+    "Test_Bundle_₪_Item"
+    "Test_Bundle_Mix"
+]
+
 # album sanity ------------------------------------------------
 
 coupon_short_way = [
     "NONE",
+    "Test_Bundle_Mix",
     "AlbumShortWayCode",
     "AlbumShortWayName",
 ]
 
 coupon_haggadah = [
     "NONE",
+    "Test_Bundle_Haggadah",
     "AlbumHaggadahCodeShipPostSal%",
     "AlbumHaggadahNameShipPostSal",
     "AlbumHaggadahNameShipHome",
