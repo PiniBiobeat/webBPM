@@ -33,6 +33,10 @@ class AdminPage(PageBase):
     cvv_num = "#cvv"
     pay = '#cg-submit-btn'
     price = '#cg-amount-sum'
+    test_open_option_shipping = "//select[@id='ctl00_main_myShippmentControl_control_shipping_method']"
+    text_click_ok_save = "//input[@value='SAVE']"
+
+
     def __init__(self, page):
         super().__init__(page)
 
@@ -72,41 +76,34 @@ class AdminPage(PageBase):
         self.pw_page.locator(self.test_open_option).select_option(value="הטבה שירותית")
         self.pw_page.click(self.text_click_ok)
 
+    def change_shipping(self):
+        self.pw_page.locator(self.test_open_option_shipping).select_option(value="דואר רשום (26 ₪)")
+        self.pw_page.click(self.text_click_ok_save)
+        self.pw_page.wait_for_load_state("domcontentloaded")
     def click_open_link(self):
-        # Set up dialog handling
         self.pw_page.once("dialog", lambda dialog: dialog.accept())
 
         def handle_dialog(dialog):
             print(f"Dialog message: {dialog.message}")
-            dialog.accept()  # Accept the dialog
-            # dialog.dismiss()  # Use this if you need to cancel the dialog
+            dialog.accept()
 
         self.pw_page.on("dialog", handle_dialog)
-
-        # Trigger the action that opens a new page
         with self.pw_page.context.expect_page() as new_page_info:
             self.pw_page.get_by_text("send payment link").click()
-
-        # Get the new page object
         new_page = new_page_info.value
-
-        # Wait for the new page to load fully
         try:
-            new_page.wait_for_load_state("domcontentloaded")  # Wait for the DOM to be loaded
-            print(f"New Page URL: {new_page.url}")  # Debug: Print the URL of the new page
+            new_page.wait_for_load_state("domcontentloaded")  #
+            print(f"New Page URL: {new_page.url}")
         except Exception as e:
             print(f"Error while waiting for the new page to load: {e}")
-
-        # Wait for a more specific element instead of <body>
         try:
             body_locator = new_page.locator("body")
-            body_locator.wait_for(state="visible", timeout=30000)  # Increase timeout if necessary
+            body_locator.wait_for(state="visible", timeout=30000)
             print("Body is visible on the new page.")
         except Exception as e:
             print(f"Body did not become visible: {e}")
-            print(f"New Page Content:\n{new_page.content()}")  # Debug: Print page content
+            print(f"New Page Content:\n{new_page.content()}")
 
-        # Return the new page object for further interactions if needed
 
     def get_url_from_new_page(self, order_id):
 
@@ -114,7 +111,7 @@ class AdminPage(PageBase):
             url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
         else:
             url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
-        self.pw_page.goto(url)
+        self.pw_page.goto(url ,timeout=30000)
         self.pw_page.wait_for_load_state()
         body_locator = self.pw_page.locator("body")
         body_locator.wait_for(state="visible")
@@ -129,7 +126,9 @@ class AdminPage(PageBase):
         self.pw_page.frame_locator(self.iframe).locator(self.exp_month_num).select_option(value=month)
         self.pw_page.frame_locator(self.iframe).locator(self.cvv_num).fill(cvv)
         self.pw_page.frame_locator(self.iframe).locator(self.pay).click()
+        a =  self.pw_page.frame_locator(self.iframe).locator("//div[@id='cg-amount-sum']").text_content()
         Thanks(self.pw_page).status()
+        return a
 
 
 

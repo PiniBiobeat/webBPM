@@ -165,6 +165,20 @@ def sql_delete_personal_date(master_id):
     connection.commit()
     cursor.close()
 
+def sql_get_total_order_price(order):
+    time.sleep(5)
+    server = '104.155.49.95'
+    database = 'lupa_online'
+    username = 'MachineDBA'
+    password = 'Kk28!32Zx'
+    cnxn = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+    cursor = cnxn.cursor()
+    print(cursor)
+    cursor.execute("SELECT  total_order_price  FROM [lupa_online].[dbo].orders_tbl where order_id =?", order)
+    rows = cursor.fetchall()
+    cursor.close()
+    return rows
 
 
 
