@@ -175,7 +175,19 @@ def sql_get_total_order_price(order):
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
     cursor = cnxn.cursor()
     print(cursor)
-    cursor.execute("SELECT  total_order_price  FROM [lupa_online].[dbo].orders_tbl where order_id =?", order)
+
+    query = """
+    SELECT total_order_price 
+    FROM [lupa_online].[dbo].[orders_tbl] 
+    WHERE order_id = ?
+
+    UNION ALL
+
+    SELECT total_order_price 
+    FROM [lupa_square].[dbo].[orders_tbl] 
+    WHERE order_id = ?
+    """
+    cursor.execute(query, order, order)
     rows = cursor.fetchall()
     cursor.close()
     return rows
