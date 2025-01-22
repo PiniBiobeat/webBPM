@@ -84,7 +84,7 @@ class AdminPage(PageBase):
         self.pw_page.once("dialog", lambda dialog: dialog.accept())
 
         def handle_dialog(dialog):
-            print(f"Dialog message: {dialog.message}")
+            # print(f"Dialog message: {dialog.message}")
             dialog.accept()
 
         self.pw_page.on("dialog", handle_dialog)
@@ -93,16 +93,18 @@ class AdminPage(PageBase):
         new_page = new_page_info.value
         try:
             new_page.wait_for_load_state("domcontentloaded")  #
-            print(f"New Page URL: {new_page.url}")
+            # print(f"New Page URL: {new_page.url}")
         except Exception as e:
-            print(f"Error while waiting for the new page to load: {e}")
+            # print(f"Error while waiting for the new page to load: {e}")
+            pass
         try:
             body_locator = new_page.locator("body")
             body_locator.wait_for(state="visible", timeout=30000)
-            print("Body is visible on the new page.")
+            # print("Body is visible on the new page.")
         except Exception as e:
-            print(f"Body did not become visible: {e}")
-            print(f"New Page Content:\n{new_page.content()}")
+            # print(f"Body did not become visible: {e}")
+            # print(f"New Page Content:\n{new_page.content()}")
+            pass
 
     def get_url_from_new_page(self, order_id):
 
