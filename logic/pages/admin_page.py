@@ -110,7 +110,7 @@ class AdminPage(PageBase):
         if order_id.startswith('7'):
             url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
         else:
-            url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
+            url = f"{configuration['admin_send_link_payment_tiles_' + os.getenv('env')]}?orderid={order_id}"
         self.pw_page.goto(url ,timeout=30000)
         self.pw_page.wait_for_load_state()
         body_locator = self.pw_page.locator("body")

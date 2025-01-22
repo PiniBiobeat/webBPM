@@ -8,7 +8,7 @@ from infra.generic_helpers import sql_get_total_order_price
 
 user = 'pini'
 passw = 'pinim1'
-order_id = 7831737
+order_id = 14142986
 
 class TestAdmin(TestBaseOnline):
 
