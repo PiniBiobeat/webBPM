@@ -1,7 +1,8 @@
 from playwright.sync_api import Playwright, BrowserContext
 import pytest
-
-
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 
 test_co = ({"username": "test", "password": "Acf325A12!"})
