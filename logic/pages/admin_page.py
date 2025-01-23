@@ -106,20 +106,19 @@ class AdminPage(PageBase):
             # print(f"New Page Content:\n{new_page.content()}")
             pass
 
-
     def get_url_from_new_page(self, order_id):
 
         if order_id.startswith('7'):
             url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
         else:
             url = f"{configuration['admin_send_link_payment_tiles_' + os.getenv('env')]}?orderid={order_id}"
-        self.pw_page.goto(url ,timeout=30000)
-        self.pw_page.wait_for_load_state()
+        self.pw_page.goto(url, timeout=30000)
+        self.pw_page.wait_for_load_state('load')
         body_locator = self.pw_page.locator("body")
         body_locator.wait_for(state="visible")
         body_text = body_locator.text_content()
-        self.pw_page.goto(body_text)
-
+        self.pw_page.goto(body_text, timeout=30000)
+        self.pw_page.wait_for_load_state('load')
 
     def pay_order(self, card="5451365000064667", year="2030", month="01", cvv="973"):
         self.pw_page.frame_locator(self.iframe).locator(self.credit_num).wait_for(state="visible")
