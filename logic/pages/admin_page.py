@@ -99,7 +99,7 @@ class AdminPage(PageBase):
             pass
         try:
             body_locator = new_page.locator("body")
-            body_locator.wait_for(state="visible", timeout=30000)
+            body_locator.wait_for(state="visible", timeout=60000)
             # print("Body is visible on the new page.")
         except Exception as e:
             # print(f"Body did not become visible: {e}")
@@ -112,12 +112,12 @@ class AdminPage(PageBase):
             url = f"{configuration['admin_send_link_payment_' + os.getenv('env')]}?orderid={order_id}"
         else:
             url = f"{configuration['admin_send_link_payment_tiles_' + os.getenv('env')]}?orderid={order_id}"
-        self.pw_page.goto(url, timeout=30000)
+        self.pw_page.goto(url, timeout=60000)
         self.pw_page.wait_for_load_state('load')
         body_locator = self.pw_page.locator("body")
         body_locator.wait_for(state="visible")
         body_text = body_locator.text_content()
-        self.pw_page.goto(body_text, timeout=30000)
+        self.pw_page.goto(body_text, timeout=60000)
         self.pw_page.wait_for_load_state('load')
 
     def pay_order(self, card="5451365000064667", year="2030", month="01", cvv="973"):
