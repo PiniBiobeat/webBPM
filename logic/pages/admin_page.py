@@ -7,6 +7,8 @@ from infra.config.config_provider import configuration
 from dotenv import load_dotenv
 load_dotenv()
 from datetime import date
+from infra.generic_helpers import monitor_order_status
+from infra.generic_helpers import sql_get_total_order_price
 
 class AdminPage(PageBase):
 
@@ -40,6 +42,8 @@ class AdminPage(PageBase):
     def __init__(self, page):
         super().__init__(page)
 
+    def orders_status(self):
+        monitor_order_status('77777777')
 
     def log_in_admin(self, text_user, text_pass):
         self.pw_page.locator(self.text_user_login).fill(text_user)
@@ -80,6 +84,10 @@ class AdminPage(PageBase):
         self.pw_page.locator(self.test_open_option_shipping).select_option(value="דואר רשום (26 ₪)")
         self.pw_page.click(self.text_click_ok_save)
         self.pw_page.wait_for_load_state("domcontentloaded")
+
+    def wait_for_status_printing_prosses(self, order_id):
+        monitor_order_status(order_id)
+
     def click_open_link(self):
         self.pw_page.once("dialog", lambda dialog: dialog.accept())
 

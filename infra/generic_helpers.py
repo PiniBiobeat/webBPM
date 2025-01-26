@@ -195,4 +195,33 @@ def sql_get_total_order_price(order):
 
 
 
-#[lupa].[dbo].[newslleter].newsletter_ststus
+def get_order_status(cursor, order_id):
+    query = """
+    SELECT in_status
+    FROM [lupa_online].[dbo].[orders_tbl]
+    WHERE order_id = ?
+
+    UNION ALL
+
+    SELECT in_status
+    FROM [lupa_square].[dbo].[orders_tbl]
+    WHERE order_id = ?
+    """
+    cursor.execute(query, order_id, order_id)
+    row = cursor.fetchone()
+    return row[0] if row else None
+
+def monitor_order_status(order_id, interval=5):
+    time.sleep(5)
+    server = '104.155.49.95'
+    database = 'lupa_online'
+    username = 'MachineDBA'
+    password = 'Kk28!32Zx'
+    cnxn = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+    cursor = cnxn.cursor()
+    while True:
+        last_status = get_order_status(cursor, order_id)
+        if 21 == last_status:
+            break
+        time.sleep(interval)

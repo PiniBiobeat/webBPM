@@ -186,7 +186,7 @@ class Test_me():
 
     def send_to_slack(self, my_dict_lupa):
 
-        if datetime.now().weekday() != 4:
+        if datetime.datetime.now().weekday() != 4:
 
 
             message_text = "\n".join(f"{key}: {value}" for key, value in my_dict_lupa.items())

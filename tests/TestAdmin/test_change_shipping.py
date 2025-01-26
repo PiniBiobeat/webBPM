@@ -5,19 +5,20 @@ from dotenv import load_dotenv
 from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 from infra.generic_helpers import sql_get_total_order_price
+from infra.generic_helpers import monitor_order_status
+from logic.pages.admin_page import AdminPage
 
 user = 'pini'
 passw = 'pinim1'
-order_id = 14142616
+order_id = 7832437
 
 class TestChangeShipping(TestBaseOnline):
-
-
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_order_with_status_PP_and_change_shipping(self):
         page: AdminPage = self.browser_online.navigate(configuration['admin_url_' + os.getenv('env')], AdminPage)
+        monitor_order_status(order_id)
         page.log_in_admin(user, passw)
         details_url = page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
