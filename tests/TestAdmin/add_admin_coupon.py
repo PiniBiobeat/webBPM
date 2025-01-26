@@ -26,6 +26,8 @@ class AdminCoupon:
         page.add_num_sale(2)
         page.click_open_link()
         page.get_url_from_new_page(str(order_id))
+        Summary.return_checkout[5] = Summary.return_checkout[5] - 2
+        Summary.return_checkout[2] = 2
 
 
     def add_coupon_manual(self, page, value='50'):
@@ -38,7 +40,7 @@ class AdminCoupon:
         page.click_ok()
 
 
-    def change_shipping(self, page):
+    def change_shipping_phone_order(self, page):
         order_id = Thanks.return_status
         page: AdminPage = AdminPage(page)
         page.pw_page.goto(configuration['admin_url_' + os.getenv('env')])
