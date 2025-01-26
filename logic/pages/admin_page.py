@@ -37,6 +37,10 @@ class AdminPage(PageBase):
     price = '#cg-amount-sum'
     test_open_option_shipping = "//select[@id='ctl00_main_myShippmentControl_control_shipping_method']"
     text_click_ok_save = "//input[@value='SAVE']"
+    text_open_link_change_shipping = "//a[@id='change_order']"
+    text_shipping = "//select[@id='ddl_transact_shipment']"
+    text_click_ok_change = "//span[@id='spanUpdating']//..//input[@id='btn_charge']"
+    test_iframe_change_shipping = "//iframe[@id='iframe_chnage_order']"
 
 
     def __init__(self, page):
@@ -79,9 +83,12 @@ class AdminPage(PageBase):
         self.pw_page.locator(self.text_num_coupons).fill(str(num_coupons))
         self.pw_page.locator(self.test_open_option).select_option(value="הטבה שירותית")
         self.pw_page.click(self.text_click_ok)
-
+    def change_shipping_printing_process(self):
+        self.pw_page.click(self.text_open_link_change_shipping)
+        self.pw_page.frame_locator(self.test_iframe_change_shipping).first.locator(self.text_shipping).select_option(value="Registered")
+        self.pw_page.frame_locator(self.test_iframe_change_shipping).first.locator(self.text_click_ok_change).click()
     def change_shipping(self):
-        self.pw_page.locator(self.test_open_option_shipping).select_option(value="דואר רשום (26 ₪)")
+        self.pw_page.locator(self.test_open_option_shipping).select_option(value="דואר רשום (30 ₪)")
         self.pw_page.click(self.text_click_ok_save)
         self.pw_page.wait_for_load_state("domcontentloaded")
 

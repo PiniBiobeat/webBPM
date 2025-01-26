@@ -10,7 +10,7 @@ from logic.pages.admin_page import AdminPage
 
 user = 'pini'
 passw = 'pinim1'
-order_id = 7832437
+order_id = 7834987
 
 class TestChangeShipping(TestBaseOnline):
 
@@ -22,6 +22,7 @@ class TestChangeShipping(TestBaseOnline):
         page.log_in_admin(user, passw)
         details_url = page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
+        page.change_shipping_printing_process()
         page.change_shipping()
         page.click_open_link()
         page.get_url_from_new_page(str(order_id))
