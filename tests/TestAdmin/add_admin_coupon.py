@@ -40,7 +40,7 @@ class AdminCoupon:
         page.click_ok()
 
 
-    def change_shipping(self, page):
+    def change_shipping_phone_order(self, page):
         order_id = Thanks.return_status
         page: AdminPage = AdminPage(page)
         page.pw_page.goto(configuration['admin_url_' + os.getenv('env')])
