@@ -26,6 +26,8 @@ class AdminCoupon:
         page.add_num_sale(2)
         page.click_open_link()
         page.get_url_from_new_page(str(order_id))
+        Summary.return_checkout[5] = Summary.return_checkout[5] - 2
+        Summary.return_checkout[2] = 2
 
 
     def add_coupon_manual(self, page, value='50'):
