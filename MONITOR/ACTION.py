@@ -1,5 +1,7 @@
 import sys
 import os
+
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import asyncio
@@ -8,6 +10,7 @@ import asyncio
 from MONITOR.test_stop_status_30 import *
 from MONITOR.test_paymentv4_connect import test_paymentv4_connect_book, test_paymentv4_connect_tiles
 from MONITOR.test_error_insufficient import test_error_insufficient
+from Test_run_every_day.C_STOP_TRANSACT import test_cancel_order_transact
 
 
 
@@ -25,6 +28,9 @@ async def payment_connection():
 
 async def insufficent():
     test_error_insufficient()
+
+async def stop_transact():
+    test_cancel_order_transact()
 
 
 
@@ -45,6 +51,7 @@ async def job_scheduler():
     scheduler.add_job(evrey_5_minute, 'interval', minutes=4)
     scheduler.add_job(payment_connection, 'interval', minutes=10)
     scheduler.add_job(insufficent, 'cron', hour='7,12,17', minute=0)
+    scheduler.add_job(stop_transact, 'cron', hour='23', minute=57)
 
 
 
