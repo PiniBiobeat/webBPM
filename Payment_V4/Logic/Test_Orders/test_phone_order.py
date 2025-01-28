@@ -135,6 +135,10 @@ class TestAddCouponManual:
         assert AssertOrder(db="lupa_square").general_assert_orders()
 
 
+class TestChangeShippingOrder:
+    pass
+
+
 class TestChangeShippingPhoneOrder:
 
     def test_change_shipping_phone_order_app(self, page):
@@ -191,7 +195,3 @@ class TestChangeShippingPhoneOrder:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).thank_page_status()
         assert AssertOrder(db="lupa_square").general_assert_orders()
-
-
-class TestChangeShippingOrder:
-    pass
