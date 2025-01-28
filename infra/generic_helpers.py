@@ -225,3 +225,27 @@ def monitor_order_status(order_id, interval=5):
         if 21 == last_status:
             break
         time.sleep(interval)
+
+def sql_get_transact_online_tbl(order_id):
+    time.sleep(5)
+    server = '104.155.49.95'
+    database = 'matrix_db'
+    username = 'MachineDBA'
+    password = 'Kk28!32Zx'
+    cnxn = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+    cursor = cnxn.cursor()
+    print(cursor)
+
+    query = """
+     SELECT TOP (10)
+      [order_id]
+      ,[price]
+      ,[catalog_num]
+      ,[error_description]
+      ,[invoice]
+        FROM [matrix_db].[dbo].[transact_online_tbl] where  catalog_num = 'BK-Mr-Dlv-000001'  and order_id = ?
+     """
+    cursor.execute(query, order_id)
+    row = cursor.fetchone()
+    return str(row[1]) if row else None
