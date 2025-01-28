@@ -83,10 +83,14 @@ class AdminPage(PageBase):
         self.pw_page.locator(self.text_num_coupons).fill(str(num_coupons))
         self.pw_page.locator(self.test_open_option).select_option(value="הטבה שירותית")
         self.pw_page.click(self.text_click_ok)
+
     def change_shipping_printing_process(self):
         self.pw_page.click(self.text_open_link_change_shipping)
         self.pw_page.frame_locator(self.test_iframe_change_shipping).first.locator(self.text_shipping).select_option(value="Registered")
         self.pw_page.frame_locator(self.test_iframe_change_shipping).first.locator(self.text_click_ok_change).click()
+        self.pw_page.once("dialog", lambda dialog: dialog.accept())
+        self.pw_page.wait_for_load_state("domcontentloaded")
+
     def change_shipping(self):
         self.pw_page.locator(self.test_open_option_shipping).select_option(value="דואר רשום (30 ₪)")
         self.pw_page.click(self.text_click_ok_save)
