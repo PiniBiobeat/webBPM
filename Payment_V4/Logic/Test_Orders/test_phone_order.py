@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import Page
 
-from tests.TestAdmin.add_admin_coupon import AdminCoupon
+from tests.TestAdmin.admin_function import AdminCoupon, AdminShipping
 from tests.TestPayment.test_add_book_V3 import AddBookV3
 from tests.TestPayment.test_add_book_online import AddBookOnline
 from tests.TestPayment.test_add_calendar import AddCalendar
@@ -81,68 +81,6 @@ class TestPhoneOrder:
         assert AssertOrder(db="lupa_square").general_assert_orders()
 
 
-class TestChangeShippingOrder:
-    pass
-
-
-class TestChangeShippingPhoneOrder:
-
-    def test_change_shipping_phone_order_app(self, page):
-        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
-        Generalfunction(page).navigate("payment_url_books")
-        BasketItems(page).valid_element_click_next()
-        Shipping(page).home()
-        PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("12930").checkouts()
-        Thanks(page).status()
-        AdminCoupon().change_shipping_phone_order(page)
-        CreditGuard(page).fill_credit_card().to_pay()
-        Thanks(page).thank_page_status()
-        assert AssertOrder().general_assert_orders()
-
-
-    def test_change_shipping_phone_order_online(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
-        Generalfunction(page).navigate("payment_url_books")
-        BasketItems(page).valid_element_click_next()
-        Shipping(page).asafta()
-        PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("12930").checkouts()
-        Thanks(page).status()
-        AdminCoupon().change_shipping_phone_order(page)
-        CreditGuard(page).fill_credit_card().to_pay()
-        Thanks(page).thank_page_status()
-        assert AssertOrder().general_assert_orders()
-
-
-    def test_change_shipping_phone_order_calendar(self, page):
-        AddCalendar().request_calendar(page, "לוח_A5")
-        Generalfunction(page).navigate("payment_url_books")
-        BasketItems(page).valid_element_click_next()
-        Shipping(page).asafta()
-        PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("12930").checkouts()
-        Thanks(page).status()
-        AdminCoupon().change_shipping_phone_order(page)
-        CreditGuard(page).fill_credit_card().to_pay()
-        Thanks(page).thank_page_status()
-        assert AssertOrder().general_assert_orders()
-
-
-    def test_change_shipping_phone_order_tiles(self, page):
-        AddTiles().request_tiles(page, "tiles20X20")
-        Generalfunction(page).navigate("payment_url_tiles")
-        BasketItems(page).valid_element_click_next()
-        Shipping(page).asafta()
-        PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("12930").checkouts()
-        Thanks(page).status()
-        AdminCoupon().change_shipping_phone_order(page)
-        CreditGuard(page).fill_credit_card().to_pay()
-        Thanks(page).thank_page_status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
-
-
 class TestAddCouponManual:
 
     def test_add_coupon_manual_app(self, page):
@@ -195,3 +133,65 @@ class TestAddCouponManual:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert AssertOrder(db="lupa_square").general_assert_orders()
+
+
+class TestChangeShippingPhoneOrder:
+
+    def test_change_shipping_phone_order_app(self, page):
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).home()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminShipping().change_shipping_phone_order(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_phone_order_online(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminShipping().change_shipping_phone_order(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_phone_order_calendar(self, page):
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminShipping().change_shipping_phone_order(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_phone_order_tiles(self, page):
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("12930").checkouts()
+        Thanks(page).status()
+        AdminShipping().change_shipping_phone_order(page)
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).thank_page_status()
+        assert AssertOrder(db="lupa_square").general_assert_orders()
+
+
+class TestChangeShippingOrder:
+    pass
