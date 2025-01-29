@@ -7,11 +7,11 @@ class AddTiles:
     URL = "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&guid=d34f6cb66016403da613edc4e2a1d1f8&token=EdvXm_Wed54Yx-9sOj_bR_BSTF3NXYwvPOXr8qckQN90ubwBfndwyoB_S4-Os9UQLfsCfAiGvusB2qakh0eDuWxfSMuYHC36Q0ZfJ9xPns5_-yOzL-48K7Zvq6UbOw1O86-vGtsUDr-EaHJKhIzMftlEopcrquJ0kL_fGJipJiHO7K8W7O3PTG7yuelnx8grcSQAUZMgiYvOFsxAICCHQcZInm5p5lRYM3RuqgN_bpwXwrN25cKVszF4FnMbA5QMZShQxcjh7FfZ-VkuSz76qGxRzn6JBsKSHI8kF8-uaGmxNbTnBwoZw7n7-9yTHHT2sLbf-IEzUGJgrD-4j0blpg2&source_type=tiles&source_device=desktop"
 
     tiles_format = {
-        "tiles20X20": "data=[{\"image_id\":\"d34f6cb66016403da613edc4e2a1d1f8.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
-        "tiles20X20white": "data=[{\"image_id\":\"d34f6cb66016403da613edc4e2a1d1f8.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"white\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
-        "tiles20X20kapa": "data=[{\"image_id\":\"d34f6cb66016403da613edc4e2a1d1f8.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
-        "tiles30X30": "data=[{\"image_id\":\"d34f6cb66016403da613edc4e2a1d1f8.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
-        "tiles30X30kapa": "data=[{\"image_id\":\"d34f6cb66016403da613edc4e2a1d1f8.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
+        "tiles20X20": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
+        "tiles20X20white": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"white\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
+        "tiles20X20kapa": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
+        "tiles30X30": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
+        "tiles30X30kapa": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
     }
 
 

@@ -9,7 +9,7 @@ from logic.pages.admin_page import AdminPage
 
 user = 'pini'
 passw = 'pinim1'
-order_id = 7835683
+order_id = 14143766
 
 class TestChangeShipping(TestBaseOnline):
 
