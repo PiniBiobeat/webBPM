@@ -1,25 +1,22 @@
 import os
+
+import requests
 from playwright.sync_api import Page
 import pytest
 import shutil
+JENKINS_WEBHOOK_URL = "http://35.195.16.141:8080/generic-webhook-trigger/invoke?token=CopyFiles"
 
-# source_path = r"\\fs-vm\data\users\musers\B\3657774_E1ceQ7tMHNmh0XnLRJKAHygOmAvFLGMZWXEMW8EPYqoj\tiles\B825dd095a1014de1b4c527c9fceaa974.jpg"
-# destination_folder = r"\\fs-vm\data\users\musers\B\3657774_E1ceQ7tMHNmh0XnLRJKAHygOmAvFLGMZWXEMW8EPYqoj\tiles\d34f6cb66016403da613edc4e2a1d1f8\medium"
-#
-# def move_file():
-#     # Ensure the destination folder exists
-#     os.makedirs(destination_folder, exist_ok=True)
-#
-#     # Define the destination path
-#     destination_path = os.path.join(destination_folder, os.path.basename(source_path))
-#
-#     # Copy the file
-#     shutil.copy(source_path, destination_path)
-#
-#     print(f"File moved to: {destination_path}")
-#
-# # Call the function to move the file first
-# move_file()
+
+def move_file():
+    response = requests.post(JENKINS_WEBHOOK_URL)
+
+    if response.status_code == 200:
+        print("Jenkins job triggered successfully!")
+    else:
+        print(f"Failed to trigger Jenkins job: {response.status_code} - {response.text}")
+move_file()
+
+
 
 class AddTiles:
     URL = "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&guid=d34f6cb66016403da613edc4e2a1d1f8&token=EdvXm_Wed54Yx-9sOj_bR_BSTF3NXYwvPOXr8qckQN90ubwBfndwyoB_S4-Os9UQLfsCfAiGvusB2qakh0eDuWxfSMuYHC36Q0ZfJ9xPns5_-yOzL-48K7Zvq6UbOw1O86-vGtsUDr-EaHJKhIzMftlEopcrquJ0kL_fGJipJiHO7K8W7O3PTG7yuelnx8grcSQAUZMgiYvOFsxAICCHQcZInm5p5lRYM3RuqgN_bpwXwrN25cKVszF4FnMbA5QMZShQxcjh7FfZ-VkuSz76qGxRzn6JBsKSHI8kF8-uaGmxNbTnBwoZw7n7-9yTHHT2sLbf-IEzUGJgrD-4j0blpg2&source_type=tiles&source_device=desktop"
