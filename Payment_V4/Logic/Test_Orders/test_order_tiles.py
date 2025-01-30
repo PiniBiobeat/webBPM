@@ -155,3 +155,34 @@ class TestTilesCouponType:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert AssertOrder(db="lupa_square").general_assert_orders()
+
+
+# special cases for tiles
+class TestTilesQuantityDiscount:
+
+    def test_order_tiles_20x20_with_quantity_10(self, page, ):
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=9)
+        BasketItems(page).get_quantity_discount().valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert BasketItems.return_quantity_discount == 90
+        assert AssertOrder(db="lupa_square").general_assert_orders()
+
+
+    def test_order_tiles_30x30_with_quantity_10(self, page, ):
+        AddTiles().request_tiles(page, "tiles30X30")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=9)
+        BasketItems(page).get_quantity_discount().valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert BasketItems.return_quantity_discount == 90
+        assert AssertOrder(db="lupa_square").general_assert_orders()

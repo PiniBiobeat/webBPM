@@ -1,3 +1,4 @@
+from decimal import Decimal
 from playwright.sync_api import Page, expect
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 
@@ -10,12 +11,24 @@ class BasketItems:
     delete_button = "//div[@class='count_selected_items_and_icon MuiBox-root css-0']/img"
     image_src = "(//button/img)"
 
+    replacements = str.maketrans({"₪": "", "(": "", ")": "", "-": "", ",": ""})
     sale_price = "(//div[@class='color_green MuiBox-root css-gg4vpm'])/div[2]"
+    quantity_discount_price = "(//p[text()=':הנחת כמות']//..//p[@class='box_itemL'])[1]"
+
     return_sale_element = None
+    return_quantity_discount = None
 
 
     def __init__(self, page: Page):
         self.page = page
+
+
+    def delete_all_items(self):
+        self.page.locator(self.select_item_button).nth(0).click()
+        self.page.locator(self.select_item_button).first.check()
+        self.page.locator(self.delete_button).click()
+        self.page.get_by_role("button", name="כן").click()
+        expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
 
 
     def valid_element_click_next(self):
@@ -50,9 +63,11 @@ class BasketItems:
             self.page.click(item_button)
 
 
-    def delete_all_items(self):
-        self.page.locator(self.select_item_button).nth(0).click()
-        self.page.locator(self.select_item_button).first.check()
-        self.page.locator(self.delete_button).click()
-        self.page.get_by_role("button", name="כן").click()
-        expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
+    def get_quantity_discount(self):
+        quantity_discount = Decimal(self.page.locator(self.quantity_discount_price).inner_text().translate(self.replacements))
+        BasketItems.return_quantity_discount = quantity_discount
+        return self
+
+
+
+

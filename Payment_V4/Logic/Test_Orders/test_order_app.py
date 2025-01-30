@@ -160,7 +160,7 @@ class TestAppCouponType:
         assert AssertOrder().general_assert_orders()
 
 
-# for sanity add new before
+# special cases for app
 class TestAppCouponPay40:
 
     @pytest.mark.parametrize("coupon_code", coupon_pay_for_40)

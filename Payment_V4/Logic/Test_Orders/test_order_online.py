@@ -157,7 +157,7 @@ class TestOnlineCouponType:
         assert AssertOrder().general_assert_orders()
 
 
-# add new before
+# special cases for online
 class TestOnlineCouponPay40:
 
     @pytest.mark.parametrize("coupon_code", coupon_pay_for_40)
