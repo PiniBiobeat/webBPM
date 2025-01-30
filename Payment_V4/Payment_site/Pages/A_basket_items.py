@@ -39,7 +39,7 @@ class BasketItems:
             price_count = sale_item.count()
             for i in range(price_count):
                 price_text = sale_item.nth(i).inner_text()
-                price_text = price_text.replace("₪", "").replace("(", "").replace(")", "").replace("-", "").strip()
+                price_text = price_text.translate(self.replacements).strip()
                 price = float(price_text)
                 sale_price += price
             if price_count > 0:
