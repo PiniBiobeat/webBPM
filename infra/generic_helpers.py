@@ -249,3 +249,22 @@ def sql_get_transact_online_tbl(order_id):
     cursor.execute(query, order_id)
     row = cursor.fetchone()
     return str(row[1]) if row else None
+
+def update_order_status(order_id, status):
+    time.sleep(5)
+
+    server = '104.155.49.95'
+    database = 'lupa'
+    username = 'MachineDBA'
+    password = 'Kk28!32Zx'
+    ctx = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
+    )
+    cursor = ctx.cursor()
+    cursor.execute('''
+                   UPDATE TOP (3) [lupa_online].[dbo].[order_item_tbl]
+                   SET in_status = 1
+                   WHERE master_id = 3657774 AND in_status = 30
+                   ''')
+    ctx.commit()
+    cursor.close()

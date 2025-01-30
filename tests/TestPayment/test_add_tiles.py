@@ -1,19 +1,36 @@
 import os
 from playwright.sync_api import Page
 import pytest
+import shutil
 
+source_path = r"\\fs-vm\data\users\musers\B\3657774_E1ceQ7tMHNmh0XnLRJKAHygOmAvFLGMZWXEMW8EPYqoj\tiles\B825dd095a1014de1b4c527c9fceaa974.jpg"
+destination_folder = r"\\fs-vm\data\users\musers\B\3657774_E1ceQ7tMHNmh0XnLRJKAHygOmAvFLGMZWXEMW8EPYqoj\tiles\d34f6cb66016403da613edc4e2a1d1f8\medium"
+
+def move_file():
+    # Ensure the destination folder exists
+    os.makedirs(destination_folder, exist_ok=True)
+
+    # Define the destination path
+    destination_path = os.path.join(destination_folder, os.path.basename(source_path))
+
+    # Copy the file
+    shutil.copy(source_path, destination_path)
+
+    print(f"File moved to: {destination_path}")
+
+# Call the function to move the file first
+move_file()
 
 class AddTiles:
     URL = "https://paymentsv4-api.lupa.co.il/api.aspx?method=add_basket&guid=d34f6cb66016403da613edc4e2a1d1f8&token=EdvXm_Wed54Yx-9sOj_bR_BSTF3NXYwvPOXr8qckQN90ubwBfndwyoB_S4-Os9UQLfsCfAiGvusB2qakh0eDuWxfSMuYHC36Q0ZfJ9xPns5_-yOzL-48K7Zvq6UbOw1O86-vGtsUDr-EaHJKhIzMftlEopcrquJ0kL_fGJipJiHO7K8W7O3PTG7yuelnx8grcSQAUZMgiYvOFsxAICCHQcZInm5p5lRYM3RuqgN_bpwXwrN25cKVszF4FnMbA5QMZShQxcjh7FfZ-VkuSz76qGxRzn6JBsKSHI8kF8-uaGmxNbTnBwoZw7n7-9yTHHT2sLbf-IEzUGJgrD-4j0blpg2&source_type=tiles&source_device=desktop"
 
     tiles_format = {
-        "tiles20X20": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
-        "tiles20X20white": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"white\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
-        "tiles20X20kapa": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
-        "tiles30X30": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
-        "tiles30X30kapa": "data=[{\"image_id\":\"B19aa8931c6204e109152ed3886ebbc63.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
+        "tiles20X20": "data=[{\"image_id\":\"B825dd095a1014de1b4c527c9fceaa974.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
+        "tiles20X20white": "data=[{\"image_id\":\"B825dd095a1014de1b4c527c9fceaa974.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"white\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
+        "tiles20X20kapa": "data=[{\"image_id\":\"B825dd095a1014de1b4c527c9fceaa974.jpg\",\"border\":\"no\",\"format\":0,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
+        "tiles30X30": "data=[{\"image_id\":\"B825dd095a1014de1b4c527c9fceaa974.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"black\",\"material\":\"frame\",\"tile_type\":\"photo\"}]",
+        "tiles30X30kapa": "data=[{\"image_id\":\"B825dd095a1014de1b4c527c9fceaa974.jpg\",\"border\":\"no\",\"format\":1,\"filter\":\"no\",\"frame_color\":\"noframe\",\"material\":\"kappa\",\"tile_type\":\"photo\"}]",
     }
-
 
     @staticmethod
     def _get_headers():
@@ -26,9 +43,9 @@ class AddTiles:
             'sec-ch-ua-mobile': '?0',
             'Cookie': os.getenv("COOKIE")
         }
+
     @classmethod
     def request_tiles(cls, page, tiles_name):
-
         if tiles_name not in cls.tiles_format:
             raise ValueError(f"Invalid tile type. Choose from: {list(cls.tiles_format.keys())}")
         payload = cls.tiles_format[tiles_name]
@@ -43,15 +60,10 @@ class AddTiles:
         assert response_json, "Response body is empty"
         return response_json
 
-
-
 class TestAddTiles:
-
     def test_tiles_request(self, page):
         AddTiles().request_tiles(page, "tiles20X20")
         AddTiles().request_tiles(page, "tiles20X20white")
         AddTiles().request_tiles(page, "tiles20X20kapa")
         AddTiles().request_tiles(page, "tiles30X30")
         AddTiles().request_tiles(page, "tiles30X30kapa")
-
-
