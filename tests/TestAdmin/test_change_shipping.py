@@ -9,7 +9,7 @@ from logic.pages.admin_page import AdminPage
 
 user = 'pini'
 passw = 'pinim1'
-order_id = 14143766
+order_id = 14143906
 
 class TestChangeShipping(TestBaseOnline):
 
@@ -23,7 +23,7 @@ class TestChangeShipping(TestBaseOnline):
         page.pw_page.goto(details_url)
         page.change_shipping_printing_process()
         get_total_pay_sql = sql_get_transact_online_tbl(order_id)
-        assert get_total_pay_sql == '26.00'
+        assert get_total_pay_sql == '39.00'
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")

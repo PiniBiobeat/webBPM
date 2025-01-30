@@ -244,7 +244,7 @@ def sql_get_transact_online_tbl(order_id):
       ,[catalog_num]
       ,[error_description]
       ,[invoice]
-        FROM [matrix_db].[dbo].[transact_online_tbl] where  catalog_num = 'BK-Mr-Dlv-000001'  and order_id = ?
+        FROM [matrix_db].[dbo].[transact_online_tbl] where  catalog_num = 'BK-Mr-Dlv-000025'  and order_id = ?
      """
     cursor.execute(query, order_id)
     row = cursor.fetchone()
