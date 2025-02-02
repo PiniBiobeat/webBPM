@@ -86,7 +86,7 @@ class AdminPage(PageBase):
 
     def change_shipping_printing_process(self):
         self.pw_page.click(self.text_open_link_change_shipping)
-        self.pw_page.frame_locator(self.test_iframe_change_shipping).first.locator(self.text_shipping).select_option(value="Registered")
+        self.pw_page.frame_locator(self.test_iframe_change_shipping).first.locator(self.text_shipping).select_option(value="BHHome")
         self.pw_page.frame_locator(self.test_iframe_change_shipping).first.locator(self.text_click_ok_change).click()
         self.pw_page.once("dialog", lambda dialog: dialog.accept())
         self.pw_page.wait_for_load_state("domcontentloaded")
