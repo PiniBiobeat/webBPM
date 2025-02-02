@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-
+from Payment_V4.Logic.Logic_Orders.data_order import order_detail
 from tests.TestAdmin.admin_function import AdminCoupon, AdminShipping
 from tests.TestPayment.test_add_book_V3 import AddBookV3
 from tests.TestPayment.test_add_book_online import AddBookOnline
@@ -20,6 +20,7 @@ from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 @pytest.fixture
 def page(request) -> Page:
+    order_detail().clear_basket_before_tests()
     return request.getfixturevalue('page')
 
 
