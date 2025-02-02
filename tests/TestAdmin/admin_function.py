@@ -1,7 +1,7 @@
 import pytest
 import os
 from playwright.sync_api import Page
-
+from infra.generic_helpers import sql_get_total_order_price,monitor_order_status,sql_get_transact_online_tbl
 from Payment_V4.Payment_site.Pages.B_shipping import Shipping
 from Payment_V4.Payment_site.Pages.D_summary import Summary
 from Payment_V4.Payment_site.Pages.E_creditGuard import CreditGuard
@@ -40,6 +40,21 @@ class AdminCoupon:
 
 
 class AdminShipping:
+
+    def change_shipping_printing_process(self, page):
+        order_id = Thanks.return_status
+        page: AdminPage = AdminPage(page)
+        page.pw_page.goto(configuration['admin_url_' + os.getenv('env')])
+        page.set_order_status(str(order_id))
+        page.log_in_admin(user, passw)
+        details_url = page.click_login_button(str(order_id))
+        page.pw_page.goto(details_url)
+        page.change_shipping_printing_process()
+        get_total_pay_sql = sql_get_transact_online_tbl(order_id)
+        assert get_total_pay_sql == '39.00'
+        Shipping.return_ship_method_value = 23
+
+
 
     def change_shipping_phone_order(self, page):
         order_id = Thanks.return_status

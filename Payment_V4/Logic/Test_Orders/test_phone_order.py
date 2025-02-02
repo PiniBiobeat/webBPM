@@ -136,8 +136,58 @@ class TestAddCouponManual:
         assert AssertOrder(db="lupa_square").general_assert_orders()
 
 
-class TestChangeShippingOrder:
-    pass
+class TestChangeShippingOrderPrintingProcess:
+
+    def test_change_shipping_order_printing_process_app(self, page):
+        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        AdminShipping().change_shipping_printing_process(page)
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_order_printing_process_online(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        AdminShipping().change_shipping_printing_process(page)
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_order_printing_process_calendar(self, page):
+        AddCalendar().request_calendar(page, "לוח_A5")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        AdminShipping().change_shipping_printing_process(page)
+        assert AssertOrder().general_assert_orders()
+
+
+    def test_change_shipping_order_printing_process_tiles(self, page):
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        AdminShipping().change_shipping_printing_process(page)
+        assert AssertOrder(db="lupa_square").general_assert_orders()
 
 
 class TestChangeShippingPhoneOrder:
