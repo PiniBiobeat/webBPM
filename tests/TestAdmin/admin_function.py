@@ -27,6 +27,7 @@ class AdminCoupon:
         page.get_url_from_new_page(str(order_id))
         Summary.return_checkout[5] = Summary.return_checkout[5] - 2
         Summary.return_checkout[2] = 2
+        page.pw_page.context.clear_cookies()
 
 
     def add_coupon_manual(self, page, value='50'):
@@ -37,6 +38,7 @@ class AdminCoupon:
         page.input_email_user('automation@lupa.co.il')
         page.choose_date()
         page.click_ok()
+        page.pw_page.context.clear_cookies()
 
 
 class AdminShipping:
@@ -53,6 +55,7 @@ class AdminShipping:
         get_total_pay_sql = sql_get_transact_online_tbl(order_id)
         assert get_total_pay_sql == '39.00'
         Shipping.return_ship_method_value = 23
+        page.pw_page.context.clear_cookies()
 
 
 
@@ -70,3 +73,4 @@ class AdminShipping:
         Shipping.return_ship_price_value = 26
         Summary.return_checkout[3] = 26
         Summary.return_checkout[5] = Summary.return_checkout[1] + 26
+        page.pw_page.context.clear_cookies()
