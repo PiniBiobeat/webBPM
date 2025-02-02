@@ -9,7 +9,7 @@ from logic.pages.admin_page import AdminPage
 
 user = 'pini'
 passw = 'pinim1'
-order_id = 14143906
+order_id = 14144117
 
 class TestChangeShipping(TestBaseOnline):
 
@@ -17,7 +17,8 @@ class TestChangeShipping(TestBaseOnline):
     @pytest.mark.usefixtures("before_after_test")
     def test_order_with_status_PP_and_change_shipping(self):
         page: AdminPage = self.browser_online.navigate(configuration['admin_url_' + os.getenv('env')], AdminPage)
-        monitor_order_status(order_id)
+        #monitor_order_status(order_id)
+        page.set_order_status(str(order_id))
         page.log_in_admin(user, passw)
         details_url = page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
