@@ -250,21 +250,63 @@ def sql_get_transact_online_tbl(order_id):
     row = cursor.fetchone()
     return str(row[1]) if row else None
 
-def update_order_status(order_id, status):
+def update_order_status_online(order_id):
     time.sleep(5)
 
     server = '104.155.49.95'
-    database = 'lupa'
+    database = 'lupa_online'
     username = 'MachineDBA'
     password = 'Kk28!32Zx'
     ctx = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
     )
     cursor = ctx.cursor()
+
+    # Use a CTE to update the top 3 records
     cursor.execute('''
-                   UPDATE TOP (3) [lupa_online].[dbo].[order_item_tbl]
-                   SET in_status = 1
-                   WHERE master_id = 3657774 AND in_status = 30
-                   ''')
+                   WITH CTE AS (
+                       SELECT TOP (3) *
+                       FROM [lupa_online].[dbo].[orders_tbl]
+                       WHERE master_id = 3657774 AND order_id = ?
+                   )
+                   UPDATE CTE
+                   SET in_status = 21
+                   ''', order_id)
+
+    # Commit the changes
     ctx.commit()
+
+    # Close the cursor and connection
     cursor.close()
+    ctx.close()
+
+
+def update_order_status_tiles(order_id):
+        time.sleep(5)
+
+        server = '104.155.49.95'
+        database = 'lupa_square'
+        username = 'MachineDBA'
+        password = 'Kk28!32Zx'
+        ctx = pyodbc.connect(
+            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
+        )
+        cursor = ctx.cursor()
+
+        # Use a CTE to update the top 3 records
+        cursor.execute('''
+                       WITH CTE AS (
+                           SELECT TOP (3) *
+                           FROM [lupa_square].[dbo].[orders_tbl]
+                           WHERE master_id = 3189204 AND order_id = ?
+                       )
+                       UPDATE CTE
+                       SET in_status = 21
+                       ''', order_id)
+
+        # Commit the changes
+        ctx.commit()
+
+        # Close the cursor and connection
+        cursor.close()
+        ctx.close()

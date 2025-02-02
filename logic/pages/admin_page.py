@@ -7,7 +7,7 @@ from infra.config.config_provider import configuration
 from dotenv import load_dotenv
 load_dotenv()
 from datetime import date
-from infra.generic_helpers import monitor_order_status
+from infra.generic_helpers import monitor_order_status, update_order_status_online,update_order_status_tiles
 from infra.generic_helpers import sql_get_total_order_price
 
 class AdminPage(PageBase):
@@ -48,6 +48,12 @@ class AdminPage(PageBase):
 
     def orders_status(self):
         monitor_order_status('77777777')
+
+    def set_order_status(self, order_id):
+        if order_id.startswith('7'):  # Check if the order_id starts with '7'
+            update_order_status_online(order_id)
+        else:
+            update_order_status_tiles(order_id)
 
     def log_in_admin(self, text_user, text_pass):
         self.pw_page.locator(self.text_user_login).fill(text_user)
