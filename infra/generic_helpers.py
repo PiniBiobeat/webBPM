@@ -235,7 +235,6 @@ def sql_get_transact_online_tbl(order_id):
     cnxn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
     cursor = cnxn.cursor()
-    print(cursor)
 
     query = """
      SELECT TOP (10)
