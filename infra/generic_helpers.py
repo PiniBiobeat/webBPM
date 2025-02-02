@@ -298,7 +298,7 @@ def update_order_status_tiles(order_id):
                        WITH CTE AS (
                            SELECT TOP (3) *
                            FROM [lupa_square].[dbo].[orders_tbl]
-                           WHERE master_id = 3189204 AND order_id = ?
+                           WHERE master_id = 3657774 AND order_id = ?
                        )
                        UPDATE CTE
                        SET in_status = 21
