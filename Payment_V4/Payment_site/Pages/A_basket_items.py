@@ -23,14 +23,6 @@ class BasketItems:
         self.page = page
 
 
-    def delete_all_items(self):
-        self.page.locator(self.select_item_button).nth(0).click()
-        self.page.locator(self.select_item_button).first.check()
-        self.page.locator(self.delete_button).click()
-        self.page.get_by_role("button", name="כן").click()
-        expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
-
-
     def valid_element_click_next(self):
         self.page.locator("text=מחיר מחירון").first.wait_for(state="visible")
         try:
@@ -67,6 +59,14 @@ class BasketItems:
         quantity_discount = Decimal(self.page.locator(self.quantity_discount_price).inner_text().translate(self.replacements))
         BasketItems.return_quantity_discount = quantity_discount
         return self
+
+
+    def delete_all_items(self):
+        self.page.locator(self.select_item_button).nth(0).click()
+        self.page.locator(self.select_item_button).first.check()
+        self.page.locator(self.delete_button).click()
+        self.page.get_by_role("button", name="כן").click()
+        expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
 
 
 
