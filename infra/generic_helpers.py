@@ -62,7 +62,7 @@ def sql_get_status_newsletter(Email):
         )
 
         cursor = ctx.cursor()
-        print(cursor)
+        # print(cursor)
         cursor.execute("select * FROM [lupa].[dbo].[newslleter] where email =?",Email)
         row = cursor.fetchall()
         for i in row:
@@ -79,7 +79,7 @@ def sql_get_status_master_id(Email):
     cnxn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
     cursor = cnxn.cursor()
-    print(cursor)
+    # print(cursor)
     cursor.execute("SELECT  *  FROM [lupa].[dbo].[user_master] where user_email =?", Email)
     row = cursor.fetchall()
 
@@ -95,8 +95,8 @@ def sql_get_calendar():
                                   port="5432",
                                   database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
-    print("PostgreSQL server information")
-    print(connection.get_dsn_parameters(), "\n")
+    # print("PostgreSQL server information")
+    # print(connection.get_dsn_parameters(), "\n")
     cursor.execute(
         '''
     SELECT format, theme,path FROM public.calendars_tbl
@@ -115,8 +115,8 @@ def sql_get_path_calendar(token_after_calendar):
                                   port="5432",
                                   database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
-    print("PostgreSQL server information")
-    print(connection.get_dsn_parameters(), "\n")
+    # print("PostgreSQL server information")
+    # print(connection.get_dsn_parameters(), "\n")
     cursor.execute(
         '''
     SELECT path FROM public.calendars_tbl
@@ -135,8 +135,8 @@ def sql_get_event_date(master_id):
                                   port="5432",
                                   database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
-    print("PostgreSQL server information")
-    print(connection.get_dsn_parameters(), "\n")
+    # print("PostgreSQL server information")
+    # print(connection.get_dsn_parameters(), "\n")
     cursor.execute(
         '''
     SELECT * FROM public.personal_dates_tbl
@@ -155,8 +155,8 @@ def sql_delete_personal_date(master_id):
                                   port="5432",
                                   database=configuration['data_from_'+os.getenv('env')])
     cursor = connection.cursor()
-    print("PostgreSQL server information")
-    print(connection.get_dsn_parameters(), "\n")
+    # print("PostgreSQL server information")
+    # print(connection.get_dsn_parameters(), "\n")
     cursor.execute(
         '''
     DELETE FROM public.personal_dates_tbl
@@ -174,7 +174,7 @@ def sql_get_total_order_price(order):
     cnxn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
     cursor = cnxn.cursor()
-    print(cursor)
+    # print(cursor)
 
     query = """
     SELECT total_order_price 
