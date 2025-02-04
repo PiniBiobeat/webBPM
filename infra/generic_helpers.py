@@ -248,7 +248,7 @@ def sql_get_transact_online_tbl(order_id):
      """
     cursor.execute(query, order_id)
     row = cursor.fetchone()
-    return str(row[1]) if row else None
+    return row if row else None
 
 def update_order_status_online(order_id):
     time.sleep(5)

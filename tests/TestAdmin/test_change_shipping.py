@@ -6,10 +6,10 @@ from infra.config.config_provider import configuration
 from logic.pages.admin_page import AdminPage
 from infra.generic_helpers import sql_get_total_order_price,monitor_order_status,sql_get_transact_online_tbl
 from logic.pages.admin_page import AdminPage
-
+from infra.open_PDF import download_pdf
 user = 'pini'
 passw = 'pinim1'
-order_id = 14144117
+order_id = 7837097
 
 class TestChangeShipping(TestBaseOnline):
 
@@ -23,8 +23,12 @@ class TestChangeShipping(TestBaseOnline):
         details_url = page.click_login_button(str(order_id))
         page.pw_page.goto(details_url)
         page.change_shipping_printing_process()
-        get_total_pay_sql = sql_get_transact_online_tbl(order_id)
-        assert get_total_pay_sql == '39.00'
+        a = sql_get_transact_online_tbl(order_id)
+        get_total_pay_sql = a[1]
+        invoice= a[4]
+        total_pay_in_PDF = download_pdf(order_id,invoice, get_total_pay_sql)
+        #get_total_pay = page.pay_order()
+        assert str(get_total_pay_sql) == '39.00' and str(total_pay_in_PDF) == str(get_total_pay_sql)
 
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
