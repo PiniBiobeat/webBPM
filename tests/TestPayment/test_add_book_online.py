@@ -23,7 +23,7 @@ class AddBookOnline:
 
 class TestAddBookOnline:
     def test_api_request(self, page):
-        AddBookOnline().request_online(page, "הגדה_פורמט_35_ריבועי_גדול")
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
 
 
 

@@ -1,6 +1,7 @@
 from decimal import Decimal
 from playwright.sync_api import Page, expect
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
+from Payment_V4.Logic.Logic_Orders.data_order import DataPriceList
 
 
 class BasketItems:
@@ -14,9 +15,11 @@ class BasketItems:
     replacements = str.maketrans({"₪": "", "(": "", ")": "", "-": "", ",": ""})
     sale_price = "(//div[@class='color_green MuiBox-root css-gg4vpm'])/div[2]"
     quantity_discount_price = "(//p[text()=':הנחת כמות']//..//p[@class='box_itemL'])[1]"
+    element_base_price = "(//p[text()=':מחיר מחירון']//..//p[@class='box_itemL'])[1]"
 
     return_sale_element = None
     return_quantity_discount = None
+    return_base_price = None
 
 
     def __init__(self, page: Page):
@@ -24,6 +27,8 @@ class BasketItems:
 
 
     def valid_element_click_next(self):
+        BasketItems.return_base_price = Decimal(self.page.locator(self.element_base_price).inner_text().translate(self.replacements))
+        DataPriceList().check_price_list(BasketItems.return_base_price)
         self.page.locator("text=מחיר מחירון").first.wait_for(state="visible")
         try:
             sale_item = self.page.locator(self.sale_price)
