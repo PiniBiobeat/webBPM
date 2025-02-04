@@ -24,7 +24,7 @@ class Thanks:
         self.thank_page_status()
         try:
             order_number = self.page.locator(self.order_number_msg).inner_text()
-            print(order_number)
+            print(f"Order Number:{order_number}")
             Thanks.return_status = order_number
             return self
         except:
