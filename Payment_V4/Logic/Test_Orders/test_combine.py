@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page
-from Payment_V4.Logic.Logic_Orders.data_order import order_detail
+from Payment_V4.Logic.Logic_Orders.data_order import ClearBasketApi
 from tests.TestPayment.test_add_book_V3 import AddBookV3
 from tests.TestPayment.test_add_book_online import AddBookOnline
 from tests.TestPayment.test_add_calendar import AddCalendar
@@ -20,7 +20,7 @@ from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 @pytest.fixture
 def page(request) -> Page:
-    order_detail().clear_basket_before_tests()
+    ClearBasketApi().clear_basket_before_tests()
     return request.getfixturevalue('page')
 
 
@@ -108,7 +108,7 @@ class TestBundleCoupon:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestCombineBundleCoupon:
