@@ -79,7 +79,7 @@ class TestPhoneOrder:
         AdminCoupon().add_admin_discount(page)
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).thank_page_status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestAddCouponManual:
@@ -133,7 +133,7 @@ class TestAddCouponManual:
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestChangeShippingOrderPrintingProcess:
@@ -187,7 +187,7 @@ class TestChangeShippingOrderPrintingProcess:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         AdminShipping().change_shipping_printing_process(page)
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestChangeShippingPhoneOrder:
@@ -245,4 +245,4 @@ class TestChangeShippingPhoneOrder:
         AdminShipping().change_shipping_phone_order(page)
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).thank_page_status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()

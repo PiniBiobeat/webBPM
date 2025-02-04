@@ -33,7 +33,7 @@ class TestTilesCouponSanity:
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles)
@@ -46,7 +46,7 @@ class TestTilesCouponSanity:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestTilesCouponItems:
@@ -66,7 +66,7 @@ class TestTilesCouponItems:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestTilesCouponIsof:
@@ -81,7 +81,7 @@ class TestTilesCouponIsof:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_isof)
@@ -92,7 +92,7 @@ class TestTilesCouponIsof:
         Shipping(page).add_isof_code(get_coupon(coupon_code))
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestTilesCouponShipping:
@@ -107,7 +107,7 @@ class TestTilesCouponShipping:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestTilesCouponFix:
@@ -122,7 +122,7 @@ class TestTilesCouponFix:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestTilesCouponType:
@@ -140,7 +140,7 @@ class TestTilesCouponType:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_type_code)
@@ -155,7 +155,7 @@ class TestTilesCouponType:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 # special cases for tiles
@@ -172,7 +172,7 @@ class TestTilesQuantityDiscount:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert BasketItems.return_quantity_discount == 90
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
     def test_order_tiles_30x30_with_quantity_10(self, page, ):
@@ -186,7 +186,7 @@ class TestTilesQuantityDiscount:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert BasketItems.return_quantity_discount == 90
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
     def test_order_tiles_20x20_and_30x30_with_quantity_20(self, page, ):
@@ -202,4 +202,4 @@ class TestTilesQuantityDiscount:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert BasketItems.return_quantity_discount == 180
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()

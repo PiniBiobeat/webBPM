@@ -108,7 +108,7 @@ class TestBundleCoupon:
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
-        assert AssertOrder(db="lupa_square").general_assert_orders()
+        assert AssertOrder().general_assert_orders()
 
 
 class TestCombineBundleCoupon:

@@ -12,7 +12,8 @@ master_id = config['GLOBAL']['paymentV4_test_master_id']
 
 class DataConnection:
 
-    def orders_tbl(self, order_number, db):
+    def orders_tbl(self, order_number):
+        db = Generalfunction.source_db_data
         command = f"""
         SELECT [order_id]
               ,[master_id]

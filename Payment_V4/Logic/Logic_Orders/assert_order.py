@@ -13,7 +13,7 @@ from Payment_V4.Logic.Logic_Orders.data_order import DataConnection
 
 class AssertOrder:
 
-    def __init__(self, db="lupa_online"):
+    def __init__(self):
         try:
             # Elements From Pages
             (self.first_base_price) = BasketItems.return_base_price
@@ -26,7 +26,7 @@ class AssertOrder:
 
 
             # DABA BASE SQL: Orders.tbl
-            self.order_id, self.master_id, self.in_status, self.total_items_quantity, self.total_items_price, self.total_order_price, self.shipping_value, self.shipping_method, self.invoice_number = DataConnection().orders_tbl(self.order_number, db)
+            self.order_id, self.master_id, self.in_status, self.total_items_quantity, self.total_items_price, self.total_order_price, self.shipping_value, self.shipping_method, self.invoice_number = DataConnection().orders_tbl(self.order_number)
             # DABA BASE PG14: coupon.tbl
             self.discount_actual_value = DataConnection().total_discount_sum(self.order_number)
 
