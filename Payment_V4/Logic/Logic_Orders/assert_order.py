@@ -16,6 +16,7 @@ class AssertOrder:
     def __init__(self, db="lupa_online"):
         try:
             # Elements From Pages
+            (self.first_base_price) = BasketItems.return_base_price
             (self.sale_price, self.sale_items) = BasketItems.return_sale_element  #wait
             (self.ship_selected_price) = Shipping.return_ship_price_value #wait
             (self.ship_selected_method) = Shipping.return_ship_method_value #wait
@@ -34,6 +35,7 @@ class AssertOrder:
 
 
     def general_assert_orders(self):
+        assert self.base_price == self.first_base_price, f"Basket base price: {self.first_base_price}, Unmatch summary base price {self.base_price}."
         assert self.item_count == self.total_items_quantity, f"Element item count: {self.item_count}, not match signed db: {self.total_items_quantity}."
         assert self.base_price == self.total_items_price, f"Element Base price: {self.base_price}, not match signed db: {self.total_items_price}."
         assert self.total_discount == self.discount_actual_value, f"Element discount: {self.total_discount}, not match signed db: {self.discount_actual_value}."
