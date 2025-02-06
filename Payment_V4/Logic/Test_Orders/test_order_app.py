@@ -178,21 +178,6 @@ class TestAppCouponPay40:
         assert AssertOrder().general_assert_orders()
 
 
-class TestAppHaggadah:
-
-    @pytest.mark.parametrize("coupon_code", coupon_haggadah)
-    def test_order_app_haggadah(self, page, coupon_code):
-        AddBookV3().requestV3(page, "הגדה_פורמט_35_ריבועי_גדול")
-        Generalfunction(page).navigate("payment_url_books")
-        BasketItems(page).valid_element_click_next()
-        Shipping(page).asafta()
-        PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon(coupon_code).checkouts()
-        CreditGuard(page).fill_credit_card().to_pay()
-        Thanks(page).status()
-        assert AssertOrder().general_assert_orders()
-
-
 class TestAppShortWay:
 
     @pytest.mark.parametrize("coupon_code", coupon_short_way)
@@ -201,6 +186,21 @@ class TestAppShortWay:
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
+
+class TestAppHaggadah:
+
+    @pytest.mark.parametrize("coupon_code", coupon_haggadah)
+    def test_order_app_haggadah(self, page, coupon_code):
+        AddBookV3().requestV3(page, "הגדה_פורמט_35_ריבועי_גדול")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(coupon_code).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
@@ -224,7 +224,7 @@ class TestAppMiniLupa:
 
 class TestAppSpecial:
 
-    @pytest.mark.parametrize("coupon_code", coupon_hagh)
+    @pytest.mark.parametrize("coupon_code", coupon_special_type)
     def test_order_app_special_type(self, page, coupon_code):
         AddBookV3().requestV3(page, "פורמט_26_פנורמי_קשה")
         AddBookV3().requestV3(page, "הגדה_פורמט_6_קלאסי_פלוס")

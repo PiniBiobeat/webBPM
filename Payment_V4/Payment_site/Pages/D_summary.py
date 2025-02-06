@@ -35,6 +35,8 @@ class Summary:
 
 
     def add_coupon(self, coupon_name):
+        if coupon_name is None:
+            return self
         coupon_fill = get_coupon(coupon_name)
         print(f"Coupon fill={coupon_fill}")
         self.page.fill(self.coupon_field, coupon_fill)

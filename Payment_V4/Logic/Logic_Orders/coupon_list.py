@@ -23,8 +23,6 @@ def get_coupon_title(coupon_name):
         return coupon_name
 
 
-
-
 # bundle sanity ------------------------------------------------
 
 coupon_bundle = [
@@ -38,16 +36,24 @@ coupon_bundle = [
 ]
 
 # album sanity ------------------------------------------------
+# special
 
-coupon_short_way = [
-    "NONE",
-    "Test_Bundle_Mix",
-    "AlbumShortWayCode",
-    "AlbumShortWayName",
+coupon_special_type = [
+    "AlbumSpecialTypeCodeFix"
+    "AlbumSpecialTypeNameFix"
+    "AlbumSpecialTypeCodeSal_Item"
+    "AlbumSpecialTypeNameSal_Item"
+    "AlbumSpecialTypeCodeSal"
+    "AlbumSpecialTypeCode%"
+    "AlbumSpecialTypeCode"
+    "AlbumSpecialTypeNameSal"
+    "AlbumSpecialTypeName%"
+    "AlbumSpecialTypeName"
+
 ]
 
 coupon_haggadah = [
-    "NONE",
+    None,
     "Test_Bundle_Haggadah",
     "AlbumHaggadahCodeShipPostSal%",
     "AlbumHaggadahNameShipPostSal",
@@ -62,12 +68,19 @@ coupon_haggadah = [
     "AlbumHaggadahName",
 ]
 
+coupon_short_way = [
+    None,
+    "Test_Bundle_Mix",
+    "AlbumShortWayCode",
+    "AlbumShortWayName",
+]
+
 coupon_pay_for_40 = [
     "PayFor40_Code",
     "PayFor40_Name"
 ]
 
-# ░░░░░░░░░░░░░░ ⬉ coupons only for album ⬉ ░░░░░░░░░░░░░░
+# ░░░░░░░░░░░░░░ ⬉ coupons special only for books ⬉ ░░░░░░░░░░░░░░
 
 coupon_albums_type_code = [
     "AlbumTypeCodeSal_Double2"
