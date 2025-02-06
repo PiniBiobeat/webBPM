@@ -128,7 +128,9 @@ class TestCombineBundleCoupon:
         assert AssertOrder().general_assert_orders()
 
 
-    def test_order_combine_haggadah_and_short_bundle_coupon(self, page):
+    def test_order_combine_bundle_haggadah_and_short_bundle_coupon(self, page):
+        AddCalendar().request_calendar(page, "לוח_3")
+        AddBookV3().requestV3(page, "פורמט_26_פנורמי_הולנדי")
         AddBookOnline().request_online(page, "הגדה_פורמט_27_ריבועי_קטן")
         AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
         Generalfunction(page).navigate("payment_url_books")

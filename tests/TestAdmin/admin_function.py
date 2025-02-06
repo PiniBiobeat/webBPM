@@ -15,6 +15,18 @@ passw = 'of2023'
 
 class AdminCoupon:
 
+    def chrage_phone_order(self, page):
+        order_id = Thanks.return_status
+        page: AdminPage = AdminPage(page)
+        page.pw_page.goto(configuration['admin_url_' + os.getenv('env')])
+        page.log_in_admin(user, passw)
+        details_url = page.click_login_button(str(order_id))
+        page.pw_page.goto(details_url)
+        page.click_open_link()
+        page.get_url_from_new_page(str(order_id))
+        page.pw_page.context.clear_cookies()
+
+
     def add_admin_discount(self, page):
         order_id = Thanks.return_status
         page: AdminPage = AdminPage(page)

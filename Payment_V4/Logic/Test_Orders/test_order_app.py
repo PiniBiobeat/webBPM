@@ -220,3 +220,21 @@ class TestAppMiniLupa:
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
         assert AssertOrder().general_assert_orders()
+
+
+class TestAppSpecial:
+
+    @pytest.mark.parametrize("coupon_code", coupon_hagh)
+    def test_order_app_special_type(self, page, coupon_code):
+        AddBookV3().requestV3(page, "פורמט_26_פנורמי_קשה")
+        AddBookV3().requestV3(page, "הגדה_פורמט_6_קלאסי_פלוס")
+        AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon(coupon_code).checkouts()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
