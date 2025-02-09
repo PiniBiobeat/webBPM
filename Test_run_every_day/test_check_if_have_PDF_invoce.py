@@ -5,7 +5,7 @@ import time
 from infra.generic_helpers import find_order_with_invoice
 import pytest
 
-pdf_path = r"C:\Users\tester\PycharmProjects\pytest-lupa\tests\TestAdmin\invoice.pdf"
+pdf_path = r".\invoice.pdf"
 text_in_pdf = "סמ תינובשח"
 MAX_RETRIES = 5  # Limit the number of retries
 slack_webhook_url = "https://hooks.slack.com/services/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"
@@ -74,7 +74,7 @@ class TestCheckInvoice:
                         print(f"⚠️ No text found on Page {page_num}.")
 
             print(f"❌ '{self.textPDF}' NOT found in the PDF.")
-            self.send_to_slack(f"❌ '{self.textPDF}' NOT found in the PDF.")
+            self.send_to_slack(f"❌ '{self.textPDF}' חשבוניות לא מוצגות בהזמנה יש להפעיל חתימת חשבוניות ")
             return False
 
         except Exception as e:
@@ -87,7 +87,7 @@ class TestCheckInvoice:
                 return self.download_pdf(attempt+1)
 
             print("❌ Maximum retries reached. Exiting.")
-            self.send_to_slack(f"❌ Error while extracting text: {e}")
+            self.send_to_slack(f"❌ חשבוניות לא מוצגות בהזמנה ,יש להפעיל חתימת חשבוניות, מספר ההזמנה הוא :{self.order_id}")
             return False
 
 @pytest.fixture
