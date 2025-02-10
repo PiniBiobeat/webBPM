@@ -9,7 +9,7 @@ from logic.pages.admin_page import AdminPage
 from infra.open_PDF import download_pdf
 user = 'pini'
 passw = 'pinim1'
-order_id = 7837097
+order_id = 7837496
 
 class TestChangeShipping(TestBaseOnline):
 

@@ -309,3 +309,24 @@ def update_order_status_tiles(order_id):
         # Close the cursor and connection
         cursor.close()
         ctx.close()
+
+
+def find_order_with_invoice():
+    time.sleep(5)
+
+    server = '104.155.49.95'
+    database = 'lupa_online'
+    username = 'MachineDBA'
+    password = 'Kk28!32Zx'
+    cnxn = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
+    )
+    cursor = cnxn.cursor()
+    query = """
+        SELECT TOP(1) order_id, invoice_number, master_id, charged_date
+        FROM [lupa_online].[dbo].[orders_tbl]
+        WHERE in_status = 21
+        """
+    cursor.execute(query)
+    row = cursor.fetchone()
+    return row if row else None
