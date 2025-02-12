@@ -85,7 +85,7 @@ class TestTilesCouponIsof:
 
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_isof)
-    def test_order_tiles_isof(self, page, coupon_code):
+    def test_order_tiles_isof_short(self, page, coupon_code):
         AddTiles().request_tiles(page, "tiles20X20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
