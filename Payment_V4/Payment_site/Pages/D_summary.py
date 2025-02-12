@@ -9,7 +9,7 @@ class Summary:
 
     coupon_field = '.MuiInputBase-input'
     coupon_confirm = ".MuiButton-text"
-    coupon_error = "//div[@class='summary_page container page MuiBox-root css-0']//p"
+    coupon_error = "(//div[@class='summary_page container page MuiBox-root css-0']//p)[1]"
     coupon_value_price = "(//div[@class='content_selected_coupon MuiBox-root css-0']/div[@class='box_item_l MuiBox-root css-0'])"
     loader = '[class*="MuiCircularProgress-circle"]'
 
