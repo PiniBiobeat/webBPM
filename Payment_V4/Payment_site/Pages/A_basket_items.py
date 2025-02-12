@@ -1,3 +1,4 @@
+import time
 from decimal import Decimal
 from playwright.sync_api import Page, expect
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
@@ -58,6 +59,8 @@ class BasketItems:
         item_button = f"{button_selector}[{item_index}]"
         for _ in range(times):
             self.page.click(item_button)
+            time.sleep(0.3)
+        time.sleep(0.5)
 
 
     def get_quantity_discount(self):
