@@ -213,7 +213,7 @@ class TestTilesFix20_30:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("FixTiles20+30")
+        Summary(page).add_coupon("FixTiles20_30")
         Summary(page).checkouts()
         assert Summary(page).return_checkout[5] == 20
         CreditGuard(page).fill_credit_card()
@@ -236,7 +236,7 @@ class TestTilesFix20_30:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("FixTiles20+30")
+        Summary(page).add_coupon("FixTiles20_30")
         Summary(page).checkouts()
         assert Summary(page).return_checkout[5] == 100
         CreditGuard(page).fill_credit_card()
