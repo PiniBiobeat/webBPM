@@ -26,29 +26,29 @@ def get_coupon_title(coupon_name):
 # bundle sanity ------------------------------------------------
 
 coupon_bundle = [
-    "Test_Bundle_FIX"
-    "Test_Bundle_₪_Quantity_Sal"
-    "Test_Bundle_₪_sal_item"
-    "Test_Bundle_₪_sal"
-    "Test_Bundle_%_Item"
-    "Test_Bundle_₪_Item"
-    "Test_Bundle_Mix"
+    "Test_Bundle_FIX",
+    "Test_Bundle_₪_Quantity_Sal",
+    "Test_Bundle_₪_sal_item",
+    "Test_Bundle_₪_sal",
+    "Test_Bundle_%_Item",
+    "Test_Bundle_₪_Item",
+    "Test_Bundle_Mix",
 ]
 
 # album sanity ------------------------------------------------
 # special
 
 coupon_special_type = [
-    "AlbumSpecialTypeCodeFix"
-    "AlbumSpecialTypeNameFix"
-    "AlbumSpecialTypeCodeSal_Item"
-    "AlbumSpecialTypeNameSal_Item"
-    "AlbumSpecialTypeCodeSal"
-    "AlbumSpecialTypeCode%"
-    "AlbumSpecialTypeCode"
-    "AlbumSpecialTypeNameSal"
-    "AlbumSpecialTypeName%"
-    "AlbumSpecialTypeName"
+    "AlbumSpecialTypeCodeFix",
+    "AlbumSpecialTypeNameFix",
+    "AlbumSpecialTypeCodeSal_Item",
+    "AlbumSpecialTypeNameSal_Item",
+    "AlbumSpecialTypeCodeSal",
+    "AlbumSpecialTypeCode%",
+    "AlbumSpecialTypeCode",
+    "AlbumSpecialTypeNameSal",
+    "AlbumSpecialTypeName%",
+    "AlbumSpecialTypeName",
 
 ]
 
@@ -77,29 +77,29 @@ coupon_short_way = [
 
 coupon_pay_for_40 = [
     "PayFor40_Code",
-    "PayFor40_Name"
+    "PayFor40_Name",
 ]
 
 # ░░░░░░░░░░░░░░ ⬉ coupons special only for books ⬉ ░░░░░░░░░░░░░░
 
 coupon_albums_type_code = [
-    "AlbumTypeCodeSal_Double2"
-    "AlbumTypeCodeSal_Double"
-    "AlbumTypeCodeSal"
-    "AlbumTypeCode%"
-    "AlbumTypeCode"
+    "AlbumTypeCodeSal_Double2",
+    "AlbumTypeCodeSal_Double",
+    "AlbumTypeCodeSal",
+    "AlbumTypeCode%",
+    "AlbumTypeCode",
 ]
 coupon_albums_type_name = [
-    "AlbumTypeNameSal"
-    "AlbumTypeName%"
-    "AlbumTypeName"
+    "AlbumTypeNameSal",
+    "AlbumTypeName%",
+    "AlbumTypeName",
 ]
 
 coupon_albums_fix = [
     "AlbumFixCodeShip",
     "AlbumFixNameShip",
     "AlbumFixCode",
-    "AlbumFixName"
+    "AlbumFixName",
 ]
 
 coupon_albums_shipping = [
@@ -153,17 +153,17 @@ coupon_albums = [
 # Calendar sanity ------------------------------------------------
 
 coupon_calendar_type_code = [
-    "CalendarTypeCodeSal_Double2"
-    "CalendarTypeCodeSal_Double"
-    "CalendarTypeCodeSal"
-    "CalendarTypeCode%"
-    "CalendarTypeCode"
-    "CalendarTypeCode"
+    "CalendarTypeCodeSal_Double2",
+    "CalendarTypeCodeSal_Double",
+    "CalendarTypeCodeSal",
+    "CalendarTypeCode%",
+    "CalendarTypeCode",
+    "CalendarTypeCode",
 ]
 coupon_calendar_type_name = [
-    "CalendarTypeNameSal"
-    "CalendarTypeName%"
-    "CalendarTypeName"
+    "CalendarTypeNameSal",
+    "CalendarTypeName%",
+    "CalendarTypeName",
 ]
 
 coupon_calendar_fix = [
@@ -227,23 +227,23 @@ coupon_calendar = [
 # Tiles sanity ------------------------------------------------
 
 coupon_tiles_type_code = [
-    "TilesTypeCodeSal_Double2"
-    "TilesTypeCodeSal_Double1"
-    "TilesTypeCodeSal"
-    "TilesTypeCode%"
-    "TilesTypeCode"
+    "TilesTypeCodeSal_Double2",
+    "TilesTypeCodeSal_Double1",
+    "TilesTypeCodeSal",
+    "TilesTypeCode%",
+    "TilesTypeCode",
 ]
 coupon_tiles_type_name = [
-    "TilesTypeNameSal"
-    "TilesTypeName%"
-    "TilesTypeName"
+    "TilesTypeNameSal",
+    "TilesTypeName%",
+    "TilesTypeName",
 ]
 
 coupon_tiles_fix = [
     "TilesFixCodeShip",
     "TilesFixNameShip",
     "TilesFixCode",
-    "TilesFixName"
+    "TilesFixName",
 ]
 
 coupon_tiles_shipping = [
@@ -276,7 +276,7 @@ coupon_tiles_items = [
     "TilesTest4_items_Code",
     "TilesTest3_items",
     "TilesTest2_items_Code",
-    "TilesTest1_items"
+    "TilesTest1_items",
 ]
 
 coupon_tiles = [
