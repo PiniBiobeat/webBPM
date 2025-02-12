@@ -40,7 +40,7 @@ class Summary:
         coupon_fill = get_coupon(coupon_name)
         print(f"Coupon fill={coupon_fill}")
         self.page.fill(self.coupon_field, coupon_fill)
-        self.page.click(self.coupon_confirm)
+        self.page.click(self.coupon_confirm, force=True)
         self.page.locator(self.loader).wait_for(state="detached")
         try:
             self.page.get_by_role("button", name="הבנתי").click(timeout=500)
