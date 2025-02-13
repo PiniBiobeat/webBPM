@@ -58,14 +58,14 @@ coupon_haggadah = [
     "AlbumHaggadahCodeShipPostSal%",
     "AlbumHaggadahNameShipPostSal",
     "AlbumHaggadahNameShipHome",
-    "AlbumHaggadahCodeSal_Item",
-    "AlbumHaggadahNameSal_Item",
-    "AlbumHaggadahCodeSal",
-    "AlbumHaggadahNameSal",
-    "AlbumHaggadahCode%",
-    "AlbumHaggadahName%",
-    "AlbumHaggadahCode",
-    "AlbumHaggadahName",
+    # "AlbumHaggadahCodeSal_Item",
+    # "AlbumHaggadahNameSal_Item",
+    # "AlbumHaggadahCodeSal",
+    # "AlbumHaggadahNameSal",
+    # "AlbumHaggadahCode%",
+    # "AlbumHaggadahName%",
+    # "AlbumHaggadahCode",
+    # "AlbumHaggadahName",
 ]
 
 coupon_short_way = [
