@@ -1,10 +1,4 @@
-
-
-
-
-
-
-
+# for _ in range(4): page.go_back()
 
 
 

@@ -9,7 +9,7 @@ class Summary:
 
     coupon_field = '.MuiInputBase-input'
     coupon_confirm = ".MuiButton-text"
-    coupon_error = "//div[@class='summary_page container page MuiBox-root css-0']//p"
+    coupon_error = "(//div[@class='summary_page container page MuiBox-root css-0']//p)[1]"
     coupon_value_price = "(//div[@class='content_selected_coupon MuiBox-root css-0']/div[@class='box_item_l MuiBox-root css-0'])"
     loader = '[class*="MuiCircularProgress-circle"]'
 
@@ -40,7 +40,7 @@ class Summary:
         coupon_fill = get_coupon(coupon_name)
         print(f"Coupon fill={coupon_fill}")
         self.page.fill(self.coupon_field, coupon_fill)
-        self.page.click(self.coupon_confirm)
+        self.page.click(self.coupon_confirm, force=True)
         self.page.locator(self.loader).wait_for(state="detached")
         try:
             self.page.get_by_role("button", name="הבנתי").click(timeout=500)
@@ -59,6 +59,7 @@ class Summary:
 
 
     def checkouts(self):
+        allure.attach(body=self.page.screenshot(), name="picture", attachment_type=allure.attachment_type.PNG)
         try:
             if self.page.locator(self.shipping_method).is_visible():
                 Shipping.return_ship_method_value = 16
@@ -75,7 +76,6 @@ class Summary:
         final_price = Decimal(self.page.locator(self.final_prices).inner_text().replace("₪", ""))
         self.page.locator(self.checkbox).last.click()
         # self.page.screenshot(path="a_summary.png")
-        allure.attach(body=self.page.screenshot(), name="picture", attachment_type=allure.attachment_type.PNG)
         self.page.click(self.payment_button)
         print(f"item_count={item_count}, base_price={base_price}, total_discount={total_discount}, shipping_price={shipping_price}, final_price={final_price}")
         Summary.return_checkout = [item_count, base_price, total_discount, shipping_price, shipping_price_discount, final_price]

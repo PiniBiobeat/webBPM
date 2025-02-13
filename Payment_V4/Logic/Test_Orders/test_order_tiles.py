@@ -85,7 +85,7 @@ class TestTilesCouponIsof:
 
 
     @pytest.mark.parametrize("coupon_code", coupon_tiles_isof)
-    def test_order_tiles_isof(self, page, coupon_code):
+    def test_order_tiles_isof_short(self, page, coupon_code):
         AddTiles().request_tiles(page, "tiles20X20")
         Generalfunction(page).navigate("payment_url_tiles")
         BasketItems(page).valid_element_click_next()
@@ -203,3 +203,51 @@ class TestTilesQuantityDiscount:
         Thanks(page).status()
         assert BasketItems.return_quantity_discount == 180
         assert AssertOrder().general_assert_orders()
+
+
+class TestTilesFix20_30:
+
+    def test_order_tiles_fix_20x20_and_30x30(self, page):
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("FixTiles20_30")
+        Summary(page).checkouts()
+        assert Summary(page).return_checkout[5] == 20
+        CreditGuard(page).fill_credit_card()
+        AddTiles().request_tiles(page, "tiles30X30")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+        assert Summary(page).return_checkout[5] == 50
+
+
+    def test_order_tiles_fix_20x20_and_30x30_with_add_quantity(self, page):
+        AddTiles().request_tiles(page, "tiles20X20")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=4)
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).add_coupon("FixTiles20_30")
+        Summary(page).checkouts()
+        assert Summary(page).return_checkout[5] == 100
+        CreditGuard(page).fill_credit_card()
+        AddTiles().request_tiles(page, "tiles30X30")
+        Generalfunction(page).navigate("payment_url_tiles")
+        BasketItems(page).update_item_quantity(item_index=1, button="+", times=4)
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+        assert Summary(page).return_checkout[5] == 250
