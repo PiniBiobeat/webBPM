@@ -1,0 +1,3 @@
+fist base price was: 690.0
+item_count=10, base_price=690.00, total_discount=None, shipping_price=0.00, final_price=600.00
+Order Number:14145600

@@ -1,0 +1,1 @@
+{"name": "test_order_app_haggadah[None]", "status": "passed", "parameters": [{"name": "coupon_code", "value": "None"}], "start": 1739448572976, "stop": 1739448575583, "uuid": "87f0b5b7-ec5b-400d-9b25-6f085357926d", "testCaseId": "14cbc34818b5a3889ec609cd0e017919", "fullName": "Payment_V4.Logic.Test_Orders.test_order_app.TestAppHaggadah#test_order_app_haggadah"}

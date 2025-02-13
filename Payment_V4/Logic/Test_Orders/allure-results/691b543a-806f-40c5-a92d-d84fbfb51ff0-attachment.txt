@@ -1,0 +1,5 @@
+fist base price was: 255.0
+Total Sale sum: 63.75 ₪
+Total Sale item: 1
+item_count=1, base_price=255.00, total_discount=63.75, shipping_price=0.00, final_price=191.25
+Order Number:7839196

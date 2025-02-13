@@ -1,0 +1,4 @@
+fist base price was: 288.0
+Total Sale sum: 72.0 ₪
+Total Sale item: 1
+Coupon fill=Test_Bundle_Haggadah
