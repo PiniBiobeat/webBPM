@@ -83,7 +83,7 @@ def groupa(groupa_execute):
 def postgres_env(postgres_execute):
     connection = psycopg2.connect(user="machineDBA",
                                   password="A#214Fdse!35dDC214XAzRDA12^79",
-                                  host="35.187.190.6",
+                                  host="10.116.96.32",
                                   port="5432",
                                   database=config['DATABASE']['postgress_' + os.getenv('env')])
     cursor = connection.cursor()
