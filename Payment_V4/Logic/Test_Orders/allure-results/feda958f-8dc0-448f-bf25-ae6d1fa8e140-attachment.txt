@@ -1,8 +1,0 @@
-fist base price was: 225.0
-Coupon fill=MAMIFAMILY2.25
-item_count=5, base_price=225.00, total_discount=65.0, shipping_price=0.00, final_price=160.00
-fist base price was: 474.0
-Total Sale sum: 30.0 ₪
-Total Sale item: 2
-item_count=10, base_price=690.00, total_discount=80.0, shipping_price=0.00, final_price=520.00
-Order Number:14145610

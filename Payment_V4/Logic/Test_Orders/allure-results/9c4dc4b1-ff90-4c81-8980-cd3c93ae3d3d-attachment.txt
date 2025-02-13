@@ -1,3 +1,0 @@
-fist base price was: 255.0
-Coupon fill=AlbumFormat
-item_count=1, base_price=255.00, total_discount=20.0, shipping_price=0.00, final_price=235.00

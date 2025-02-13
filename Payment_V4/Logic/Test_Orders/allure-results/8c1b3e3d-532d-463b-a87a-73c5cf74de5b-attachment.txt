@@ -1,2 +1,0 @@
-fist base price was: 45.0
-Coupon fill=FixTiles20+30
