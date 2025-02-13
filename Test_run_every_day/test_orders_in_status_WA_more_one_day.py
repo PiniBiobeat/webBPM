@@ -14,6 +14,32 @@ def get_connection():
     conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
     return conn
 
+def insert_to_table_error(order_id, master_id, platform, payload, code, insert_date):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = '''INSERT INTO lupa.[dbo].orders_generic_errors_tbl (order_id, master_id, platform, payload, code, insert_date)
+                   VALUES (?, ?, ?, ?, ?, ?);'''
+        cursor.execute(query, (order_id, master_id, platform, payload, code, insert_date))
+        cursor.commit()
+        cursor.close()
+        conn.close()
+        print("Insert successful!")
+    except Exception as e:
+        print(f"Error: {e}")
+def order_exists(order_id):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        query = '''SELECT COUNT(*) FROM lupa.[dbo].orders_generic_errors_tbl WHERE order_id = ?'''
+        cursor.execute(query, (order_id,))
+        count = cursor.fetchone()[0]
+        cursor.close()
+        conn.close()
+        return count > 0
+    except Exception as e:
+        print(f"Error checking order existence: {e}")
+        return False
 
 # Function to execute the provided query and fetch results
 def fetch_orders():
@@ -62,8 +88,10 @@ def test_check_orders_and_notify():
         message = f"Orders with 'charged_date' older than 1 day (Checked on {datetime.now()}):\n"
         for row in rows:
             database_name, order_id, in_status = row
-            message += f"Database: {database_name}, Order ID: {order_id}, Status: {in_status}\n"
-        send_to_slack(message)
+            if not order_exists(order_id):
+                insert_to_table_error(order_id, None, None, None, in_status, datetime.now())
+                message += f"Database: {database_name}, Order ID: {order_id}, Status: {in_status}\n"
+                send_to_slack(message)
     else:
          print(f"No orders with 'charged_date' older than 1 day found (Checked on {datetime.now()}).")
 
