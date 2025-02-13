@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Playwright, BrowserContext
 import pytest
 import logging
@@ -16,10 +17,8 @@ def browser_context(playwright: Playwright, request) -> [BrowserContext, None, N
     context = browser.new_context(http_credentials=test_co, color_scheme='light', viewport=viewport, record_video_dir=None)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
-    failed_before = request.session.testsfailed
     yield context
-    if request.session.testsfailed != failed_before:
-        context.tracing.stop(path="trace_.zip")
+    # context.tracing.stop(path="trace_.zip")
     context.close()
     browser.close()
 
@@ -32,10 +31,9 @@ def mobile_browser_context(playwright: Playwright,request) -> [BrowserContext, N
     context = browser.new_context(http_credentials=test_co, color_scheme='light', **device, record_video_dir=None)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
-    failed_before = request.session.testsfailed
     yield context
-    if request.session.testsfailed != failed_before:
-        context.tracing.stop(path="trace_mobile_.zip")
+
+    # context.tracing.stop(path="trace_mobile_.zip")
     context.close()
     browser.close()
 
@@ -55,17 +53,22 @@ def page_mobile(mobile_browser_context):
     page.close()
 
 
-
-
-
-
-
-
-
-
-
-
-
+@pytest.fixture(autouse=True)
+def trace_on_failure(request, browser_context, mobile_browser_context):
+    if 'mobile_browser_context' in request.fixturename:
+        context = mobile_browser_context
+    else:
+        context = browser_context
+    yield
+    rep = getattr(request.node, "rep_call", None)
+    if rep and rep.failed:
+        test_name = request.node.name
+        trace_path = f"trace/trace_{test_name}.zip"
+        context.tracing.stop(path=trace_path)
+        if context.pages:
+            screenshot = context.pages[0].screenshot()
+            allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
+        context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
 
 
