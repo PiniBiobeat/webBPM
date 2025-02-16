@@ -67,22 +67,17 @@ def page_mobile(mobile_browser_context):
 
 @pytest.fixture(autouse=True)
 def trace_on_failure(request, browser_context):
+    context = browser_context
+    yield
     rep = getattr(request.node, "rep_call", None)
     if rep and rep.failed:
         test_name = request.node.name
         trace_path = f"trace/trace_{test_name}.zip"
-        browser_context.tracing.stop(path=trace_path)
-        if browser_context.pages:
-            screenshot = browser_context.pages[0].screenshot()
+        context.tracing.stop(path=trace_path)
+        if context.pages:
+            screenshot = context.pages[0].screenshot()
             allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
-        browser_context.tracing.start(screenshots=True, snapshots=True, sources=True)
-
-
-
-
-
-
-
+        context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
 
 
