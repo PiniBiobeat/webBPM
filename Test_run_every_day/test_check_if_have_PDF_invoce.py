@@ -2,6 +2,7 @@ import requests
 import pdfplumber
 import os
 import time
+from datetime import datetime
 from infra.generic_helpers import find_order_with_invoice
 import pytest
 
@@ -19,6 +20,12 @@ class TestCheckInvoice:
         self.textPDF = text_in_pdf
 
     def send_to_slack(self, message):
+        # Check if the current time is between 19:00 and 08:00
+        current_hour = datetime.now().hour
+        if 19 <= current_hour or current_hour < 8:
+            print(f"Script is not allowed to send messages to Slack at this time: {datetime.now().strftime('%H:%M')}")
+            return
+
         payload = {"text": message}
         response = requests.post(slack_webhook_url, json=payload)
         if response.status_code != 200:
@@ -79,7 +86,6 @@ class TestCheckInvoice:
 
         except Exception as e:
             print(f"❌ Error while extracting text: {e}")
-
 
             if attempt < MAX_RETRIES:
                 print("🔄 Retrying PDF download...")
