@@ -63,6 +63,13 @@ class ClearBasketApi:
         requests.get(url2)
 
 
+    def clear_coupons_before_tests(self):
+        command_coupon = f"SELECT mng.cancel_coupons_by_user_id({master_id});"
+        postgres_env(command_coupon)
+
+
+
+
 class DataPriceList:
 
     def check_price_list(self, return_base_price):

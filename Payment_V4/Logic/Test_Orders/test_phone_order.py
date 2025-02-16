@@ -21,6 +21,7 @@
 # @pytest.fixture
 # def page(request) -> Page:
 #     ClearBasketApi().clear_basket_before_tests()
+#     ClearBasketApi().clear_coupons_before_tests()
 #     return request.getfixturevalue('page')
 #
 #
