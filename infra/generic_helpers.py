@@ -317,7 +317,7 @@ def find_order_with_invoice():
     server = '104.155.49.95'
     database = 'lupa_online'
     username = 'MachineDBA'
-    password = 'Kk28!32Zx'
+    password = 'Kk28!32Zx' # find how to encrypt the password
     cnxn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password
     )
