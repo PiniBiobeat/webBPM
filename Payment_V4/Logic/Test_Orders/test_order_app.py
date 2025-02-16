@@ -26,7 +26,7 @@ def page(request) -> Page:
 
 class TestAppCouponSanity:
 
-    def test_oder_app_f35(self, page):
+    def test_order_app_f35(self, page):
         AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
         BasketItems(page).valid_element_click_next()
