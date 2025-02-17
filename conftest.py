@@ -30,7 +30,7 @@ def browser_context(playwright: Playwright, request) -> [BrowserContext, None, N
     else:
         raise ValueError(f"Unknown environment: {env}")
     yield context
-    # context.tracing.stop(path="trace_.zip")
+    # context.tracing.stop(path="trace.zip")
     context.close()
     browser.close()
 
