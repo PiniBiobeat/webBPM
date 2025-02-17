@@ -1,3 +1,4 @@
+import time
 import allure
 from playwright.sync_api import Playwright, BrowserContext
 import pytest
@@ -40,6 +41,42 @@ def page(browser_context):
     page.close()
 
 
+@pytest.fixture(scope="function")
+def trace(request, browser_context):
+    context = browser_context
+    failed_before = request.session.testsfailed
+    yield context
+    if request.session.testsfailed != failed_before:
+        test_name = request.node.name
+        trace_path = f"trace/trace_{test_name}.zip"
+        context.tracing.stop(path=trace_path)
+        if browser_context.pages:
+            time.sleep(1)
+            screenshot = browser_context.pages[0].screenshot()
+            allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
+        context.tracing.start(screenshots=True, snapshots=True, sources=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -62,47 +99,6 @@ def page_mobile(mobile_browser_context):
     page = mobile_browser_context.new_page()
     yield page
     page.close()
-
-
-
-# @pytest.fixture(autouse=True)
-# def trace_on_failure(request, browser_context):
-#     context = browser_context
-#     yield
-#     rep = getattr(request.node, "rep_call", None)
-#     if rep and rep.failed:
-#         test_name = request.node.name
-#         trace_path = f"trace/trace_{test_name}.zip"
-#         context.tracing.stop(path=trace_path)
-#         if context.pages:
-#             screenshot = context.pages[0].screenshot()
-#             allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
-#         context.tracing.start(screenshots=True, snapshots=True, sources=True)
-#
-#
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 from infra.config.config_provider import init_config
