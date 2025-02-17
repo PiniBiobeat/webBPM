@@ -47,11 +47,12 @@ def trace(request, browser_context):
     failed_before = request.session.testsfailed
     yield context
     if request.session.testsfailed != failed_before:
+        time.sleep(2)
         test_name = request.node.name
         trace_path = f"trace/trace_{test_name}.zip"
+        allure.attach(body=open(trace_path, "rb").read(), name=f"Trace: {test_name}",attachment_type=allure.attachment_type.ZIP)
         context.tracing.stop(path=trace_path)
         if browser_context.pages:
-            time.sleep(1)
             screenshot = browser_context.pages[0].screenshot()
             allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
         context.tracing.start(screenshots=True, snapshots=True, sources=True)
