@@ -47,7 +47,7 @@ def trace(request, browser_context):
     failed_before = request.session.testsfailed
     yield context
     if request.session.testsfailed != failed_before:
-        time.sleep(2)
+        time.sleep(0.1)
         test_name = request.node.name
         trace_path = f"trace/trace_{test_name}.zip"
         context.tracing.stop(path=trace_path)

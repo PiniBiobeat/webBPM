@@ -19,7 +19,7 @@ from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 
 
 @pytest.fixture
-def page(request) -> Page:
+def page(request, trace) -> Page:
     ClearBasketApi().clear_basket_before_tests()
     ClearBasketApi().clear_coupons_before_tests()
     return request.getfixturevalue('page')
