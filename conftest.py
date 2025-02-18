@@ -51,7 +51,7 @@ def trace(request, browser_context):
         test_name = request.node.name
         trace_path = f"trace/trace_{test_name}.zip"
         context.tracing.stop(path=trace_path)
-        allure.attach(body=open(trace_path, "rb").read(), name=f"Trace: {test_name}",attachment_type=allure.attachment_type.ZIP)
+        allure.attach(body=open(trace_path, "rb").read(), name=test_name, attachment_type=allure.attachment_type.ZIP)
         if browser_context.pages:
             screenshot = browser_context.pages[0].screenshot()
             allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
