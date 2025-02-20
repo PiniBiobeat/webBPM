@@ -74,7 +74,6 @@ class TestCheckInvoice:
 
                         if str(self.textPDF) in text:
                             print(f"✅ Found '{self.textPDF}' on Page {page_num}!")
-                            self.send_to_slack(f"✅ Found '{self.textPDF}' on Page {page_num} in the PDF.")
                             return True
 
                     else:
