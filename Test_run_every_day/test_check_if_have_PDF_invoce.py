@@ -9,7 +9,7 @@ import pytest
 pdf_path = r".\invoice.pdf"
 text_in_pdf = "סמ תינובשח"
 MAX_RETRIES = 5  # Limit the number of retries
-slack_webhook_url = "https://hooks.slack.com/services/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"
+slack_webhook_url = "https://hooks.slack.com/services/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"
 
 class TestCheckInvoice:
     def __init__(self):
