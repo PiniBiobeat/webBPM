@@ -41,7 +41,7 @@ class TestCheckInvoice:
         if response.status_code == 200:
             with open(pdf_path, "wb") as f:
                 f.write(response.content)
-            print(f"✅ PDF downloaded successfully: {pdf_path}")
+
 
             return self.extract_and_search_text(attempt)
         else:
