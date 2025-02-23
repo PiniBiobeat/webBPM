@@ -17,7 +17,7 @@ class AssertOrder:
         try:
             # Elements From Pages
             (self.first_base_price) = BasketItems.return_base_price
-            (self.sale_price, self.sale_items) = BasketItems.return_sale_element  #wait
+            # (self.sale_price, self.sale_items) = BasketItems.return_sale_element  #wait
             (self.ship_selected_price) = Shipping.return_ship_price_value #wait
             (self.ship_selected_method) = Shipping.return_ship_method_value #wait
             (self.item_count, self.base_price, self.total_discount, self.shipping_price, self.shipping_price_discount, self.final_price) = Summary.return_checkout
