@@ -20,7 +20,7 @@ from Payment_V4.Logic.Logic_Orders.assert_order import AssertOrder
 @pytest.fixture
 def page(request, trace) -> Page:
     ClearBasketApi().clear_basket_before_tests()
-    # ClearBasketApi().clear_coupons_before_tests()
+    ClearBasketApi().clear_coupons_before_tests()
     return request.getfixturevalue('page')
 
 
@@ -32,7 +32,7 @@ class TestAppCouponSanity:
         BasketItems(page).valid_element_click_next()
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
-        # Summary(page).add_coupon("AlbumFormat")
+        Summary(page).add_coupon("AlbumFormat")
         # page.pause()
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
