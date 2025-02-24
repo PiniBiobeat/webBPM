@@ -42,7 +42,7 @@ class BasketItems:
                 sale_price += price
             if price_count > 0:
                 sale_items = sale_item.count()
-                print(f"Total Sale sum: {sale_price}")
+                print(f"Total Sale sum: {sale_price} ₪")
                 print(f"Total Sale item: {sale_items}")
                 BasketItems.return_sale_element = (sale_price, sale_items)
             else:
