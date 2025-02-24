@@ -1,3 +1,4 @@
+import os
 import time
 import allure
 from playwright.sync_api import Playwright, BrowserContext
@@ -5,7 +6,8 @@ import pytest
 import logging
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 test_co = ({"username": "test", "password": "Acf325A12!"})
