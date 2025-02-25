@@ -43,22 +43,22 @@ def page(browser_context):
     page.close()
 
 
-@pytest.fixture(scope="function")
-def trace(request, browser_context):
-    context = browser_context
+@pytest.fixture(scope="function", autouse=True)
+def trace(request):
     failed_before = request.session.testsfailed
-    yield context
+    yield
     if request.session.testsfailed != failed_before:
         time.sleep(0.1)
         test_name = request.node.name
         trace_path = f"trace/trace_{test_name}.zip"
-        context.tracing.stop(path=trace_path)
-        allure.attach(body=open(trace_path, "rb").read(), name=test_name, attachment_type=allure.attachment_type.ZIP)
-        if browser_context.pages:
-            screenshot = browser_context.pages[0].screenshot()
-            allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
-        context.tracing.start(screenshots=True, snapshots=True, sources=True)
-
+        if "browser_context" in request.fixturenames:
+            context = request.getfixturevalue("browser_context")
+            context.tracing.stop(path=trace_path)
+            allure.attach(body=open(trace_path, "rb").read(), name=test_name,attachment_type=allure.attachment_type.ZIP)
+            if context.pages:
+                screenshot = context.pages[0].screenshot()
+                allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
+            context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
 
 
