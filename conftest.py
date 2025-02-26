@@ -16,14 +16,12 @@ test_co = ({"username": "test", "password": "Acf325A12!"})
 def browser_context(playwright: Playwright, request) -> [BrowserContext, None, None]:
     env = os.getenv("DEV")
     if env == "desktop":
-
         viewport = {'width': 1280, 'height': 720}
         browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
         context = browser.new_context(http_credentials=test_co, color_scheme='light', viewport=viewport, record_video_dir=None)
         context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
     elif env == "mobile":
-
         device = playwright.devices['iPhone 15 Pro Max']
         browser = playwright.chromium.launch(headless=False, slow_mo=500, args=["--window-position=-1920,0"] * False)
         context = browser.new_context(http_credentials=test_co, color_scheme='light', **device, record_video_dir=None)
@@ -36,29 +34,23 @@ def browser_context(playwright: Playwright, request) -> [BrowserContext, None, N
     context.close()
     browser.close()
 
-@pytest.fixture(scope="session")
-def page(browser_context):
+
+@pytest.fixture(scope="function")
+def page(browser_context, request):
     page = browser_context.new_page()
-    yield page
-    page.close()
-
-
-@pytest.fixture(scope="function", autouse=True)
-def trace(request):
     failed_before = request.session.testsfailed
-    yield
+    yield page
     if request.session.testsfailed != failed_before:
-        time.sleep(0.1)
         test_name = request.node.name
-        trace_path = f"trace/trace_{test_name}.zip"
-        if "browser_context" in request.fixturenames:
-            context = request.getfixturevalue("browser_context")
-            context.tracing.stop(path=trace_path)
-            allure.attach(body=open(trace_path, "rb").read(), name=test_name,attachment_type=allure.attachment_type.ZIP)
-            if context.pages:
-                screenshot = context.pages[0].screenshot()
-                allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
-            context.tracing.start(screenshots=True, snapshots=True, sources=True)
+        trace_path = "trace.zip"
+        browser_context.tracing.stop(path=trace_path)
+        allure.attach(body=open(trace_path, "rb").read(), name=test_name, attachment_type=allure.attachment_type.ZIP)
+        screenshot = browser_context.pages[0].screenshot()
+        allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
+    page.close()
+    browser_context.tracing.start(screenshots=True, snapshots=True, sources=True)
+
+
 
 
 
