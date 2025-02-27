@@ -48,7 +48,8 @@ def page(browser_context, request):
         screenshot = browser_context.pages[0].screenshot()
         allure.attach(body=screenshot, name="FailShot", attachment_type=allure.attachment_type.PNG)
     page.close()
-    browser_context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    if request.session.testsfailed != failed_before:
+      browser_context.tracing.start(screenshots=True, snapshots=True, sources=True)
 
 
 
