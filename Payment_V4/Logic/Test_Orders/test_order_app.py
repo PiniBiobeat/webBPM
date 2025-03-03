@@ -181,6 +181,19 @@ class TestAppCouponPay40:
 
 class TestAppShortWay:
 
+    def test_order_app_short_way_with_upgrade(self, page):
+        AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
+        Generalfunction(page).navigate("payment_url_books")
+        page.get_by_text("שדרגו אותי").click()
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).home()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
+
     @pytest.mark.parametrize("coupon_code", coupon_short_way)
     def test_order_app_short_way(self, page, coupon_code):
         AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
