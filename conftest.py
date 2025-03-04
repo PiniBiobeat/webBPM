@@ -35,7 +35,7 @@ def browser_context(playwright: Playwright, request) -> [BrowserContext, None, N
     browser.close()
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def page(browser_context, request):
     page = browser_context.new_page()
     failed_before = request.session.testsfailed
