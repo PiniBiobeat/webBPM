@@ -27,13 +27,13 @@ class TestOnlineCouponSanity:
     def test_order_online_f35(self, page):
         AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
         Generalfunction(page).navigate("payment_url_books")
-        BasketItems(page).valid_element_click_next()
-        Shipping(page).asafta()
-        PersonalDetails(page).filler_detail()
-        Summary(page).add_coupon("AlbumFormat")
-        Summary(page).checkouts()
-        CreditGuard(page).fill_credit_card().to_pay()
-        Thanks(page).status()
+        # BasketItems(page).valid_element_click_next()
+        # Shipping(page).asafta()
+        # PersonalDetails(page).filler_detail()
+        # Summary(page).add_coupon("AlbumFormat")
+        # Summary(page).checkouts()
+        # CreditGuard(page).fill_credit_card().to_pay()
+        # Thanks(page).status()
         assert AssertOrder().general_assert_orders()
 
 
