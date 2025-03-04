@@ -1,163 +1,132 @@
+import os
 import pyodbc
-from datetime import datetime
-import datetime
+from datetime import datetime, timedelta
 import requests
 import json
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-my_dict_lupa = dict()
 from data_base import mysql
-
-
-#'ben@lupa.co.il','pinim@lupa.co.il'
 
 operators = ['pinim@lupa.co.il']
 hours = 8
-class Test_me():
-    my_dict_lupa = dict()
+
+class TestMe:
+
+    my_dict_lupa = {}
+
+    def connect_to_db(self, server, database, username, password):
+        try:
+            cnxn = pyodbc.connect(
+                'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+            return cnxn
+        except pyodbc.Error as e:
+            print(f"Error connecting to database: {e}")
+            return None
+
+    def fetch_data(self, cnxn, query):
+        try:
+            with cnxn.cursor() as cursor:
+                cursor.execute(query)
+                return cursor.fetchall()
+        except pyodbc.Error as e:
+            print(f"Error executing query: {e}")
+            return []
+
+    def test_connect_to_db(self, database, query, product_type):
+        server = '104.155.49.95'
+        username = 'MachineDBA'
+        password = 'Kk28!32Zx'
+
+        cnxn = self.connect_to_db(server, database, username, password)
+        if cnxn:
+            rows = self.fetch_data(cnxn, query)
+            for row in rows:
+                self.my_dict_lupa[row[0]] = {
+                    "product_type": product_type,
+                    "charged_date": row[1]  # Assuming charged_date is the second column
+                }
+            print(self.my_dict_lupa)
+            cnxn.close()
 
     def test_connect_to_db_in_lupa_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
-        cursor = cnxn.cursor()
-        print(cursor)
-        cursor.execute(f"select *  FROM [lupa].[dbo].[orders_tbl] where bulk_id is null and consolidate IS NULL and in_status = 'Printing process' and charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
-            for row in rows:
-                my_dict_lupa[row[0]] = " 🖼️ Photo Album Desktop"
-        print(my_dict_lupa)
-
-
-        cursor.close()
+        query = f"""
+         SELECT order_id,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
+             FROM [lupa].[dbo].[orders_tbl]
+                WHERE bulk_id IS NULL
+                  AND consolidate IS NULL
+                  AND in_status = 'Printing process'
+                  AND CONVERT(datetime, charged_date) < DATEADD(hour, -{hours}, GETDATE())
+        """
+        self.test_connect_to_db('lupa', query, "🖼️ Photo Album Desktop")
 
     def test_connect_to_db_in_lupa_online_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa_online'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
-
-        cursor = cnxn.cursor()
-        print(cursor)
-        cursor.execute(f"select *  FROM [lupa_online].[dbo].[order_item_tbl] where bulk_id = 0   and in_status = 21 and  charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
-            for row in rows:
-                if row[37] == 3:  # Check if row[37] equals 1
-                    my_dict_lupa[row[1]] =  " 🗓️ Calendar"
-                else:
-                    my_dict_lupa[row[1]] = " 📓 Photo Album Online"
-            print(my_dict_lupa)
-            #self.send_to_email(my_dict_lupa)
-
-
-        cursor.close()
+        query = f"""
+            SELECT order_id, charged_date FROM [lupa_online].[dbo].[order_item_tbl]
+            WHERE bulk_id = 0 AND in_status = 21
+            AND charged_date < DATEADD(hour, -{hours}, GETDATE())
+        """
+        self.test_connect_to_db('lupa_online', query, "📓 Photo Album Online")
 
     def test_connect_to_db_in_lupa_tiles_DB(self):
-        server = '104.155.49.95'
-        database = 'lupa_square'
-        username = 'MachineDBA'
-        password = 'Kk28!32Zx'
-        cnxn = pyodbc.connect(
-            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';Encrypt = Optional;UID=' + username + ';PWD=' + password)
+        query = f"""
+            SELECT order_id, charged_date FROM [lupa_square].[dbo].[order_item_tbl]
+            WHERE bulk_id = 0 AND in_status = 21
+            AND charged_date < DATEADD(hour, -{hours}, GETDATE())
+        """
+        self.test_connect_to_db('lupa_square', query, "🖼️ Tiles Photo")
 
-        cursor = cnxn.cursor()
-        print(cursor)
-        cursor.execute(f"select *  FROM [lupa_square].[dbo].[order_item_tbl] where bulk_id = 0   and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())")
-        rows = cursor.fetchall()
-        if rows != []:
-            for row in rows:
-                my_dict_lupa[row[1]] = " 🖼️ Tiles Photo"
-            print(my_dict_lupa)
-        cursor.close()
-        if len(my_dict_lupa) > 0:
-            self.send_to_email(my_dict_lupa)
-            self.send_to_slack(my_dict_lupa)
+        if self.my_dict_lupa:
+            self.send_to_email(self.my_dict_lupa)
+            self.send_to_slack(self.my_dict_lupa)
 
+            update_without_bulk = f"""
+                UPDATE [lupa_online].[dbo].[order_item_tbl]
+                SET in_status = 26
+                WHERE bulk_id = 0 AND in_status = 21
+                AND product_id = 3
+                AND charged_date < DATEADD(hour, -{hours}, GETDATE())
+            """
+            update_without_bulk2 = f"""
+                UPDATE [lupa_square].[dbo].[order_item_tbl]
+                SET in_status = 26
+                WHERE bulk_id = 0 AND in_status = 21
+                AND charged_date < DATEADD(hour, -{hours}, GETDATE())
+            """
+            mysql(update_without_bulk)
+            mysql(update_without_bulk2)
 
-
-            #set 26 to orders without bulk id
-            update_withoutbalk = f"update [lupa_online].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and product_id = 3 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
-            update_withoutbalk2 = f"update [lupa_square].[dbo].[order_item_tbl] set in_status = 26 where bulk_id = 0 and in_status = 21 and charged_date < DATEADD(hour, -{hours}, GETDATE())"
-            mysql(update_withoutbalk)
-            mysql(update_withoutbalk2)
-
-
-
-
-    import json
+    def calculate_days_difference(self, provided_date_str):
+        if isinstance(provided_date_str, datetime):
+            provided_date = provided_date_str
+        else:
+            provided_date = datetime.strptime(provided_date_str, "%Y-%m-%d %H:%M:%S.%f")
+        current_date = datetime.utcnow()
+        difference = current_date - provided_date
+        return difference.days
 
     def json_to_slack_message(self, json_data):
-        """
-        Converts a JSON object to a formatted Slack message.
-
-        Args:
-            json_data (dict): The JSON data to convert to a Slack message.
-
-        Returns:
-            str: The formatted Slack message string.
-        """
-        # Create a bulleted list of the key values
         keys_list = list(json_data.keys())
-        value_list = "\n".join([f"• <https://admin.lupa.co.il/admin_book/Order_Details.aspx?id={key}|{key}>" if str(key).startswith('18') else f"• <https://admin.lupa.co.il/admin_online/Order_Details.aspx?id={key}|{key}>" if str(key).startswith('76') else f"• <https://admin.lupa.co.il/admin_online/Order_Details.aspx?id={key}|{key}>" for key in keys_list])
+        value_list = "\n".join([
+            f"• <https://admin.lupa.co.il/admin_book/Order_Details.aspx?id={key}|{key}>" if str(key).startswith('19') else
+            f"• <https://admin.lupa.co.il/admin_online/Order_Details.aspx?id={key}|{key}>" for key in keys_list
+        ])
 
-        # Build the Slack message blocks
         blocks = [
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": "הזמנות ללא באלק :wave:"
-                }
-            },
-            {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": value_list
-                }
-            }
+            {"type": "section", "text": {"type": "mrkdwn", "text": "הזמנות ללא באלק :wave:"}},
+            {"type": "section", "text": {"type": "mrkdwn", "text": value_list}}
         ]
 
-        # Build the Slack message payload
-        payload = {
-            "blocks": blocks
-        }
-
-        # Convert the payload to JSON and return it
+        payload = {"blocks": blocks}
         return json.dumps(payload)
 
-    def json_to_html_table(self,json_data):
-        """
-        Converts a JSON object to an HTML table.
-
-        Args:
-            json_data (str or dict): The JSON data to convert to an HTML table.
-
-        Returns:
-            str: The HTML table string.
-        """
-        # Load JSON data if it's a string
+    def json_to_html_table(self, json_data):
         if isinstance(json_data, str):
             json_data = json.loads(json_data)
 
-        # Build the table rows
-        rows = []
-        for key, value in json_data.items():
-            rows.append(f"<tr><td>{key}</td><td>{value}</td></tr>")
-
-        # Build the HTML table
+        rows = [f"<tr><td>{key}</td><td>{value['product_type']}</td></tr>" for key, value in json_data.items()]
         table = f"<table><tr><th>Key</th><th>Value</th></tr>{''.join(rows)}</table>"
 
-        # Build the HTML template
         template = f"""
             <!DOCTYPE html>
             <html>
@@ -169,46 +138,30 @@ class Test_me():
                 </body>
             </html>
         """
-
         return template
 
-    def send_to_email(self,my_dict_lupa):
-      requests.post(
+    def send_to_email(self, my_dict_lupa):
+        requests.post(
             "https://api.mailgun.net/v3/lupa.co.il/messages",
-            auth=("api", "key-d2ed6868aa56bfda882f84b173693a2a"),
+            auth=("api", os.getenv('MAILGUN_API_KEY')),
             data={
-                "from": "Orders without bulk id   <monitor@lupa.co.il>",
+                "from": "Orders without bulk id <monitor@lupa.co.il>",
                 "to": operators,
-                "subject": "all orders orders without bulk id in 24 hours and with status Printing process ! ",
+                "subject": "All orders without bulk id in 24 hours and with status Printing process!",
                 "html": self.json_to_html_table(my_dict_lupa)
             }
-          )
+        )
 
     def send_to_slack(self, my_dict_lupa):
+        if datetime.now().weekday() != 4:
+            message_text = "\n".join(
+                f"{value['product_type']} Order {key} was charged {self.calculate_days_difference(value['charged_date'])} days ago."
+                for key, value in my_dict_lupa.items())
 
-        if datetime.datetime.now().weekday() != 4:
+            payload = {"text": "Orders without bulk id\n" + message_text}
 
-
-            message_text = "\n".join(f"{key}: {value}" for key, value in my_dict_lupa.items())
-
-            # Build the payload in the format Slack expects
-            payload = {
-                "text":  "Orders without bulk id\n" + message_text  # Ensure it’s a plain-text string
-            }
-
-            # Send the payload as JSON
             response = requests.post(
-                "https://hooks.slack.com/services/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",
+                "https://hooks.slack.com/services/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",
                 json=payload
             )
-
-            # Print response details for debugging
             print(response.status_code, response.text)
-
-
-
-
-
-
-
-
