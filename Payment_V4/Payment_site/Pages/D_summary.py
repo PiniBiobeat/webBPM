@@ -59,7 +59,7 @@ class Summary:
 
 
     def checkouts(self):
-        allure.attach(body=self.page.screenshot(), name="picture", attachment_type=allure.attachment_type.PNG)
+        allure.attach(body=self.page.screenshot(full_page=True), name="summary", attachment_type=allure.attachment_type.PNG)
         try:
             if self.page.locator(self.shipping_method).is_visible():
                 Shipping.return_ship_method_value = 16
