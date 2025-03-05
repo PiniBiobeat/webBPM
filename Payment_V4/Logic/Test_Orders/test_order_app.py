@@ -1,6 +1,6 @@
 import allure
 import pytest
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from Payment_V4.Logic.Logic_Orders.data_order import ClearBasketApi
 from tests.TestPayment.test_add_book_V3 import AddBookV3
@@ -185,6 +185,7 @@ class TestAppShortWay:
         AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
         Generalfunction(page).navigate("payment_url_books")
         page.get_by_text("שדרגו אותי").click()
+        expect(page.locator("#root")).to_contain_text("ריבועי גדול 30X30")
         BasketItems(page).valid_element_click_next()
         Shipping(page).home()
         PersonalDetails(page).filler_detail()
