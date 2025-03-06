@@ -20,8 +20,6 @@ class TestDeleteTiles(TestBase):
         page.upload_photo_gallery()
 
         page: GalleryPage = self.browser.create_page(GalleryPage)
-        page.select_group_images()
-        page.select_image()
         page.select_image_2()
         page.click_button_next()
 
