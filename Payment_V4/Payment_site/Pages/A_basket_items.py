@@ -1,4 +1,5 @@
 import time
+import allure
 from decimal import Decimal
 from playwright.sync_api import Page, expect
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
@@ -29,6 +30,7 @@ class BasketItems:
 
     def valid_element_click_next(self):
         BasketItems.return_base_price = Decimal(self.page.locator(self.element_base_price).inner_text().translate(self.replacements))
+        allure.attach(body=self.page.screenshot(full_page=True), name="basket",attachment_type=allure.attachment_type.PNG)
         DataPriceList().check_price_list(BasketItems.return_base_price)
         self.page.locator("text=מחיר מחירון").first.wait_for(state="visible")
         try:

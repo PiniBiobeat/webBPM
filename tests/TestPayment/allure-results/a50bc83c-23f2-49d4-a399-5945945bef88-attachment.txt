@@ -1,1 +1,0 @@
-DEBUG    asyncio:proactor_events.py:634 Using proactor: IocpProactor
