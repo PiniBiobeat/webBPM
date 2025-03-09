@@ -20,7 +20,9 @@ def get_coupon_title(coupon_name):
     if coupon_title:
         return coupon_title[0][0]
     else:
-        return coupon_name
+        getcoupon2 = f"SELECT title FROM cpn.coupon_tbl WHERE code = '{coupon_name}'"
+        coupon_title2 = postgres_env(getcoupon2)
+        return coupon_title2[0][0]
 
 
 # bundle sanity ------------------------------------------------
