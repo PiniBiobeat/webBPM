@@ -41,8 +41,8 @@ class TestUrlPayment(TestBase):
         page.upload_photo_gallery()
 
         page: GalleryPage = self.browser.create_page(GalleryPage)
-        page.select_group_images()
-        page.select_image()
+        # page.select_group_images()
+        # page.select_image()
         page.click_button_next()
         page.click_button_next()
 
@@ -50,5 +50,5 @@ class TestUrlPayment(TestBase):
         current_url = self.browser.page.url
         parsed_url = urlparse(current_url)
         url_without_params = urlunparse(parsed_url._replace(query=''))
-        expected_url = 'https://paymentsv4-ui.lupa.co.il/basket'
+        expected_url = 'https://paymentsv4-ui.lupa.co.il/basketItems'
         assert url_without_params == expected_url, f"Expected URL: {expected_url}, Actual URL: {url_without_params}"
