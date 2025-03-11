@@ -1,3 +1,4 @@
+import os
 
 from logic.pages.home_page import HomePage
 from tests.TestTiles.test_base import TestBase
@@ -28,7 +29,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_email_exists(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -46,7 +47,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_f_name_number(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -64,7 +65,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_l_name_number(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -85,7 +86,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_email_not_valid(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -105,7 +106,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_password_without_num(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -124,7 +125,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_password_not_same(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -143,7 +144,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_check_terms_of_use(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -155,7 +156,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_without_mark_newsletter(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()
@@ -170,7 +171,7 @@ class TestSignUp(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_user_not_approved(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()

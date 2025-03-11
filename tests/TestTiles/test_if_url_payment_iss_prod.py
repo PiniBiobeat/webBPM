@@ -1,4 +1,6 @@
 import json
+import os
+
 from logic.pages.upload_photo_page import UploadPhotoPage
 import pytest
 from logic.pages.home_page import HomePage
@@ -22,7 +24,7 @@ class TestUrlPayment(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_url_payment(self) -> None:
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.choose_tiles()
         page.open_menu()
         page.open_screen_login_from_menu()

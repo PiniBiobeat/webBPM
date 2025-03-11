@@ -1,3 +1,4 @@
+import os
 import time
 from logic.pages.home_page import HomePage
 from tests.TestTiles.test_base import TestBase
@@ -30,7 +31,7 @@ class TestSignUpNotApproved(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_sign_up_with_User_not_approved_newsletter(self):
-        page: HomePage = self.browser.navigate(configuration['url1'],HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')],HomePage)
         page.open_menu()
         page.open_screen_login_from_menu()
         page.shoose_sign_up()

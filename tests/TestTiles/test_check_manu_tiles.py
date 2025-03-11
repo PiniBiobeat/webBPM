@@ -1,3 +1,4 @@
+import os
 import time
 
 import pytest
@@ -20,7 +21,7 @@ class TestChechManuTiles(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_check_login_link(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         page.click_log_in()
 
@@ -31,7 +32,7 @@ class TestChechManuTiles(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_link_lupa_site(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         url_lupa_site = page.click_lupa_site()
         assert url_lupa_site == "https://www.lupa.co.il/"
@@ -39,7 +40,7 @@ class TestChechManuTiles(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_link_lupa_tariff(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.open_menu()
         url_lupa_tariff = page.click_lupa_tariff()
         assert url_lupa_tariff == "https://www.lupa.co.il/tariff/tiles/"
