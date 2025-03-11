@@ -1,4 +1,5 @@
 import json
+import os
 
 import pytest
 from logic.pages.home_page import HomePage
@@ -19,7 +20,7 @@ class TestLogin(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_login_with_user_invalid(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.choose_tiles()
         page.open_menu()
         page.open_screen_login_from_menu()

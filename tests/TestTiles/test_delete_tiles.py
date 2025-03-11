@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from logic.pages.home_page import HomePage
 from logic.pages.upload_photo_page import UploadPhotoPage
@@ -13,7 +15,7 @@ class TestDeleteTiles(TestBase):
     @pytest.mark.smoke
     @pytest.mark.usefixtures("before_after_test")
     def test_delete_image_preview(self):
-        page: HomePage = self.browser.navigate(configuration['url1'], HomePage)
+        page: HomePage = self.browser.navigate(configuration['url_tiles_'+os.getenv('env')], HomePage)
         page.choose_tiles()
 
         page: UploadPhotoPage = self.browser.create_page(UploadPhotoPage)
