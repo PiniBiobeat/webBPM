@@ -98,7 +98,7 @@ class AdminPage(PageBase):
         self.pw_page.wait_for_load_state("domcontentloaded")
 
     def change_shipping(self):
-        self.pw_page.locator(self.test_open_option_shipping).select_option(value="דואר רשום (30 ₪)")
+        self.pw_page.locator(self.test_open_option_shipping).select_option(value="דואר רשום (26 ₪)")
         self.pw_page.click(self.text_click_ok_save)
         self.pw_page.wait_for_load_state("domcontentloaded")
 
