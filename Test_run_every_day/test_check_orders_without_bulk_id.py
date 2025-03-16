@@ -51,7 +51,7 @@ class TestMe:
 
     def test_connect_to_db_in_lupa_DB(self):
         query = f"""
-         SELECT order_id,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
+         SELECT a_num,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
              FROM [lupa].[dbo].[orders_tbl]
                 WHERE bulk_id IS NULL
                   AND consolidate IS NULL
@@ -161,7 +161,7 @@ class TestMe:
             payload = {"text": "Orders without bulk id\n" + message_text}
 
             response = requests.post(
-                "https://hooks.slack.com/services/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",
+                "https://hooks.slack.com/services/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",
                 json=payload
             )
             print(response.status_code, response.text)

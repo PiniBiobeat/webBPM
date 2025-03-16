@@ -20,9 +20,10 @@ class Browser:
         device = available_devices[device_name]
 
         self.browser = playwright.chromium.launch(headless=False,slow_mo=500)
-        self.context = self.browser.new_context(**device)
+        self.context = self.browser.new_context(**device, ignore_https_errors=True)
         self.context.tracing.start(screenshots=True, snapshots=True)
         self.page = self.context.new_page()
+
 
 
     def navigate(self, address, page_type: Type[PageBase]):
