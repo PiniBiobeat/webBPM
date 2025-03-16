@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import pytest
 import os
 from playwright.sync_api import Page
@@ -65,7 +67,7 @@ class AdminShipping:
         page.pw_page.goto(details_url)
         page.change_shipping_printing_process()
         get_total_pay_sql = sql_get_transact_online_tbl(order_id)
-        assert get_total_pay_sql == '39.00'
+        assert get_total_pay_sql[1] == Decimal('39.00')
         Shipping.return_ship_method_value = 23
         page.pw_page.context.clear_cookies()
 
