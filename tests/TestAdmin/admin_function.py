@@ -88,4 +88,3 @@ class AdminShipping:
         Shipping.return_ship_price_value = 26
         Summary.return_checkout[3] = 26
         Summary.return_checkout[5] = Summary.return_checkout[1] + 26
-        page.pw_page.context.clear_cookies()
