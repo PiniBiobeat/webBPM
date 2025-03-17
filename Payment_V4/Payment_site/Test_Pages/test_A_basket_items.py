@@ -41,6 +41,16 @@ class TestBasketItemsBooks:
         BasketItems(page).valid_element_click_next()
 
 
+    def test_change_format_books(self, page):
+        self.root_books(page, item="ספר_27_מסלול_מקוצר")
+        BasketItems(page).change_format(1, "ריבועי גדול")
+
+
+    def test_change_cover_books(self, page):
+        self.root_books(page, item="פורמט_27_ריבועי_קטן_קשה")
+        BasketItems(page).change_cover(1, "רכה")
+
+
     def test_delete_all_items_book(self, page):
         add_item_app = AddBookV3()
         for item_app in add_item_app.token.keys():
