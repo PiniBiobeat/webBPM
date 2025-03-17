@@ -76,6 +76,7 @@ class BasketItems:
         self.page.locator(self.select_item_button).first.check()
         self.page.locator(self.delete_button).click()
         self.page.get_by_role("button", name="כן").click()
+        self.page.locator('[class*="MuiCircularProgress-circle"]').wait_for(state="detached")
         expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
 
 
