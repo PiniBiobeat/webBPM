@@ -110,8 +110,7 @@ class TestBasketItemsTiles:
 
 
 class TestUIChangeFormatAndCovers:
-
-    """app"""
+    # app
     def test_books_app_ui_change_cover_format_27_and_38_to_soft(self, page):
         AddBookV3().requestV3(page, "פורמט_27_ריבועי_קטן_קשה")
         AddBookV3().requestV3(page, "פורמט_38_מיני_לופה_קשה")
@@ -121,168 +120,64 @@ class TestUIChangeFormatAndCovers:
         BasketItems(page).valid_element_click_next()
 
 
-    """online change format"""
-    def test_books_online_ui_change_format_f35_to_f27_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+    # online
+    @pytest.mark.parametrize("request_format, change_format_to, change_cover_to", [
+        ("פורמט_35_ריבועי_גדול_קשה", "ריבועי קטן", None),
+        ("פורמט_27_ריבועי_קטן_קשה", "ריבועי גדול", None),
+        ("פורמט_35_ריבועי_גדול_הולנדי", "ריבועי קטן", None),
+        ("פורמט_27_ריבועי_קטן_הולנדי", "ריבועי גדול", None),
+        ("פורמט_35_ריבועי_גדול_קשה", None, "הולנדי"),
+        ("פורמט_35_ריבועי_גדול_הולנדי", None, "קשה"),
+        ("פורמט_27_ריבועי_קטן_קשה", None, "הולנדי"),
+        ("פורמט_27_ריבועי_קטן_הולנדי", None, "קשה"),
+        ("פורמט_35_ריבועי_גדול_קשה", "ריבועי קטן", "הולנדי"),
+        ("פורמט_35_ריבועי_גדול_הולנדי", "ריבועי קטן", "קשה"),
+        ("פורמט_27_ריבועי_קטן_קשה", "ריבועי גדול", "הולנדי"),
+        ("פורמט_27_ריבועי_קטן_הולנדי", "ריבועי גדול", "קשה"),
+        ("פורמט_27_ריבועי_קטן_קשה", "ריבועי גדול", "קשה"),
+        ("פורמט_27_ריבועי_קטן_הולנדי", "ריבועי גדול", "הולנדי"),
+        ("פורמט_35_ריבועי_גדול_קשה", "ריבועי קטן", "קשה"),
+        ("פורמט_35_ריבועי_גדול_הולנדי", "ריבועי קטן", "הולנדי"),
+        ("פורמט_35_ריבועי_גדול_קשה", "ריבועי קטן", "רכה"),
+        ("פורמט_35_ריבועי_גדול_הולנדי", "ריבועי קטן", "רכה"),
+        ("פורמט_27_ריבועי_קטן_קשה", None, "רכה"),
+        ("פורמט_27_ריבועי_קטן_הולנדי", None, "רכה"),
+    ])
+    def test_books_online_ui_change_format_and_cover(self, page, request_format, change_format_to, change_cover_to):
+        AddBookOnline().request_online(page, request_format)
         Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
+        if change_format_to:
+            BasketItems(page).change_format(1, change_format_to)
+        if change_cover_to:
+            BasketItems(page).change_cover(1, change_cover_to)
         BasketItems(page).valid_element_click_next()
 
 
-    def test_books_online_ui_change_format_f27_to_f35_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי גדול")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_format_f35_to_f27_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_format_f27_to_f35_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי גדול")
-        BasketItems(page).valid_element_click_next()
-
-
-    """online change cover"""
-    def test_books_online_ui_change_cover_f35_hard_to_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "הולנדי")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_cover_f35_layflat_to_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "קשה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_cover_f27_hard_to_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "הולנדי")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_cover_f27_layflat_to_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "קשה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_cover_f27_hard_to_soft(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "רכה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_cover_f27_layflat_to_soft(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "רכה")
-        BasketItems(page).valid_element_click_next()
-
-
-    """online change cover and format"""
-    def test_books_online_ui_change_f35_hard_to_f27_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
-        BasketItems(page).change_cover(1, "הולנדי")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f35_layflat_to_f27_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
-        BasketItems(page).change_cover(1, "קשה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f27_hard_to_f35_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי גדול")
-        BasketItems(page).change_cover(1, "הולנדי")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f27_layflat_to_f35_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי גדול")
-        BasketItems(page).change_cover(1, "קשה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f27_hard_to_f35_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי גדול")
-        BasketItems(page).change_cover(1, "קשה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f27_layflat_to_f35_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי גדול")
-        BasketItems(page).change_cover(1, "הולנדי")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f35_hard_to_f27_hard(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
-        BasketItems(page).change_cover(1, "קשה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f35_layflat_to_f27_layflat(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
-        BasketItems(page).change_cover(1, "הולנדי")
-        BasketItems(page).valid_element_click_next()
-
-
-    """online change cover and format to soft"""
-    def test_books_online_ui_change_f35_hard_to_f27_soft(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
-        BasketItems(page).change_cover(1, "רכה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f35_layflat_to_f27_soft(self, page):
-        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_format(1, "ריבועי קטן")
-        BasketItems(page).change_cover(1, "רכה")
-        BasketItems(page).valid_element_click_next()
-
-
-    def test_books_online_ui_change_f27_hard_to_f27_soft(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "רכה")
-        BasketItems(page).valid_element_click_next()
-
-    def test_books_online_ui_change_f27_laflat_to_f27_soft(self, page):
-        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
-        Generalfunction(page).navigate('payment_url_books')
-        BasketItems(page).change_cover(1, "רכה")
+    # tiles
+    @pytest.mark.parametrize("request_tiles, cover_change_to, format_change_to", [
+        ("tiles20X20", "30x30", None),
+        ("tiles20X20kapa", "30x30", None),
+        ("tiles30X30", "20x20", None),
+        ("tiles30X30kapa", "20x20", None),
+        ("tiles20X20", None, "מסגרת לבנה"),
+        ("tiles20X20", None, "קאפה"),
+        ("tiles20X20white", None, "מסגרת שחורה"),
+        ("tiles20X20white", None, "קאפה"),
+        ("tiles20X20kapa", None, "מסגרת שחורה"),
+        ("tiles20X20kapa", None, "מסגרת לבנה"),
+        ("tiles30X30", None, "קאפה"),
+        ("tiles30X30kapa", None, "מסגרת שחורה"),
+        ("tiles20X20", "30x30", "קאפה"),
+        ("tiles30X30", "20x20", "מסגרת לבנה"),
+        ("tiles30X30kapa", "20x20", "מסגרת שחורה"),
+        ("tiles20X20kapa", "30x30", "מסגרת שחורה"),
+        ("tiles30X30", "20x20", "קאפה"),
+    ])
+    def test_tiles_ui_changes(self, page, request_tiles, cover_change_to, format_change_to):
+        AddTiles().request_tiles(page, request_tiles)
+        Generalfunction(page).navigate('payment_url_tiles')
+        if cover_change_to:
+            BasketItems(page).change_cover(1, cover_change_to)
+        if format_change_to:
+            BasketItems(page).change_format(1, format_change_to)
         BasketItems(page).valid_element_click_next()
