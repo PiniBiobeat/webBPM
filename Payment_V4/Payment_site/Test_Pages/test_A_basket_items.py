@@ -143,7 +143,7 @@ class TestUIChangeFormatAndCovers:
         ("פורמט_27_ריבועי_קטן_קשה", None, "רכה"),
         ("פורמט_27_ריבועי_קטן_הולנדי", None, "רכה"),
     ])
-    def test_books_online_ui_change_format_and_cover(self, page, request_format, change_format_to, change_cover_to):
+    def test_books_online_ui_change_item(self, page, request_format, change_format_to, change_cover_to):
         AddBookOnline().request_online(page, request_format)
         Generalfunction(page).navigate('payment_url_books')
         if change_format_to:
@@ -173,7 +173,7 @@ class TestUIChangeFormatAndCovers:
         ("tiles20X20kapa", "30x30", "מסגרת שחורה"),
         ("tiles30X30", "20x20", "קאפה"),
     ])
-    def test_tiles_ui_changes(self, page, request_tiles, cover_change_to, format_change_to):
+    def test_tiles_ui_change_item(self, page, request_tiles, cover_change_to, format_change_to):
         AddTiles().request_tiles(page, request_tiles)
         Generalfunction(page).navigate('payment_url_tiles')
         if cover_change_to:
