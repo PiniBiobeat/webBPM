@@ -29,8 +29,10 @@ class BasketItems:
 
 
     def valid_element_click_next(self):
-        BasketItems.return_base_price = Decimal(self.page.locator(self.element_base_price).inner_text().translate(self.replacements))
-        allure.attach(body=self.page.screenshot(full_page=True), name="basket",attachment_type=allure.attachment_type.PNG)
+        BasketItems.return_base_price = Decimal(
+            self.page.locator(self.element_base_price).inner_text().translate(self.replacements))
+        allure.attach(body=self.page.screenshot(full_page=True), name="basket",
+                      attachment_type=allure.attachment_type.PNG)
         DataPriceList().check_price_list(BasketItems.return_base_price)
         self.page.locator("text=מחיר מחירון").first.wait_for(state="visible")
         try:
@@ -66,21 +68,10 @@ class BasketItems:
 
 
     def get_quantity_discount(self):
-        quantity_discount = Decimal(self.page.locator(self.quantity_discount_price).inner_text().translate(self.replacements))
+        quantity_discount = Decimal(
+            self.page.locator(self.quantity_discount_price).inner_text().translate(self.replacements))
         BasketItems.return_quantity_discount = quantity_discount
         return self
-
-
-    def delete_all_items(self):
-        self.page.locator(self.select_item_button).nth(0).click()
-        self.page.locator(self.select_item_button).first.check()
-        self.page.locator(self.delete_button).click()
-        self.page.get_by_role("button", name="כן").click()
-        self.page.locator('[class*="MuiCircularProgress-circle"]').wait_for(state="detached")
-        expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")
-
-
-    # container_xpath = '(//*[@class="basket_item_container MuiBox-root css-0"])'
 
 
     def change_format(self, item_index: int, change_format_to: str):
@@ -95,3 +86,12 @@ class BasketItems:
         cover_button.click()
         self.page.locator('//ul[@role="listbox"]//li').filter(has_text=change_cover_to).click()
         return self
+
+
+    def delete_all_items(self):
+        self.page.locator(self.select_item_button).nth(0).click()
+        self.page.locator(self.select_item_button).first.check()
+        self.page.locator(self.delete_button).click()
+        self.page.get_by_role("button", name="כן").click()
+        self.page.locator('[class*="MuiCircularProgress-circle"]').wait_for(state="detached")
+        expect(self.page.get_by_role("heading")).to_contain_text("הסל שלך ריק בינתיים")

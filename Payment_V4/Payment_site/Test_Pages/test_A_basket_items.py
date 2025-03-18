@@ -91,6 +91,16 @@ class TestBasketItemsTiles:
         BasketItems(page).valid_element_click_next()
 
 
+    def test_change_format_tiles(self, page):
+        self.root_tiles(page)
+        BasketItems(page).change_format(1, "קאפה")
+
+
+    def test_change_cover_tiles(self, page):
+        self.root_tiles(page)
+        BasketItems(page).change_cover(1, "30x30")
+
+
     def test_delete_all_items_tiles(self, page):
         add_tiles_items = AddTiles()
         for item_tiles in add_tiles_items.tiles_format.keys():
