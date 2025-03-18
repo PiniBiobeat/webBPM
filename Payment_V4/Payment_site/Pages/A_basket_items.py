@@ -78,6 +78,7 @@ class BasketItems:
         format_button = self.page.locator(f'({self.count_item_conatiner}[{item_index}]//*[@aria-haspopup="listbox"])[1]')
         format_button.click()
         self.page.locator('//ul[@role="listbox"]//li').filter(has_text=change_format_to).click()
+        expect(self.page.locator(f'({self.count_item_conatiner}[{item_index}]//*[@aria-haspopup="listbox"])[1]')).to_contain_text(change_format_to)
         return self
 
 
@@ -85,6 +86,7 @@ class BasketItems:
         cover_button = self.page.locator(f'({self.count_item_conatiner}[{item_index}]//*[@aria-haspopup="listbox"])[2]')
         cover_button.click()
         self.page.locator('//ul[@role="listbox"]//li').filter(has_text=change_cover_to).click()
+        expect(self.page.locator(f'({self.count_item_conatiner}[{item_index}]//*[@aria-haspopup="listbox"])[2]')).to_contain_text(change_cover_to)
         return self
 
 
