@@ -194,6 +194,19 @@ class TestAppShortWay:
         Thanks(page).status()
         assert AssertOrder().general_assert_orders()
 
+    def test_order_app_short_way_with_upgrade_from_menu(self, page):
+        AddBookV3().requestV3(page, "ספר_27_מסלול_מקוצר")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).change_format(1, "ריבועי גדול")
+        expect(page.locator("#root")).to_contain_text("ריבועי גדול 30X30")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).home()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
 
     @pytest.mark.parametrize("coupon_code", coupon_short_way)
     def test_order_app_short_way(self, page, coupon_code):
@@ -249,6 +262,23 @@ class TestAppSpecial:
         Shipping(page).asafta()
         PersonalDetails(page).filler_detail()
         Summary(page).add_coupon(coupon_code).checkouts()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
+
+
+class TestAppSoftCover:
+
+    def test_order_app_format_27_and_38_soft_cover(self, page):
+        AddBookV3().requestV3(page, "פורמט_27_ריבועי_קטן_קשה")
+        AddBookV3().requestV3(page, "פורמט_38_מיני_לופה_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).change_cover(2, "רכה")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
         Summary(page).checkouts()
         CreditGuard(page).fill_credit_card().to_pay()
         Thanks(page).status()
