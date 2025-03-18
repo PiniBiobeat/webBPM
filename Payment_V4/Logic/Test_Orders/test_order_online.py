@@ -217,3 +217,18 @@ class TestOnlineHaggadah:
 #             CreditGuard(page).fill_credit_card().to_pay()
 #             Thanks(page).status()
 #             assert AssertOrder().general_assert_orders()
+
+
+class TestOnlineSoftCover:
+
+    def test_order_online_format_27_soft_cover(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate("payment_url_books")
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).valid_element_click_next()
+        Shipping(page).asafta()
+        PersonalDetails(page).filler_detail()
+        Summary(page).checkouts()
+        CreditGuard(page).fill_credit_card().to_pay()
+        Thanks(page).status()
+        assert AssertOrder().general_assert_orders()
