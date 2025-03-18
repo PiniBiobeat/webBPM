@@ -107,3 +107,182 @@ class TestBasketItemsTiles:
             add_tiles_items.request_tiles(page, item_tiles)
         Generalfunction(page).navigate('payment_url_tiles')
         BasketItems(page).delete_all_items()
+
+
+class TestUIChangeFormatAndCovers:
+
+    """app"""
+    def test_books_app_ui_change_cover_format_27_and_38_to_soft(self, page):
+        AddBookV3().requestV3(page, "פורמט_27_ריבועי_קטן_קשה")
+        AddBookV3().requestV3(page, "פורמט_38_מיני_לופה_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).change_cover(2, "רכה")
+        BasketItems(page).valid_element_click_next()
+
+
+    """online change format"""
+    def test_books_online_ui_change_format_f35_to_f27_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_format_f27_to_f35_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי גדול")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_format_f35_to_f27_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_format_f27_to_f35_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי גדול")
+        BasketItems(page).valid_element_click_next()
+
+
+    """online change cover"""
+    def test_books_online_ui_change_cover_f35_hard_to_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "הולנדי")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_cover_f35_layflat_to_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "קשה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_cover_f27_hard_to_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "הולנדי")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_cover_f27_layflat_to_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "קשה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_cover_f27_hard_to_soft(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_cover_f27_layflat_to_soft(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).valid_element_click_next()
+
+
+    """online change cover and format"""
+    def test_books_online_ui_change_f35_hard_to_f27_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).change_cover(1, "הולנדי")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f35_layflat_to_f27_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).change_cover(1, "קשה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f27_hard_to_f35_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי גדול")
+        BasketItems(page).change_cover(1, "הולנדי")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f27_layflat_to_f35_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי גדול")
+        BasketItems(page).change_cover(1, "קשה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f27_hard_to_f35_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי גדול")
+        BasketItems(page).change_cover(1, "קשה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f27_layflat_to_f35_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי גדול")
+        BasketItems(page).change_cover(1, "הולנדי")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f35_hard_to_f27_hard(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).change_cover(1, "קשה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f35_layflat_to_f27_layflat(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).change_cover(1, "הולנדי")
+        BasketItems(page).valid_element_click_next()
+
+
+    """online change cover and format to soft"""
+    def test_books_online_ui_change_f35_hard_to_f27_soft(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f35_layflat_to_f27_soft(self, page):
+        AddBookOnline().request_online(page, "פורמט_35_ריבועי_גדול_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_format(1, "ריבועי קטן")
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).valid_element_click_next()
+
+
+    def test_books_online_ui_change_f27_hard_to_f27_soft(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_קשה")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).valid_element_click_next()
+
+    def test_books_online_ui_change_f27_laflat_to_f27_soft(self, page):
+        AddBookOnline().request_online(page, "פורמט_27_ריבועי_קטן_הולנדי")
+        Generalfunction(page).navigate('payment_url_books')
+        BasketItems(page).change_cover(1, "רכה")
+        BasketItems(page).valid_element_click_next()
