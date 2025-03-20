@@ -102,9 +102,7 @@ class Shipping:
             raise Exception(error_isof_msg)
 
 
-
-
-    def no_shops_selection(self):
+    def no_shops_selection_validation(self):
         self.page.click(self.selector_bar_shops)
         Generalfunction(self.page).next_button()
         expect(self.page.locator(self.selector_bar_shops_valid_city)).to_be_visible()
@@ -123,7 +121,7 @@ class Shipping:
         expect(self.page.locator("h1")).not_to_have_text("פרטים אישיים")
 
 
-    def no_shops_deleting(self):
+    def no_shops_deleting_validation(self):
         self.page.click(self.selector_bar_shops)
         self.page.locator(self.shops_menu_city).click()
         self.page.locator(self.shops_list_city).get_by_text("תנובות", exact=True).click()
@@ -135,11 +133,9 @@ class Shipping:
         expect(self.page.locator(self.selector_bar_shops_valid_point)).to_be_visible()
 
 
-    def no_shipping_selection_back_and_forward(self):
+    def no_shipping_selection_back_and_forward_validation(self):
         self.page.click(self.selector_bar_home)
         self.page.go_back()
         self.page.go_forward()
         Generalfunction(self.page).next_button()
         expect(self.page.get_by_text("אי אפשר להמשיך בלי לבחור משלוח ללופה שלך")).to_be_visible()
-
-
