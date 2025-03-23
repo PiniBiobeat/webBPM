@@ -44,14 +44,13 @@ class Summary:
         self.page.locator(self.loader).wait_for(state="detached")
         try:
             self.page.get_by_role("button", name="הבנתי").click(timeout=500)
-        except Exception: pass
-        try:
+        except Exception:
+            pass
+
+        if self.page.locator(self.coupon_error).is_visible():
             check = self.page.locator(self.coupon_error).inner_text(timeout=500)
-            if check:
-                raise Exception(f"Coupon error: {check}")
-        except Exception as e:
-            if "Coupon error" in str(e):
-                raise
+            raise Exception(check)
+
         locator = self.page.locator(self.coupon_switch.format(coupon_title=get_coupon_title(coupon_name)))
         if locator.is_visible(timeout=0):
             locator.click(timeout=0)

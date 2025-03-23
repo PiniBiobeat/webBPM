@@ -103,3 +103,11 @@ class DataPriceList:
             """)) and result[0][0] is not None)
         print(f"fist base price was: {total_sum}")
         assert return_base_price == total_sum
+
+
+class DataValidationMSG:
+
+    def validate_msg(self, msg):
+        command = f"SELECT value_name FROM cpn.data_dictionary WHERE table_name IN ('get_coupons') and column_value = '{msg}'"
+        data_command = postgres_env(command)
+        return data_command[0][0]

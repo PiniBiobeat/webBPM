@@ -100,6 +100,7 @@ class Shipping:
             error_isof_msg = self.page.locator(self.isof_error).inner_text()
             print(error_isof_msg)
             raise Exception(error_isof_msg)
+        return Exception
 
 
     def no_shops_selection_validation(self):
@@ -126,7 +127,7 @@ class Shipping:
         self.page.locator(self.shops_menu_city).click()
         self.page.locator(self.shops_list_city).get_by_text("תנובות", exact=True).click()
         self.page.locator(self.shops_menu_point).last.click()
-        self.page.locator(self.shops_list_point).get_by_text("E-MOBILE", exact=True).click()
+        self.page.locator(self.shops_list_point).get_by_text("המעבדה של שלמה", exact=True).click()
         self.page.locator(self.close_icon).first.dblclick(force=True)
         Generalfunction(self.page).next_button()
         expect(self.page.locator(self.selector_bar_shops_valid_city)).to_be_visible()
