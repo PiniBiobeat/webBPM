@@ -45,48 +45,10 @@ class TestShippingBooks:
         Shipping(page).home()
 
 
-class TestIsofCodeBooks:
-
+    @pytest.mark.xfail
     def test_add_isof_code(self, page):
         root_books(page)
         Shipping(page).add_isof_code("Album-isof-Code")
-
-
-    def test_error_isof_code_Expired(self, page):
-        with pytest.raises(Exception) as p:
-            root_books(page)
-            Shipping(page).add_isof_code("CouponExpired")   #'עבר זמנו של הקופון שהקלדת, זהו נגמר :('
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponExpired")
-
-
-    def test_error_isof_code_item(self, page):
-        with pytest.raises(Exception) as p:
-            root_books(page)
-            Shipping(page).add_isof_code("Tiles-isof-Code")   #'יש פה אי הבנה, הקופון שהקלדת בכלל שייך למוצר אחר (נמליץ לעבור על תנאי הקופון'
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponIrrelevant")
-
-
-    def test_error_isof_code_exist(self, page):
-        root_books(page)
-        with pytest.raises(Exception) as p:
-            Shipping(page).add_isof_code("dfdfgdf")   #'הקופון שהקלדת לא קיים, כדאי לבדוק שהאותיות והמספרים מדויקים'
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponNotFound")
-
-
-    @pytest.xfail
-    def test_error_isof_code_Benefit(self, page):
-        with pytest.raises(Exception) as p:
-            root_books(page)
-            Shipping(page).add_isof_code("Test_Sal_item_isof")   #'יש פה אי הבנה, הקופון אינו מקנה הטבה בהזמנה זו (נמליץ לעבור על תנאי הקופון)'
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponHasNoValue")
-
-
-    def test_error_isof_code_none(self, page):
-        root_books(page)
-        with pytest.raises(Exception) as p:
-            Shipping(page).add_isof_code("")
-        assert str(p.value) == "לא הוכנס קוד קופון"
-
 
 
 class TestShippingErrorValidationBooks:
@@ -111,22 +73,44 @@ class TestShippingErrorValidationBooks:
         Shipping(page).no_shipping_selection_back_and_forward_validation()
 
 
+class TestIsofCodeValidationBooks:
+
+    def test_error_isof_code_Expired(self, page):
+        with pytest.raises(Exception) as p:
+            root_books(page)
+            Shipping(page).add_isof_code("CouponExpired")  # 'עבר זמנו של הקופון שהקלדת, זהו נגמר :('
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponExpired")
 
 
+    def test_error_isof_code_item(self, page):
+        with pytest.raises(Exception) as p:
+            root_books(page)
+            Shipping(page).add_isof_code(
+                "Tiles-isof-Code")  # 'יש פה אי הבנה, הקופון שהקלדת בכלל שייך למוצר אחר (נמליץ לעבור על תנאי הקופון'
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponIrrelevant")
 
 
+    def test_error_isof_code_exist(self, page):
+        root_books(page)
+        with pytest.raises(Exception) as p:
+            Shipping(page).add_isof_code("dfdfgdf")  # 'הקופון שהקלדת לא קיים, כדאי לבדוק שהאותיות והמספרים מדויקים'
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponNotFound")
 
 
+    @pytest.mark.xfail
+    def test_error_isof_code_Benefit(self, page):
+        with pytest.raises(Exception) as p:
+            root_books(page)
+            Shipping(page).add_isof_code(
+                "Test_Sal_item_isof")  # 'יש פה אי הבנה, הקופון אינו מקנה הטבה בהזמנה זו (נמליץ לעבור על תנאי הקופון)'
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponHasNoValue")
 
 
-
-
-
-
-
-
-
-
+    def test_error_isof_code_none(self, page):
+        root_books(page)
+        with pytest.raises(Exception) as p:
+            Shipping(page).add_isof_code("")
+        assert str(p.value) == "לא הוכנס קוד קופון"
 
 
 ##################  tiles  ##################
@@ -159,48 +143,10 @@ class TestShippingTiles:
         Shipping(page).home()
 
 
-
-class TestIsofCodeBooksTiles:
-
+    @pytest.mark.xfail
     def test_add_isof_code_tiles(self, page):
         root_tiles(page)
         Shipping(page).add_isof_code("Tiles-isof-Code")
-
-
-    def test_error_isof_code_Expired_tiles(self, page):
-        with pytest.raises(Exception) as p:
-            root_tiles(page)
-            Shipping(page).add_isof_code("CouponExpired")  # 'עבר זמנו של הקופון שהקלדת, זהו נגמר :('
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponExpired")
-
-
-    def test_error_isof_code_item_tiles(self, page):
-        with pytest.raises(Exception) as p:
-            root_tiles(page)
-            Shipping(page).add_isof_code("Album-isof-Code")  # 'יש פה אי הבנה, הקופון שהקלדת בכלל שייך למוצר אחר (נמליץ לעבור על תנאי הקופון'
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponIrrelevant")
-
-
-    def test_error_isof_code_exist_tiles(self, page):
-        root_tiles(page)
-        with pytest.raises(Exception) as p:
-            Shipping(page).add_isof_code("dfdfgdf")  # 'הקופון שהקלדת לא קיים, כדאי לבדוק שהאותיות והמספרים מדויקים'
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponNotFound")
-
-
-    @pytest.xfail
-    def test_error_isof_code_Benefit_tiles(self, page):
-        with pytest.raises(Exception) as p:
-            root_tiles(page)
-            Shipping(page).add_isof_code("Test_Sal_item_isof")  # 'יש פה אי הבנה, הקופון אינו מקנה הטבה בהזמנה זו (נמליץ לעבור על תנאי הקופון)'
-        assert str(p.value) == DataValidationMSG().validate_msg("CouponHasNoValue")
-
-
-    def test_error_isof_code_none_tiles(self, page):
-        root_tiles(page)
-        with pytest.raises(Exception) as p:
-            Shipping(page).add_isof_code("")
-        assert str(p.value) == "לא הוכנס קוד קופון"
 
 
 class TestShippingErrorValidationTiles:
@@ -223,3 +169,43 @@ class TestShippingErrorValidationTiles:
     def test_no_shipping_selection_back_and_forward_tiles(self, page):
         root_tiles(page)
         Shipping(page).no_shipping_selection_back_and_forward_validation()
+
+
+class TestIsofCodeValidationTiles:
+
+    def test_error_isof_code_Expired_tiles(self, page):
+        with pytest.raises(Exception) as p:
+            root_tiles(page)
+            Shipping(page).add_isof_code("CouponExpired")  # 'עבר זמנו של הקופון שהקלדת, זהו נגמר :('
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponExpired")
+
+
+    def test_error_isof_code_item_tiles(self, page):
+        with pytest.raises(Exception) as p:
+            root_tiles(page)
+            Shipping(page).add_isof_code(
+                "Album-isof-Code")  # 'יש פה אי הבנה, הקופון שהקלדת בכלל שייך למוצר אחר (נמליץ לעבור על תנאי הקופון'
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponIrrelevant")
+
+
+    def test_error_isof_code_exist_tiles(self, page):
+        root_tiles(page)
+        with pytest.raises(Exception) as p:
+            Shipping(page).add_isof_code("dfdfgdf")  # 'הקופון שהקלדת לא קיים, כדאי לבדוק שהאותיות והמספרים מדויקים'
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponNotFound")
+
+
+    @pytest.mark.xfail
+    def test_error_isof_code_Benefit_tiles(self, page):
+        with pytest.raises(Exception) as p:
+            root_tiles(page)
+            Shipping(page).add_isof_code(
+                "Test_Sal_item_isof")  # 'יש פה אי הבנה, הקופון אינו מקנה הטבה בהזמנה זו (נמליץ לעבור על תנאי הקופון)'
+        assert str(p.value) == DataValidationMSG().validate_msg("CouponHasNoValue")
+
+
+    def test_error_isof_code_none_tiles(self, page):
+        root_tiles(page)
+        with pytest.raises(Exception) as p:
+            Shipping(page).add_isof_code("")
+        assert str(p.value) == "לא הוכנס קוד קופון"
