@@ -70,8 +70,10 @@ class TestMe:
 
     def test_connect_to_db_in_lupa_tiles_DB(self):
         query = f"""
-            SELECT order_id, charged_date FROM [lupa_square].[dbo].[order_item_tbl]
-            WHERE bulk_id = 0 AND in_status = 21
+            SELECT order_id, charged_date
+            FROM [lupa_square].[dbo].[order_item_tbl]
+            WHERE  (in_status = 21 OR in_status = 22) 
+            AND bulk_id = 0 
             AND charged_date < DATEADD(hour, -{hours}, GETDATE())
         """
         self.test_connect_to_db('lupa_square', query, "🖼️ Tiles Photo")
@@ -161,7 +163,7 @@ class TestMe:
             payload = {"text": "Orders without bulk id\n" + message_text}
 
             response = requests.post(
-                "https://hooks.slack.com/services/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",
+                "https://hooks.slack.com/services/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",
                 json=payload
             )
             print(response.status_code, response.text)
