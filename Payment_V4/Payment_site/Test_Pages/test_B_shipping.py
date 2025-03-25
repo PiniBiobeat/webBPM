@@ -1,8 +1,10 @@
 import pytest
 from playwright.sync_api import Page
 
-from Payment_V4.Logic.Logic_Orders.data_order import ClearBasketApi, DataValidationMSG
+from Payment_V4.Logic.Logic_Orders.data_order import ClearBasketApi, DataValidationMSG, DataPriceList
 from tests.TestPayment.test_add_book_V3 import AddBookV3
+from tests.TestPayment.test_add_book_online import AddBookOnline
+from tests.TestPayment.test_add_calendar import AddCalendar
 from tests.TestPayment.test_add_tiles import AddTiles
 from Payment_V4.Payment_site.Pages._General_function import Generalfunction
 from Payment_V4.Payment_site.Pages.A_basket_items import BasketItems
@@ -17,8 +19,13 @@ def page(request) -> Page:
     return request.getfixturevalue('page')
 
 
-def root_books(page, book="פורמט_35_ריבועי_גדול_קשה"):
-    AddBookV3().requestV3(page, book)
+def root_books(page, product, item="פורמט_35_ריבועי_גדול_קשה"):
+    if product == "app":
+        AddBookV3().requestV3(page, item)
+    elif product == "online":
+        AddBookOnline().request_online(page, item)
+    elif product == "calendar":
+        AddCalendar().request_calendar(page, item)
     Generalfunction(page).navigate("payment_url_books")
     BasketItems(page).valid_element_click_next()
 
@@ -26,72 +33,128 @@ def root_books(page, book="פורמט_35_ריבועי_גדול_קשה"):
 class TestShippingBooks:
 
     def test_asafta_select(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).asafta()
 
 
     def test_shops_select(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).shops("פתח תקוה", "ברזיל הקטנה")
 
 
     def test_post_select(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).post()
 
 
     def test_home_select(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).home()
 
 
     @pytest.mark.xfail
     def test_add_isof_code(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).add_isof_code("Album-isof-Code")
 
 
 class TestShippingErrorValidationBooks:
 
     def test_no_shops_selection(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).no_shops_selection_validation()
 
 
     def test_no_shops_validation(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).no_shops_validation()
 
 
     def test_no_shops_after_clear_validation(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).no_shops_deleting_validation()
 
 
     def test_no_shipping_selection_back_and_forward(self, page):
-        root_books(page)
+        root_books("app", page)
         Shipping(page).no_shipping_selection_back_and_forward_validation()
+
+
+class TestShippingPriceBooks:
+
+    @pytest.mark.parametrize("item", AddBookV3.token)
+    def test_shipping_price_app(self, page, item):
+        root_books(page, "app", item)
+        row = "shipPriceIpadSpl"
+        shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
+        errors = []
+        for method in shipping_methods:
+            try:
+                method()
+                a_num = Shipping.a_num
+                if item == "ספר_27_מסלול_מקוצר":
+                    a_num = 5
+                assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, a_num)
+            except AssertionError as e:
+                errors.append(str(e))
+            page.go_back()
+        if errors:
+            raise AssertionError("\n".join(errors))
+
+
+    @pytest.mark.parametrize("item", AddBookOnline.token)
+    def test_shipping_price_online(self, page, item):
+        root_books(page, "online", item)
+        row = "shipPriceOnlineSpl"
+        shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
+        errors = []
+        for method in shipping_methods:
+            try:
+                method()
+                assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, Shipping.a_num)
+            except AssertionError as e:
+                errors.append(str(e))
+            page.go_back()
+        if errors:
+            raise AssertionError("\n".join(errors))
+
+
+    @pytest.mark.parametrize("item", AddCalendar.items)
+    def test_shipping_price_calendar(self, page, item):
+        root_books(page, "calendar", item)
+        row = "shipPriceCalendarSpl"
+        shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
+        errors = []
+        for method in shipping_methods:
+            try:
+                method()
+                assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, Shipping.a_num)
+            except AssertionError as e:
+                errors.append(str(e))
+            page.go_back()
+        if errors:
+            raise AssertionError("\n".join(errors))
 
 
 class TestIsofCodeValidationBooks:
 
     def test_error_isof_code_Expired(self, page):
         with pytest.raises(Exception) as p:
-            root_books(page)
+            root_books("app", page)
             Shipping(page).add_isof_code("CouponExpired")  # 'עבר זמנו של הקופון שהקלדת, זהו נגמר :('
         assert str(p.value) == DataValidationMSG().validate_msg("CouponExpired")
 
 
     def test_error_isof_code_item(self, page):
         with pytest.raises(Exception) as p:
-            root_books(page)
+            root_books("app", page)
             Shipping(page).add_isof_code(
                 "Tiles-isof-Code")  # 'יש פה אי הבנה, הקופון שהקלדת בכלל שייך למוצר אחר (נמליץ לעבור על תנאי הקופון'
         assert str(p.value) == DataValidationMSG().validate_msg("CouponIrrelevant")
 
 
     def test_error_isof_code_exist(self, page):
-        root_books(page)
+        root_books("app", page)
         with pytest.raises(Exception) as p:
             Shipping(page).add_isof_code("dfdfgdf")  # 'הקופון שהקלדת לא קיים, כדאי לבדוק שהאותיות והמספרים מדויקים'
         assert str(p.value) == DataValidationMSG().validate_msg("CouponNotFound")
@@ -100,25 +163,23 @@ class TestIsofCodeValidationBooks:
     @pytest.mark.xfail
     def test_error_isof_code_Benefit(self, page):
         with pytest.raises(Exception) as p:
-            root_books(page)
+            root_books("app", page)
             Shipping(page).add_isof_code(
                 "Test_Sal_item_isof")  # 'יש פה אי הבנה, הקופון אינו מקנה הטבה בהזמנה זו (נמליץ לעבור על תנאי הקופון)'
         assert str(p.value) == DataValidationMSG().validate_msg("CouponHasNoValue")
 
 
     def test_error_isof_code_none(self, page):
-        root_books(page)
+        root_books("app", page)
         with pytest.raises(Exception) as p:
             Shipping(page).add_isof_code("")
         assert str(p.value) == "לא הוכנס קוד קופון"
 
 
-
-
 ##################  tiles  ##################
 
-def root_tiles(page, book="tiles20X20"):
-    AddTiles().request_tiles(page, book)
+def root_tiles(page, item="tiles20X20"):
+    AddTiles().request_tiles(page, item)
     Generalfunction(page).navigate("payment_url_tiles")
     BasketItems(page).valid_element_click_next()
 
@@ -149,6 +210,25 @@ class TestShippingTiles:
     def test_add_isof_code_tiles(self, page):
         root_tiles(page)
         Shipping(page).add_isof_code("Tiles-isof-Code")
+
+
+class TestShippingPriceTiles:
+
+    @pytest.mark.parametrize("item", AddTiles.tiles_format)
+    def test_shipping_price_app(self, page, item):
+        root_tiles(page, item)
+        row = "shipPriceTilesSpl"
+        shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
+        errors = []
+        for method in shipping_methods:
+            try:
+                method()
+                assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, Shipping.a_num)
+            except AssertionError as e:
+                errors.append(str(e))
+            page.go_back()
+        if errors:
+            raise AssertionError("\n".join(errors))
 
 
 class TestShippingErrorValidationTiles:

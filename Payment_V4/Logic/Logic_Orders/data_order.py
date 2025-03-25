@@ -72,8 +72,6 @@ class ClearBasketApi:
             postgres_env(command_coupon)
 
 
-
-
 class DataPriceList:
 
     def check_price_list(self, return_base_price):
@@ -101,8 +99,14 @@ class DataPriceList:
                 FROM prc.pricelist_tbl AS pt
                 WHERE id = '{record[0]}'
             """)) and result[0][0] is not None)
-        print(f"fist base price was: {total_sum}")
+        print(f"DB base price list sum: {total_sum}")
         assert return_base_price == total_sum
+
+
+    def get_shippint_pricelist(self, rowname, id):
+        command = f"SELECT [{rowname}] FROM [lupa].[dbo].[delivery_type_tbl] where id = {id}"
+        data_command = mysql(command)
+        return int(data_command[0][0])
 
 
 class DataValidationMSG:

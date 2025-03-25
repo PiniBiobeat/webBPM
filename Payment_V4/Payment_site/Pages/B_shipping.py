@@ -27,6 +27,7 @@ class Shipping:
     isof_error = "//p[@id=':r6:-helper-text']"
     return_ship_price_value = None
     return_ship_method_value = None
+    a_num = None
 
 
     def __init__(self, page: Page):
@@ -45,10 +46,11 @@ class Shipping:
     def asafta(self):
         self.page.click(self.selector_asafta_b)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_selected_price = int(float(self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")))
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
         Shipping.return_ship_method_value = 17
+        Shipping.a_num = 19
         return self
 
 
@@ -59,30 +61,33 @@ class Shipping:
         self.page.locator(self.shops_list_city).get_by_text(city, exact=True).click()
         self.page.locator(self.shops_menu_point).click()
         self.page.locator(self.shops_list_point).get_by_text(point, exact=True).click()
-        ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_selected_price = int(float(self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")))
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
         Shipping.return_ship_method_value = 21
+        Shipping.a_num = 21
         return self
 
 
     def post(self):
         self.page.click(self.selector_post_il)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_selected_price = int(float(self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")))
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
         Shipping.return_ship_method_value = 3
+        Shipping.a_num = 4
         return self
 
 
     def home(self):
         self.page.click(self.selector_bar_home)
         self.page.get_by_role("button", name="מידע נוסף").click()
-        ship_selected_price = self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")
+        ship_selected_price = int(float(self.page.locator(self.selector_ship_price).inner_text().replace("₪", "")))
         Generalfunction(self.page).next_button()
         Shipping.return_ship_price_value = ship_selected_price
         Shipping.return_ship_method_value = 23
+        Shipping.a_num = 23
         return self
 
 

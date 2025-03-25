@@ -33,4 +33,4 @@ class AddBookV3:
 
 class TestAddBookV3:
     def test_api_request(self, page):
-        AddBookV3().requestV3(page, "פורמט_35_ריבועי_גדול_קשה")
+        AddBookV3().requestV3(page, "פורמט_27_ריבועי_קטן_הולנדי")
