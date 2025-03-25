@@ -51,12 +51,20 @@ class TestMe:
 
     def test_connect_to_db_in_lupa_DB(self):
         query = f"""
-             SELECT a_num,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
-             FROM [lupa].[dbo].[orders_tbl]
-             WHERE  isnull(bulk_id, 0) = 0
-             AND consolidate IS NULL
-             AND in_status = 'Printing process'
-             AND CONVERT(datetime, charged_date) < DATEADD(hour, -{hours}, GETDATE())
+             			 WITH ConsolidatedOrders AS (
+                SELECT 
+                    a_num,
+                    FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS formatted_charged_date,
+                    ROW_NUMBER() OVER (PARTITION BY consolidate ORDER BY CONVERT(datetime, charged_date) DESC) AS row_num , consolidate
+                FROM [lupa].[dbo].[orders_tbl]
+                WHERE ISNULL(bulk_id, 0) = 0
+                  AND in_status = 'Printing process'
+                  AND CONVERT(datetime, charged_date) < DATEADD(hour, -{hours}, GETDATE())
+            )
+            SELECT a_num ,formatted_charged_date AS charged_date,consolidate
+            FROM ConsolidatedOrders
+            WHERE row_num = 1
+            ORDER BY charged_date DESC;
         """
         self.test_connect_to_db('lupa', query, "🖼️ Photo Album Desktop")
 
