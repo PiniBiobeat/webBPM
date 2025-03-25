@@ -30,6 +30,18 @@ def root_books(page, product, item="פורמט_35_ריבועי_גדול_קשה")
     BasketItems(page).valid_element_click_next()
 
 
+def root_books_marketing(page, product, item="פורמט_35_ריבועי_גדול_קשה"):
+    if product == "app":
+        AddBookV3().requestV3(page, item)
+    elif product == "online":
+        AddBookOnline().request_online(page, item)
+    elif product == "calendar":
+        AddCalendar().request_calendar(page, item)
+    Generalfunction(page).navigate("payment_url_books")
+    Generalfunction(page).next_button()
+    BasketItems(page).valid_element_click_next()
+
+
 class TestShippingBooks:
 
     def test_asafta_select(self, page):
@@ -83,9 +95,15 @@ class TestShippingErrorValidationBooks:
 class TestShippingPriceBooks:
 
     @pytest.mark.parametrize("item", AddBookV3.token)
-    def test_shipping_price_app(self, page, item):
-        root_books(page, "app", item)
-        row = "shipPriceIpadSpl"
+    @pytest.mark.parametrize("newsletter", ['True', 'False'])
+    def test_shipping_price_app(self, page, item, newsletter):
+        DataPriceList().sign_newsletter(newsletter)
+        if newsletter == "True":
+            root_books(page, "app", item)
+            row = "shipPriceOnlineSpl"
+        else:
+            root_books_marketing(page, "app", item)
+            row = "shipPriceOnline"
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
@@ -98,14 +116,21 @@ class TestShippingPriceBooks:
             except AssertionError as e:
                 errors.append(str(e))
             page.go_back()
+        DataPriceList().sign_newsletter("True")
         if errors:
             raise AssertionError("\n".join(errors))
 
 
     @pytest.mark.parametrize("item", AddBookOnline.token)
-    def test_shipping_price_online(self, page, item):
-        root_books(page, "online", item)
-        row = "shipPriceOnlineSpl"
+    @pytest.mark.parametrize("newsletter", ['True', 'False'])
+    def test_shipping_price_online(self, page, item, newsletter):
+        DataPriceList().sign_newsletter(newsletter)
+        if newsletter == "True":
+            root_books(page, "online", item)
+            row = "shipPriceOnlineSpl"
+        else:
+            root_books_marketing(page, "online", item)
+            row = "shipPriceOnline"
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
@@ -115,14 +140,21 @@ class TestShippingPriceBooks:
             except AssertionError as e:
                 errors.append(str(e))
             page.go_back()
+        DataPriceList().sign_newsletter("True")
         if errors:
             raise AssertionError("\n".join(errors))
 
 
     @pytest.mark.parametrize("item", AddCalendar.items)
-    def test_shipping_price_calendar(self, page, item):
-        root_books(page, "calendar", item)
-        row = "shipPriceCalendarSpl"
+    @pytest.mark.parametrize("newsletter", ['True', 'False'])
+    def test_shipping_price_calendar(self, page, item, newsletter):
+        DataPriceList().sign_newsletter(newsletter)
+        if newsletter == "True":
+            root_books(page, "calendar", item)
+            row = "shipPriceCalendarSpl"
+        else:
+            root_books_marketing(page, "calendar", item)
+            row = "shipPriceCalendar"
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
@@ -132,6 +164,7 @@ class TestShippingPriceBooks:
             except AssertionError as e:
                 errors.append(str(e))
             page.go_back()
+        DataPriceList().sign_newsletter("True")
         if errors:
             raise AssertionError("\n".join(errors))
 
@@ -184,6 +217,13 @@ def root_tiles(page, item="tiles20X20"):
     BasketItems(page).valid_element_click_next()
 
 
+def root_tiles_marketing(page, item="tiles20X20"):
+    AddTiles().request_tiles(page, item)
+    Generalfunction(page).navigate("payment_url_tiles")
+    Generalfunction(page).next_button()
+    BasketItems(page).valid_element_click_next()
+
+
 class TestShippingTiles:
 
     def test_asafta_select_tiles(self, page):
@@ -215,9 +255,15 @@ class TestShippingTiles:
 class TestShippingPriceTiles:
 
     @pytest.mark.parametrize("item", AddTiles.tiles_format)
-    def test_shipping_price_app(self, page, item):
-        root_tiles(page, item)
-        row = "shipPriceTilesSpl"
+    @pytest.mark.parametrize("newsletter", ['True', 'False'])
+    def test_shipping_price_app(self, page, item, newsletter):
+        DataPriceList().sign_newsletter(newsletter)
+        if newsletter == "True":
+            root_tiles(page, item)
+            row = "shipPriceTilesSpl"
+        else:
+            root_tiles_marketing(page, item)
+            row = "shipPriceTiles"
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
@@ -227,6 +273,7 @@ class TestShippingPriceTiles:
             except AssertionError as e:
                 errors.append(str(e))
             page.go_back()
+        DataPriceList().sign_newsletter("True")
         if errors:
             raise AssertionError("\n".join(errors))
 

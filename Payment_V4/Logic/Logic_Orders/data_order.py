@@ -109,6 +109,11 @@ class DataPriceList:
         return int(data_command[0][0])
 
 
+    def sign_newsletter(self, newsletter):
+        command = f"update [lupa].[dbo].[user_master] set newsletter = '{newsletter}' where master_id = {master_id}"
+        mysql(command)
+
+
 class DataValidationMSG:
 
     def validate_msg(self, msg):
