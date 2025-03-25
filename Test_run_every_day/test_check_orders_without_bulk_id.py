@@ -51,27 +51,29 @@ class TestMe:
 
     def test_connect_to_db_in_lupa_DB(self):
         query = f"""
-         SELECT a_num,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
+             SELECT a_num,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
              FROM [lupa].[dbo].[orders_tbl]
-                WHERE bulk_id IS NULL
-                  AND consolidate IS NULL
-                  AND in_status = 'Printing process'
-                  AND CONVERT(datetime, charged_date) < DATEADD(hour, -{hours}, GETDATE())
+             WHERE  isnull(bulk_id, 0) = 0
+             AND consolidate IS NULL
+             AND in_status = 'Printing process'
+             AND CONVERT(datetime, charged_date) < DATEADD(hour, -{hours}, GETDATE())
         """
         self.test_connect_to_db('lupa', query, "🖼️ Photo Album Desktop")
 
     def test_connect_to_db_in_lupa_online_DB(self):
         query = f"""
             SELECT order_id, charged_date FROM [lupa_online].[dbo].[order_item_tbl]
-            WHERE bulk_id = 0 AND in_status = 21
+            WHERE in_status = 21 AND isnull(bulk_id, 0) = 0
             AND charged_date < DATEADD(hour, -{hours}, GETDATE())
         """
         self.test_connect_to_db('lupa_online', query, "📓 Photo Album Online")
 
     def test_connect_to_db_in_lupa_tiles_DB(self):
         query = f"""
-            SELECT order_id, charged_date FROM [lupa_square].[dbo].[order_item_tbl]
-            WHERE bulk_id = 0 AND in_status = 21
+            SELECT order_id, charged_date
+            FROM [lupa_square].[dbo].[order_item_tbl]
+            WHERE  isnull(bulk_id, 0) = 0
+			AND (in_status = 21 OR in_status = 22) 
             AND charged_date < DATEADD(hour, -{hours}, GETDATE())
         """
         self.test_connect_to_db('lupa_square', query, "🖼️ Tiles Photo")
@@ -161,7 +163,7 @@ class TestMe:
             payload = {"text": "Orders without bulk id\n" + message_text}
 
             response = requests.post(
-                "https://hooks.slack.com/services/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",
+                "https://hooks.slack.com/services/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",
                 json=payload
             )
             print(response.status_code, response.text)
