@@ -51,19 +51,19 @@ class TestMe:
 
     def test_connect_to_db_in_lupa_DB(self):
         query = f"""
-         SELECT a_num,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
+             SELECT a_num,FORMAT(CONVERT(datetime, charged_date), 'yyyy-MM-dd HH:mm:ss.fff') AS charged_date
              FROM [lupa].[dbo].[orders_tbl]
-                WHERE bulk_id IS NULL
-                  AND consolidate IS NULL
-                  AND in_status = 'Printing process'
-                  AND CONVERT(datetime, charged_date) < DATEADD(hour, -{hours}, GETDATE())
+             WHERE  isnull(bulk_id, 0) = 0
+             AND consolidate IS NULL
+             AND in_status = 'Printing process'
+             AND CONVERT(datetime, charged_date) < DATEADD(hour, -{hours}, GETDATE())
         """
         self.test_connect_to_db('lupa', query, "🖼️ Photo Album Desktop")
 
     def test_connect_to_db_in_lupa_online_DB(self):
         query = f"""
             SELECT order_id, charged_date FROM [lupa_online].[dbo].[order_item_tbl]
-            WHERE bulk_id = 0 AND in_status = 21
+            WHERE in_status = 21 AND isnull(bulk_id, 0) = 0
             AND charged_date < DATEADD(hour, -{hours}, GETDATE())
         """
         self.test_connect_to_db('lupa_online', query, "📓 Photo Album Online")
@@ -72,8 +72,8 @@ class TestMe:
         query = f"""
             SELECT order_id, charged_date
             FROM [lupa_square].[dbo].[order_item_tbl]
-            WHERE  (in_status = 21 OR in_status = 22) 
-            AND bulk_id = 0 
+            WHERE  isnull(bulk_id, 0) = 0
+			AND (in_status = 21 OR in_status = 22) 
             AND charged_date < DATEADD(hour, -{hours}, GETDATE())
         """
         self.test_connect_to_db('lupa_square', query, "🖼️ Tiles Photo")
