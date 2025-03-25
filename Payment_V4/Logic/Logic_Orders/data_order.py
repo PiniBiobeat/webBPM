@@ -106,7 +106,7 @@ class DataPriceList:
     def get_shippint_pricelist(self, rowname, id):
         command = f"SELECT [{rowname}] FROM [lupa].[dbo].[delivery_type_tbl] where id = {id}"
         data_command = mysql(command)
-        return data_command[0][0]
+        return int(data_command[0][0])
 
 
     def sign_newsletter(self, newsletter):
