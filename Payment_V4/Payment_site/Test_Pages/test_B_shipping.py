@@ -107,7 +107,6 @@ class TestShippingPriceBooks:
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
-            method_name = method.__name__
             try:
                 method()
                 a_num = Shipping.a_num
@@ -115,7 +114,7 @@ class TestShippingPriceBooks:
                     a_num = 5
                 assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, a_num)
             except AssertionError as e:
-                errors.append(f"{method_name}: \n {str(e)}")
+                errors.append(f"\n Shipping: {method.__name__}: \n {str(e)}")
             page.go_back()
         DataPriceList().sign_newsletter("True")
         if errors:
@@ -135,12 +134,11 @@ class TestShippingPriceBooks:
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
-            method_name = method.__name__
             try:
                 method()
                 assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, Shipping.a_num)
             except AssertionError as e:
-                errors.append(f"{method_name}: \n {str(e)}")
+                errors.append(f"\n Shipping: {method.__name__}: \n {str(e)}")
             page.go_back()
         DataPriceList().sign_newsletter("True")
         if errors:
@@ -160,12 +158,11 @@ class TestShippingPriceBooks:
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
-            method_name = method.__name__
             try:
                 method()
                 assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, Shipping.a_num)
             except AssertionError as e:
-                errors.append(f"{method_name}: \n {str(e)}")
+                errors.append(f"\n Shipping: {method.__name__}: \n {str(e)}")
             page.go_back()
         DataPriceList().sign_newsletter("True")
         if errors:
@@ -259,7 +256,7 @@ class TestShippingPriceTiles:
 
     @pytest.mark.parametrize("item", AddTiles.tiles_format)
     @pytest.mark.parametrize("newsletter", ['True', 'False'])
-    def test_shipping_price_app(self, page, item, newsletter):
+    def test_shipping_price_tiles(self, page, item, newsletter):
         DataPriceList().sign_newsletter(newsletter)
         if newsletter == "True":
             root_tiles(page, item)
@@ -270,12 +267,12 @@ class TestShippingPriceTiles:
         shipping_methods = [Shipping(page).asafta, Shipping(page).shops, Shipping(page).post, Shipping(page).home]
         errors = []
         for method in shipping_methods:
-            method_name = method.__name__
             try:
+                page.pause()
                 method()
                 assert Shipping.return_ship_price_value == DataPriceList().get_shippint_pricelist(row, Shipping.a_num)
             except AssertionError as e:
-                errors.append(f"{method_name}: \n {str(e)}")
+                errors.append(f"\n Shipping: {method.__name__}: \n {str(e)}")
             page.go_back()
         DataPriceList().sign_newsletter("True")
         if errors:
