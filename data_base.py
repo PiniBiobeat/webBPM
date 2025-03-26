@@ -26,13 +26,17 @@ def mysql(mysql_execute):
 
     cursor = cnxn.cursor()
     query1 = mysql_execute
-    cursor.execute(query1)
+
     if query1.strip().lower().startswith('select'):
+        cursor.execute(query1)
         result1 = cursor.fetchall()
     else:
+        cursor.execute(query1)
+        cnxn.commit()
         result1 = cursor.rowcount
+
     cursor.close()
-    cnxn.commit()
+    cnxn.close()
     return result1
 
 
