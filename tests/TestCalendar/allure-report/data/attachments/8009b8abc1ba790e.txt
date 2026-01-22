@@ -1,2 +1,0 @@
-Starting test "test_change_themes"
-*****DONE*****

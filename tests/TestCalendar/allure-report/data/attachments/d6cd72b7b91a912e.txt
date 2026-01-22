@@ -1,10 +1,0 @@
-Starting test "test_change_themes"
-PostgreSQL server information
-{'user': 'machineDBA', 'channel_binding': 'prefer', 'dbname': 'calendars', 'host': '10.116.96.32', 'port': '5432', 'options': '', 'sslmode': 'prefer', 'sslcompression': '0', 'sslcertmode': 'allow', 'sslsni': '1', 'ssl_min_protocol_version': 'TLSv1.2', 'gssencmode': 'disable', 'krbsrvname': 'postgres', 'gssdelegation': '0', 'target_session_attrs': 'any', 'load_balance_hosts': 'disable'} 
-
-Calendar data: [(92, 'White', '\\\\fs-vm\\data\\users\\musers\\B\\3189204_vsVhgy04k04tcgxShwXZRE6vZ1WozRaXMTgiSFHVvBAj\\calendar\\Projects\\d3154102b8494c4584413c83197b37a3_jfmrbmQQ7f3aSfx8DYgP3g6nGNFJLqseKp7SxiFTNLQj')]
-Attempting to access file at: \\fs-vm\data\users\musers\B\3189204_vsVhgy04k04tcgxShwXZRE6vZ1WozRaXMTgiSFHVvBAj\calendar\Projects\d3154102b8494c4584413c83197b37a3_jfmrbmQQ7f3aSfx8DYgP3g6nGNFJLqseKp7SxiFTNLQj\Dat\projectObj.dat
-Directory contents: ['projectObj.dat', 'generator_bk_20-8-2024.dat', 'bk_20-8-2024.dat']
-This is a network path. Verify network connectivity.
-Theme successfully changed to White
-*****DONE*****

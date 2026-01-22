@@ -1,5 +1,0 @@
-Starting test "test_create_calendar_and_check_in_DB_A5_and_Diamonds"
-PostgreSQL server information
-{'user': 'machineDBA', 'channel_binding': 'prefer', 'dbname': 'calendars', 'host': '10.116.96.32', 'port': '5432', 'options': '', 'sslmode': 'prefer', 'sslcompression': '0', 'sslcertmode': 'allow', 'sslsni': '1', 'ssl_min_protocol_version': 'TLSv1.2', 'gssencmode': 'disable', 'krbsrvname': 'postgres', 'gssdelegation': '0', 'target_session_attrs': 'any', 'load_balance_hosts': 'disable'} 
-
-*****DONE*****

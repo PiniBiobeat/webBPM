@@ -1,4 +1,0 @@
-Starting test "test_sign_up_with_User_approved_newsletter"
-<pyodbc.Cursor object at 0x0000012D9625D3B0>
-<pyodbc.Cursor object at 0x0000012D9625D3B0>
-*****DONE*****

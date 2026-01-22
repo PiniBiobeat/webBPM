@@ -1,2 +1,0 @@
-Starting test "test_log_in_online_with_lupa"
-*****DONE*****

@@ -1,3 +1,0 @@
-Starting test "test_send_calendar"
-Success
-*****DONE*****

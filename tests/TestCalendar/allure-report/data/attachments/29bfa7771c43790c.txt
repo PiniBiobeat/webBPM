@@ -1,2 +1,0 @@
-Starting test "test_create_calendar_and_check_in_DB_A5_and_Diamonds"
-*****DONE*****

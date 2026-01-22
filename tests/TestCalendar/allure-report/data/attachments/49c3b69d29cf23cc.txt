@@ -1,10 +1,0 @@
-Starting test "test_add_personal_date_with_image"
-222
-PostgreSQL server information
-{'user': 'machineDBA', 'channel_binding': 'prefer', 'dbname': 'calendars_test', 'host': '10.116.96.32', 'port': '5432', 'options': '', 'sslmode': 'prefer', 'sslcompression': '0', 'sslcertmode': 'allow', 'sslsni': '1', 'ssl_min_protocol_version': 'TLSv1.2', 'gssencmode': 'disable', 'krbsrvname': 'postgres', 'gssdelegation': '0', 'target_session_attrs': 'any', 'load_balance_hosts': 'disable'} 
-
-after script  - >[(1299, 3606890, 3, 8, 21, 'PD_cf9b26a02e694d3f9e95079493a14bb4.jpg', None, 'event name', datetime.datetime(2024, 8, 21, 7, 53, 38, 983691), None)]/n
-PostgreSQL server information
-{'user': 'machineDBA', 'channel_binding': 'prefer', 'dbname': 'calendars_test', 'host': '10.116.96.32', 'port': '5432', 'options': '', 'sslmode': 'prefer', 'sslcompression': '0', 'sslcertmode': 'allow', 'sslsni': '1', 'ssl_min_protocol_version': 'TLSv1.2', 'gssencmode': 'disable', 'krbsrvname': 'postgres', 'gssdelegation': '0', 'target_session_attrs': 'any', 'load_balance_hosts': 'disable'} 
-
-*****DONE*****
