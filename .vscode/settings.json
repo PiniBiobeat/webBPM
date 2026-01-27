@@ -1,0 +1,24 @@
+{
+    "python.defaultInterpreterPath": "./.venv/bin/python",
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        ".pytest_cache": true,
+        ".venv": false,
+        "allure-results": true
+    },
+    "python.envFile": "${workspaceFolder}/.env",
+    "playwright.reuseBrowser": true,
+    "playwright.showTrace": true
+}
