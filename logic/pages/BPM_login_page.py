@@ -1,16 +1,13 @@
+from playwright.sync_api import expect
 from infra.page_base import PageBase
 
+class BPMLoginPage(PageBase):
+    username = "input[type='text']"
+    password = "input[type='password']"
+    submit = "button[type='submit']"
 
-class YTPage(PageBase):
-
-    side_menu = "id=guide-icon"
-
-    def __init__(self, page):
-        super().__init__(page)
-
-    def click_side_menu(self):
-        visible = self.wait_for_visible(self.side_menu)
-        self.pw_page.click(selector=self.side_menu)
-        self.pw_page.wait_for_timeout(200000)
-
-
+    def login(self, username: str, password: str):
+        expect(self.pw_page.locator(self.username)).to_be_visible(timeout=60000)
+        self.pw_page.locator(self.username).fill(username)
+        self.pw_page.locator(self.password).fill(password)
+        self.pw_page.locator(self.submit).click()
