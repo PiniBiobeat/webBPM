@@ -2,8 +2,7 @@ name: Run Tests
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
   pull_request:
 
 jobs:
@@ -11,28 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.8
+      - name: Build docker image
+        run: docker build -t playwright-tests .
 
-    - name: Install dependencies
-      run: |
-        python -m venv .venv
-        source .venv/bin/activate
-        pip install -r requirements.txt
-        playwright install
+      - name: Run tests (create allure-results folder on host)
+        run: |
+          mkdir -p allure-results
+          docker run --rm -v "$PWD/allure-results:/app/allure-results" playwright-tests
 
-    - name: Run tests
-      run: |
-        docker build -t playwright-tests .
-        docker run --rm -v $(pwd)/allure-results:/app/allure-results playwright-tests
-
-    - name: Upload Allure results
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-results
-        path: allure-results
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
