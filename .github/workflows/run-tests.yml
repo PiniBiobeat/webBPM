@@ -19,7 +19,10 @@ jobs:
       - name: Run tests (create allure-results folder on host)
         run: |
           docker run --rm -v $(pwd)/allure-results:/app/allure-results playwright-tests
-          allure serve allure-results
+
+      - name: Generate Allure report
+        run: |
+          allure generate allure-results -o allure-report
 
       - name: Upload Allure results
         if: always()
@@ -27,3 +30,10 @@ jobs:
         with:
           name: allure-results
           path: allure-results
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
