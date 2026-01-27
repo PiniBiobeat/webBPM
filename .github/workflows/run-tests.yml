@@ -18,8 +18,8 @@ jobs:
 
       - name: Run tests (create allure-results folder on host)
         run: |
-          mkdir -p allure-results
-          docker run --rm -v "$PWD/allure-results:/app/allure-results" playwright-tests
+          docker run --rm -v $(pwd)/allure-results:/app/allure-results playwright-tests
+          allure serve allure-results
 
       - name: Upload Allure results
         if: always()
