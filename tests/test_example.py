@@ -15,13 +15,5 @@ class TestExample(TestWebBase):
         login_page = BPMLoginPage(page)
         login_page.login("pini","mari")
         expect(page.get_by_text("Incorrect username or password")).to_be_visible()
+        print("Test completed: BPM web page creation with invalid credentials.")
 
-    
-    # def test_youtube_basic_navigation(self, page: Page, base_url):
-    #     """Example test for basic YouTube navigation"""
-    #     # Use Playwright's expect for better assertions
-    #     expect(page).to_have_title(re.compile("YouTube", re.IGNORECASE))
-    #     expect(page).to_have_url(re.compile("youtube.com"))
-    #
-    #     # Verify page elements are present
-    #     expect(page.locator("id=guide-icon").first).to_be_visible()
