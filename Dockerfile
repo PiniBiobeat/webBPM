@@ -13,4 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Use xvfb-run to simulate a display server
-CMD ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1280x720x24", "pytest", "-vv", "-s"]
+CMD ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1280x720x24", "pytest", "-vv"]
