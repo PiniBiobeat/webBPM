@@ -1,0 +1,3 @@
+[32mINFO    [0m root:conftest.py:163 Starting test: test_example_BPM_web_page_creation
+[35mDEBUG   [0m asyncio:proactor_events.py:633 Using proactor: IocpProactor
+[32mINFO    [0m root:conftest.py:169 Finished test: test_example_BPM_web_page_creation
