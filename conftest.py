@@ -43,7 +43,7 @@ def browser_context(playwright: Playwright, request) -> BrowserContext:
     if env == "desktop":
         viewport = {'width': 1280, 'height': 720}
         browser = playwright.chromium.launch(
-            headless=False,  # Run in headed mode
+            headless=True,  # Run in headless mode
             slow_mo=500,
             args=["--window-position=-1920,0"] if os.getenv("POSITION_BROWSER") else None
         )
