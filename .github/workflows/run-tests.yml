@@ -21,9 +21,12 @@ jobs:
           docker run --rm -v $(pwd)/allure-results:/app/allure-results playwright-tests
       - name: Debug Allure results directory
         run: ls -la allure-results
+
+      - name: Debug Docker container logs
+        run: docker logs $(docker ps -lq)
       - name: Generate Allure report
         run: |
-         timeout 300 allure generate allure-results -o allure-report
+         allure generate allure-results -o allure-report
 
       - name: Upload Allure results
         if: always()
