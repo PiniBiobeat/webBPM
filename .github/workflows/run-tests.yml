@@ -13,25 +13,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build docker image
+      - name: Build Docker image
         run: docker build -t playwright-tests .
 
-      - name: Run tests (headed + allure + traces/videos)
+      - name: Run tests (headed + Allure + traces)
         run: |
           mkdir -p allure-results test-results
-          docker run --name playwright-tests-container \
+          docker run --rm \
             -v ${PWD}/allure-results:/app/allure-results \
             -v ${PWD}/test-results:/app/test-results \
-            -e PYTHONUNBUFFERED=1 \
             playwright-tests
 
-      - name: List artifacts folders
+      - name: Show generated files
         if: always()
         run: |
-          echo "allure-results:"
+          echo "=== allure-results ==="
           ls -la allure-results || true
-          echo "test-results:"
-          find test-results -maxdepth 3 -type f || true
+          echo "=== test-results ==="
+          find test-results -type f || true
 
       - name: Install Allure CLI
         if: always()
@@ -58,13 +57,9 @@ jobs:
           name: allure-report
           path: allure-report
 
-      - name: Upload Playwright test artifacts (trace/video/screenshots)
+      - name: Upload Playwright artifacts (trace / video / screenshots)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-test-results
           path: test-results
-
-      - name: Clean up Docker container
-        if: always()
-        run: docker rm -f playwright-tests-container
