@@ -13,13 +13,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m playwright install --with-deps
+
       - name: Build Docker image
         run: docker build -t playwright-tests .
 
       - name: Run tests (headed + Allure + traces)
         run: |
           mkdir -p allure-results test-results
-          docker run --rm \
+          docker run --name playwright-tests-container \
             -v ${PWD}/allure-results:/app/allure-results \
             -v ${PWD}/test-results:/app/test-results \
             playwright-tests
@@ -63,3 +74,7 @@ jobs:
         with:
           name: playwright-test-results
           path: test-results
+
+      - name: Clean up Docker container
+        if: always()
+        run: docker rm -f playwright-tests-container
