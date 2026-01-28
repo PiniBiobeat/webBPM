@@ -18,7 +18,7 @@ jobs:
 
       - name: Run tests (create allure-results folder on host)
         run: |
-          docker run --rm -v $(pwd)/allure-results:/app/allure-results playwright-tests
+         timeout 300 docker run --rm -v $(pwd)/allure-results:/app/allure-results playwright-tests
       - name: Debug Allure results directory
         run: ls -la allure-results
 
