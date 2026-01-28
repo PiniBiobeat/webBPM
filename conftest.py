@@ -24,13 +24,6 @@ test_credentials = {
 }
 
 
-@pytest.fixture(scope="session")
-def base_url():
-    """
-    Provide the base URL from configuration.
-    """
-    return configuration["url"]
-
 
 @pytest.fixture(scope="session")
 def browser_context(playwright: Playwright, request) -> BrowserContext:
@@ -39,11 +32,11 @@ def browser_context(playwright: Playwright, request) -> BrowserContext:
     Supports desktop and mobile environments.
     """
     env = os.getenv("DEV", "desktop")
-    
+
     if env == "desktop":
         viewport = {'width': 1280, 'height': 720}
         browser = playwright.chromium.launch(
-            headless=True,  # Run in headless mode
+            headless=True,  # Always run in headless mode
             slow_mo=500,
             args=["--window-position=-1920,0"] if os.getenv("POSITION_BROWSER") else None
         )
@@ -58,8 +51,8 @@ def browser_context(playwright: Playwright, request) -> BrowserContext:
     elif env == "mobile":
         device = playwright.devices['iPhone 15 Pro Max']
         browser = playwright.chromium.launch(
-            headless=False, 
-            slow_mo=500, 
+            headless=True,  # Always run in headless mode
+            slow_mo=500,
             args=["--window-position=-1920,0"] if os.getenv("POSITION_BROWSER") else None
         )
         context = browser.new_context(
@@ -80,12 +73,13 @@ def browser_context(playwright: Playwright, request) -> BrowserContext:
 
     else:
         raise ValueError(f"Unknown environment: {env}. Supported: desktop, mobile, headless")
-    
+
     yield context
-    
+
     # Cleanup
     context.close()
     browser.close()
+
 
 
 @pytest.fixture(scope="function")
