@@ -24,8 +24,15 @@ test_credentials = {
 }
 
 
-
 @pytest.fixture(scope="session")
+def base_url():
+    """
+    Provide the base URL from configuration.
+    """
+    return configuration["url"]
+
+
+@pytest.fixture(scope="function")
 def browser_context(playwright: Playwright, request) -> BrowserContext:
     """
     Create a browser context for the test session.
@@ -36,7 +43,7 @@ def browser_context(playwright: Playwright, request) -> BrowserContext:
     if env == "desktop":
         viewport = {'width': 1280, 'height': 720}
         browser = playwright.chromium.launch(
-            headless=True,  # Always run in headless mode
+            headless=False,  # Run in headed mode
             slow_mo=500,
             args=["--window-position=-1920,0"] if os.getenv("POSITION_BROWSER") else None
         )
@@ -51,7 +58,7 @@ def browser_context(playwright: Playwright, request) -> BrowserContext:
     elif env == "mobile":
         device = playwright.devices['iPhone 15 Pro Max']
         browser = playwright.chromium.launch(
-            headless=True,  # Always run in headless mode
+            headless=False,
             slow_mo=500,
             args=["--window-position=-1920,0"] if os.getenv("POSITION_BROWSER") else None
         )
@@ -81,7 +88,6 @@ def browser_context(playwright: Playwright, request) -> BrowserContext:
     browser.close()
 
 
-
 @pytest.fixture(scope="function")
 def page(browser_context, request, base_url):
     """
@@ -90,18 +96,18 @@ def page(browser_context, request, base_url):
     Handles test failure screenshots and traces.
     """
     page = browser_context.new_page()
-    
+
     # Navigate to the base URL automatically
     page.goto(base_url)
-    
+
     failed_before = request.session.testsfailed
-    
+
     yield page
-    
+
     # Handle test failures
     if request.session.testsfailed != failed_before:
         test_name = request.node.name
-        
+
         # Capture trace
         try:
             trace_path = f"traces/{test_name}_trace.zip"
@@ -114,7 +120,7 @@ def page(browser_context, request, base_url):
             )
         except Exception as e:
             print(f"Could not save trace: {e}")
-        
+
         # Capture screenshot
         try:
             screenshot = page.screenshot()
@@ -125,7 +131,7 @@ def page(browser_context, request, base_url):
             )
         except Exception as e:
             print(f"Could not save screenshot: {e}")
-    
+
     page.close()
 
 
@@ -136,9 +142,9 @@ def before_after_test():
     """
     # Setup code here
     print("\\n=== Test Setup ===")
-    
+
     yield
-    
+
     # Teardown code here
     print("\\n=== Test Teardown ===")
 
