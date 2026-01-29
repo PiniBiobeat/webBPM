@@ -15,5 +15,4 @@ class TestExample(TestWebBase):
         login_page = BPMLoginPage(page)
         login_page.login("pini","mari")
         expect(page.get_by_text("Incorrect username or password")).to_be_visible()
-        print("Test completed: BPM web page creation with invalid credentials.")
 
