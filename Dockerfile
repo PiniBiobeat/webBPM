@@ -1,17 +1,19 @@
 FROM mcr.microsoft.com/playwright/python:v1.57.0-noble
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Install additional system dependencies (if needed)
-RUN apt-get update && apt-get install -y xvfb && rm -rf /var/lib/apt/lists/*
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Copy the requirements file and install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application files
 COPY . .
 
-# Set the default command to run tests with Playwright
-CMD ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1280x720x24", "pytest", "-vv", "--headed", "--alluredir=/app/allure-results", "--tracing=retain-on-failure", "--video=retain-on-failure", "--screenshot=only-on-failure"]
+RUN mkdir -p artifacts/videos artifacts/traces
+
+CMD bash -lc 'if [ "$HEADED" = "true" ]; then \
+               xvfb-run -a pytest; \
+             else \
+               pytest; \
+             fi'
